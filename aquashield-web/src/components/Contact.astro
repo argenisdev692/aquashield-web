@@ -32,11 +32,11 @@ const serviceAreas = [
 ];
 ---
 
-<section id="contact" class:list={["section-padding bg-gray-50", className]}>
+<section id="contact" class:list={["section-padding bg-white pt-12 md:pt-16 shadow-[0_-5px_20px_-5px_rgba(0,0,0,0.1)] relative z-10", className]}>
   <div class="container mx-auto px-4">
     <!-- Section header -->
     <div class="text-center max-w-3xl mx-auto mb-16 fade-in-section">
-      <span class="inline-block text-aqua font-semibold text-sm uppercase tracking-wider mb-4">
+      <span class="inline-block text-aqua font-bold text-xl md:text-2xl uppercase tracking-widest mb-4">
         Contact Us
       </span>
       <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-navy mb-6">
@@ -308,31 +308,23 @@ const serviceAreas = [
           </p>
         </div>
 
-        <!-- Map placeholder -->
-        <div class="bg-white rounded-3xl overflow-hidden shadow-lg">
-          <div class="aspect-video bg-gray-200 relative">
-            <!-- Placeholder for Google Maps embed -->
-            <div class="absolute inset-0 flex items-center justify-center">
-              <div class="text-center">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-gray-400 mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                </svg>
-                <p class="text-gray-500">Interactive map coming soon</p>
-              </div>
-            </div>
-            <!-- Uncomment and add your Google Maps API key to enable the map
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3464.123456789!2d-95.3810!3d29.7520!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjnCsDQ1JzA3LjIiTiA5NcKwMjInNTEuNiJX!5e0!3m2!1sen!2sus!4v1234567890"
-              width="100%"
-              height="100%"
-              style="border:0;"
-              allowfullscreen=""
-              loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade"
-            ></iframe>
-            -->
-          </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Full Width Map -->
+  <div class="w-full h-96 mt-20 mb-12 relative fade-in-section">
+    <div class="absolute inset-0 bg-gray-200">
+      <!-- Placeholder for Google Maps embed -->
+      <div class="absolute inset-0 flex items-center justify-center bg-gray-100">
+        <div class="text-center">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-gray-400 mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
+          <p class="text-xl text-gray-500 font-medium">Interactive map coming soon</p>
+          <p class="text-gray-400 mt-2">Will display service area coverage</p>
         </div>
       </div>
     </div>

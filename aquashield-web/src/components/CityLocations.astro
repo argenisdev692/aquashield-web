@@ -12,7 +12,7 @@ const cities = [
 ];
 ---
 
-<section class:list={["section-container bg-white", className]} id="locations">
+<section class:list={["section-container bg-white pt-4 md:pt-6", className]} id="locations">
   <h2 class="section-title mt-0">Areas We Serve</h2>
   <p class="section-subtitle">
     Providing professional restoration services across multiple cities
@@ -29,8 +29,8 @@ const cities = [
           />
           <div class="absolute inset-0 bg-gradient-to-t from-navy/80 to-transparent"></div>
           <div class="absolute bottom-4 left-0 right-0 text-center">
-            <h3 class="text-2xl font-bold text-white mb-1 mt-0">{city.name}</h3>
-            <p class="text-white/90 font-medium">{city.state}</p>
+            <h3 class="text-2xl font-bold !text-white mb-1 mt-0">{city.name}</h3>
+            <p class="text-white font-medium">{city.state}</p>
           </div>
         </div>
       </div>

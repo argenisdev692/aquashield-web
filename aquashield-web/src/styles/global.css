@@ -31,7 +31,7 @@
   --color-silver-light: #F5F5F6;
   --color-white: #FFFFFF;
   --color-white-pure: #FFFFFF;
-  
+
   /* Border Radius */
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -81,79 +81,79 @@
   /* ============================================
      AQUASHIELD BRAND COLORS - CHANGE HERE ONLY
      ============================================ */
-  
+
   /* Navy Blue - Primary Brand Color */
   /* #0C2340 = RGB(12, 35, 64) */
   --navy: #0C2340;
   --navy-light: #1a3a5c;
   --navy-dark: #081829;
   --navy-rgb: 12, 35, 64;
-  
+
   /* Aqua Blue - Secondary Brand Color */
   /* #00B5E2 = RGB(0, 181, 226) */
   --aqua: #00B5E2;
   --aqua-light: #33c4e8;
   --aqua-dark: #0091b5;
   --aqua-rgb: 0, 181, 226;
-  
+
   /* Pure White */
   --white: #FFFFFF;
   --white-rgb: 255, 255, 255;
-  
+
   /* Light Silver Gray */
   --silver: #E6E7E8;
   --silver-light: #F5F5F6;
   --silver-rgb: 230, 231, 232;
-  
+
   /* ============================================
      SEMANTIC COLOR MAPPINGS
      ============================================ */
-  
+
   --radius: 0.625rem;
-  
+
   /* Background & Foreground */
   --background: var(--white);
   --foreground: var(--navy);
-  
+
   /* Card */
   --card: var(--white);
   --card-foreground: var(--navy);
-  
+
   /* Popover */
   --popover: var(--white);
   --popover-foreground: var(--navy);
-  
+
   /* Primary - Navy Blue */
   --primary: var(--navy);
   --primary-foreground: var(--white);
-  
+
   /* Secondary - Aqua Blue */
   --secondary: var(--aqua);
   --secondary-foreground: var(--white);
-  
+
   /* Muted */
   --muted: var(--silver);
   --muted-foreground: #64748b;
-  
+
   /* Accent - Aqua Blue */
   --accent: var(--aqua);
   --accent-foreground: var(--white);
-  
+
   /* Destructive */
   --destructive: #ef4444;
-  
+
   /* Border & Input */
   --border: var(--silver);
   --input: var(--silver);
   --ring: var(--aqua);
-  
+
   /* Chart Colors */
   --chart-1: var(--navy);
   --chart-2: var(--aqua);
   --chart-3: var(--navy-light);
   --chart-4: var(--aqua-light);
   --chart-5: var(--silver);
-  
+
   /* Sidebar */
   --sidebar: var(--navy);
   --sidebar-foreground: var(--white);
@@ -169,37 +169,37 @@
   /* Dark mode - Navy as background */
   --background: var(--navy-dark);
   --foreground: var(--white);
-  
+
   --card: var(--navy);
   --card-foreground: var(--white);
-  
+
   --popover: var(--navy);
   --popover-foreground: var(--white);
-  
+
   --primary: var(--aqua);
   --primary-foreground: var(--navy-dark);
-  
+
   --secondary: var(--navy-light);
   --secondary-foreground: var(--white);
-  
+
   --muted: var(--navy-light);
   --muted-foreground: var(--silver);
-  
+
   --accent: var(--aqua);
   --accent-foreground: var(--navy-dark);
-  
+
   --destructive: #f87171;
-  
+
   --border: var(--navy-light);
   --input: var(--navy-light);
   --ring: var(--aqua);
-  
+
   --chart-1: var(--aqua);
   --chart-2: var(--aqua-light);
   --chart-3: var(--silver);
   --chart-4: var(--aqua-dark);
   --chart-5: var(--navy-light);
-  
+
   --sidebar: var(--navy-dark);
   --sidebar-foreground: var(--white);
   --sidebar-primary: var(--aqua);
@@ -223,12 +223,31 @@ body {
 }
 
 /* Ensure Roboto for all elements */
-body, button, input, textarea, select, a, p, span, div, h1, h2, h3, h4, h5, h6 {
+body,
+button,
+input,
+textarea,
+select,
+a,
+p,
+span,
+div,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: 'Roboto', system-ui, -apple-system, sans-serif;
 }
 
 /* Typography */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-weight: 700;
   color: var(--navy);
   margin-top: 2rem;
@@ -410,7 +429,7 @@ a:hover {
 }
 
 @utility section-container {
-  max-width: 80rem;
+  max-width: 90rem;
   margin-left: auto;
   margin-right: auto;
   padding: 4rem 1rem;
@@ -513,12 +532,33 @@ a:hover {
 
 /* Pulse animation for emergency button */
 @keyframes pulse {
-  0%, 100% {
+
+  0%,
+  100% {
     opacity: 1;
   }
+
   50% {
     opacity: 0.8;
   }
+}
+
+/* Fade in up animation for titles and cards */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s ease-out forwards;
+  opacity: 0;
 }
 
 /* ============================================
