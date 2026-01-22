@@ -1,0 +1,257 @@
+---
+// Navbar component for AquaShield Restoration
+// Mobile-responsive navigation with emergency phone number
+
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+
+const navLinks = [
+  { href: "#home", label: "Home" },
+  { href: "#services", label: "Services" },
+  { href: "#about", label: "About Us" },
+  { href: "#why-us", label: "Why Choose Us" },
+  { href: "#contact", label: "Contact" },
+];
+
+const companyData = {
+  name: "AquaShield",
+  tagline: "Restoration LLC",
+  phone: "(555) 123-4567",
+  emergencyPhone: "(555) 911-AQUA",
+};
+---
+
+<header class:list={["fixed top-0 left-0 right-0 z-50 transition-all duration-300", className]} id="navbar">
+  <!-- Top bar with emergency number -->
+  <div class="bg-navy text-white py-2 hidden md:block">
+    <div class="container mx-auto px-4 flex justify-between items-center text-sm">
+      <div class="flex items-center gap-6">
+        <a href={`tel:${companyData.phone.replace(/[^0-9]/g, '')}`} class="flex items-center gap-2 hover:text-aqua transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+          </svg>
+          <span>{companyData.phone}</span>
+        </a>
+        <span class="text-gray-400">|</span>
+        <span class="flex items-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <span>24/7 Emergency Service Available</span>
+        </span>
+      </div>
+      <a 
+        href={`tel:${companyData.emergencyPhone.replace(/[^0-9]/g, '')}`} 
+        class="btn-emergency text-sm px-4 py-1 rounded-full font-medium flex items-center gap-2 animate-pulse"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+        </svg>
+        Emergency: {companyData.emergencyPhone}
+      </a>
+    </div>
+  </div>
+
+  <!-- Main navigation -->
+  <nav class="bg-white/95 backdrop-blur-md shadow-md transition-all duration-300" id="main-nav">
+    <div class="container mx-auto px-4">
+      <div class="flex justify-between items-center h-16 md:h-20">
+        <!-- Logo -->
+        <a href="#home" class="flex items-center gap-3 group">
+          <!-- Logo PNG -->
+          <img
+            src="/Logo PNG.png"
+            alt="AquaShield Restoration Logo"
+            class="h-12 md:h-16 w-auto transition-transform duration-300 group-hover:scale-105"
+          />
+        </a>
+
+        <!-- Desktop Navigation -->
+        <div class="hidden lg:flex items-center gap-8">
+          {navLinks.map((link) => (
+            <a 
+              href={link.href} 
+              class="text-navy font-medium hover:text-aqua transition-colors relative group py-2"
+            >
+              {link.label}
+              <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-aqua transition-all duration-300 group-hover:w-full"></span>
+            </a>
+          ))}
+        </div>
+
+        <!-- CTA Button (Desktop) -->
+        <div class="hidden lg:flex items-center gap-4">
+          <a href="#contact" class="btn-primary">
+            Get Free Quote
+          </a>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button 
+          type="button" 
+          class="lg:hidden p-2 text-navy hover:text-aqua transition-colors"
+          id="mobile-menu-btn"
+          aria-label="Toggle mobile menu"
+          aria-expanded="false"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" id="menu-icon">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" id="close-icon">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div class="lg:hidden hidden bg-white border-t border-gray-100" id="mobile-menu">
+      <div class="container mx-auto px-4 py-4">
+        <div class="flex flex-col gap-4">
+          {navLinks.map((link) => (
+            <a 
+              href={link.href} 
+              class="text-navy font-medium hover:text-aqua transition-colors py-2 border-b border-gray-100 last:border-0"
+            >
+              {link.label}
+            </a>
+          ))}
+          <div class="pt-4 flex flex-col gap-3">
+            <a href="#contact" class="btn-primary text-center">
+              Get Free Quote
+            </a>
+            <a 
+              href={`tel:${companyData.emergencyPhone.replace(/[^0-9]/g, '')}`} 
+              class="btn-emergency text-center flex items-center justify-center gap-2"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+              </svg>
+              Emergency: {companyData.emergencyPhone}
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!-- Spacer for fixed navbar -->
+<div class="h-16 md:h-28"></div>
+
+<script>
+  // Mobile menu toggle
+  const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const menuIcon = document.getElementById('menu-icon');
+  const closeIcon = document.getElementById('close-icon');
+
+  if (mobileMenuBtn && mobileMenu && menuIcon && closeIcon) {
+    mobileMenuBtn.addEventListener('click', () => {
+      const isExpanded = mobileMenuBtn.getAttribute('aria-expanded') === 'true';
+      mobileMenuBtn.setAttribute('aria-expanded', (!isExpanded).toString());
+      mobileMenu.classList.toggle('hidden');
+      menuIcon.classList.toggle('hidden');
+      closeIcon.classList.toggle('hidden');
+    });
+
+    // Close mobile menu when clicking on a link
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+        menuIcon.classList.remove('hidden');
+        closeIcon.classList.add('hidden');
+        mobileMenuBtn.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+
+  // Navbar scroll effect
+  const navbar = document.getElementById('navbar');
+  const mainNav = document.getElementById('main-nav');
+  
+  if (navbar && mainNav) {
+    let lastScroll = 0;
+    
+    window.addEventListener('scroll', () => {
+      const currentScroll = window.pageYOffset;
+      
+      // Add shadow and background on scroll
+      if (currentScroll > 50) {
+        mainNav.classList.add('shadow-lg');
+        mainNav.classList.remove('bg-white/95');
+        mainNav.classList.add('bg-white');
+      } else {
+        mainNav.classList.remove('shadow-lg');
+        mainNav.classList.add('bg-white/95');
+        mainNav.classList.remove('bg-white');
+      }
+      
+      lastScroll = currentScroll;
+    });
+  }
+
+  // Active link highlighting
+  const sections = document.querySelectorAll('section[id]');
+  const navLinksElements = document.querySelectorAll('nav a[href^="#"]');
+
+  window.addEventListener('scroll', () => {
+    let current = '';
+    
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop;
+      const sectionHeight = section.clientHeight;
+      
+      if (window.pageYOffset >= sectionTop - 200) {
+        current = section.getAttribute('id') || '';
+      }
+    });
+
+    navLinksElements.forEach(link => {
+      link.classList.remove('text-aqua');
+      if (link.getAttribute('href') === `#${current}`) {
+        link.classList.add('text-aqua');
+      }
+    });
+  });
+</script>
+
+<style>
+  /* Smooth transitions for navbar */
+  #navbar {
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  /* Mobile menu animation */
+  #mobile-menu {
+    animation: slideDown 0.3s ease-out;
+  }
+  
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Emergency button pulse animation */
+  .animate-pulse {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+  
+  @keyframes pulse {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.8;
+    }
+  }
+</style>

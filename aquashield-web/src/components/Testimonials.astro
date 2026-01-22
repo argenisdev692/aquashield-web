@@ -1,0 +1,252 @@
+---
+// Testimonials section component for AquaShield Restoration
+// Customer reviews and social proof
+
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+
+const testimonials = [
+  {
+    id: 1,
+    name: "Sarah Mitchell",
+    location: "Homeowner",
+    rating: 5,
+    text: "When our basement flooded at 2 AM, AquaShield was there within the hour. Their team was professional, compassionate, and incredibly thorough. They saved us from what could have been a disaster. I can't recommend them enough!",
+    image: null,
+    date: "2 weeks ago",
+  },
+  {
+    id: 2,
+    name: "Michael Rodriguez",
+    location: "Business Owner",
+    rating: 5,
+    text: "Our restaurant had a major pipe burst that threatened to shut us down. AquaShield's emergency team worked around the clock to get us back open in just 3 days. Their insurance coordination was seamless. True professionals!",
+    image: null,
+    date: "1 month ago",
+  },
+  {
+    id: 3,
+    name: "Jennifer Thompson",
+    location: "Property Manager",
+    rating: 5,
+    text: "I manage multiple properties and AquaShield is my go-to for any water damage situation. They're reliable, fast, and their pricing is always fair. The thermal imaging they use catches moisture others would miss.",
+    image: null,
+    date: "3 weeks ago",
+  },
+  {
+    id: 4,
+    name: "David Chen",
+    location: "Homeowner",
+    rating: 5,
+    text: "After a storm caused roof damage and water intrusion, AquaShield handled everything from water extraction to mold prevention to reconstruction. One company, one point of contact, zero stress. Outstanding service!",
+    image: null,
+    date: "1 month ago",
+  },
+  {
+    id: 5,
+    name: "Amanda Foster",
+    location: "Homeowner",
+    rating: 5,
+    text: "The team at AquaShield went above and beyond. They not only fixed the water damage but also helped us understand how to prevent future issues. Their follow-up inspection gave us complete peace of mind.",
+    image: null,
+    date: "2 months ago",
+  },
+  {
+    id: 6,
+    name: "Robert Williams",
+    location: "Insurance Adjuster",
+    rating: 5,
+    text: "As an insurance professional, I've worked with many restoration companies. AquaShield stands out for their documentation, communication, and quality of work. They make the claims process smooth for everyone.",
+    image: null,
+    date: "1 month ago",
+  },
+];
+
+// Generate star rating
+const renderStars = (rating: number) => {
+  return Array.from({ length: 5 }, (_, i) => i < rating);
+};
+---
+
+<section id="testimonials" class:list={["section-padding bg-white", className]}>
+  <div class="container mx-auto px-4">
+    <!-- Section header -->
+    <div class="text-center max-w-3xl mx-auto mb-16 fade-in-section">
+      <span class="inline-block text-aqua font-semibold text-sm uppercase tracking-wider mb-4">
+        Testimonials
+      </span>
+      <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-navy mb-6">
+        What Our Customers
+        <span class="text-aqua">Say About Us</span>
+      </h2>
+      <p class="text-gray-600 text-lg">
+        Don't just take our word for it. Here's what homeowners and businesses 
+        have to say about their experience with AquaShield Restoration.
+      </p>
+    </div>
+
+    <!-- Overall rating summary -->
+    <div class="flex flex-col md:flex-row items-center justify-center gap-8 mb-16 fade-in-section">
+      <div class="text-center">
+        <div class="text-6xl font-bold text-navy mb-2">5.0</div>
+        <div class="flex justify-center gap-1 mb-2">
+          {renderStars(5).map((filled) => (
+            <svg 
+              xmlns="http://www.w3.org/2000/svg" 
+              class={`h-6 w-6 ${filled ? 'text-yellow-400' : 'text-gray-300'}`}
+              fill="currentColor" 
+              viewBox="0 0 24 24"
+            >
+              <path d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+            </svg>
+          ))}
+        </div>
+        <div class="text-gray-600">Based on 500+ reviews</div>
+      </div>
+      
+      <div class="hidden md:block w-px h-20 bg-gray-200"></div>
+      
+      <div class="flex gap-6">
+        <div class="text-center">
+          <div class="w-16 h-16 bg-gray-100 rounded-xl flex items-center justify-center mb-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-navy" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm3 8h-1.35c-.538 0-.65.221-.65.778v1.222h2l-.209 2h-1.791v7h-3v-7h-2v-2h2v-2.308c0-1.769.931-2.692 3.029-2.692h1.971v3z"/>
+            </svg>
+          </div>
+          <div class="text-sm text-gray-600">Facebook</div>
+        </div>
+        <div class="text-center">
+          <div class="w-16 h-16 bg-gray-100 rounded-xl flex items-center justify-center mb-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-navy" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-2.917 16.083c-2.258 0-4.083-1.825-4.083-4.083s1.825-4.083 4.083-4.083c1.103 0 2.024.402 2.735 1.067l-1.107 1.068c-.304-.292-.834-.63-1.628-.63-1.394 0-2.531 1.155-2.531 2.579 0 1.424 1.138 2.579 2.531 2.579 1.616 0 2.224-1.162 2.316-1.762h-2.316v-1.4h3.855c.036.204.064.408.064.677.001 2.332-1.563 3.988-3.919 3.988zm9.917-3.5h-1.75v1.75h-1.167v-1.75h-1.75v-1.166h1.75v-1.75h1.167v1.75h1.75v1.166z"/>
+            </svg>
+          </div>
+          <div class="text-sm text-gray-600">Google</div>
+        </div>
+        <div class="text-center">
+          <div class="w-16 h-16 bg-gray-100 rounded-xl flex items-center justify-center mb-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-navy" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm0 19c-3.866 0-7-3.134-7-7s3.134-7 7-7 7 3.134 7 7-3.134 7-7 7zm-1.5-11.5l5 3.5-5 3.5v-7z"/>
+            </svg>
+          </div>
+          <div class="text-sm text-gray-600">Yelp</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Testimonials grid -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {testimonials.map((testimonial, index) => (
+        <div 
+          class="testimonial-card fade-in-section"
+          style={`animation-delay: ${0.1 * index}s`}
+        >
+          <!-- Quote icon -->
+          <div class="text-aqua/20 mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+            </svg>
+          </div>
+
+          <!-- Rating -->
+          <div class="flex gap-1 mb-4">
+            {renderStars(testimonial.rating).map((filled) => (
+              <svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                class={`h-5 w-5 ${filled ? 'text-yellow-400' : 'text-gray-300'}`}
+                fill="currentColor" 
+                viewBox="0 0 24 24"
+              >
+                <path d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+              </svg>
+            ))}
+          </div>
+
+          <!-- Testimonial text -->
+          <p class="text-gray-600 leading-relaxed mb-6">
+            "{testimonial.text}"
+          </p>
+
+          <!-- Author -->
+          <div class="flex items-center gap-4 pt-4 border-t border-gray-100">
+            <div class="w-12 h-12 bg-gradient-to-br from-navy to-aqua rounded-full flex items-center justify-center text-white font-bold">
+              {testimonial.name.split(' ').map(n => n[0]).join('')}
+            </div>
+            <div>
+              <div class="font-semibold text-navy">{testimonial.name}</div>
+              <div class="text-sm text-gray-500">{testimonial.location} • {testimonial.date}</div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- CTA -->
+    <div class="text-center mt-16 fade-in-section">
+      <p class="text-gray-600 mb-6">
+        Ready to experience the AquaShield difference?
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="#contact" class="btn-primary">
+          Get Your Free Estimate
+        </a>
+        <a 
+          href="https://google.com/reviews" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          class="btn-secondary"
+        >
+          Read More Reviews
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  @reference "../styles/global.css";
+
+  /* Testimonial card styles */
+  .testimonial-card {
+    @apply bg-white rounded-2xl p-8 shadow-sm border border-gray-100;
+    @apply transition-all duration-300;
+  }
+
+  .testimonial-card:hover {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    border-color: rgba(0, 181, 226, 0.2);
+  }
+
+  /* Fade in animation */
+  .fade-in-section {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s ease-out forwards;
+  }
+
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .fade-in-section {
+      animation: none;
+      opacity: 1;
+      transform: none;
+    }
+    
+    .testimonial-card {
+      transition: none;
+    }
+  }
+</style>

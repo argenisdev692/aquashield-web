@@ -1,0 +1,204 @@
+---
+// Services section component for AquaShield Restoration
+// Displays water damage restoration services in a card-based layout
+
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+
+const services = [
+  {
+    id: "water-damage",
+    title: "Water Damage Restoration",
+    description: "Complete water extraction, drying, and restoration services for flooded homes and businesses. We respond quickly to minimize damage and restore your property.",
+    icon: "water",
+    features: ["24/7 Emergency Response", "Water Extraction", "Structural Drying", "Content Restoration"],
+  },
+  {
+    id: "emergency-response",
+    title: "Emergency Response",
+    description: "Immediate response to water emergencies, available 24 hours a day, 7 days a week. Our rapid response team arrives within 60 minutes.",
+    icon: "emergency",
+    features: ["60-Minute Response", "Board-Up Services", "Tarping", "Emergency Mitigation"],
+  },
+  {
+    id: "insurance-claims",
+    title: "Insurance Claims Assistance",
+    description: "We work directly with your insurance company to streamline the claims process. Our experts document everything and advocate for your best interests.",
+    icon: "insurance",
+    features: ["Direct Billing", "Documentation", "Claims Advocacy", "Free Estimates"],
+  },
+  {
+    id: "mold-remediation",
+    title: "Mold Remediation",
+    description: "Professional mold inspection, testing, and removal services. We eliminate mold at its source and prevent future growth to protect your health.",
+    icon: "mold",
+    features: ["Mold Testing", "Safe Removal", "Air Quality Testing", "Prevention Treatment"],
+  },
+  {
+    id: "structural-drying",
+    title: "Structural Drying",
+    description: "Advanced drying techniques using industrial-grade equipment to thoroughly dry walls, floors, and structural components, preventing long-term damage.",
+    icon: "drying",
+    features: ["Industrial Dehumidifiers", "Air Movers", "Moisture Monitoring", "Thermal Imaging"],
+  },
+  {
+    id: "reconstruction",
+    title: "Reconstruction Services",
+    description: "Full reconstruction and repair services to restore your property to its pre-loss condition. From minor repairs to complete rebuilds.",
+    icon: "construction",
+    features: ["Drywall Repair", "Flooring", "Painting", "Complete Rebuilds"],
+  },
+];
+
+// Icon components
+const icons: Record<string, string> = {
+  water: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />`,
+  emergency: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />`,
+  insurance: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />`,
+  mold: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />`,
+  drying: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />`,
+  construction: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />`,
+};
+---
+
+<section id="services" class:list={["section-padding bg-gray-50", className]}>
+  <div class="container mx-auto px-4">
+    <!-- Section header -->
+    <div class="text-center max-w-3xl mx-auto mb-16 fade-in-section">
+      <span class="inline-block text-aqua font-semibold text-sm uppercase tracking-wider mb-4">
+        Our Services
+      </span>
+      <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-navy mb-6">
+        Professional Water Damage
+        <span class="text-aqua">Restoration Services</span>
+      </h2>
+      <p class="text-gray-600 text-lg">
+        From emergency water extraction to complete reconstruction, we provide comprehensive 
+        restoration services to get your property back to normal as quickly as possible.
+      </p>
+    </div>
+
+    <!-- Services grid -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {services.map((service, index) => (
+        <div 
+          class="card-service group fade-in-section"
+          style={`animation-delay: ${0.1 * index}s`}
+        >
+          <!-- Icon -->
+          <div class="w-16 h-16 bg-aqua/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-aqua group-hover:scale-110 transition-all duration-300">
+            <svg 
+              xmlns="http://www.w3.org/2000/svg" 
+              class="h-8 w-8 text-aqua group-hover:text-white transition-colors duration-300" 
+              fill="none" 
+              viewBox="0 0 24 24" 
+              stroke="currentColor"
+              set:html={icons[service.icon]}
+            />
+          </div>
+
+          <!-- Content -->
+          <h3 class="text-xl font-bold text-navy mb-3 group-hover:text-aqua transition-colors">
+            {service.title}
+          </h3>
+          <p class="text-gray-600 mb-6 leading-relaxed">
+            {service.description}
+          </p>
+
+          <!-- Features list -->
+          <ul class="space-y-2 mb-6">
+            {service.features.map((feature) => (
+              <li class="flex items-center gap-2 text-sm text-gray-600">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-aqua flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                <span>{feature}</span>
+              </li>
+            ))}
+          </ul>
+
+          <!-- Learn more link -->
+          <a 
+            href={`#${service.id}`} 
+            class="inline-flex items-center gap-2 text-navy font-semibold hover:text-aqua transition-colors group/link"
+          >
+            Learn More
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transform group-hover/link:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </a>
+        </div>
+      ))}
+    </div>
+
+    <!-- CTA Banner -->
+    <div class="mt-16 bg-gradient-hero rounded-3xl p-8 md:p-12 text-center fade-in-section">
+      <div class="max-w-2xl mx-auto">
+        <h3 class="text-2xl md:text-3xl font-bold text-white mb-4">
+          Need Emergency Water Damage Help?
+        </h3>
+        <p class="text-white/80 mb-8">
+          Our team is available 24/7 to respond to water emergencies. 
+          Don't wait – water damage gets worse every minute.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="#contact" class="btn-secondary bg-white text-navy hover:bg-gray-100">
+            Get Free Estimate
+          </a>
+          <a href="tel:5559114782" class="btn-emergency">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+            </svg>
+            Call Now: (555) 911-AQUA
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  @reference "../styles/global.css";
+
+  /* Service card styles */
+  .card-service {
+    @apply bg-white rounded-2xl p-8 shadow-sm border border-gray-100;
+    @apply transition-all duration-300;
+  }
+
+  .card-service:hover {
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    border-color: rgba(0, 181, 226, 0.2);
+    transform: translateY(-0.25rem);
+  }
+
+  /* Fade in animation */
+  .fade-in-section {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s ease-out forwards;
+  }
+
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .fade-in-section {
+      animation: none;
+      opacity: 1;
+      transform: none;
+    }
+    
+    .card-service {
+      transition: none;
+    }
+  }
+</style>

@@ -1,0 +1,506 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ============================================
+   AquaShield Restoration LLC - Brand Colors
+   ============================================
+   
+   Primary Colors:
+   - Navy Blue (Deep Marine Blue): #0C2340 - Authority, trust, experience
+   - Aqua Blue (Bright Aqua): #00B5E2 - Freshness and action
+   
+   Supporting Colors:
+   - Pure White: #FFFFFF - Backgrounds, text on dark
+   - Light Silver Gray: #E6E7E8 - Subtle details, dividers
+   
+   To change the brand colors, simply update the values below.
+   All components using these variables will update automatically.
+   ============================================ */
+
+@theme {
+  /* AquaShield Brand Colors - Direct Tailwind access */
+  --color-navy: #0C2340;
+  --color-navy-light: #1a3a5c;
+  --color-navy-dark: #081829;
+  --color-aqua: #00B5E2;
+  --color-aqua-light: #33c4e8;
+  --color-aqua-dark: #0091b5;
+  --color-silver: #E6E7E8;
+  --color-silver-light: #F5F5F6;
+  --color-white: #FFFFFF;
+  --color-white-pure: #FFFFFF;
+  
+  /* Border Radius */
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+}
+
+@theme inline {
+  /* Color mappings for Tailwind */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+:root {
+  /* ============================================
+     AQUASHIELD BRAND COLORS - CHANGE HERE ONLY
+     ============================================ */
+  
+  /* Navy Blue - Primary Brand Color */
+  /* #0C2340 = RGB(12, 35, 64) */
+  --navy: #0C2340;
+  --navy-light: #1a3a5c;
+  --navy-dark: #081829;
+  --navy-rgb: 12, 35, 64;
+  
+  /* Aqua Blue - Secondary Brand Color */
+  /* #00B5E2 = RGB(0, 181, 226) */
+  --aqua: #00B5E2;
+  --aqua-light: #33c4e8;
+  --aqua-dark: #0091b5;
+  --aqua-rgb: 0, 181, 226;
+  
+  /* Pure White */
+  --white: #FFFFFF;
+  --white-rgb: 255, 255, 255;
+  
+  /* Light Silver Gray */
+  --silver: #E6E7E8;
+  --silver-light: #F5F5F6;
+  --silver-rgb: 230, 231, 232;
+  
+  /* ============================================
+     SEMANTIC COLOR MAPPINGS
+     ============================================ */
+  
+  --radius: 0.625rem;
+  
+  /* Background & Foreground */
+  --background: var(--white);
+  --foreground: var(--navy);
+  
+  /* Card */
+  --card: var(--white);
+  --card-foreground: var(--navy);
+  
+  /* Popover */
+  --popover: var(--white);
+  --popover-foreground: var(--navy);
+  
+  /* Primary - Navy Blue */
+  --primary: var(--navy);
+  --primary-foreground: var(--white);
+  
+  /* Secondary - Aqua Blue */
+  --secondary: var(--aqua);
+  --secondary-foreground: var(--white);
+  
+  /* Muted */
+  --muted: var(--silver);
+  --muted-foreground: #64748b;
+  
+  /* Accent - Aqua Blue */
+  --accent: var(--aqua);
+  --accent-foreground: var(--white);
+  
+  /* Destructive */
+  --destructive: #ef4444;
+  
+  /* Border & Input */
+  --border: var(--silver);
+  --input: var(--silver);
+  --ring: var(--aqua);
+  
+  /* Chart Colors */
+  --chart-1: var(--navy);
+  --chart-2: var(--aqua);
+  --chart-3: var(--navy-light);
+  --chart-4: var(--aqua-light);
+  --chart-5: var(--silver);
+  
+  /* Sidebar */
+  --sidebar: var(--navy);
+  --sidebar-foreground: var(--white);
+  --sidebar-primary: var(--aqua);
+  --sidebar-primary-foreground: var(--white);
+  --sidebar-accent: var(--navy-light);
+  --sidebar-accent-foreground: var(--white);
+  --sidebar-border: var(--navy-light);
+  --sidebar-ring: var(--aqua);
+}
+
+.dark {
+  /* Dark mode - Navy as background */
+  --background: var(--navy-dark);
+  --foreground: var(--white);
+  
+  --card: var(--navy);
+  --card-foreground: var(--white);
+  
+  --popover: var(--navy);
+  --popover-foreground: var(--white);
+  
+  --primary: var(--aqua);
+  --primary-foreground: var(--navy-dark);
+  
+  --secondary: var(--navy-light);
+  --secondary-foreground: var(--white);
+  
+  --muted: var(--navy-light);
+  --muted-foreground: var(--silver);
+  
+  --accent: var(--aqua);
+  --accent-foreground: var(--navy-dark);
+  
+  --destructive: #f87171;
+  
+  --border: var(--navy-light);
+  --input: var(--navy-light);
+  --ring: var(--aqua);
+  
+  --chart-1: var(--aqua);
+  --chart-2: var(--aqua-light);
+  --chart-3: var(--silver);
+  --chart-4: var(--aqua-dark);
+  --chart-5: var(--navy-light);
+  
+  --sidebar: var(--navy-dark);
+  --sidebar-foreground: var(--white);
+  --sidebar-primary: var(--aqua);
+  --sidebar-primary-foreground: var(--navy-dark);
+  --sidebar-accent: var(--navy);
+  --sidebar-accent-foreground: var(--white);
+  --sidebar-border: var(--navy);
+  --sidebar-ring: var(--aqua);
+}
+
+/* Base styles without @apply */
+* {
+  border-color: var(--border);
+  outline-color: var(--ring);
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: 'Roboto', 'Montserrat', system-ui, -apple-system, sans-serif;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  color: var(--navy);
+}
+
+h1 {
+  font-size: 2.25rem;
+}
+
+@media (min-width: 768px) {
+  h1 {
+    font-size: 3rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  h1 {
+    font-size: 3.75rem;
+  }
+}
+
+h2 {
+  font-size: 1.875rem;
+}
+
+@media (min-width: 768px) {
+  h2 {
+    font-size: 2.25rem;
+  }
+}
+
+h3 {
+  font-size: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  h3 {
+    font-size: 1.875rem;
+  }
+}
+
+h4 {
+  font-size: 1.25rem;
+}
+
+@media (min-width: 768px) {
+  h4 {
+    font-size: 1.5rem;
+  }
+}
+
+/* Links */
+a {
+  color: var(--aqua);
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--aqua-dark);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: var(--silver);
+  border-radius: 9px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--navy-light);
+  border-radius: 7px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--aqua);
+  border-radius: 7px;
+}
+
+/* Custom utility classes using @utility directive for Tailwind v4 */
+@utility btn-primary {
+  background-color: var(--navy);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+@variant hover {
+  .btn-primary {
+    background-color: var(--aqua);
+  }
+}
+
+@variant focus {
+  .btn-primary {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--aqua), 0 0 0 4px white;
+  }
+}
+
+@utility btn-secondary {
+  border: 2px solid var(--navy);
+  color: var(--navy);
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  background-color: transparent;
+}
+
+@variant hover {
+  .btn-secondary {
+    background-color: var(--aqua);
+    border-color: var(--aqua);
+    color: white;
+  }
+}
+
+@variant focus {
+  .btn-secondary {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--aqua), 0 0 0 4px white;
+  }
+}
+
+@utility btn-emergency {
+  background-color: var(--aqua);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 700;
+  transition: background-color 0.3s ease;
+  animation: pulse 2s infinite;
+}
+
+@variant hover {
+  .btn-emergency {
+    background-color: var(--aqua-dark);
+    animation: none;
+  }
+}
+
+@variant focus {
+  .btn-emergency {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--navy), 0 0 0 4px white;
+  }
+}
+
+@utility card-service {
+  background-color: white;
+  border-radius: 0.75rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  padding: 1.5rem;
+  border: 1px solid var(--silver);
+  transition: all 0.3s ease;
+}
+
+@variant hover {
+  .card-service {
+    border-color: var(--aqua);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    transform: translateY(-4px);
+  }
+}
+
+@utility section-container {
+  max-width: 80rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 4rem 1rem;
+}
+
+@media (min-width: 640px) {
+  .section-container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .section-container {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+  }
+}
+
+@utility section-title {
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: var(--navy);
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+@media (min-width: 768px) {
+  .section-title {
+    font-size: 2.25rem;
+  }
+}
+
+@utility section-subtitle {
+  font-size: 1.125rem;
+  color: var(--muted-foreground);
+  text-align: center;
+  max-width: 42rem;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 3rem;
+}
+
+@utility text-shadow {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+@utility text-shadow-lg {
+  text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+@utility glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* Gradient backgrounds as regular classes */
+.bg-gradient-navy {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+}
+
+.bg-gradient-aqua {
+  background: linear-gradient(135deg, var(--aqua) 0%, var(--aqua-dark) 100%);
+}
+
+.bg-gradient-hero {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 50%, var(--aqua-dark) 100%);
+}
+
+/* Wave pattern overlay */
+.wave-pattern {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%2300B5E2' fill-opacity='0.1' d='M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,154.7C960,171,1056,181,1152,165.3C1248,149,1344,107,1392,85.3L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-size: cover;
+}
+
+/* Fade in animation for sections */
+.fade-in-section {
+  opacity: 0;
+  transform: translateY(20px);
+  visibility: hidden;
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  will-change: opacity, visibility;
+}
+
+.fade-in-section.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
+}
+
+/* Pulse animation for emergency button */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}

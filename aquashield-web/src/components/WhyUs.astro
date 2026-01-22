@@ -1,0 +1,229 @@
+---
+// Why Choose Us section component for AquaShield Restoration
+// Highlights competitive advantages and differentiators
+
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+
+const reasons = [
+  {
+    number: "01",
+    title: "60-Minute Emergency Response",
+    description: "When water damage strikes, every minute counts. Our rapid response team arrives at your property within 60 minutes, 24 hours a day, 7 days a week. We start mitigation immediately to minimize damage and reduce restoration costs.",
+    highlight: "60 min",
+  },
+  {
+    number: "02",
+    title: "IICRC Certified Technicians",
+    description: "Our team holds certifications from the Institute of Inspection, Cleaning and Restoration Certification (IICRC). This means you get trained professionals who follow industry best practices and the latest restoration techniques.",
+    highlight: "Certified",
+  },
+  {
+    number: "03",
+    title: "Advanced Equipment & Technology",
+    description: "We invest in state-of-the-art equipment including industrial dehumidifiers, air movers, thermal imaging cameras, and moisture detection tools. This technology ensures thorough drying and prevents hidden moisture damage.",
+    highlight: "Advanced",
+  },
+  {
+    number: "04",
+    title: "Direct Insurance Billing",
+    description: "We work directly with all major insurance companies to streamline your claims process. Our team documents everything, communicates with adjusters, and advocates for your best interests so you can focus on recovery.",
+    highlight: "Hassle-Free",
+  },
+  {
+    number: "05",
+    title: "Complete Restoration Services",
+    description: "From initial water extraction to final reconstruction, we handle every aspect of restoration under one roof. No need to coordinate multiple contractors – we manage the entire process from start to finish.",
+    highlight: "Full Service",
+  },
+  {
+    number: "06",
+    title: "Satisfaction Guaranteed",
+    description: "We stand behind our work with a 100% satisfaction guarantee. Our job isn't done until you're completely happy with the results. We also provide follow-up inspections to ensure lasting quality.",
+    highlight: "Guaranteed",
+  },
+];
+
+const stats = [
+  { value: "15+", label: "Years Experience" },
+  { value: "5,000+", label: "Projects Completed" },
+  { value: "100%", label: "Satisfaction Rate" },
+  { value: "24/7", label: "Emergency Service" },
+];
+---
+
+<section id="why-us" class:list={["section-padding bg-gray-50", className]}>
+  <div class="container mx-auto px-4">
+    <!-- Section header -->
+    <div class="text-center max-w-3xl mx-auto mb-16 fade-in-section">
+      <span class="inline-block text-aqua font-semibold text-sm uppercase tracking-wider mb-4">
+        Why Choose Us
+      </span>
+      <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-navy mb-6">
+        The AquaShield
+        <span class="text-aqua">Difference</span>
+      </h2>
+      <p class="text-gray-600 text-lg">
+        When disaster strikes, you need a restoration partner you can trust. 
+        Here's why thousands of homeowners and businesses choose AquaShield.
+      </p>
+    </div>
+
+    <!-- Reasons grid -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+      {reasons.map((reason, index) => (
+        <div 
+          class="reason-card group fade-in-section"
+          style={`animation-delay: ${0.1 * index}s`}
+        >
+          <!-- Number badge -->
+          <div class="flex items-start justify-between mb-4">
+            <span class="text-5xl font-bold text-gray-100 group-hover:text-aqua/20 transition-colors duration-300">
+              {reason.number}
+            </span>
+            <span class="inline-block px-3 py-1 bg-aqua/10 text-aqua text-xs font-semibold rounded-full">
+              {reason.highlight}
+            </span>
+          </div>
+
+          <!-- Content -->
+          <h3 class="text-xl font-bold text-navy mb-3 group-hover:text-aqua transition-colors">
+            {reason.title}
+          </h3>
+          <p class="text-gray-600 leading-relaxed">
+            {reason.description}
+          </p>
+        </div>
+      ))}
+    </div>
+
+    <!-- Stats bar -->
+    <div class="bg-gradient-hero rounded-3xl p-8 md:p-12 fade-in-section">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+        {stats.map((stat, index) => (
+          <div 
+            class="text-center"
+            style={`animation-delay: ${0.1 * index}s`}
+          >
+            <div class="text-4xl md:text-5xl font-bold text-white mb-2">
+              {stat.value}
+            </div>
+            <div class="text-white/70 text-sm md:text-base">
+              {stat.label}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Trust badges -->
+    <div class="mt-16 text-center fade-in-section">
+      <p class="text-gray-500 text-sm uppercase tracking-wider mb-8">
+        Trusted Certifications & Partnerships
+      </p>
+      <div class="flex flex-wrap justify-center items-center gap-8 md:gap-12">
+        <!-- IICRC Badge -->
+        <div class="trust-badge">
+          <div class="w-20 h-20 bg-gray-100 rounded-xl flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-navy" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+            </svg>
+          </div>
+          <span class="text-xs text-gray-600 mt-2 block">IICRC Certified</span>
+        </div>
+
+        <!-- Licensed & Insured -->
+        <div class="trust-badge">
+          <div class="w-20 h-20 bg-gray-100 rounded-xl flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-navy" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+            </svg>
+          </div>
+          <span class="text-xs text-gray-600 mt-2 block">Licensed & Insured</span>
+        </div>
+
+        <!-- BBB Accredited -->
+        <div class="trust-badge">
+          <div class="w-20 h-20 bg-gray-100 rounded-xl flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-navy" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+            </svg>
+          </div>
+          <span class="text-xs text-gray-600 mt-2 block">A+ BBB Rating</span>
+        </div>
+
+        <!-- EPA Lead-Safe -->
+        <div class="trust-badge">
+          <div class="w-20 h-20 bg-gray-100 rounded-xl flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-navy" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <span class="text-xs text-gray-600 mt-2 block">EPA Lead-Safe</span>
+        </div>
+
+        <!-- 24/7 Service -->
+        <div class="trust-badge">
+          <div class="w-20 h-20 bg-gray-100 rounded-xl flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-navy" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <span class="text-xs text-gray-600 mt-2 block">24/7 Emergency</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  @reference "../styles/global.css";
+
+  /* Reason card styles */
+  .reason-card {
+    @apply bg-white rounded-2xl p-8 shadow-sm border border-gray-100;
+    @apply transition-all duration-300;
+  }
+
+  .reason-card:hover {
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    border-color: rgba(0, 181, 226, 0.2);
+  }
+
+  /* Trust badge styles */
+  .trust-badge {
+    @apply flex flex-col items-center;
+    @apply opacity-70 hover:opacity-100 transition-opacity duration-300;
+  }
+
+  /* Fade in animation */
+  .fade-in-section {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s ease-out forwards;
+  }
+
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .fade-in-section {
+      animation: none;
+      opacity: 1;
+      transform: none;
+    }
+    
+    .reason-card,
+    .trust-badge {
+      transition: none;
+    }
+  }
+</style>
