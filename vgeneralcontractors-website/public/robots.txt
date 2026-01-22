@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://vgeneralcontractors.com/sitemap.xml

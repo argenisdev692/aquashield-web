@@ -1,0 +1,134 @@
+<?php
+
+namespace App\Exports;
+
+use App\Models\{{EntityName}};
+use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\WithMapping;
+use Maatwebsite\Excel\Concerns\WithStyles;
+use Maatwebsite\Excel\Concerns\WithColumnWidths;
+use Maatwebsite\Excel\Concerns\WithTitle;
+use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
+use PhpOffice\PhpSpreadsheet\Style\Font;
+use Illuminate\Database\Eloquent\Collection;
+
+class {{EntityName}}Export extends BaseExport implements 
+    FromCollection,
+    WithHeadings,
+    WithMapping,
+    WithStyles,
+    WithColumnWidths,
+    WithTitle,
+    ShouldAutoSize
+{
+    private Collection ${{entityNamePlural}};
+
+    public function __construct(Collection ${{entityNamePlural}})
+    {
+        $this->{{entityNamePlural}} = ${{entityNamePlural}};
+    }
+
+    /**
+     * Return collection of data to export
+     */
+    public function collection()
+    {
+        return $this->{{entityNamePlural}};
+    }
+
+    /**
+     * Define the headings for the export
+     */
+    public function headings(): array
+    {
+        return [
+            'ID',
+            'UUID',
+            'Usuario',
+            {{headings}}
+            'Fecha de Creación',
+            'Fecha de Actualización',
+            'Estado'
+        ];
+    }
+
+    /**
+     * Map each row of data
+     */
+    public function map(${{entityName}}): array
+    {
+        return [
+            ${{entityName}}->id,
+            ${{entityName}}->uuid,
+            ${{entityName}}->user?->name ?? 'N/A',
+            {{mappings}}
+            ${{entityName}}->created_at?->format('d/m/Y H:i:s'),
+            ${{entityName}}->updated_at?->format('d/m/Y H:i:s'),
+            ${{entityName}}->deleted_at ? 'Inactivo' : 'Activo'
+        ];
+    }
+
+    /**
+     * Apply styles to the worksheet
+     */
+    public function styles(Worksheet $sheet)
+    {
+        return [
+            // Style the first row as bold text
+            1 => [
+                'font' => [
+                    'bold' => true,
+                    'size' => 12,
+                ],
+                'alignment' => [
+                    'horizontal' => Alignment::HORIZONTAL_CENTER,
+                ],
+                'fill' => [
+                    'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
+                    'startColor' => [
+                        'argb' => 'FFE2E2E2',
+                    ],
+                ],
+            ],
+        ];
+    }
+
+    /**
+     * Define column widths
+     */
+    public function columnWidths(): array
+    {
+        return [
+            'A' => 10,  // ID
+            'B' => 40,  // UUID
+            'C' => 25,  // Usuario
+            {{columnWidths}}
+        ];
+    }
+
+    /**
+     * Define the title of the worksheet
+     */
+    public function title(): string
+    {
+        return '{{EntityName}} Export';
+    }
+
+    /**
+     * Format specific cell values
+     */
+    private function formatCellValue($value, string $type): string
+    {
+        return match ($type) {
+            'date' => $value ? $value->format('d/m/Y') : 'N/A',
+            'datetime' => $value ? $value->format('d/m/Y H:i:s') : 'N/A',
+            'boolean' => $value ? 'Sí' : 'No',
+            'json' => $value ? json_encode($value, JSON_UNESCAPED_UNICODE) : 'N/A',
+            'enum' => $value ? ucfirst(str_replace('_', ' ', $value)) : 'N/A',
+            default => $value ?? 'N/A'
+        };
+    }
+}

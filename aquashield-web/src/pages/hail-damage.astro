@@ -1,0 +1,111 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Hail Damage Repair | AquaShield Restoration LLC">
+  <Navbar />
+  <main>
+    <!-- Hero Section -->
+    <section class="relative py-20 bg-gradient-navy text-white">
+      <div class="container mx-auto px-4">
+        <h1 class="text-4xl md:text-5xl font-bold mb-4">Hail Damage Repair</h1>
+        <p class="text-xl text-white/80 max-w-3xl">
+          Specialized hail damage inspection and repair services. Protect your property 
+          from long-term damage with prompt, professional restoration.
+        </p>
+      </div>
+    </section>
+    
+    <!-- Content Section -->
+    <section class="section-container bg-white">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <h2 class="text-3xl font-bold text-navy mb-6">Signs of Hail Damage</h2>
+          <p class="text-lg text-muted-foreground mb-6">
+            Hail damage isn't always obvious. Our experts can identify even minor damage 
+            that could lead to major problems if left unaddressed.
+          </p>
+          <ul class="space-y-4">
+            <li class="flex items-start gap-3">
+              <svg class="w-6 h-6 text-aqua flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+              </svg>
+              <span><strong>Dented or Cracked Shingles:</strong> Impact marks and granule loss</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-6 h-6 text-aqua flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+              </svg>
+              <span><strong>Gutter Damage:</strong> Dents in metal gutters and downspouts</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-6 h-6 text-aqua flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+              </svg>
+              <span><strong>Damaged Vents:</strong> Impact damage on roof vents and pipes</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-6 h-6 text-aqua flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+              </svg>
+              <span><strong>Interior Leaks:</strong> Water stains on ceilings or walls</span>
+            </li>
+          </ul>
+          <a href="#contact" class="btn-primary mt-8 inline-block">
+            Request Free Inspection
+          </a>
+        </div>
+        <div>
+          <img 
+            src="/img/services/hail-damage-1.webp" 
+            alt="Hail Damage Inspection"
+            class="rounded-2xl shadow-xl w-full"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="section-container bg-silver-light">
+      <h2 class="section-title">Our Hail Damage Restoration Process</h2>
+      <div class="grid md:grid-cols-3 gap-8 mt-12">
+        <div class="text-center">
+          <div class="w-20 h-20 bg-aqua rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-navy mb-3">Detailed Inspection</h3>
+          <p class="text-muted-foreground">
+            Comprehensive assessment of all hail damage, including hidden issues
+          </p>
+        </div>
+        <div class="text-center">
+          <div class="w-20 h-20 bg-aqua rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-navy mb-3">Insurance Documentation</h3>
+          <p class="text-muted-foreground">
+            Complete documentation with photos and reports for your insurance claim
+          </p>
+        </div>
+        <div class="text-center">
+          <div class="w-20 h-20 bg-aqua rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-navy mb-3">Expert Restoration</h3>
+          <p class="text-muted-foreground">
+            Professional repair or replacement using quality materials and techniques
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>

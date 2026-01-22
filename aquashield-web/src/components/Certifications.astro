@@ -1,0 +1,33 @@
+---
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+
+const certifications = [
+  { name: "IICRC Certified", image: "/img/certifications/gaf-logo.webp" },
+  { name: "GAF Master Elite", image: "/img/certifications/gaf-certified.webp" },
+  { name: "Licensed & Insured", image: "/img/certifications/gaf-system-plus.webp" },
+];
+---
+
+<section class:list={["section-container bg-white", className]} id="certifications">
+  <h2 class="section-title mt-0">Our Certifications</h2>
+  <p class="section-subtitle">
+    Trusted and certified by industry leaders
+  </p>
+  
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
+    {certifications.map((cert) => (
+      <div class="flex flex-col items-center card-service transition-transform duration-300 hover:scale-105">
+        <img 
+          src={cert.image} 
+          alt={cert.name}
+          class="h-32 w-auto object-contain mb-4"
+        />
+        <p class="text-navy font-semibold text-center">{cert.name}</p>
+      </div>
+    ))}
+  </div>
+</section>

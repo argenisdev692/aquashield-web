@@ -1,0 +1,94 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="New Roof Installation | AquaShield Restoration LLC">
+  <Navbar />
+  <main>
+    <!-- Hero Section -->
+    <section class="relative py-20 bg-gradient-navy text-white">
+      <div class="container mx-auto px-4">
+        <h1 class="text-4xl md:text-5xl font-bold mb-4">New Roof Installation</h1>
+        <p class="text-xl text-white/80 max-w-3xl">
+          Professional roof installation services with quality materials and expert craftsmanship. 
+          Get a durable, weather-resistant roof that protects your property for years to come.
+        </p>
+      </div>
+    </section>
+    
+    <!-- Content Section -->
+    <section class="section-container bg-white">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <h2 class="text-3xl font-bold text-navy mb-6">Why Choose a New Roof?</h2>
+          <ul class="space-y-4">
+            <li class="flex items-start gap-3">
+              <svg class="w-6 h-6 text-aqua flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span><strong>Enhanced Protection:</strong> Latest materials provide superior weather resistance</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-6 h-6 text-aqua flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span><strong>Energy Efficiency:</strong> Modern roofing improves insulation and reduces costs</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-6 h-6 text-aqua flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span><strong>Increased Value:</strong> New roof significantly boosts property value</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-6 h-6 text-aqua flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span><strong>Warranty Coverage:</strong> Comprehensive manufacturer and workmanship warranties</span>
+            </li>
+          </ul>
+          <a href="#contact" class="btn-primary mt-8 inline-block">
+            Get Free Estimate
+          </a>
+        </div>
+        <div>
+          <img 
+            src="/img/services/new-roof-1.webp" 
+            alt="New Roof Installation"
+            class="rounded-2xl shadow-xl w-full"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="section-container bg-silver-light">
+      <h2 class="section-title">Our Installation Process</h2>
+      <div class="grid md:grid-cols-4 gap-8 mt-12">
+        <div class="text-center">
+          <div class="w-16 h-16 bg-navy rounded-full flex items-center justify-center text-white text-2xl font-bold mx-auto mb-4">1</div>
+          <h3 class="text-xl font-bold text-navy mb-2">Inspection</h3>
+          <p class="text-muted-foreground">Thorough assessment of your current roof</p>
+        </div>
+        <div class="text-center">
+          <div class="w-16 h-16 bg-navy rounded-full flex items-center justify-center text-white text-2xl font-bold mx-auto mb-4">2</div>
+          <h3 class="text-xl font-bold text-navy mb-2">Planning</h3>
+          <p class="text-muted-foreground">Custom design and material selection</p>
+        </div>
+        <div class="text-center">
+          <div class="w-16 h-16 bg-navy rounded-full flex items-center justify-center text-white text-2xl font-bold mx-auto mb-4">3</div>
+          <h3 class="text-xl font-bold text-navy mb-2">Installation</h3>
+          <p class="text-muted-foreground">Expert installation by certified professionals</p>
+        </div>
+        <div class="text-center">
+          <div class="w-16 h-16 bg-navy rounded-full flex items-center justify-center text-white text-2xl font-bold mx-auto mb-4">4</div>
+          <h3 class="text-xl font-bold text-navy mb-2">Quality Check</h3>
+          <p class="text-muted-foreground">Final inspection and cleanup</p>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>

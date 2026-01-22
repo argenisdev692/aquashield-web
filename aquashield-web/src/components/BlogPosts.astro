@@ -1,0 +1,59 @@
+---
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+
+// Posts estáticos (en proyecto real, cargar dinámicamente)
+const posts = [
+  {
+    title: "Water Damage Prevention Tips",
+    excerpt: "Learn how to prevent water damage in your home with these expert tips and maintenance strategies...",
+    image: "/img/hero/hero-1.webp",
+    date: "2026-01-15",
+    slug: "#"
+  },
+  {
+    title: "Understanding Mold Growth",
+    excerpt: "What causes mold and how to prevent it from developing in your property after water damage...",
+    image: "/img/hero/hero-2.webp",
+    date: "2026-01-10",
+    slug: "#"
+  },
+  {
+    title: "Insurance Claims Guide",
+    excerpt: "Navigate your insurance claim with confidence using our comprehensive step-by-step guide...",
+    image: "/img/hero/hero-3.webp",
+    date: "2026-01-05",
+    slug: "#"
+  },
+];
+---
+
+<section class:list={["section-container bg-white", className]} id="blog">
+  <h2 class="section-title">Latest Articles</h2>
+  <p class="section-subtitle">
+    Expert tips and insights from our restoration professionals
+  </p>
+  
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
+    {posts.map((post) => (
+      <article class="card-service overflow-hidden p-0">
+        <img 
+          src={post.image} 
+          alt={post.title}
+          class="w-full h-48 object-cover"
+        />
+        <div class="p-6">
+          <time class="text-sm text-muted-foreground">{post.date}</time>
+          <h3 class="text-xl font-bold text-navy mt-2 mb-3">{post.title}</h3>
+          <p class="text-muted-foreground mb-4">{post.excerpt}</p>
+          <a href={post.slug} class="link-on-light font-semibold">
+            Read More →
+          </a>
+        </div>
+      </article>
+    ))}
+  </div>
+</section>

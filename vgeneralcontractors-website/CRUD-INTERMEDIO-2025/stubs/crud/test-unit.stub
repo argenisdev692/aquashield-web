@@ -1,0 +1,227 @@
+<?php
+
+namespace Tests\Unit;
+
+use App\Models\{{EntityName}};
+use App\Models\User;
+use App\Services\{{EntityName}}Service;
+use App\Repositories\Interfaces\{{EntityName}}RepositoryInterface;
+use App\DTOs\{{EntityName}}DTO;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithFaker;
+use Tests\TestCase;
+use Mockery;
+
+class {{EntityName}}ServiceTest extends TestCase
+{
+    use RefreshDatabase, WithFaker;
+
+    private {{EntityName}}Service ${{entityName}}Service;
+    private ${{entityName}}Repository;
+    private $exportService;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        
+        $this->{{entityName}}Repository = Mockery::mock({{EntityName}}RepositoryInterface::class);
+        $this->exportService = Mockery::mock(\App\Services\{{EntityName}}ExportService::class);
+        
+        $this->{{entityName}}Service = new {{EntityName}}Service(
+            $this->{{entityName}}Repository,
+            $this->exportService
+        );
+    }
+
+    protected function tearDown(): void
+    {
+        Mockery::close();
+        parent::tearDown();
+    }
+
+    /** @test */
+    public function it_can_create_{{entityName}}(): void
+    {
+        // Arrange
+        $user = User::factory()->create();
+        $data = [
+            'user_id' => $user->id,
+            {{testData}}
+        ];
+        
+        ${{entityName}} = {{EntityName}}::factory()->make($data);
+        
+        $this->{{entityName}}Repository
+            ->shouldReceive('create')
+            ->once()
+            ->with(Mockery::type('array'))
+            ->andReturn(${{entityName}});
+
+        // Act
+        $result = $this->{{entityName}}Service->create($data);
+
+        // Assert
+        $this->assertInstanceOf({{EntityName}}::class, $result);
+        {{assertions}}
+    }
+
+    /** @test */
+    public function it_can_update_{{entityName}}(): void
+    {
+        // Arrange
+        $user = User::factory()->create();
+        ${{entityName}} = {{EntityName}}::factory()->create(['user_id' => $user->id]);
+        
+        $updateData = [
+            {{updateTestData}}
+        ];
+        
+        $updated{{EntityName}} = ${{entityName}}->replicate();
+        $updated{{EntityName}}->fill($updateData);
+        
+        $this->{{entityName}}Repository
+            ->shouldReceive('update')
+            ->once()
+            ->with(${{entityName}}, Mockery::type('array'))
+            ->andReturn($updated{{EntityName}});
+
+        // Act
+        $result = $this->{{entityName}}Service->update(${{entityName}}, $updateData);
+
+        // Assert
+        $this->assertInstanceOf({{EntityName}}::class, $result);
+        {{updateAssertions}}
+    }
+
+    /** @test */
+    public function it_can_delete_{{entityName}}(): void
+    {
+        // Arrange
+        $user = User::factory()->create();
+        ${{entityName}} = {{EntityName}}::factory()->create(['user_id' => $user->id]);
+        
+        $this->{{entityName}}Repository
+            ->shouldReceive('delete')
+            ->once()
+            ->with(${{entityName}})
+            ->andReturn(true);
+
+        // Act
+        $result = $this->{{entityName}}Service->delete(${{entityName}});
+
+        // Assert
+        $this->assertTrue($result);
+    }
+
+    /** @test */
+    public function it_can_find_{{entityName}}_by_uuid(): void
+    {
+        // Arrange
+        $user = User::factory()->create();
+        ${{entityName}} = {{EntityName}}::factory()->create(['user_id' => $user->id]);
+        
+        $this->{{entityName}}Repository
+            ->shouldReceive('findByUuid')
+            ->once()
+            ->with(${{entityName}}->uuid)
+            ->andReturn(${{entityName}});
+
+        // Act
+        $result = $this->{{entityName}}Service->findByUuid(${{entityName}}->uuid);
+
+        // Assert
+        $this->assertInstanceOf({{EntityName}}::class, $result);
+        $this->assertEquals(${{entityName}}->uuid, $result->uuid);
+    }
+
+    /** @test */
+    public function it_can_get_paginated_{{entityNamePlural}}(): void
+    {
+        // Arrange
+        $mockPaginator = Mockery::mock(\Illuminate\Contracts\Pagination\LengthAwarePaginator::class);
+        
+        $this->{{entityName}}Repository
+            ->shouldReceive('getAllPaginated')
+            ->once()
+            ->with(15, null, [])
+            ->andReturn($mockPaginator);
+
+        // Act
+        $result = $this->{{entityName}}Service->getAllPaginated();
+
+        // Assert
+        $this->assertInstanceOf(\Illuminate\Contracts\Pagination\LengthAwarePaginator::class, $result);
+    }
+
+    /** @test */
+    public function it_can_restore_{{entityName}}(): void
+    {
+        // Arrange
+        $user = User::factory()->create();
+        ${{entityName}} = {{EntityName}}::factory()->create(['user_id' => $user->id]);
+        
+        $this->{{entityName}}Repository
+            ->shouldReceive('restore')
+            ->once()
+            ->with(${{entityName}}->uuid)
+            ->andReturn(${{entityName}});
+
+        // Act
+        $result = $this->{{entityName}}Service->restore(${{entityName}}->uuid);
+
+        // Assert
+        $this->assertInstanceOf({{EntityName}}::class, $result);
+    }
+
+    /** @test */
+    public function it_can_force_delete_{{entityName}}(): void
+    {
+        // Arrange
+        $uuid = $this->faker->uuid;
+        
+        $this->{{entityName}}Repository
+            ->shouldReceive('forceDelete')
+            ->once()
+            ->with($uuid)
+            ->andReturn(true);
+
+        // Act
+        $result = $this->{{entityName}}Service->forceDelete($uuid);
+
+        // Assert
+        $this->assertTrue($result);
+    }
+
+    /** @test */
+    public function it_validates_business_rules_on_create(): void
+    {
+        // Arrange
+        $invalidData = [
+            {{invalidTestData}}
+        ];
+
+        // Act & Assert
+        $this->expectException(\Exception::class);
+        $this->{{entityName}}Service->create($invalidData);
+    }
+
+    /** @test */
+    public function it_can_export_{{entityNamePlural}}(): void
+    {
+        // Arrange
+        $filters = ['user_id' => 1];
+        $mockResponse = Mockery::mock(\Symfony\Component\HttpFoundation\BinaryFileResponse::class);
+        
+        $this->exportService
+            ->shouldReceive('export')
+            ->once()
+            ->with($filters)
+            ->andReturn($mockResponse);
+
+        // Act
+        $result = $this->{{entityName}}Service->export($filters);
+
+        // Assert
+        $this->assertInstanceOf(\Symfony\Component\HttpFoundation\BinaryFileResponse::class, $result);
+    }
+}

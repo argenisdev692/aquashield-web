@@ -1,0 +1,110 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Warranties & Guarantees | AquaShield Restoration LLC">
+  <Navbar />
+  <main>
+    <!-- Hero Section -->
+    <section class="relative py-20 bg-gradient-navy text-white">
+      <div class="container mx-auto px-4">
+        <h1 class="text-4xl md:text-5xl font-bold mb-4">Our Warranties & Guarantees</h1>
+        <p class="text-xl text-white/80 max-w-3xl">
+          We stand behind our work with comprehensive warranties and guarantees. 
+          Your peace of mind is our priority.
+        </p>
+      </div>
+    </section>
+    
+    <!-- Warranty Types -->
+    <section class="section-container bg-white">
+      <div class="grid md:grid-cols-2 gap-12">
+        <div class="card-service">
+          <h3 class="text-2xl font-bold text-navy mb-4">Workmanship Warranty</h3>
+          <p class="text-muted-foreground mb-6">
+            We guarantee our installation and repair work for a full 5 years. If any issues arise 
+            due to workmanship, we'll fix them at no additional cost.
+          </p>
+          <ul class="space-y-3">
+            <li class="flex items-start gap-3">
+              <svg class="w-6 h-6 text-aqua flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span>5-year coverage on all installations</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-6 h-6 text-aqua flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span>No-cost repairs for covered issues</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-6 h-6 text-aqua flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span>Transferable to new property owners</span>
+            </li>
+          </ul>
+        </div>
+        
+        <div class="card-service">
+          <h3 class="text-2xl font-bold text-navy mb-4">Material Warranty</h3>
+          <p class="text-muted-foreground mb-6">
+            All materials come with manufacturer warranties ranging from 10 to 50 years, 
+            depending on the product selected.
+          </p>
+          <ul class="space-y-3">
+            <li class="flex items-start gap-3">
+              <svg class="w-6 h-6 text-aqua flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span>10-50 year manufacturer coverage</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-6 h-6 text-aqua flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span>Defect protection and replacement</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-6 h-6 text-aqua flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span>Premium materials from trusted brands</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Satisfaction Guarantee -->
+    <section class="section-container bg-gradient-navy text-white text-center">
+      <h2 class="text-3xl md:text-4xl font-bold mb-6">100% Satisfaction Guarantee</h2>
+      <p class="text-xl text-white/80 max-w-3xl mx-auto mb-8">
+        We're not satisfied until you are. If there's any issue with our work, 
+        we'll make it right or refund your money. No questions asked.
+      </p>
+      <div class="grid md:grid-cols-4 gap-6 max-w-4xl mx-auto">
+        <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6">
+          <div class="text-4xl font-bold text-aqua mb-2">100%</div>
+          <div class="text-sm">Customer Satisfaction</div>
+        </div>
+        <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6">
+          <div class="text-4xl font-bold text-aqua mb-2">24/7</div>
+          <div class="text-sm">Support Available</div>
+        </div>
+        <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6">
+          <div class="text-4xl font-bold text-aqua mb-2">5+</div>
+          <div class="text-sm">Year Warranty</div>
+        </div>
+        <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6">
+          <div class="text-4xl font-bold text-aqua mb-2">A+</div>
+          <div class="text-sm">BBB Rating</div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>

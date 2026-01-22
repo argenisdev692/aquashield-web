@@ -1,0 +1,42 @@
+---
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<section class:list={["section-container bg-silver-light", className]} id="portfolio-showcase">
+  <h2 class="section-title">Our Project Portfolio</h2>
+  <p class="section-subtitle">
+    See our completed restoration projects
+  </p>
+  
+  <div class="mt-12">
+    <!-- CompanyCam Showcase Integration -->
+    <div 
+      id="companycam-showcase-root" 
+      data-showcase-id="YOUR_SHOWCASE_ID"
+      class="rounded-2xl overflow-hidden shadow-xl bg-white p-8 text-center"
+    >
+      <p class="text-muted-foreground mb-4">Portfolio showcase coming soon</p>
+      <a href="#contact" class="btn-primary inline-block">
+        Contact Us to See Our Work
+      </a>
+    </div>
+  </div>
+</section>
+
+<script>
+  // CompanyCam initialization
+  (function() {
+    var ccShowcaseRoot = document.getElementById("companycam-showcase-root");
+    if (!ccShowcaseRoot || !ccShowcaseRoot.attachShadow || !window.fetch) {
+      return;
+    }
+    var ccShowcaseScript = document.createElement("script");
+    ccShowcaseScript.src = 'https://showcase.companycam.com/bundle.js';
+    ccShowcaseScript.type = "text/javascript";
+    document.body.appendChild(ccShowcaseScript);
+  })();
+</script>

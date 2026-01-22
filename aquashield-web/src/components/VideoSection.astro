@@ -1,0 +1,35 @@
+---
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<section class:list={["section-container bg-gradient-navy text-white", className]} id="video">
+  <div class="grid lg:grid-cols-2 gap-12 items-center">
+    <div>
+      <h2 class="text-3xl md:text-4xl font-bold mb-6 mt-0 text-white">
+        See Our Work in Action
+      </h2>
+      <p class="text-lg text-white/90 mb-6">
+        Watch how we transform water-damaged properties back to their original condition. 
+        Our expert team uses state-of-the-art equipment and proven techniques.
+      </p>
+      <a href="#contact" class="btn-emergency inline-block">
+        Get Started Today
+      </a>
+    </div>
+    
+    <div class="relative aspect-video rounded-2xl overflow-hidden shadow-2xl group">
+      <video 
+        controls 
+        poster="/img/hero/hero-1.webp"
+        class="w-full h-full object-cover"
+      >
+        <source src="/video/company-video.mp4" type="video/mp4" />
+        Your browser does not support video playback.
+      </video>
+    </div>
+  </div>
+</section>

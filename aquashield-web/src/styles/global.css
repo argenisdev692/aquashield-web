@@ -219,17 +219,25 @@
 body {
   background-color: var(--background);
   color: var(--foreground);
-  font-family: 'Roboto', 'Montserrat', system-ui, -apple-system, sans-serif;
+  font-family: 'Roboto', system-ui, -apple-system, sans-serif;
+}
+
+/* Ensure Roboto for all elements */
+body, button, input, textarea, select, a, p, span, div, h1, h2, h3, h4, h5, h6 {
+  font-family: 'Roboto', system-ui, -apple-system, sans-serif;
 }
 
 /* Typography */
 h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
   color: var(--navy);
+  margin-top: 2rem;
+  margin-bottom: 1rem;
 }
 
 h1 {
   font-size: 2.25rem;
+  margin-top: 3rem;
 }
 
 @media (min-width: 768px) {
@@ -246,6 +254,7 @@ h1 {
 
 h2 {
   font-size: 1.875rem;
+  margin-top: 2.5rem;
 }
 
 @media (min-width: 768px) {
@@ -256,6 +265,7 @@ h2 {
 
 h3 {
   font-size: 1.5rem;
+  margin-top: 2rem;
 }
 
 @media (min-width: 768px) {
@@ -266,6 +276,7 @@ h3 {
 
 h4 {
   font-size: 1.25rem;
+  margin-top: 1.5rem;
 }
 
 @media (min-width: 768px) {
@@ -307,16 +318,18 @@ a:hover {
 /* Custom utility classes using @utility directive for Tailwind v4 */
 @utility btn-primary {
   background-color: var(--navy);
-  color: white;
+  color: white !important;
   padding: 0.75rem 1.5rem;
   border-radius: 0.5rem;
   font-weight: 500;
+  font-family: 'Roboto', system-ui, -apple-system, sans-serif;
   transition: background-color 0.3s ease;
 }
 
 @variant hover {
   .btn-primary {
     background-color: var(--aqua);
+    color: white !important;
   }
 }
 
@@ -329,10 +342,11 @@ a:hover {
 
 @utility btn-secondary {
   border: 2px solid var(--navy);
-  color: var(--navy);
+  color: var(--navy) !important;
   padding: 0.75rem 1.5rem;
   border-radius: 0.5rem;
   font-weight: 500;
+  font-family: 'Roboto', system-ui, -apple-system, sans-serif;
   transition: all 0.3s ease;
   background-color: transparent;
 }
@@ -341,7 +355,7 @@ a:hover {
   .btn-secondary {
     background-color: var(--aqua);
     border-color: var(--aqua);
-    color: white;
+    color: white !important;
   }
 }
 
@@ -354,10 +368,11 @@ a:hover {
 
 @utility btn-emergency {
   background-color: var(--aqua);
-  color: white;
+  color: white !important;
   padding: 0.75rem 1.5rem;
   border-radius: 0.5rem;
   font-weight: 700;
+  font-family: 'Roboto', system-ui, -apple-system, sans-serif;
   transition: background-color 0.3s ease;
   animation: pulse 2s infinite;
 }
@@ -365,6 +380,7 @@ a:hover {
 @variant hover {
   .btn-emergency {
     background-color: var(--aqua-dark);
+    color: white !important;
     animation: none;
   }
 }
@@ -503,4 +519,46 @@ a:hover {
   50% {
     opacity: 0.8;
   }
+}
+
+/* ============================================
+   UTILITIES PARA CONTRASTE CORRECTO (WCAG AA)
+   ============================================ */
+
+/* Utilities para contraste correcto */
+@utility text-on-light {
+  color: var(--navy);
+}
+
+@utility text-on-dark {
+  color: var(--white);
+}
+
+@utility link-on-light {
+  color: var(--aqua);
+}
+
+@variant hover {
+  .link-on-light {
+    color: var(--aqua-dark);
+  }
+}
+
+@utility link-on-dark {
+  color: var(--aqua-light);
+}
+
+@variant hover {
+  .link-on-dark {
+    color: var(--white);
+  }
+}
+
+/* Regla de contraste para links globales */
+a.on-light {
+  color: var(--aqua);
+}
+
+a.on-dark {
+  color: var(--aqua-light);
 }

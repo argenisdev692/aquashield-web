@@ -1,0 +1,77 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import AboutUs from '../components/AboutUs.astro';
+import WhyUs from '../components/WhyUs.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="About Us | AquaShield Restoration LLC">
+  <Navbar />
+  <main>
+    <!-- Hero Section -->
+    <section class="relative py-20 bg-gradient-navy text-white">
+      <div class="container mx-auto px-4">
+        <h1 class="text-4xl md:text-5xl font-bold mb-4">About AquaShield Restoration</h1>
+        <p class="text-xl text-white/80 max-w-3xl">
+          Your trusted partner in water damage restoration and property protection. 
+          Serving communities with excellence, integrity, and rapid emergency response since 2010.
+        </p>
+      </div>
+    </section>
+    
+    <!-- About Us Component -->
+    <AboutUs />
+    
+    <!-- Why Us Component -->
+    <WhyUs />
+    
+    <!-- Team Section -->
+    <section class="section-container bg-white">
+      <h2 class="section-title">Our Commitment to Excellence</h2>
+      <p class="section-subtitle max-w-3xl mx-auto">
+        We combine cutting-edge technology with proven restoration techniques to deliver 
+        superior results every time.
+      </p>
+      
+      <div class="grid md:grid-cols-3 gap-8 mt-12">
+        <div class="text-center">
+          <div class="w-20 h-20 bg-aqua/10 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-10 h-10 text-aqua" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-navy mb-3">Expert Team</h3>
+          <p class="text-muted-foreground">
+            IICRC certified technicians with years of restoration experience
+          </p>
+        </div>
+        
+        <div class="text-center">
+          <div class="w-20 h-20 bg-aqua/10 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-10 h-10 text-aqua" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-navy mb-3">Rapid Response</h3>
+          <p class="text-muted-foreground">
+            24/7 emergency services with guaranteed response within 60 minutes
+          </p>
+        </div>
+        
+        <div class="text-center">
+          <div class="w-20 h-20 bg-aqua/10 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-10 h-10 text-aqua" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-navy mb-3">Quality Guarantee</h3>
+          <p class="text-muted-foreground">
+            100% satisfaction guarantee backed by comprehensive warranties
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>

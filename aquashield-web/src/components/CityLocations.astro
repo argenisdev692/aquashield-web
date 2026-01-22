@@ -1,0 +1,39 @@
+---
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+
+const cities = [
+  { name: "Houston", state: "TX", image: "/img/cities/houston.webp" },
+  { name: "Dallas", state: "TX", image: "/img/cities/dallas.webp" },
+  { name: "Florida", state: "FL", image: "/img/cities/florida.webp" },
+];
+---
+
+<section class:list={["section-container bg-white", className]} id="locations">
+  <h2 class="section-title mt-0">Areas We Serve</h2>
+  <p class="section-subtitle">
+    Providing professional restoration services across multiple cities
+  </p>
+  
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
+    {cities.map((city) => (
+      <div class="card-service text-center overflow-hidden p-0 group">
+        <div class="relative overflow-hidden h-48">
+          <img 
+            src={city.image} 
+            alt={`${city.name}, ${city.state}`}
+            class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-navy/80 to-transparent"></div>
+          <div class="absolute bottom-4 left-0 right-0 text-center">
+            <h3 class="text-2xl font-bold text-white mb-1 mt-0">{city.name}</h3>
+            <p class="text-white/90 font-medium">{city.state}</p>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>

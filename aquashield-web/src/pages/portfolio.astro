@@ -1,0 +1,33 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Our Portfolio | AquaShield Restoration LLC">
+  <Navbar />
+  <main>
+    <section class="relative py-20 bg-gradient-navy text-white">
+      <div class="container mx-auto px-4">
+        <h1 class="text-4xl md:text-5xl font-bold mb-4">Our Portfolio</h1>
+        <p class="text-xl text-white/80 max-w-3xl">
+          See examples of our completed restoration projects and the quality work we deliver.
+        </p>
+      </div>
+    </section>
+    
+    <section class="section-container bg-white text-center">
+      <h2 class="section-title">Featured Projects</h2>
+      <p class="section-subtitle">
+        Browse through our gallery of successful restoration projects
+      </p>
+      <div class="mt-12 text-center">
+        <p class="text-muted-foreground mb-8">Portfolio gallery coming soon. Contact us to see examples of our work.</p>
+        <a href="#contact" class="btn-primary">
+          Request Project Examples
+        </a>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>

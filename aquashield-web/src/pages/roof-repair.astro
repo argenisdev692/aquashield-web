@@ -1,0 +1,81 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Roof Repair Services | AquaShield Restoration LLC">
+  <Navbar />
+  <main>
+    <!-- Hero Section -->
+    <section class="relative py-20 bg-gradient-navy text-white">
+      <div class="container mx-auto px-4">
+        <h1 class="text-4xl md:text-5xl font-bold mb-4">Professional Roof Repair</h1>
+        <p class="text-xl text-white/80 max-w-3xl">
+          Fast, reliable roof repair services to fix leaks, damage, and wear. 
+          Expert solutions that restore your roof's integrity and extend its lifespan.
+        </p>
+      </div>
+    </section>
+    
+    <!-- Content Section -->
+    <section class="section-container bg-white">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <img 
+            src="/img/services/repair-1.webp" 
+            alt="Roof Repair Services"
+            class="rounded-2xl shadow-xl w-full"
+          />
+        </div>
+        <div>
+          <h2 class="text-3xl font-bold text-navy mb-6">Common Roof Repairs We Handle</h2>
+          <ul class="space-y-4">
+            <li class="flex items-start gap-3">
+              <svg class="w-6 h-6 text-aqua flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span><strong>Leak Detection & Repair:</strong> Advanced techniques to find and fix all leaks</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-6 h-6 text-aqua flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span><strong>Shingle Replacement:</strong> Quick replacement of damaged or missing shingles</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-6 h-6 text-aqua flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span><strong>Flashing Repair:</strong> Fix compromised flashing around chimneys and vents</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-6 h-6 text-aqua flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span><strong>Structural Damage:</strong> Repair and reinforce damaged roof structures</span>
+            </li>
+          </ul>
+          <a href="#contact" class="btn-primary mt-8 inline-block">
+            Schedule Inspection
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Emergency Section -->
+    <section class="section-container bg-gradient-navy text-white text-center">
+      <h2 class="text-3xl md:text-4xl font-bold mb-6">Emergency Roof Repair Available 24/7</h2>
+      <p class="text-xl text-white/80 mb-8 max-w-2xl mx-auto">
+        Don't let a damaged roof cause further problems. Our emergency response team is ready to help.
+      </p>
+      <a href="tel:5559114782" class="btn-emergency text-lg px-8 py-4 inline-flex items-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+        </svg>
+        Call Now: (555) 911-AQUA
+      </a>
+    </section>
+  </main>
+  <Footer />
+</Layout>

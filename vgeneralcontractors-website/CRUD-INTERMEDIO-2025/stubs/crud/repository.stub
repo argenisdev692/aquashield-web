@@ -1,0 +1,173 @@
+<?php
+
+namespace App\Repositories;
+
+use App\Models\{{EntityName}};
+use App\Repositories\Interfaces\{{EntityName}}RepositoryInterface;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Builder;
+
+class {{EntityName}}Repository extends BaseRepository implements {{EntityName}}RepositoryInterface
+{
+    /**
+     * Searchable fields for the model
+     */
+    protected array $searchableFields = {{searchableFields}};
+
+    public function __construct({{EntityName}} $model)
+    {
+        parent::__construct($model);
+    }
+
+    /**
+     * Get all {{entityName}} records with pagination and filters
+     */
+    public function getAllPaginated(
+        int $perPage = 15,
+        ?string $search = null,
+        array $filters = []
+    ): LengthAwarePaginator {
+        $query = $this->model->newQuery()
+            ->with(['user'])
+            ->latest();
+
+        // Apply search
+        if ($search) {
+            $query->where(function (Builder $q) use ($search) {
+                foreach ($this->searchableFields as $field) {
+                    $q->orWhere($field, 'LIKE', "%{$search}%");
+                }
+            });
+        }
+
+        // Apply filters
+        $this->applyFilters($query, $filters);
+
+        return $query->paginate($perPage);
+    }
+
+    /**
+     * Find {{entityName}} by UUID
+     */
+    public function findByUuid(string $uuid): ?{{EntityName}}
+    {
+        return $this->model->where('uuid', $uuid)->first();
+    }
+
+    /**
+     * Get {{entityName}} records by user
+     */
+    public function getByUser(int $userId): Collection
+    {
+        return $this->model->where('user_id', $userId)
+            ->with(['user'])
+            ->latest()
+            ->get();
+    }
+
+    /**
+     * Search {{entityName}} records
+     */
+    public function search(string $query): Collection
+    {
+        $searchQuery = $this->model->newQuery();
+
+        foreach ($this->searchableFields as $field) {
+            $searchQuery->orWhere($field, 'LIKE', "%{$query}%");
+        }
+
+        return $searchQuery->with(['user'])->get();
+    }
+
+    /**
+     * Get active {{entityName}} records
+     */
+    public function getActive(): Collection
+    {
+        return $this->model->active()
+            ->with(['user'])
+            ->latest()
+            ->get();
+    }
+
+    /**
+     * Get inactive {{entityName}} records
+     */
+    public function getInactive(): Collection
+    {
+        return $this->model->inactive()
+            ->with(['user'])
+            ->latest()
+            ->get();
+    }
+
+    /**
+     * Restore soft deleted {{entityName}}
+     */
+    public function restore(string $uuid): ?{{EntityName}}
+    {
+        ${{entityName}} = $this->model->withTrashed()->where('uuid', $uuid)->first();
+        
+        if (${{entityName}} && ${{entityName}}->trashed()) {
+            ${{entityName}}->restore();
+            return ${{entityName}}->fresh();
+        }
+
+        return null;
+    }
+
+    /**
+     * Force delete {{entityName}}
+     */
+    public function forceDelete(string $uuid): bool
+    {
+        ${{entityName}} = $this->model->withTrashed()->where('uuid', $uuid)->first();
+        
+        if (${{entityName}}) {
+            return ${{entityName}}->forceDelete();
+        }
+
+        return false;
+    }
+
+    /**
+     * Get {{entityName}} records for export
+     */
+    public function getForExport(array $filters = []): Collection
+    {
+        $query = $this->model->newQuery()
+            ->with(['user'])
+            ->latest();
+
+        $this->applyFilters($query, $filters);
+
+        return $query->get();
+    }
+
+    /**
+     * Apply filters to query
+     */
+    private function applyFilters(Builder $query, array $filters): void
+    {
+        if (isset($filters['user_id'])) {
+            $query->where('user_id', $filters['user_id']);
+        }
+
+        if (isset($filters['status'])) {
+            if ($filters['status'] === 'active') {
+                $query->active();
+            } elseif ($filters['status'] === 'inactive') {
+                $query->inactive();
+            }
+        }
+
+        if (isset($filters['date_from'])) {
+            $query->whereDate('created_at', '>=', $filters['date_from']);
+        }
+
+        if (isset($filters['date_to'])) {
+            $query->whereDate('created_at', '<=', $filters['date_to']);
+        }
+    }
+}

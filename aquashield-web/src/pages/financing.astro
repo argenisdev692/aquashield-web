@@ -1,0 +1,33 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Financing from '../components/Financing.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Financing Options | AquaShield Restoration LLC">
+  <Navbar />
+  <main>
+    <section class="relative py-20 bg-gradient-navy text-white">
+      <div class="container mx-auto px-4">
+        <h1 class="text-4xl md:text-5xl font-bold mb-4">Flexible Financing Options</h1>
+        <p class="text-xl text-white/80 max-w-3xl">
+          Don't let financial concerns delay your restoration project. We offer flexible payment plans to fit any budget.
+        </p>
+      </div>
+    </section>
+    
+    <Financing />
+    
+    <section class="section-container bg-white text-center">
+      <h2 class="text-3xl font-bold text-navy mb-6">Apply Today</h2>
+      <p class="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
+        Our financing application is quick and easy. Get approved in minutes and start your restoration project today.
+      </p>
+      <a href="#contact" class="btn-primary text-lg px-8 py-4">
+        Apply for Financing
+      </a>
+    </section>
+  </main>
+  <Footer />
+</Layout>
