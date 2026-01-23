@@ -8,52 +8,59 @@ const { class: className } = Astro.props;
 // Posts estáticos (en proyecto real, cargar dinámicamente)
 const posts = [
   {
-    title: "Water Damage Prevention Tips",
-    excerpt: "Learn how to prevent water damage in your home with these expert tips and maintenance strategies...",
-    image: "/brain/1d27b498-b1e7-43a4-b756-74f22296efc0/water_damage_prevention_tips_1769110668751.png",
-    date: "2026-01-15",
+    title: "New trends in Tech",
+    date: "July 19, 2021",
+    image: "https://images.unsplash.com/photo-1593508512255-86ab42a8e620?auto=format&q=75&fit=crop&w=600",
     slug: "#"
   },
   {
-    title: "Understanding Mold Growth",
-    excerpt: "What causes mold and how to prevent it from developing in your property after water damage...",
-    image: "/brain/1d27b498-b1e7-43a4-b756-74f22296efc0/understanding_mold_growth_1769110682539.png",
-    date: "2026-01-10",
+    title: "Working with legacy stacks",
+    date: "April 07, 2021",
+    image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&q=75&fit=crop&w=600",
     slug: "#"
   },
   {
-    title: "Insurance Claims Guide",
-    excerpt: "Navigate your insurance claim with confidence using our comprehensive step-by-step guide...",
-    image: "/brain/1d27b498-b1e7-43a4-b756-74f22296efc0/insurance_claims_guide_1769110697685.png",
-    date: "2026-01-05",
+    title: "10 best smartphones for devs",
+    date: "March 15, 2021",
+    image: "https://images.unsplash.com/photo-1542759564-7ccbb6ac450a?auto=format&q=75&fit=crop&w=600",
+    slug: "#"
+  },
+  {
+    title: "8 High performance Notebooks",
+    date: "January 27, 2021",
+    image: "https://images.unsplash.com/photo-1610465299996-30f240ac2b1c?auto=format&q=75&fit=crop&w=600",
     slug: "#"
   },
 ];
 ---
 
-<section class:list={["section-container bg-white", className]} id="blog">
-  <h2 class="section-title">Latest Articles</h2>
-  <p class="section-subtitle">
-    Expert tips and insights from our restoration professionals
-  </p>
-  
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
-    {posts.map((post) => (
-      <article class="card-service overflow-hidden p-0">
-        <img 
-          src={post.image} 
-          alt={post.title}
-          class="w-full h-48 object-cover"
-        />
-        <div class="p-6">
-          <time class="text-sm text-muted-foreground">{post.date}</time>
-          <h3 class="text-xl font-bold text-navy mt-2 mb-3">{post.title}</h3>
-          <p class="text-muted-foreground mb-4">{post.excerpt}</p>
-          <a href={post.slug} class="link-on-light font-semibold">
-            Read More →
-          </a>
-        </div>
-      </article>
-    ))}
+<div class:list={["bg-white py-6 sm:py-8 lg:py-12", className]}>
+  <div class="mx-auto max-w-screen-2xl px-4 md:px-8">
+    <!-- text - start -->
+    <div class="mb-10 md:mb-16">
+      <h2 class="mb-4 text-center text-2xl font-bold text-gray-800 md:mb-6 lg:text-3xl">Blog</h2>
+
+      <p class="mx-auto max-w-screen-md text-center text-gray-500 md:text-lg">This is a section of some simple filler text, also known as placeholder text. It shares some characteristics of a real written text but is random or otherwise generated.</p>
+    </div>
+    <!-- text - end -->
+
+    <div class="grid gap-4 sm:grid-cols-2 md:gap-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-8">
+      {posts.map((post) => (
+        <!-- article - start -->
+        <a href={post.slug} class="group relative flex h-48 flex-col overflow-hidden rounded-lg bg-gray-100 shadow-lg md:h-64 xl:h-96">
+          <img src={post.image} loading="lazy" alt={post.title} class="absolute inset-0 h-full w-full object-cover object-center transition duration-200 group-hover:scale-110" />
+
+          <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-gray-800 to-transparent md:via-transparent"></div>
+
+          <div class="relative mt-auto p-4">
+            <span class="block text-sm text-gray-200">{post.date}</span>
+            <h2 class="mb-2 text-xl font-semibold text-white !text-white transition duration-100">{post.title}</h2>
+
+            <span class="font-semibold text-indigo-300">Read more</span>
+          </div>
+        </a>
+        <!-- article - end -->
+      ))}
+    </div>
   </div>
-</section>
+</div>

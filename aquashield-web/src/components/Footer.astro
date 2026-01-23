@@ -6,7 +6,7 @@ interface Props {
 const { class: className } = Astro.props;
 
 const companyData = {
-  name: "AquaShield Restoration LLC",
+  name: "AQUASHIELD RESTORATION LLC",
   phone: "(555) 123-4567",
   email: "info@aquashieldrestoration.com",
   address: {
@@ -55,11 +55,7 @@ const footerLinks = {
       
       <!-- Column 1: Company Info -->
       <div>
-        <img 
-          src="/Logo PNG.png" 
-          alt={companyData.name}
-          class="h-16 w-auto mb-4"
-        />
+        <h2 class="text-xl font-bold mb-4 bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-500 bg-clip-text text-transparent">{companyData.name}</h2>
         <p class="text-white/80 mb-4">
           Professional water damage restoration and protection services. Available 24/7 for emergencies.
         </p>

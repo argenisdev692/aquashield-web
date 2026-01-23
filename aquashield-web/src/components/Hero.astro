@@ -70,7 +70,7 @@ const heroStats = [
 
         <!-- Main heading -->
         <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
-          <span class="text-aqua inline-block animate-fade-in-up" style="animation-delay: 0.2s;">AquaShield</span>
+          <span class="inline-block animate-fade-in-up bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-500 bg-clip-text text-transparent" style="animation-delay: 0.2s;">AQUASHIELD RESTORATION</span>
           <br />
           <span class="text-white/90 inline-block animate-fade-in-up" style="animation-delay: 0.5s;">{companyData.tagline}</span>
         </h1>
@@ -83,15 +83,15 @@ const heroStats = [
         </p>
 
         <!-- CTA Buttons -->
-        <div class="flex flex-col sm:flex-row gap-4 pt-4">
+        <div class="flex flex-col sm:flex-row gap-4 pt-4 pb-4">
           <button onclick="openInspectionModal()" class="btn-primary text-center text-lg px-8 py-4 shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 ease-out cursor-pointer">
             Get Free Estimate
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
           </button>
-          <a 
-            href={`tel:${companyData.emergencyPhone.replace(/[^0-9]/g, '')}`} 
+          <a
+            href={`tel:${companyData.emergencyPhone.replace(/[^0-9]/g, '')}`}
             class="btn-emergency text-center text-lg px-8 py-4 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 ease-out"
           >
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -100,37 +100,15 @@ const heroStats = [
             Call Now: {companyData.emergencyPhone}
           </a>
         </div>
-
-        <!-- Trust indicators -->
-        <div class="flex flex-col sm:flex-row flex-wrap items-start sm:items-center gap-4 sm:gap-6 pt-6 pb-4 text-aqua text-sm font-medium">
-          <div class="flex items-center gap-2">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-aqua flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-            </svg>
-            <span>Licensed & Insured</span>
-          </div>
-          <div class="flex items-center gap-2">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-aqua flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-            </svg>
-            <span>IICRC Certified</span>
-          </div>
-          <div class="flex items-center gap-2">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-aqua flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-            <span>Insurance Claims Help</span>
-          </div>
-        </div>
       </div>
 
       <!-- Right column - Stats/Image -->
       <div class="hidden lg:block fade-in-section" style="animation-delay: 0.3s;">
         <div class="relative">
           <!-- Stats cards -->
-          <div class="grid grid-cols-2 gap-4">
+          <div class="grid grid-cols-2 gap-4 mb-6">
             {heroStats.map((stat, index) => (
-              <div 
+              <div
                 class="bg-white/10 backdrop-blur-md rounded-2xl p-6 text-center border border-white/20 hover:bg-white/20 transition-all duration-300 hover:scale-105"
                 style={`animation-delay: ${0.1 * index}s`}
               >
@@ -140,13 +118,35 @@ const heroStats = [
             ))}
           </div>
 
+          <!-- Trust indicators below cards -->
+          <div class="flex flex-col gap-3 text-aqua text-sm font-medium">
+            <div class="flex items-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-aqua flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+              </svg>
+              <span>Licensed & Insured</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-aqua flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span>IICRC Certified</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-aqua flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <span>Insurance Claims Help</span>
+            </div>
+          </div>
+
           <!-- Decorative shield -->
           <div class="absolute -bottom-10 -right-10 w-40 h-40 opacity-20">
             <svg viewBox="0 0 100 100" class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-              <path 
-                d="M50 5 L90 20 L90 50 C90 75 70 90 50 95 C30 90 10 75 10 50 L10 20 Z" 
-                fill="var(--aqua)" 
-                stroke="var(--white)" 
+              <path
+                d="M50 5 L90 20 L90 50 C90 75 70 90 50 95 C30 90 10 75 10 50 L10 20 Z"
+                fill="var(--aqua)"
+                stroke="var(--white)"
                 stroke-width="2"
               />
             </svg>
@@ -154,6 +154,13 @@ const heroStats = [
         </div>
       </div>
     </div>
+  </div>
+
+  <!-- Wave divider at bottom -->
+  <div class="absolute -bottom-[1px] left-0 w-full overflow-hidden leading-[0] rotate-180 z-20">
+    <svg class="relative block w-[calc(100%+1.3px)] h-[80px] md:h-[120px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+      <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" fill="#ffffff"></path>
+    </svg>
   </div>
 
   <!-- Scroll indicator removed -->
