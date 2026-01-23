@@ -1,0 +1,179 @@
+---
+---
+
+<style>
+    .hero-section {
+        margin-top: -2rem;
+    }
+
+    .tab-content {
+        transition: all 0.3s ease-in-out;
+    }
+
+    .faq-item {
+        transition: all 0.3s ease-in-out;
+    }
+
+    .faq-item:hover {
+        transform: translateX(5px);
+    }
+</style>
+
+<!-- Hero Section with Image Overlay -->
+<div class="relative h-[500px] w-full hero-section bg-navy">
+    <!-- Background Image -->
+    <img src="/img/general/faqs.webp" alt="Frequently Asked Questions" class="absolute inset-0 w-full h-full object-cover object-[center_25%] opacity-40">
+
+    <!-- Dark Overlay -->
+    <div class="absolute inset-0 bg-gradient-to-b from-navy/80 to-navy/60"></div>
+
+    <!-- Content -->
+    <div class="relative z-10 h-full flex items-center justify-center">
+        <div class="text-center">
+            <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 drop-shadow-lg">
+                Questions and Answers
+            </h1>
+            <p class="text-lg sm:text-xl md:text-2xl text-white max-w-2xl mx-auto px-4 mb-12 drop-shadow-md">
+                Find answers to common water damage restoration questions.
+            </p>
+
+            <!-- Breadcrumb Navigation -->
+            <nav class="px-4 md:px-8 mt-8">
+                <div class="mx-auto">
+                    <ol class="flex items-center justify-center space-x-2 text-white">
+                        <li>
+                            <a href="/" class="hover:text-aqua transition-colors">Home</a>
+                        </li>
+                        <li>
+                            <span class="mx-2">/</span>
+                        </li>
+                        <li class="text-aqua font-medium">FAQs</li>
+                    </ol>
+                </div>
+            </nav>
+        </div>
+    </div>
+</div>
+
+<!-- Main Content -->
+<main class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <!-- FAQ Content -->
+        <div class="lg:col-span-2">
+            <div x-data="{ activeTab: 'general' }" class="bg-white rounded-lg shadow-lg p-6">
+                <!-- Tab Navigation -->
+                <div class="flex flex-wrap gap-4 mb-6">
+                    <button @click="activeTab = 'general'" :class="{ 'bg-aqua text-white': activeTab === 'general', 'bg-gray-100 text-gray-700 hover:bg-gray-200': activeTab !== 'general' }" class="px-4 py-2 rounded-lg font-semibold transition-colors">
+                        General Questions
+                    </button>
+                    <button @click="activeTab = 'services'" :class="{ 'bg-aqua text-white': activeTab === 'services', 'bg-gray-100 text-gray-700 hover:bg-gray-200': activeTab !== 'services' }" class="px-4 py-2 rounded-lg font-semibold transition-colors">
+                        Our Services
+                    </button>
+                    <button @click="activeTab = 'process'" :class="{ 'bg-aqua text-white': activeTab === 'process', 'bg-gray-100 text-gray-700 hover:bg-gray-200': activeTab !== 'process' }" class="px-4 py-2 rounded-lg font-semibold transition-colors">
+                        Process & Timeline
+                    </button>
+                </div>
+
+                <!-- Tab Content -->
+                <div class="space-y-4">
+                    <!-- General Questions -->
+                    <div x-show="activeTab === 'general'" class="space-y-4">
+                        <div class="faq-item bg-gray-50 p-6 rounded-lg border-l-4 border-aqua">
+                            <h3 class="text-xl font-bold text-navy mb-3">
+                                How do I know if I have a trusted restoration company?
+                            </h3>
+                            <p class="text-gray-700">A trusted company is IICRC certified, fully insured, and bonded. They should also have a strong portfolio of completed projects and positive customer reviews. At AquaShield Restoration LLC, we meet all these criteria and are proud of our excellent reputation in the community.</p>
+                        </div>
+                        <div class="faq-item bg-gray-50 p-6 rounded-lg border-l-4 border-aqua">
+                            <h3 class="text-xl font-bold text-navy mb-3">
+                                Can you provide references or examples of your work?
+                            </h3>
+                            <p class="text-gray-700">Absolutely. We are proud of our work and are happy to provide references from past clients. You can also view our extensive portfolio of completed projects on our website to see the quality and variety of our restoration work.</p>
+                        </div>
+                        <div class="faq-item bg-gray-50 p-6 rounded-lg border-l-4 border-aqua">
+                            <h3 class="text-xl font-bold text-navy mb-3">How quickly can you respond to an emergency?</h3>
+                            <p class="text-gray-700">We offer 24/7 emergency response services with a guaranteed 60-minute response time. Water damage requires immediate attention, and our team is always ready to help protect your property from further damage.</p>
+                        </div>
+                    </div>
+
+                    <!-- Services -->
+                    <div x-show="activeTab === 'services'" class="space-y-4">
+                        <div class="faq-item bg-gray-50 p-6 rounded-lg border-l-4 border-aqua">
+                            <h3 class="text-xl font-bold text-navy mb-3">What types of water damage do you handle?</h3>
+                            <p class="text-gray-700">We specialize in all types of water damage restoration, including flood damage, storm damage, burst pipes, sewage backups, and mold remediation. Our team can handle both residential and commercial properties of any size.</p>
+                        </div>
+                        <div class="faq-item bg-gray-50 p-6 rounded-lg border-l-4 border-aqua">
+                            <h3 class="text-xl font-bold text-navy mb-3">Do you help with insurance claims?</h3>
+                            <p class="text-gray-700">Yes, we have extensive experience working with insurance companies. We can help you navigate the claims process, from initial inspection to final settlement, to ensure you receive the full compensation you are entitled to for your water damage.</p>
+                        </div>
+                        <div class="faq-item bg-gray-50 p-6 rounded-lg border-l-4 border-aqua">
+                            <h3 class="text-xl font-bold text-navy mb-3">Do you offer mold remediation services?</h3>
+                            <p class="text-gray-700">Yes, mold remediation is one of our core services. Water damage often leads to mold growth if not properly addressed. We use advanced techniques and equipment to safely remove mold and prevent future growth.</p>
+                        </div>
+                    </div>
+
+                    <!-- Process -->
+                    <div x-show="activeTab === 'process'" class="space-y-4">
+                        <div class="faq-item bg-gray-50 p-6 rounded-lg border-l-4 border-aqua">
+                            <h3 class="text-xl font-bold text-navy mb-3">What does a water damage inspection involve?</h3>
+                            <p class="text-gray-700">Our comprehensive inspections include moisture detection, assessment of structural damage, identification of affected areas, and development of a detailed restoration plan. We use advanced equipment to detect hidden moisture that could lead to future problems.</p>
+                        </div>
+                        <div class="faq-item bg-gray-50 p-6 rounded-lg border-l-4 border-aqua">
+                            <h3 class="text-xl font-bold text-navy mb-3">How long does water damage restoration take?</h3>
+                            <p class="text-gray-700">The timeline varies depending on the extent of the damage. Minor water damage can be resolved in 3-5 days, while major restoration projects may take 1-2 weeks. We will provide you with a detailed timeline after our initial assessment.</p>
+                        </div>
+                        <div class="faq-item bg-gray-50 p-6 rounded-lg border-l-4 border-aqua">
+                            <h3 class="text-xl font-bold text-navy mb-3">Do I need to leave my home during restoration?</h3>
+                            <p class="text-gray-700">In most cases, you can remain in your home during the restoration process. However, for extensive damage or mold remediation, we may recommend temporary relocation for your safety and comfort. We'll discuss this with you during the assessment.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="lg:col-span-1">
+            <div class="sticky top-32 space-y-6">
+                <!-- Key Benefits Box -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-navy mb-4">Why Choose AquaShield</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 text-aqua mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span class="text-gray-700">Free Property Inspections</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 text-aqua mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span class="text-gray-700">24/7 Emergency Response</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 text-aqua mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span class="text-gray-700">Expert Insurance Claim Assistance</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 text-aqua mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span class="text-gray-700">IICRC Certified Technicians</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- CTA Box -->
+                <div class="bg-gradient-navy rounded-lg shadow-lg p-6 text-center">
+                    <h3 class="text-xl font-bold text-white mb-4">Schedule a Free Inspection</h3>
+                    <p class="text-white/90 mb-6">Our experts are ready to answer your questions and guide you through the process.</p>
+                    <button onclick="openInspectionModal()" class="block w-full bg-white text-navy px-6 py-3 rounded-lg font-bold transition-all duration-300 hover:!bg-aqua hover:!text-white cursor-pointer">
+                        Contact Us Now
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

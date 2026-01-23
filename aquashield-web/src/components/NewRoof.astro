@@ -1,0 +1,118 @@
+---
+---
+
+<style>
+    .hero-section {
+        margin-top: -2rem;
+    }
+</style>
+
+<!-- Hero Section with Image Overlay -->
+<div class="relative h-[500px] w-full hero-section bg-navy">
+    <!-- Background Image -->
+    <img src="/img/services/new-roof.webp" alt="Professional new roof installation" class="absolute inset-0 w-full h-full object-cover opacity-40">
+
+    <!-- Dark Overlay -->
+    <div class="absolute inset-0 bg-gradient-to-b from-navy/80 to-navy/60"></div>
+
+    <!-- Content -->
+    <div class="relative z-10 h-full flex items-center justify-center">
+        <div class="text-center">
+            <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 drop-shadow-lg">
+                New Roof Installation
+            </h1>
+            <p class="text-lg sm:text-xl md:text-2xl text-white max-w-2xl mx-auto px-4 mb-12 drop-shadow-md">
+                Protect your investment with a high-quality, professionally installed new roof.
+            </p>
+
+            <!-- Breadcrumb Navigation -->
+            <nav class="px-4 md:px-8 mt-8">
+                <div class="mx-auto">
+                    <ol class="flex items-center justify-center space-x-2 text-white">
+                        <li>
+                            <a href="/" class="hover:text-aqua transition-colors">Home</a>
+                        </li>
+                        <li>
+                            <span class="mx-2">/</span>
+                        </li>
+                        <li class="text-aqua font-medium">New Roof</li>
+                    </ol>
+                </div>
+            </nav>
+        </div>
+    </div>
+</div>
+
+<!-- Main Content -->
+<main class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+    <div class="bg-white rounded-lg shadow-lg p-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+            <!-- Text Content Column -->
+            <div class="space-y-6">
+                <div>
+                    <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-navy mb-4">
+                        Expert New Roof Installation
+                    </h2>
+                    <p class="text-base sm:text-lg md:text-xl text-gray-600">
+                        A new roof is one of the most important investments you can make in your property. At AquaShield Restoration LLC, we provide expert new roof installation services using only the highest quality materials to ensure your home or business is protected for years to come. Our team of certified professionals is committed to delivering exceptional workmanship and customer service.
+                    </p>
+                </div>
+
+                <div class="space-y-4">
+                    <h3 class="text-xl sm:text-2xl md:text-3xl font-semibold text-navy">
+                        Why Choose Us:
+                    </h3>
+                    <ul class="space-y-2 text-base sm:text-lg md:text-xl text-gray-600">
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 text-aqua mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span>Expert Installation Team</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 text-aqua mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span>Premium Materials & Workmanship</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 text-aqua mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span>Comprehensive Warranty Protection</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 text-aqua mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span>Free, No-Obligation Estimates</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 text-aqua mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span>Insurance Claim Assistance</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Image Column -->
+            <div class="relative h-[400px] rounded-lg overflow-hidden fade-in-section">
+                <img src="/img/services/new-roof-content.webp" alt="Professional roof installation process" class="absolute inset-0 w-full h-full object-cover image-zoom">
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Form Section -->
+    <div id="schedule-estimate" class="mt-12">
+        <div class="text-center mb-8">
+            <h2 class="text-3xl font-bold text-navy">Get Your Free New Roof Estimate</h2>
+            <p class="text-lg text-gray-600 mt-2">Schedule your free, no-obligation estimate today and let our experts provide you with a detailed quote.</p>
+        </div>
+
+        <div class="text-center">
+            <button onclick="openInspectionModal()" class="btn-primary inline-block px-8 py-3 text-lg font-bold rounded-lg cursor-pointer">Book Free Estimate Now</button>
+        </div>
+    </div>
+</main>

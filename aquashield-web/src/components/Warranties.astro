@@ -1,0 +1,129 @@
+---
+---
+
+<style>
+    .hero-section {
+        margin-top: -2rem;
+    }
+
+    .warranty-image {
+        transition: all 0.5s ease-in-out;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
+
+    .warranty-image:hover {
+        transform: scale(1.05);
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    }
+
+    .warranty-container {
+        overflow: hidden;
+    }
+</style>
+
+<!-- Hero Section with Image Overlay -->
+<div class="relative h-[500px] w-full hero-section bg-navy">
+    <!-- Background Image -->
+    <img src="/img/general/warranty-hero.webp" alt="Roofing warranties" class="absolute inset-0 w-full h-full object-cover opacity-40">
+    
+    <!-- Dark Overlay -->
+    <div class="absolute inset-0 bg-gradient-to-b from-navy/80 to-navy/60"></div>
+    
+    <!-- Content -->
+    <div class="relative z-10 h-full flex items-center justify-center">
+        <div class="text-center">
+            <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 drop-shadow-lg">
+                Roofing Warranties
+            </h1>
+            <p class="text-lg sm:text-xl md:text-2xl text-white max-w-2xl mx-auto px-4 mb-12 drop-shadow-md">
+                Industry-leading coverage and protection for your investment.
+            </p>
+            
+            <!-- Breadcrumb Navigation -->
+            <nav class="px-4 md:px-8 mt-8">
+                <div class="mx-auto">
+                    <ol class="flex items-center justify-center space-x-2 text-white">
+                        <li>
+                            <a href="/" class="hover:text-aqua transition-colors">Home</a>
+                        </li>
+                        <li>
+                            <span class="mx-2">/</span>
+                        </li>
+                        <li class="text-aqua font-medium">Warranties</li>
+                    </ol>
+                </div>
+            </nav>
+        </div>
+    </div>
+</div>
+
+<!-- Main Content -->
+<div class="relative py-24 bg-white">
+    <div class="container mx-auto px-4">
+        <!-- Section Header -->
+        <div class="text-center max-w-3xl mx-auto mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-navy mb-4">
+                Comprehensive Warranty Protection
+            </h2>
+            <p class="text-lg text-gray-600">
+                At AquaShield Restoration LLC, we stand behind our work with industry-leading warranties that protect your investment for years to come.
+            </p>
+        </div>
+
+        <!-- Warranty Images -->
+        <div class="flex flex-wrap items-center justify-center warranty-container">
+            <div class="w-full md:w-1/2 px-4 mb-12">
+                <div class="relative overflow-hidden rounded-lg shadow-lg warranty-image h-full bg-white">
+                    <img src="/img/general/warranty1.webp" alt="Roofing warranty coverage details" class="w-full h-full object-contain">
+                </div>
+            </div>
+            <div class="w-full md:w-1/2 px-4 mb-12">
+                <div class="relative overflow-hidden rounded-lg shadow-lg warranty-image h-full bg-white">
+                    <img src="/img/general/warranty2.webp" alt="Warranty certificate example" class="w-full h-full object-contain">
+                </div>
+            </div>
+        </div>
+
+        <!-- Additional Info -->
+        <div class="max-w-4xl mx-auto mt-16">
+            <div class="bg-aqua/10 border-l-4 border-aqua rounded-lg p-8">
+                <h3 class="text-2xl font-bold text-navy mb-4">Why Our Warranties Matter</h3>
+                <div class="space-y-4 text-gray-600">
+                    <p class="flex items-start">
+                        <svg class="w-6 h-6 text-aqua mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <span><strong>Comprehensive Coverage:</strong> Our warranties cover both materials and workmanship, giving you complete peace of mind.</span>
+                    </p>
+                    <p class="flex items-start">
+                        <svg class="w-6 h-6 text-aqua mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <span><strong>Long-Term Protection:</strong> Extended warranty options available to protect your investment for decades.</span>
+                    </p>
+                    <p class="flex items-start">
+                        <svg class="w-6 h-6 text-aqua mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <span><strong>Transferable:</strong> Many of our warranties can be transferred to new homeowners, adding value to your property.</span>
+                    </p>
+                    <p class="flex items-start">
+                        <svg class="w-6 h-6 text-aqua mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <span><strong>Backed by Industry Leaders:</strong> We partner with top manufacturers to provide the best warranty coverage available.</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA Section -->
+        <div class="text-center mt-16">
+            <h3 class="text-2xl font-bold text-navy mb-4">Have Questions About Our Warranties?</h3>
+            <p class="text-lg text-gray-600 mb-8">Contact us today to learn more about our comprehensive warranty options.</p>
+            <button onclick="openInspectionModal()" class="btn-primary inline-block px-8 py-4 text-lg font-bold rounded-lg cursor-pointer">
+                Contact Us Today
+            </button>
+        </div>
+    </div>
+</div>

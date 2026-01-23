@@ -1,0 +1,163 @@
+---
+---
+
+<style>
+    .hero-section {
+        margin-top: -2rem;
+    }
+</style>
+
+<!-- Hero Section with Image Overlay -->
+<div class="relative h-[500px] w-full hero-section bg-navy">
+    <!-- Background Image -->
+    <img src="/img/services/storm-damage.webp" alt="Storm damage repair services" class="absolute inset-0 w-full h-full object-cover opacity-40">
+
+    <!-- Dark Overlay -->
+    <div class="absolute inset-0 bg-gradient-to-b from-navy/80 to-navy/60"></div>
+
+    <!-- Content -->
+    <div class="relative z-10 h-full flex items-center justify-center">
+        <div class="text-center">
+            <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 drop-shadow-lg">
+                Emergency Storm Damage Repair
+            </h1>
+            <p class="text-lg sm:text-xl md:text-2xl text-white max-w-2xl mx-auto px-4 mb-12 drop-shadow-md">
+                Rapid response and expert repair for storm-damaged properties.
+            </p>
+
+            <!-- Breadcrumb Navigation -->
+            <nav class="px-4 md:px-8 mt-8">
+                <div class="mx-auto">
+                    <ol class="flex items-center justify-center space-x-2 text-white">
+                        <li>
+                            <a href="/" class="hover:text-aqua transition-colors">Home</a>
+                        </li>
+                        <li>
+                            <span class="mx-2">/</span>
+                        </li>
+                        <li class="text-aqua font-medium">Storm Damage</li>
+                    </ol>
+                </div>
+            </nav>
+        </div>
+    </div>
+</div>
+
+<!-- Main Content -->
+<main class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+    <!-- Emergency Contact Banner -->
+    <div class="bg-aqua/10 border-l-4 border-aqua p-4 mb-8">
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center">
+                <svg class="h-6 w-6 text-aqua flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                </svg>
+                <p class="ml-3 text-base sm:text-lg font-medium text-navy text-center sm:text-left">
+                    For emergency storm damage, call us immediately at
+                    <a href="tel:5551234567" class="font-bold hover:text-aqua whitespace-nowrap">(555) 123-4567</a>
+                </p>
+            </div>
+            <button onclick="openInspectionModal()" class="btn-primary px-6 py-2 rounded-md whitespace-nowrap flex-shrink-0 cursor-pointer">
+                Get a Free Inspection
+            </button>
+        </div>
+    </div>
+
+    <div class="bg-white rounded-lg shadow-lg p-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start mb-8">
+            <!-- Text Content Column -->
+            <div class="space-y-6">
+                <div>
+                    <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-navy mb-4">
+                        Professional Storm Damage Repair
+                    </h2>
+                    <p class="text-base sm:text-lg text-gray-600">
+                        Storms can cause significant damage to your property, from high winds and hail to fallen debris. At AquaShield Restoration LLC, we specialize in storm damage repair and restoration. Our team is available 24/7 to provide emergency services and help you protect your property from further damage.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Image Column -->
+            <div class="relative rounded-lg overflow-hidden fade-in-section">
+                <img src="/img/services/storm-damage-content.webp" alt="Storm damage repair process" class="w-full h-auto object-cover image-zoom">
+            </div>
+        </div>
+
+        <div class="space-y-6">
+            <div class="space-y-4">
+                <p class="text-base sm:text-lg text-gray-600">
+                    If your property has been damaged by a storm, it's crucial to act quickly. Contact us for a free, comprehensive inspection. We will assess the damage and provide you with a detailed report and a fair, transparent quote.
+                </p>
+
+                <p class="text-base sm:text-lg text-gray-600">
+                    Our team will develop a customized repair or replacement plan tailored to your specific needs and budget, ensuring your property is restored to its pre-storm condition or better.
+                </p>
+            </div>
+
+            <!-- Call to Action Box -->
+            <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+                <h3 class="text-lg sm:text-xl font-semibold text-navy mb-4">Why Choose Us for Storm Damage</h3>
+                <ul class="space-y-3 text-base sm:text-lg">
+                    <li class="flex items-start">
+                        <svg class="w-6 h-6 text-aqua mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                        <span>24/7 Emergency Response</span>
+                    </li>
+                    <li class="flex items-start">
+                        <svg class="w-6 h-6 text-aqua mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                        <span>Free, Comprehensive Inspection</span>
+                    </li>
+                    <li class="flex items-start">
+                        <svg class="w-6 h-6 text-aqua mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                        <span>Expert Insurance Claim Assistance</span>
+                    </li>
+                    <li class="flex items-start">
+                        <svg class="w-6 h-6 text-aqua mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                        <span>Experienced & IICRC Certified</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-12 bg-white rounded-lg shadow-lg p-8">
+        <h2 class="text-2xl sm:text-3xl font-bold text-navy mb-6">Our Storm Damage Restoration Process</h2>
+        <div class="space-y-4">
+            <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-aqua">
+                <h3 class="text-xl font-semibold text-navy mb-2">Thorough Damage Assessment</h3>
+                <p class="text-base sm:text-lg text-gray-600">
+                    We conduct a detailed inspection to identify all storm-related damage, including hidden issues that could lead to future problems.
+                </p>
+            </div>
+            <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-aqua">
+                <h3 class="text-xl font-semibold text-navy mb-2">Clear Repair or Replacement Plan</h3>
+                <p class="text-base sm:text-lg text-gray-600">
+                    Based on our assessment, we provide a clear, detailed plan for either repairing or replacing damaged areas, along with a transparent quote.
+                </p>
+            </div>
+            <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-aqua">
+                <h3 class="text-xl font-semibold text-navy mb-2">Professional Execution</h3>
+                <p class="text-base sm:text-lg text-gray-600">
+                    Our certified team carries out the repair or replacement with precision and high-quality materials, ensuring a durable and long-lasting result.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div id="schedule-inspection" class="mt-12">
+        <div class="text-center mb-8">
+            <h2 class="text-3xl font-bold text-navy">Request a Free Storm Inspection</h2>
+            <p class="text-lg text-gray-600 mt-2">Don't wait. Schedule your free inspection today to assess any potential storm damage.</p>
+        </div>
+        <div class="text-center">
+            <button onclick="openInspectionModal()" class="btn-primary inline-block px-8 py-3 text-lg font-bold rounded-lg cursor-pointer">Book Free Inspection Now</button>
+        </div>
+    </div>
+</main>

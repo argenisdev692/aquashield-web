@@ -2,93 +2,14 @@
 import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
+import Faqs from '../components/Faqs.astro';
 ---
 
 <Layout title="Frequently Asked Questions | AquaShield Restoration LLC">
   <Navbar />
   <main>
-    <section class="relative py-20 bg-gradient-navy text-white">
-      <div class="container mx-auto px-4">
-        <h1 class="text-4xl md:text-5xl font-bold mb-4">Frequently Asked Questions</h1>
-        <p class="text-xl text-white/80 max-w-3xl">
-          Find answers to common questions about our restoration services.
-        </p>
-      </div>
-    </section>
-    
-    <section class="section-container bg-white">
-      <div class="max-w-3xl mx-auto space-y-6">
-        <details class="bg-silver-light rounded-lg p-6 group">
-          <summary class="font-bold text-navy cursor-pointer list-none flex justify-between items-center">
-            <span>How quickly can you respond to an emergency?</span>
-            <svg class="w-5 h-5 transform group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-            </svg>
-          </summary>
-          <p class="mt-4 text-muted-foreground">
-            We offer 24/7 emergency service and guarantee a response within 60 minutes for urgent situations. Our rapid response team is always ready to help minimize damage and begin the restoration process.
-          </p>
-        </details>
-
-        <details class="bg-silver-light rounded-lg p-6 group">
-          <summary class="font-bold text-navy cursor-pointer list-none flex justify-between items-center">
-            <span>Do you work with insurance companies?</span>
-            <svg class="w-5 h-5 transform group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-            </svg>
-          </summary>
-          <p class="mt-4 text-muted-foreground">
-            Yes! We have extensive experience working with all major insurance companies. We'll help document the damage, file your claim, and communicate directly with your insurance adjuster to ensure you receive the coverage you're entitled to.
-          </p>
-        </details>
-
-        <details class="bg-silver-light rounded-lg p-6 group">
-          <summary class="font-bold text-navy cursor-pointer list-none flex justify-between items-center">
-            <span>What areas do you serve?</span>
-            <svg class="w-5 h-5 transform group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-            </svg>
-          </summary>
-          <p class="mt-4 text-muted-foreground">
-            We proudly serve Houston, Dallas, and surrounding areas in Texas, as well as select cities in Florida. Contact us to confirm we service your specific location.
-          </p>
-        </details>
-
-        <details class="bg-silver-light rounded-lg p-6 group">
-          <summary class="font-bold text-navy cursor-pointer list-none flex justify-between items-center">
-            <span>Are your technicians certified?</span>
-            <svg class="w-5 h-5 transform group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-            </svg>
-          </summary>
-          <p class="mt-4 text-muted-foreground">
-            Absolutely. All our technicians are IICRC certified and undergo continuous training to stay current with the latest restoration techniques and industry best practices.
-          </p>
-        </details>
-
-        <details class="bg-silver-light rounded-lg p-6 group">
-          <summary class="font-bold text-navy cursor-pointer list-none flex justify-between items-center">
-            <span>What types of payment do you accept?</span>
-            <svg class="w-5 h-5 transform group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-            </svg>
-          </summary>
-          <p class="mt-4 text-muted-foreground">
-            We accept all major credit cards, checks, and insurance assignments. We also offer flexible financing options for qualified customers to make restoration more affordable.
-          </p>
-        </details>
-      </div>
-    </section>
-
-    <section class="section-container bg-silver-light text-center">
-      <h2 class="text-3xl font-bold text-navy mb-4">Still Have Questions?</h2>
-      <p class="text-lg text-muted-foreground mb-8">
-        Our team is here to help. Contact us for personalized answers to your restoration questions.
-      </p>
-      <a href="#contact" class="btn-primary">
-        Contact Us
-      </a>
-    </section>
+    <Faqs />
   </main>
   <Footer />
 </Layout>
+

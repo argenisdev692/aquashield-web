@@ -2,106 +2,14 @@
 import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
+import StormDamage from '../components/StormDamage.astro';
 ---
 
 <Layout title="Storm Damage Restoration | AquaShield Restoration LLC">
   <Navbar />
   <main>
-    <!-- Hero Section -->
-    <section class="relative py-20 bg-gradient-navy text-white">
-      <div class="container mx-auto px-4">
-        <h1 class="text-4xl md:text-5xl font-bold mb-4">Storm Damage Restoration</h1>
-        <p class="text-xl text-white/80 max-w-3xl">
-          Expert storm damage assessment and repair services. We help you recover quickly 
-          from wind, rain, and severe weather damage with full insurance support.
-        </p>
-      </div>
-    </section>
-    
-    <!-- Content Section -->
-    <section class="section-container bg-white">
-      <h2 class="section-title">Complete Storm Damage Solutions</h2>
-      <div class="grid md:grid-cols-3 gap-8 mt-12">
-        <div class="card-service">
-          <h3 class="text-2xl font-bold text-navy mb-4">Wind Damage</h3>
-          <p class="text-muted-foreground mb-4">
-            Repair and replace damaged shingles, flashing, and structural components caused by high winds.
-          </p>
-          <ul class="space-y-2 text-sm">
-            <li>• Missing or loose shingles</li>
-            <li>• Damaged gutters</li>
-            <li>• Compromised roof structure</li>
-          </ul>
-        </div>
-        
-        <div class="card-service">
-          <h3 class="text-2xl font-bold text-navy mb-4">Water Damage</h3>
-          <p class="text-muted-foreground mb-4">
-            Address leaks and water intrusion from storm damage with comprehensive water restoration.
-          </p>
-          <ul class="space-y-2 text-sm">
-            <li>• Leak detection and repair</li>
-            <li>• Water extraction</li>
-            <li>• Structural drying</li>
-          </ul>
-        </div>
-        
-        <div class="card-service">
-          <h3 class="text-2xl font-bold text-navy mb-4">Debris Impact</h3>
-          <p class="text-muted-foreground mb-4">
-            Repair damage from fallen trees, branches, and flying debris during severe storms.
-          </p>
-          <ul class="space-y-2 text-sm">
-            <li>• Structural assessment</li>
-            <li>• Emergency tarping</li>
-            <li>• Complete restoration</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- Insurance Section -->
-    <section class="section-container bg-silver-light">
-      <div class="grid lg:grid-cols-2 gap-12 items-center">
-        <div>
-          <h2 class="text-3xl font-bold text-navy mb-6">We Work With Your Insurance</h2>
-          <p class="text-lg text-muted-foreground mb-6">
-            Our team has extensive experience working with insurance companies. We'll help you navigate 
-            the claims process to ensure you get the coverage you deserve.
-          </p>
-          <ul class="space-y-3 mb-8">
-            <li class="flex items-start gap-3">
-              <svg class="w-6 h-6 text-aqua flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-              </svg>
-              <span>Free insurance inspection</span>
-            </li>
-            <li class="flex items-start gap-3">
-              <svg class="w-6 h-6 text-aqua flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-              </svg>
-              <span>Documentation assistance</span>
-            </li>
-            <li class="flex items-start gap-3">
-              <svg class="w-6 h-6 text-aqua flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-              </svg>
-              <span>Direct insurance communication</span>
-            </li>
-          </ul>
-          <a href="/insurance-claims" class="btn-primary">
-            Learn About Insurance Claims
-          </a>
-        </div>
-        <div>
-          <img 
-            src="/img/services/storm-damage-1.webp" 
-            alt="Storm Damage Restoration"
-            class="rounded-2xl shadow-xl w-full"
-          />
-        </div>
-      </div>
-    </section>
+    <StormDamage />
   </main>
   <Footer />
 </Layout>
+

@@ -2,96 +2,14 @@
 import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
+import InsuranceClaims from '../components/InsuranceClaims.astro';
 ---
 
 <Layout title="Insurance Claims Assistance | AquaShield Restoration LLC">
   <Navbar />
   <main>
-    <section class="relative py-20 bg-gradient-navy text-white">
-      <div class="container mx-auto px-4">
-        <h1 class="text-4xl md:text-5xl font-bold mb-4">Insurance Claims Assistance</h1>
-        <p class="text-xl text-white/80 max-w-3xl">
-          Navigate your insurance claim with confidence. We work directly with your insurance company to ensure you get the coverage you deserve.
-        </p>
-      </div>
-    </section>
-    
-    <section class="section-container bg-white">
-      <div class="grid lg:grid-cols-2 gap-12">
-        <div>
-          <h2 class="text-3xl font-bold text-navy mb-6">How We Help With Insurance Claims</h2>
-          <ul class="space-y-4">
-            <li class="flex items-start gap-3">
-              <svg class="w-6 h-6 text-aqua flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-              </svg>
-              <span><strong>Free Inspection:</strong> Comprehensive damage assessment for your claim</span>
-            </li>
-            <li class="flex items-start gap-3">
-              <svg class="w-6 h-6 text-aqua flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-              </svg>
-              <span><strong>Documentation:</strong> Detailed reports with photos and estimates</span>
-            </li>
-            <li class="flex items-start gap-3">
-              <svg class="w-6 h-6 text-aqua flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-              </svg>
-              <span><strong>Direct Communication:</strong> We handle all interactions with your insurer</span>
-            </li>
-            <li class="flex items-start gap-3">
-              <svg class="w-6 h-6 text-aqua flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-              </svg>
-              <span><strong>Advocate for You:</strong> We ensure all covered damage is included</span>
-            </li>
-          </ul>
-          <a href="#contact" class="btn-primary mt-8 inline-block">
-            Get Help With Your Claim
-          </a>
-        </div>
-        <div class="bg-silver-light rounded-2xl p-8">
-          <h3 class="text-2xl font-bold text-navy mb-6">The Claims Process</h3>
-          <ol class="space-y-4">
-            <li class="flex gap-4">
-              <div class="w-8 h-8 bg-navy text-white rounded-full flex items-center justify-center flex-shrink-0 font-bold">1</div>
-              <div>
-                <strong class="text-navy">Contact Us</strong>
-                <p class="text-sm text-muted-foreground">Call for emergency service or schedule an inspection</p>
-              </div>
-            </li>
-            <li class="flex gap-4">
-              <div class="w-8 h-8 bg-navy text-white rounded-full flex items-center justify-center flex-shrink-0 font-bold">2</div>
-              <div>
-                <strong class="text-navy">Damage Assessment</strong>
-                <p class="text-sm text-muted-foreground">We document all damage thoroughly</p>
-              </div>
-            </li>
-            <li class="flex gap-4">
-              <div class="w-8 h-8 bg-navy text-white rounded-full flex items-center justify-center flex-shrink-0 font-bold">3</div>
-              <div>
-                <strong class="text-navy">File Claim</strong>
-                <p class="text-sm text-muted-foreground">We submit comprehensive documentation to your insurer</p>
-              </div>
-            </li>
-            <li class="flex gap-4">
-              <div class="w-8 h-8 bg-navy text-white rounded-full flex items-center justify-center flex-shrink-0 font-bold">4</div>
-              <div>
-                <strong class="text-navy">Adjuster Meeting</strong>
-                <p class="text-sm text-muted-foreground">We meet with the adjuster on your behalf</p>
-              </div>
-            </li>
-            <li class="flex gap-4">
-              <div class="w-8 h-8 bg-navy text-white rounded-full flex items-center justify-center flex-shrink-0 font-bold">5</div>
-              <div>
-                <strong class="text-navy">Begin Restoration</strong>
-                <p class="text-sm text-muted-foreground">Work starts once your claim is approved</p>
-              </div>
-            </li>
-          </ol>
-        </div>
-      </div>
-    </section>
+    <InsuranceClaims />
   </main>
   <Footer />
 </Layout>
+

@@ -254,6 +254,28 @@ h6 {
   margin-bottom: 1rem;
 }
 
+/* Headings on dark backgrounds should be white */
+.bg-gradient-navy h1,
+.bg-gradient-navy h2,
+.bg-gradient-navy h3,
+.bg-gradient-navy h4,
+.bg-gradient-navy h5,
+.bg-gradient-navy h6,
+.bg-navy h1,
+.bg-navy h2,
+.bg-navy h3,
+.bg-navy h4,
+.bg-navy h5,
+.bg-navy h6,
+.bg-gray-900 h1,
+.bg-gray-900 h2,
+.bg-gray-900 h3,
+.bg-gray-900 h4,
+.bg-gray-900 h5,
+.bg-gray-900 h6 {
+  color: white !important;
+}
+
 h1 {
   font-size: 2.25rem;
   margin-top: 3rem;
@@ -336,26 +358,34 @@ a:hover {
 
 /* Custom utility classes using @utility directive for Tailwind v4 */
 @utility btn-primary {
-  background-color: var(--navy);
+  background-color: var(--aqua);
   color: white !important;
   padding: 0.75rem 1.5rem;
   border-radius: 0.5rem;
-  font-weight: 500;
+  font-weight: 600;
   font-family: 'Roboto', system-ui, -apple-system, sans-serif;
-  transition: background-color 0.3s ease;
-}
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
 
-@variant hover {
-  .btn-primary {
-    background-color: var(--aqua);
+  &:hover {
+    background-color: var(--navy);
     color: white !important;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0, 181, 226, 0.3);
   }
-}
 
-@variant focus {
-  .btn-primary {
+  &:focus {
     outline: none;
-    box-shadow: 0 0 0 2px var(--aqua), 0 0 0 4px white;
+    box-shadow: 0 0 0 3px rgba(0, 181, 226, 0.5);
+  }
+
+  &:active {
+    transform: translateY(0);
+    transition: all 0.1s ease;
   }
 }
 
@@ -364,24 +394,30 @@ a:hover {
   color: var(--navy) !important;
   padding: 0.75rem 1.5rem;
   border-radius: 0.5rem;
-  font-weight: 500;
+  font-weight: 600;
   font-family: 'Roboto', system-ui, -apple-system, sans-serif;
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   background-color: transparent;
-}
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 
-@variant hover {
-  .btn-secondary {
+  &:hover {
     background-color: var(--aqua);
     border-color: var(--aqua);
     color: white !important;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0, 181, 226, 0.3);
   }
-}
 
-@variant focus {
-  .btn-secondary {
+  &:focus {
     outline: none;
-    box-shadow: 0 0 0 2px var(--aqua), 0 0 0 4px white;
+    box-shadow: 0 0 0 3px rgba(0, 181, 226, 0.5);
+  }
+
+  &:active {
+    transform: translateY(0);
+    transition: all 0.1s ease;
   }
 }
 
@@ -392,22 +428,28 @@ a:hover {
   border-radius: 0.5rem;
   font-weight: 700;
   font-family: 'Roboto', system-ui, -apple-system, sans-serif;
-  transition: background-color 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   animation: pulse 2s infinite;
-}
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 
-@variant hover {
-  .btn-emergency {
-    background-color: var(--aqua-dark);
+  &:hover {
+    background-color: var(--navy);
     color: white !important;
     animation: none;
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 181, 226, 0.4);
   }
-}
 
-@variant focus {
-  .btn-emergency {
+  &:focus {
     outline: none;
-    box-shadow: 0 0 0 2px var(--navy), 0 0 0 4px white;
+    box-shadow: 0 0 0 3px rgba(0, 181, 226, 0.5);
+  }
+
+  &:active {
+    transform: scale(1);
+    transition: all 0.1s ease;
   }
 }
 

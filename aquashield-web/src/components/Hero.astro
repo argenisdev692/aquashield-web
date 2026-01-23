@@ -84,12 +84,12 @@ const heroStats = [
 
         <!-- CTA Buttons -->
         <div class="flex flex-col sm:flex-row gap-4 pt-4">
-          <a href="#contact" class="btn-primary text-center text-lg px-8 py-4 shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 ease-out">
+          <button onclick="openInspectionModal()" class="btn-primary text-center text-lg px-8 py-4 shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 ease-out cursor-pointer">
             Get Free Estimate
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
-          </a>
+          </button>
           <a 
             href={`tel:${companyData.emergencyPhone.replace(/[^0-9]/g, '')}`} 
             class="btn-emergency text-center text-lg px-8 py-4 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 ease-out"

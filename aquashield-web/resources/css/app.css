@@ -1,0 +1,571 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Roboto Font */
+@font-face {
+    font-family: "Roboto";
+    src: url("../../public/assets/fonts/Roboto/Roboto-VariableFont_wdth,wght.ttf")
+        format("truetype");
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Roboto";
+    src: url("../../public/assets/fonts/Roboto/Roboto-Italic-VariableFont_wdth,wght.ttf")
+        format("truetype");
+    font-weight: 100 900;
+    font-style: italic;
+    font-display: swap;
+}
+
+[x-cloak] {
+    display: none;
+}
+
+/* Toggle Switch Styles */
+.dot {
+    transition: transform 0.3s ease-in-out;
+}
+
+input:checked ~ .dot {
+    transform: translateX(100%);
+}
+
+input:checked ~ .block {
+    background-color: #4f46e5;
+}
+
+/* ===============================================
+   CRUD MODAL STYLES - SweetAlert2 Customization
+   =============================================== */
+
+/* Estilos para modal de creación (verde) */
+.swal2-popup.swal-create .swal2-header,
+.swal2-popup.swal-create .swal2-title {
+    background: linear-gradient(135deg, #10b981, #059669) !important;
+    color: white !important;
+}
+
+/* Estilos para modal de edición (azul) */
+.swal2-popup.swal-edit .swal2-header,
+.swal2-popup.swal-edit .swal2-title {
+    background: linear-gradient(135deg, #3b82f6, #2563eb) !important;
+    color: white !important;
+}
+
+/* Forzar estilos del header */
+.swal2-header {
+    padding: 0 !important;
+    border-radius: 12px 12px 0 0 !important;
+    position: relative !important; /* Añadido para posicionamiento correcto del botón X */
+}
+
+.swal2-popup.swal-create .swal2-header,
+.swal2-popup.swal-edit .swal2-header {
+    border-radius: 12px 12px 0 0 !important;
+}
+
+.swal2-title {
+    padding: 2rem 3rem 1.5rem 1.5rem !important; /* Más padding superior, menos derecho ya que el botón es más pequeño */
+    margin: 0 !important;
+    width: 100% !important;
+    text-align: center !important;
+    position: relative !important; /* Para que el posicionamiento sea independiente del botón X */
+}
+
+/* Estilos generales para el modal */
+.swal2-popup {
+    border-radius: 12px !important;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25) !important;
+    overflow: hidden !important;
+    position: relative !important; /* Para posicionamiento correcto del botón X */
+}
+
+/* Asegurar que el header también tenga border radius */
+.swal2-header {
+    border-top-left-radius: 12px !important;
+    border-top-right-radius: 12px !important;
+    border-bottom-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+}
+
+/* Asegurar que el contenido no sobresalga */
+.swal2-content {
+    border-radius: 0 !important;
+}
+
+/* Asegurar que los botones tengan border radius inferior */
+.swal2-actions {
+    border-bottom-left-radius: 12px !important;
+    border-bottom-right-radius: 12px !important;
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+}
+
+.swal2-title {
+    font-size: 1.5rem !important;
+    font-weight: 600 !important;
+    margin: 0 !important;
+    padding: 1.5rem 3rem 1rem 1rem !important; /* Más padding superior, menos derecho */
+}
+
+.swal2-close {
+    font-size: 1.2rem !important; /* Reducido ligeramente */
+    font-weight: 300 !important;
+    right: 0.75rem !important; /* Más pegado al borde */
+    top: 0.5rem !important; /* Mucho más arriba */
+    background: #ef4444 !important;
+    color: white !important;
+    border-radius: 50% !important;
+    width: 2rem !important; /* Reducido para que interfiera menos */
+    height: 2rem !important; /* Reducido para que interfiera menos */
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border: none !important;
+    box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3) !important;
+    overflow: hidden !important;
+    padding: 0 !important;
+    line-height: 1 !important;
+    z-index: 1000 !important; /* Z-index muy alto */
+    position: absolute !important; /* Asegurar posicionamiento absoluto */
+}
+
+.swal2-close:hover {
+    background: #dc2626 !important;
+    color: white !important;
+    border-radius: 50% !important;
+    transform: scale(1.1) !important; /* Ligeramente más grande en hover */
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4) !important;
+    width: 2rem !important; /* Mantener dimensiones consistentes */
+    height: 2rem !important; /* Mantener dimensiones consistentes */
+}
+
+/* Estilos para el formulario */
+.crud-modal-form {
+    padding: 1rem;
+}
+
+.form-group label {
+    font-weight: 500 !important;
+    color: #374151 !important;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    transition: all 0.2s ease !important;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    ring: 2px !important;
+    ring-color: #3b82f6 !important;
+    border-color: #3b82f6 !important;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
+}
+
+/* Estilos para mensajes de validación */
+.error-message {
+    font-size: 0.875rem !important;
+    margin-top: 0.25rem !important;
+    transition: all 0.2s ease !important;
+}
+
+.error-message.text-red-500 {
+    color: #ef4444 !important;
+}
+
+.error-message.text-green-500 {
+    color: #10b981 !important;
+}
+
+/* Estilos para campos con error */
+.form-group input.error,
+.form-group select.error,
+.form-group textarea.error {
+    border-color: #ef4444 !important;
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1) !important;
+}
+
+/* Estilos para campos válidos */
+.form-group input.valid,
+.form-group select.valid,
+.form-group textarea.valid {
+    border-color: #10b981 !important;
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1) !important;
+}
+
+/* Estilos para campos requeridos - asterisco rojo */
+.form-group label.required::after {
+    content: " *";
+    color: #ef4444 !important;
+    font-weight: bold !important;
+    margin-left: 2px;
+}
+
+.form-group label.required {
+    position: relative;
+}
+
+/* Alternativa para asterisco antes del label */
+.form-group label.required-before::before {
+    content: "* ";
+    color: #ef4444 !important;
+    font-weight: bold !important;
+    margin-right: 2px;
+}
+
+/* ===============================================
+   CHECKBOX AND RADIO BUTTON STYLES
+   =============================================== */
+
+/* Estilos mejorados para checkboxes - Solo aplicar cuando NO tienen estilos personalizados */
+input[type="checkbox"].checkbox-field:not(.custom-styled),
+input[type="checkbox"].form-checkbox:not(.custom-styled),
+.checkbox-field:not(.custom-styled),
+.form-checkbox:not(.custom-styled) {
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    width: 1.25rem !important;
+    height: 1.25rem !important;
+    border: 2px solid #d97706 !important; /* yellow-600 border */
+    border-radius: 0.375rem !important; /* rounded-md */
+    background-color: #ffffff !important;
+    cursor: pointer !important;
+    position: relative !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    flex-shrink: 0 !important;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06) !important;
+}
+
+/* Hover state para checkboxes */
+input[type="checkbox"].checkbox-field:not(.custom-styled):hover,
+input[type="checkbox"].form-checkbox:not(.custom-styled):hover,
+.checkbox-field:not(.custom-styled):hover,
+.form-checkbox:not(.custom-styled):hover {
+    border-color: #f59e0b !important; /* yellow-500 */
+    background-color: #fef3c7 !important; /* yellow-50 */
+    transform: scale(1.05) !important;
+    box-shadow: 0 4px 12px 0 rgba(245, 158, 11, 0.15),
+        0 2px 4px 0 rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Focus state para checkboxes */
+input[type="checkbox"].checkbox-field:not(.custom-styled):focus,
+input[type="checkbox"].form-checkbox:not(.custom-styled):focus,
+.checkbox-field:not(.custom-styled):focus,
+.form-checkbox:not(.custom-styled):focus {
+    outline: none !important;
+    border-color: #f59e0b !important; /* yellow-500 */
+    box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.3) !important;
+    transform: scale(1.02) !important;
+}
+
+/* Checked state para checkboxes */
+input[type="checkbox"].checkbox-field:not(.custom-styled):checked,
+input[type="checkbox"].form-checkbox:not(.custom-styled):checked,
+.checkbox-field:not(.custom-styled):checked,
+.form-checkbox:not(.custom-styled):checked {
+    background-color: #f59e0b !important; /* yellow-500 */
+    border-color: #d97706 !important; /* yellow-600 */
+}
+
+/* Checkmark para checkboxes */
+input[type="checkbox"].checkbox-field:not(.custom-styled):checked::after,
+input[type="checkbox"].form-checkbox:not(.custom-styled):checked::after,
+.checkbox-field:not(.custom-styled):checked::after,
+.form-checkbox:not(.custom-styled):checked::after {
+    content: "✓" !important;
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) scale(0) !important;
+    color: #ffffff !important;
+    font-size: 0.875rem !important;
+    font-weight: bold !important;
+    line-height: 1 !important;
+    animation: checkmark-appear 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55)
+        forwards !important;
+}
+
+/* Animación para el checkmark */
+@keyframes checkmark-appear {
+    0% {
+        transform: translate(-50%, -50%) scale(0) rotate(-45deg) !important;
+        opacity: 0 !important;
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.2) rotate(0deg) !important;
+        opacity: 1 !important;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1) rotate(0deg) !important;
+        opacity: 1 !important;
+    }
+}
+
+/* Estilos para radio buttons - Solo aplicar cuando NO tienen estilos personalizados */
+input[type="radio"].radio-field:not(.custom-styled):not(.sr-only) {
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    width: 1.25rem !important;
+    height: 1.25rem !important;
+    border: 2px solid #d97706 !important; /* yellow-600 border */
+    border-radius: 50% !important;
+    background-color: #ffffff !important;
+    cursor: pointer !important;
+    position: relative !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    flex-shrink: 0 !important;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06) !important;
+}
+
+/* Hover state para radio buttons */
+input[type="radio"].radio-field:not(.custom-styled):not(.sr-only):hover {
+    border-color: #f59e0b !important; /* yellow-500 */
+    background-color: #fef3c7 !important; /* yellow-50 */
+    transform: scale(1.05) !important;
+    box-shadow: 0 4px 12px 0 rgba(245, 158, 11, 0.15),
+        0 2px 4px 0 rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Focus state para radio buttons */
+input[type="radio"].radio-field:not(.custom-styled):not(.sr-only):focus {
+    outline: none !important;
+    border-color: #f59e0b !important; /* yellow-500 */
+    box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.3) !important;
+    transform: scale(1.02) !important;
+}
+
+/* Checked state para radio buttons */
+input[type="radio"].radio-field:not(.custom-styled):not(.sr-only):checked {
+    background-color: #f59e0b !important; /* yellow-500 */
+    border-color: #d97706 !important; /* yellow-600 */
+}
+
+/* Dot para radio buttons */
+input[type="radio"].radio-field:not(.custom-styled):not(
+        .sr-only
+    ):checked::after {
+    content: "" !important;
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) scale(0) !important;
+    width: 0.5rem !important;
+    height: 0.5rem !important;
+    background-color: #ffffff !important;
+    border-radius: 50% !important;
+    animation: radio-dot-appear 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55)
+        forwards !important;
+}
+
+/* Animación para el dot del radio button */
+@keyframes radio-dot-appear {
+    0% {
+        transform: translate(-50%, -50%) scale(0) !important;
+        opacity: 0 !important;
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.3) !important;
+        opacity: 1 !important;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1) !important;
+        opacity: 1 !important;
+    }
+}
+
+/* Disabled states */
+input[type="checkbox"].checkbox-field:not(.custom-styled):disabled,
+input[type="checkbox"].form-checkbox:not(.custom-styled):disabled,
+input[type="radio"].radio-field:not(.custom-styled):not(.sr-only):disabled,
+.checkbox-field:not(.custom-styled):disabled,
+.form-checkbox:not(.custom-styled):disabled {
+    opacity: 0.5 !important;
+    cursor: not-allowed !important;
+    border-color: #9ca3af !important; /* gray-400 */
+    background-color: #f3f4f6 !important; /* gray-100 */
+}
+
+input[type="checkbox"].checkbox-field:not(.custom-styled):disabled:hover,
+input[type="checkbox"].form-checkbox:not(.custom-styled):disabled:hover,
+input[type="radio"].radio-field:not(.custom-styled):not(
+        .sr-only
+    ):disabled:hover,
+.checkbox-field:not(.custom-styled):disabled:hover,
+.form-checkbox:not(.custom-styled):disabled:hover {
+    transform: none !important;
+    background-color: #f3f4f6 !important; /* gray-100 */
+}
+
+/* ===============================================
+   INSURANCE RADIO BUTTONS STYLING
+   =============================================== */
+
+/* Radio buttons styling for insurance options - consistent with facebook-lead-form */
+.insurance-label {
+    transition: all 0.2s ease !important;
+    background-color: white !important;
+    border: 2px solid #e5e7eb !important; /* gray-300 */
+    font-weight: 500 !important;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06) !important;
+}
+
+.insurance-label:hover {
+    background-color: #facc15 !important; /* yellow-400 */
+    color: white !important;
+    border-color: #eab308 !important; /* yellow-500 */
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 12px 0 rgba(245, 158, 11, 0.25),
+        0 2px 4px 0 rgba(0, 0, 0, 0.1) !important;
+}
+
+.insurance-label.selected {
+    background-color: #f59e0b !important; /* yellow-500 */
+    color: white !important;
+    border-color: #d97706 !important; /* yellow-600 */
+    font-weight: bold !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 12px 0 rgba(245, 158, 11, 0.3),
+        0 2px 4px 0 rgba(0, 0, 0, 0.1) !important;
+}
+
+.insurance-label:active {
+    transform: translateY(0) !important;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Hide radio buttons visually but keep them accessible for insurance options */
+.radio-field.sr-only {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+}
+
+/* ===============================================
+   CALENDAR MODAL STYLES
+   =============================================== */
+
+/* Calendar Container */
+#calendar {
+    max-width: 1100px;
+    margin: 20px auto;
+    padding: 0 10px;
+}
+
+/* FullCalendar Event Customization */
+.fc-event {
+    font-size: 0.75rem !important;
+    line-height: 1.2 !important;
+}
+
+/* Custom Event Content Styling */
+.fc-event-content-custom {
+    width: 100%;
+    padding: 1px 2px !important;
+}
+
+/* Client Name (First Line) */
+.client-title {
+    font-weight: bold;
+    font-size: 0.8rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-bottom: 2px;
+}
+
+/* Event Time (Second Line) */
+.event-time {
+    font-size: 0.7rem;
+    opacity: 0.85;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-bottom: 2px;
+}
+
+/* Appointment Status (Third Line) */
+.appointment-status {
+    font-size: 0.7rem;
+    opacity: 0.9;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Hide default FullCalendar event elements */
+.fc-event-title-container,
+.fc-event-time {
+    display: none !important;
+}
+
+/* Improve event layout */
+.fc-timegrid-event-harness {
+    margin-left: 1px !important;
+    margin-right: 1px !important;
+}
+
+.fc-timegrid-event {
+    padding: 1px 2px !important;
+}
+
+/* Tooltip Styling (Tippy.js) */
+.tippy-box[data-theme~="light-border"] {
+    font-size: 0.85rem;
+}
+
+.tippy-box[data-theme~="light-border"] .tippy-content {
+    padding: 0.5rem;
+}
+
+/* ===============================================
+   CALENDAR RESPONSIVE DESIGN
+   =============================================== */
+
+@media (max-width: 768px) {
+    #calendar {
+        margin: 10px auto;
+        padding: 0 5px;
+    }
+
+    .fc-event {
+        font-size: 0.7rem !important;
+    }
+
+    .client-title {
+        font-size: 0.75rem;
+    }
+
+    .event-time,
+    .appointment-status {
+        font-size: 0.65rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .fc-event {
+        font-size: 0.65rem !important;
+    }
+
+    .client-title {
+        font-size: 0.7rem;
+    }
+
+    .event-time,
+    .appointment-status {
+        font-size: 0.6rem;
+    }
+}

@@ -1,0 +1,310 @@
+---
+// Free Inspection Modal Component
+---
+
+<!-- Modal Container -->
+<div 
+  id="inspection-modal" 
+  class="fixed inset-0 z-50 hidden overflow-y-auto"
+  style="display: none;"
+>
+  <!-- Background Overlay -->
+  <div 
+    class="fixed inset-0 bg-black/50 transition-opacity"
+    onclick="closeInspectionModal()"
+  ></div>
+
+  <!-- Modal Panel -->
+  <div class="flex items-center justify-center min-h-screen px-4 py-8 text-center sm:p-0">
+    <div 
+      class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-4xl sm:w-full relative max-h-[90vh] overflow-y-auto"
+      onclick="event.stopPropagation()"
+    >
+      <!-- Close Button -->
+      <button 
+        onclick="closeInspectionModal()"
+        class="sticky top-4 right-4 float-right bg-red-500 text-white rounded-full p-2 hover:bg-red-600 transition-colors duration-200 shadow-lg z-10 cursor-pointer"
+        type="button"
+      >
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+
+      <!-- Modal Content -->
+      <div class="bg-white px-4 pt-5 pb-4 sm:p-8">
+        <div class="max-w-3xl mx-auto">
+          <!-- Header -->
+          <div class="text-center mb-8">
+            <h2 class="text-3xl font-bold text-white mb-4 bg-aqua py-4 rounded-lg shadow-lg">
+              Get Your Free Inspection
+            </h2>
+            <p class="text-lg text-gray-600">
+              Fill out the form below and our team will contact you shortly to schedule your free inspection.
+            </p>
+          </div>
+
+          <!-- Form -->
+          <form id="inspection-form" class="space-y-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <!-- First Name -->
+              <div>
+                <label for="modal_first_name" class="block text-sm font-medium text-gray-700 mb-1">
+                  First Name <span class="text-red-600">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="modal_first_name"
+                  name="first_name"
+                  required
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-aqua focus:border-transparent transition text-gray-900"
+                />
+              </div>
+
+              <!-- Last Name -->
+              <div>
+                <label for="modal_last_name" class="block text-sm font-medium text-gray-700 mb-1">
+                  Last Name <span class="text-red-600">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="modal_last_name"
+                  name="last_name"
+                  required
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-aqua focus:border-transparent transition text-gray-900"
+                />
+              </div>
+
+              <!-- Phone -->
+              <div>
+                <label for="modal_phone" class="block text-sm font-medium text-gray-700 mb-1">
+                  Phone <span class="text-red-600">*</span>
+                </label>
+                <input
+                  type="tel"
+                  id="modal_phone"
+                  name="phone"
+                  required
+                  placeholder="(555) 123-4567"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-aqua focus:border-transparent transition text-gray-900"
+                />
+              </div>
+
+              <!-- Email -->
+              <div>
+                <label for="modal_email" class="block text-sm font-medium text-gray-700 mb-1">
+                  Email <span class="text-red-600">*</span>
+                </label>
+                <input
+                  type="email"
+                  id="modal_email"
+                  name="email"
+                  required
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-aqua focus:border-transparent transition text-gray-900"
+                />
+              </div>
+
+              <!-- Address -->
+              <div class="md:col-span-2">
+                <label for="modal_address" class="block text-sm font-medium text-gray-700 mb-1">
+                  Address <span class="text-red-600">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="modal_address"
+                  name="address"
+                  required
+                  placeholder="123 Main Street"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-aqua focus:border-transparent transition text-gray-900"
+                />
+              </div>
+
+              <!-- City -->
+              <div>
+                <label for="modal_city" class="block text-sm font-medium text-gray-700 mb-1">
+                  City <span class="text-red-600">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="modal_city"
+                  name="city"
+                  required
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-aqua focus:border-transparent transition text-gray-900"
+                />
+              </div>
+
+              <!-- State -->
+              <div>
+                <label for="modal_state" class="block text-sm font-medium text-gray-700 mb-1">
+                  State <span class="text-red-600">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="modal_state"
+                  name="state"
+                  required
+                  maxlength="2"
+                  placeholder="TX"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-aqua focus:border-transparent transition text-gray-900"
+                />
+              </div>
+
+              <!-- Zip Code -->
+              <div>
+                <label for="modal_zipcode" class="block text-sm font-medium text-gray-700 mb-1">
+                  Zip Code <span class="text-red-600">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="modal_zipcode"
+                  name="zipcode"
+                  required
+                  maxlength="5"
+                  pattern="[0-9]{5}"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-aqua focus:border-transparent transition text-gray-900"
+                />
+              </div>
+
+              <!-- Property Insurance -->
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  Do you have property insurance? <span class="text-red-600">*</span>
+                </label>
+                <div class="flex space-x-4 mt-2">
+                  <label class="inline-flex items-center cursor-pointer">
+                    <input
+                      type="radio"
+                      name="insurance_property"
+                      value="yes"
+                      required
+                      class="form-radio text-aqua h-5 w-5"
+                      style="accent-color: var(--color-aqua);"
+                    />
+                    <span class="ml-2 text-gray-700">Yes</span>
+                  </label>
+                  <label class="inline-flex items-center cursor-pointer">
+                    <input
+                      type="radio"
+                      name="insurance_property"
+                      value="no"
+                      class="form-radio text-aqua h-5 w-5"
+                      style="accent-color: var(--color-aqua);"
+                    />
+                    <span class="ml-2 text-gray-700">No</span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Message -->
+              <div class="md:col-span-2">
+                <label for="modal_message" class="block text-sm font-medium text-gray-700 mb-1">
+                  Comment or Message <span class="text-xs text-gray-500">(Optional)</span>
+                </label>
+                <textarea
+                  id="modal_message"
+                  name="message"
+                  rows="4"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-aqua focus:border-transparent transition resize-none text-gray-900"
+                  placeholder="Tell us about your restoration needs..."
+                ></textarea>
+              </div>
+            </div>
+
+            <!-- SMS Consent -->
+            <div class="mt-6">
+              <label class="inline-flex items-start cursor-pointer">
+                <input
+                  type="checkbox"
+                  name="sms_consent"
+                  class="form-checkbox text-aqua mt-1 h-5 w-5"
+                  style="accent-color: var(--color-aqua);"
+                />
+                <span class="ml-2 text-sm text-gray-600">
+                  I consent to receive SMS messages from AquaShield Restoration LLC at <strong>(555) 123-4567</strong>. 
+                  Message and data rates may apply. Reply STOP to opt-out. 
+                  View our <a href="/privacy-policy" class="text-aqua hover:underline">Privacy Policy</a> and 
+                  <a href="/terms-and-conditions" class="text-aqua hover:underline">Terms & Conditions</a>.
+                </span>
+              </label>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="text-center mt-8">
+              <button
+                type="submit"
+                class="w-full md:w-auto inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-bold rounded-lg text-white bg-aqua hover:bg-navy focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-aqua transition-all duration-400 shadow-lg cursor-pointer"
+              >
+                <span>Send Request</span>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Function to open modal
+  function openInspectionModal() {
+    const modal = document.getElementById('inspection-modal');
+    if (modal) {
+      modal.style.display = 'block';
+      document.body.style.overflow = 'hidden'; // Prevent scrolling
+    }
+  }
+
+  // Function to close modal
+  function closeInspectionModal() {
+    const modal = document.getElementById('inspection-modal');
+    if (modal) {
+      modal.style.display = 'none';
+      document.body.style.overflow = ''; // Restore scrolling
+      
+      // Re-initialize Alpine.js components if needed
+      if (typeof Alpine !== 'undefined') {
+        setTimeout(() => {
+          Alpine.initTree(document.body);
+        }, 100);
+      }
+    }
+  }
+
+  // Make functions globally available
+  (window as any).openInspectionModal = openInspectionModal;
+  (window as any).closeInspectionModal = closeInspectionModal;
+
+  // Close modal on ESC key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeInspectionModal();
+    }
+  });
+
+  // Handle form submission
+  document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('inspection-form');
+    
+    if (form) {
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const formData = new FormData(form as HTMLFormElement);
+        const data = Object.fromEntries(formData.entries());
+        
+        // Here you would typically send the data to your backend
+        console.log('Inspection form submitted:', data);
+        
+        // Show success message
+        alert('Thank you! We will contact you shortly to schedule your free inspection.');
+        
+        // Close modal and reset form
+        closeInspectionModal();
+        (form as HTMLFormElement).reset();
+      });
+    }
+  });
+</script>

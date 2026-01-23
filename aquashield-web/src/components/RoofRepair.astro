@@ -1,0 +1,181 @@
+---
+---
+
+<style>
+    .hero-section {
+        margin-top: -2rem;
+    }
+</style>
+
+<!-- Hero Section with Image Overlay -->
+<div class="relative h-[500px] w-full hero-section bg-navy">
+    <!-- Background Image -->
+    <img src="/img/services/roof-repair.webp" alt="Professional roof repair services" class="absolute inset-0 w-full h-full object-cover opacity-40">
+
+    <!-- Dark Overlay -->
+    <div class="absolute inset-0 bg-gradient-to-b from-navy/80 to-navy/60"></div>
+
+    <!-- Content -->
+    <div class="relative z-10 h-full flex items-center justify-center">
+        <div class="text-center">
+            <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 drop-shadow-lg">
+                Roof Repair Services
+            </h1>
+            <p class="text-lg sm:text-xl md:text-2xl text-white max-w-2xl mx-auto px-4 mb-12 drop-shadow-md">
+                Fast, reliable, and professional roof repair to protect your home from the elements.
+            </p>
+
+            <!-- Breadcrumb Navigation -->
+            <nav class="px-4 md:px-8 mt-8">
+                <div class="mx-auto">
+                    <ol class="flex items-center justify-center space-x-2 text-white">
+                        <li>
+                            <a href="/" class="hover:text-aqua transition-colors">Home</a>
+                        </li>
+                        <li>
+                            <span class="mx-2">/</span>
+                        </li>
+                        <li class="text-aqua font-medium">Roof Repair</li>
+                    </ol>
+                </div>
+            </nav>
+        </div>
+    </div>
+</div>
+
+<!-- Main Content -->
+<main class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+    <div class="bg-white rounded-lg shadow-lg p-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start mb-8">
+            <!-- Text Content Column -->
+            <div class="space-y-6">
+                <div>
+                    <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-navy mb-4">
+                        Expert Roof Repair Services
+                    </h2>
+                    <p class="text-base sm:text-lg md:text-xl text-gray-600">
+                        From minor leaks to significant storm damage, a damaged roof can compromise the safety and integrity of your home. At AquaShield Restoration LLC, we offer comprehensive roof repair services to address a wide range of issues, ensuring your roof is restored to its optimal condition. Our experienced team is equipped to handle repairs for all types of roofing systems.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Image Column -->
+            <div class="relative rounded-lg overflow-hidden fade-in-section">
+                <img src="/img/services/roof-repair-content.webp" alt="Professional roof repair process" class="w-full h-auto object-cover image-zoom">
+            </div>
+        </div>
+
+        <div class="space-y-6">
+            <div>
+                <h3 class="text-xl sm:text-2xl font-semibold text-navy mb-3">Common Reasons for Roof Repair</h3>
+                <p class="text-base sm:text-lg text-gray-600 mb-4">
+                    Our team will conduct a thorough evaluation to identify the root cause of the problem and recommend the most effective repair solution.
+                </p>
+                <ul class="space-y-2 text-base sm:text-lg text-gray-600">
+                    <li class="flex items-start">
+                        <svg class="w-6 h-6 text-aqua mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <span>Damage caused by storms, including wind and debris</span>
+                    </li>
+                    <li class="flex items-start">
+                        <svg class="w-6 h-6 text-aqua mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <span>Damage caused by hail, including dents and cracks</span>
+                    </li>
+                    <li class="flex items-start">
+                        <svg class="w-6 h-6 text-aqua mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <span>Normal wear and tear due to the roof's age</span>
+                    </li>
+                    <li class="flex items-start">
+                        <svg class="w-6 h-6 text-aqua mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <span>Warranty issues or defective materials</span>
+                    </li>
+                    <li class="flex items-start">
+                        <svg class="w-6 h-6 text-aqua mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <span>Leaks, missing shingles, and other visible damage</span>
+                    </li>
+                </ul>
+            </div>
+
+            <p class="text-base sm:text-lg md:text-xl text-gray-600">
+                Trust AquaShield Restoration LLC to provide prompt, reliable, and high-quality roof repair services. We are committed to ensuring your peace of mind and protecting your investment.
+            </p>
+        </div>
+    </div>
+
+    <!-- Services Tabs Section -->
+    <div class="mt-12 bg-white rounded-lg shadow-lg p-8" x-data="{ activeTab: 'repair' }">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+            <!-- Vertical Tabs -->
+            <div class="md:col-span-4 flex flex-col border-r">
+                <button @click="activeTab = 'repair'" :class="{ 'bg-aqua/10 border-aqua text-aqua': activeTab === 'repair' }" class="px-4 py-3 text-left text-lg font-semibold border-l-4 hover:bg-aqua/10 transition-colors">
+                    Roof Repair Process
+                </button>
+                <button @click="activeTab = 'replacement'" :class="{ 'bg-aqua/10 border-aqua text-aqua': activeTab === 'replacement' }" class="px-4 py-3 text-left text-lg font-semibold border-l-4 hover:bg-aqua/10 transition-colors">
+                    Roof Replacement
+                </button>
+            </div>
+
+            <!-- Content Area with Image -->
+            <div class="md:col-span-8">
+                <!-- Repair Tab Content -->
+                <div x-show="activeTab === 'repair'" class="space-y-4">
+                    <div class="prose max-w-none">
+                        <p class="text-lg text-gray-600">
+                            Our comprehensive evaluation process ensures we identify all issues and provide a lasting solution. We inspect, repair, and ensure your roof is in top condition.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Replacement Tab Content -->
+                <div x-show="activeTab === 'replacement'" class="space-y-4">
+                    <div class="prose max-w-none">
+                        <p class="text-lg text-gray-600">
+                            A new roof can last up to 30 years and is a significant investment in your property. Our team will guide you through the process, from selecting the right materials to expert installation.
+                        </p>
+
+                        <h3 class="text-xl font-semibold text-navy mt-6">How Roof Replacement Works</h3>
+                        <ul class="space-y-4 text-gray-600">
+                            <li class="border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors">
+                                <strong class="text-lg font-semibold text-navy">1. Quote, Inspection & Evaluation</strong>
+                                <p class="mt-2">We start with a thorough inspection to provide an accurate quote and detailed evaluation of your roofing needs.</p>
+                            </li>
+                            <li class="border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors">
+                                <strong class="text-lg font-semibold text-navy">2. Processing Insurance Claims</strong>
+                                <p class="mt-2">Our experts assist with your insurance claim to ensure you get the coverage you deserve.</p>
+                            </li>
+                            <li class="border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors">
+                                <strong class="text-lg font-semibold text-navy">3. Materials Delivery & Installation</strong>
+                                <p class="mt-2">We use high-quality materials and our certified team ensures a professional installation.</p>
+                            </li>
+                            <li class="border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors">
+                                <strong class="text-lg font-semibold text-navy">4. Quality Assurance & Cleanup</strong>
+                                <p class="mt-2">We conduct a final quality check and ensure your property is clean and tidy before we leave.</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Form Section -->
+    <div id="schedule-inspection" class="mt-12">
+        <div class="text-center mb-8">
+            <h2 class="text-3xl font-bold text-navy">Get Your Free Roof Repair Estimate</h2>
+            <p class="text-lg text-gray-600 mt-2">Schedule your free, no-obligation estimate today and let our experts provide you with a detailed quote.</p>
+        </div>
+
+        <div class="text-center">
+            <button onclick="openInspectionModal()" class="btn-primary inline-block px-8 py-3 text-lg font-bold rounded-lg cursor-pointer">Book Free Estimate Now</button>
+        </div>
+    </div>
+</main>

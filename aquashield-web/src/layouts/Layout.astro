@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import InspectionModal from '../components/InspectionModal.astro';
 
 interface Props {
   title?: string;
@@ -210,6 +211,9 @@ const companyData = {
   </head>
   <body class="min-h-screen bg-background text-foreground antialiased">
     <slot />
+    
+    <!-- Inspection Modal -->
+    <InspectionModal />
     
     <!-- Intersection Observer for fade-in animations -->
     <script>
