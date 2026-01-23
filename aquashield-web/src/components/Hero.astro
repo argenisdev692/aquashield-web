@@ -23,7 +23,7 @@ const heroStats = [
 ];
 ---
 
-<section id="home" class:list={["relative min-h-[90vh] flex items-center overflow-hidden", className]}>
+<section id="home" class:list={["relative min-h-[100vh] flex items-center overflow-hidden", className]}>
   <!-- Background with gradient and pattern -->
   <div class="absolute inset-0 bg-gradient-hero">
     <!-- Wave pattern overlay -->
@@ -57,8 +57,8 @@ const heroStats = [
     </div>
   </div>
 
-  <!-- Content -->
-  <div class="container mx-auto px-4 relative z-10">
+  <!-- Content with proper spacing for wave -->
+  <div class="container mx-auto px-4 relative z-10 pb-32 md:pb-40 lg:pb-48">
     <div class="grid lg:grid-cols-2 gap-12 items-center">
       <!-- Left column - Text content -->
       <div class="text-white space-y-6 fade-in-section">
@@ -68,11 +68,14 @@ const heroStats = [
           <span>24/7 Emergency Service Available</span>
         </div>
 
-        <!-- Main heading -->
+        <!-- Main heading with typing effect -->
         <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
-          <span class="inline-block animate-fade-in-up bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-500 bg-clip-text text-transparent" style="animation-delay: 0.2s;">AQUASHIELD RESTORATION</span>
+          <span class="inline-block typing-text" data-text="AQUASHIELD RESTORATION">
+            <span class="typed-text"></span>
+            <span class="cursor">|</span>
+          </span>
           <br />
-          <span class="text-white/90 inline-block animate-fade-in-up" style="animation-delay: 0.5s;">{companyData.tagline}</span>
+          <span class="text-white/90 inline-block animate-fade-in-up" style="animation-delay: 2.5s;">{companyData.tagline}</span>
         </h1>
 
         <!-- Subheading -->
@@ -82,8 +85,8 @@ const heroStats = [
           when disaster strikes your home or business.
         </p>
 
-        <!-- CTA Buttons -->
-        <div class="flex flex-col sm:flex-row gap-4 pt-4 pb-4">
+        <!-- CTA Buttons - improved z-index -->
+        <div class="flex flex-col sm:flex-row gap-4 pt-4 pb-8 relative z-20">
           <button onclick="openInspectionModal()" class="btn-primary text-center text-lg px-8 py-4 shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 ease-out cursor-pointer">
             Get Free Estimate
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -92,7 +95,7 @@ const heroStats = [
           </button>
           <a
             href={`tel:${companyData.emergencyPhone.replace(/[^0-9]/g, '')}`}
-            class="btn-emergency text-center text-lg px-8 py-4 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 ease-out"
+            class="btn-call-emergency text-center text-lg px-8 py-4 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 ease-out"
           >
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
@@ -119,20 +122,20 @@ const heroStats = [
           </div>
 
           <!-- Trust indicators below cards -->
-          <div class="flex flex-col gap-3 text-aqua text-sm font-medium">
-            <div class="flex items-center gap-2">
+          <div class="flex flex-col gap-3 text-white text-sm font-medium">
+            <div class="flex items-center gap-3">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-aqua flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
               </svg>
               <span>Licensed & Insured</span>
             </div>
-            <div class="flex items-center gap-2">
+            <div class="flex items-center gap-3">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-aqua flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
               </svg>
               <span>IICRC Certified</span>
             </div>
-            <div class="flex items-center gap-2">
+            <div class="flex items-center gap-3">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-aqua flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
@@ -140,14 +143,25 @@ const heroStats = [
             </div>
           </div>
 
-          <!-- Decorative shield -->
-          <div class="absolute -bottom-10 -right-10 w-40 h-40 opacity-20">
-            <svg viewBox="0 0 100 100" class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+          <!-- Decorative shield with animated glow -->
+          <div class="absolute bottom-0 -right-4 w-40 h-40 opacity-30 pointer-events-none z-10">
+            <svg viewBox="0 0 100 100" class="w-full h-full shield-glow" xmlns="http://www.w3.org/2000/svg">
+              <!-- Shield outline -->
               <path
                 d="M50 5 L90 20 L90 50 C90 75 70 90 50 95 C30 90 10 75 10 50 L10 20 Z"
                 fill="var(--aqua)"
                 stroke="var(--white)"
                 stroke-width="2"
+                class="shield-path"
+              />
+              <!-- Checkmark icon inside -->
+              <path
+                d="M35 50 L45 60 L65 35"
+                fill="none"
+                stroke="var(--white)"
+                stroke-width="6"
+                stroke-linecap="round"
+                stroke-linejoin="round"
               />
             </svg>
           </div>
@@ -156,10 +170,47 @@ const heroStats = [
     </div>
   </div>
 
-  <!-- Wave divider at bottom -->
-  <div class="absolute -bottom-[1px] left-0 w-full overflow-hidden leading-[0] rotate-180 z-20">
-    <svg class="relative block w-[calc(100%+1.3px)] h-[80px] md:h-[120px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-      <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" fill="#ffffff"></path>
+  <!-- Wave divider at bottom - animated waves -->
+  <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-[0]">
+    <svg class="relative block w-full h-[120px] md:h-[180px] lg:h-[220px]" viewBox="0 24 150 28" preserveAspectRatio="none">
+      <style>
+        @keyframes waveMove1 {
+          from { transform: translateX(-90px); }
+          to { transform: translateX(85px); }
+        }
+        @keyframes waveMove2 {
+          from { transform: translateX(-90px); }
+          to { transform: translateX(85px); }
+        }
+        .wave-layer-1 {
+          animation: waveMove1 12s linear infinite 0s;
+        }
+        .wave-layer-2 {
+          animation: waveMove2 15s linear infinite -2s;
+        }
+      </style>
+      <defs>
+        <!-- Gradient 1: Teal to Aqua -->
+        <linearGradient id="waveGradient1">
+          <stop offset="0%" stop-color="#14b8a6"></stop>
+          <stop offset="100%" stop-color="#22d3ee"></stop>
+        </linearGradient>
+        <!-- Gradient 2: Aqua to Sky Blue -->
+        <linearGradient id="waveGradient2">
+          <stop offset="0%" stop-color="#00B5E2"></stop>
+          <stop offset="100%" stop-color="#38bdf8"></stop>
+        </linearGradient>
+        <!-- Wave path definition -->
+        <path id="wavePath" d="M -160 40 Q -116 30 -72 40 Q -28 50 16 40 Q 60 30 104 40 Q 148 50 192 40 L 192 80 L -160 80 Z"></path>
+      </defs>
+      <g>
+        <!-- First wave layer -->
+        <use href="#wavePath" x="48" y="0" fill="url(#waveGradient1)" opacity="0.4" class="wave-layer-1"></use>
+        <!-- Second wave layer -->
+        <use href="#wavePath" x="68" y="3" fill="url(#waveGradient2)" opacity="0.5" class="wave-layer-2"></use>
+        <!-- Static white wave on top -->
+        <use href="#wavePath" x="48" y="5" fill="#ffffff" opacity="1"></use>
+      </g>
     </svg>
   </div>
 
@@ -225,6 +276,61 @@ const heroStats = [
     }
   }
 
+  /* Typing effect */
+  .typing-text {
+    position: relative;
+    display: inline-block;
+  }
+
+  .typed-text {
+    /* Animated gradient - Teal to Sky Blue flowing */
+    background: linear-gradient(
+      90deg,
+      #0d9488 0%,
+      #14b8a6 25%,
+      #22d3ee 50%,
+      #38bdf8 75%,
+      #0d9488 100%
+    );
+    background-size: 200% 100%;
+    animation: gradientFlow 5s ease infinite;
+    
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 900;
+    letter-spacing: 0.02em;
+    text-shadow: 0 0 30px rgba(20, 184, 166, 0.3);
+  }
+
+  @keyframes gradientFlow {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  .cursor {
+    color: var(--aqua);
+    animation: blink 0.8s infinite;
+    font-weight: 300;
+    margin-left: 2px;
+  }
+
+  @keyframes blink {
+    0%, 49% {
+      opacity: 1;
+    }
+    50%, 100% {
+      opacity: 0;
+    }
+  }
+
   /* Fade in animation for sections */
   .fade-in-section {
     opacity: 0;
@@ -250,7 +356,9 @@ const heroStats = [
   /* Reduced motion */
   @media (prefers-reduced-motion: reduce) {
     .water-drop,
-    .fade-in-section {
+    .fade-in-section,
+    .cursor,
+    .shield-glow {
       animation: none;
       opacity: 1;
       transform: none;
@@ -260,4 +368,74 @@ const heroStats = [
       animation: none;
     }
   }
+
+  /* Shield glow animation - shooting star effect */
+  .shield-glow {
+    position: relative;
+    filter: drop-shadow(0 0 8px rgba(20, 184, 166, 0.3));
+  }
+
+  .shield-path {
+    stroke-dasharray: 400;
+    stroke-dashoffset: 400;
+    animation: shieldGlow 4s ease-in-out infinite;
+  }
+
+  @keyframes shieldGlow {
+    0% {
+      stroke-dashoffset: 400;
+      stroke: rgba(255, 255, 255, 0.3);
+      filter: drop-shadow(0 0 0px rgba(20, 184, 166, 0));
+    }
+    50% {
+      stroke-dashoffset: 0;
+      stroke: rgba(34, 211, 238, 1);
+      filter: drop-shadow(0 0 15px rgba(34, 211, 238, 0.8));
+    }
+    100% {
+      stroke-dashoffset: -400;
+      stroke: rgba(255, 255, 255, 0.3);
+      filter: drop-shadow(0 0 0px rgba(20, 184, 166, 0));
+    }
+  }
 </style>
+
+<script>
+  // Typing effect for hero title
+  function typeWriter() {
+    const typingElement = document.querySelector('.typing-text');
+    if (!typingElement) return;
+    
+    const text = typingElement.getAttribute('data-text') || '';
+    const typedTextElement = typingElement.querySelector('.typed-text');
+    const cursorElement = typingElement.querySelector('.cursor');
+    
+    if (!typedTextElement || !cursorElement) return;
+    
+    let index = 0;
+    const speed = 80; // milliseconds per character
+    
+    function type() {
+      if (index < text.length) {
+        typedTextElement.textContent += text.charAt(index);
+        index++;
+        setTimeout(type, speed);
+      } else {
+        // After typing is complete, keep cursor blinking for 2 seconds then hide it
+        setTimeout(() => {
+          cursorElement.style.display = 'none';
+        }, 2000);
+      }
+    }
+    
+    // Start typing after a small delay
+    setTimeout(type, 300);
+  }
+  
+  // Run on page load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', typeWriter);
+  } else {
+    typeWriter();
+  }
+</script>

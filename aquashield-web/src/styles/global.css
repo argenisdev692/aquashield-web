@@ -272,7 +272,19 @@ h6 {
 .bg-gray-900 h3,
 .bg-gray-900 h4,
 .bg-gray-900 h5,
-.bg-gray-900 h6 {
+.bg-gray-900 h6,
+.bg-gradient-to-br h1,
+.bg-gradient-to-br h2,
+.bg-gradient-to-br h3,
+.bg-gradient-to-br h4,
+.bg-gradient-to-br h5,
+.bg-gradient-to-br h6,
+[class*="from-slate-"] h1,
+[class*="from-slate-"] h2,
+[class*="from-slate-"] h3,
+[class*="from-slate-"] h4,
+[class*="from-slate-"] h5,
+[class*="from-slate-"] h6 {
   color: white !important;
 }
 
@@ -445,6 +457,37 @@ a:hover {
   &:focus {
     outline: none;
     box-shadow: 0 0 0 3px rgba(0, 181, 226, 0.5);
+  }
+
+  &:active {
+    transform: scale(1);
+    transition: all 0.1s ease;
+  }
+}
+
+@utility btn-call-emergency {
+  background: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%);
+  color: white !important;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 700;
+  font-family: 'Roboto', system-ui, -apple-system, sans-serif;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 14px rgba(20, 184, 166, 0.4);
+
+  &:hover {
+    background: linear-gradient(135deg, #0d9488 0%, #14b8a6 100%);
+    color: white !important;
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(20, 184, 166, 0.6);
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.5);
   }
 
   &:active {

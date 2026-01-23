@@ -169,6 +169,116 @@ const currentPath = Astro.url.pathname;
               )
             );
           })}
+          
+          <!-- Language Dropdown -->
+          <div class="relative" x-data="{ open: false, currentLang: 'en' }">
+            <button 
+              @click="open = !open" 
+              @click.away="open = false"
+              class="flex items-center gap-2 text-navy hover:text-aqua transition-colors py-2 px-3 rounded-lg hover:bg-gray-50 cursor-pointer"
+            >
+              <!-- Current Language Flag -->
+              <div class="w-5 h-5 rounded-sm overflow-hidden">
+                <svg x-show="currentLang === 'en'" class="w-full h-full" viewBox="0 0 640 480">
+                  <defs>
+                    <clipPath id="us-flag">
+                      <path d="M0 0h640v480H0z"/>
+                    </clipPath>
+                  </defs>
+                  <g clip-path="url(#us-flag)">
+                    <path fill="#bd3d44" d="M0 0h640v480H0"/>
+                    <path stroke="#fff" stroke-width="37" d="M0 55.3h640M0 129h640M0 203h640M0 277h640M0 351h640M0 425h640"/>
+                    <path fill="#192f5d" d="M0 0h364.8v258.5H0"/>
+                    <g fill="#fff">
+                      <g id="us-star">
+                        <path d="m30.4 11 2.3 7.1h7.5l-6.1 4.4 2.3 7.1-6.1-4.4-6.1 4.4 2.3-7.1-6.1-4.4h7.5z"/>
+                      </g>
+                      <use href="#us-star" transform="translate(63,0)"/>
+                      <use href="#us-star" transform="translate(126,0)"/>
+                      <use href="#us-star" transform="translate(189,0)"/>
+                      <use href="#us-star" transform="translate(252,0)"/>
+                      <use href="#us-star" transform="translate(315,0)"/>
+                      <use href="#us-star" transform="translate(31.5,24)"/>
+                      <use href="#us-star" transform="translate(94.5,24)"/>
+                      <use href="#us-star" transform="translate(157.5,24)"/>
+                      <use href="#us-star" transform="translate(220.5,24)"/>
+                      <use href="#us-star" transform="translate(283.5,24)"/>
+                    </g>
+                  </g>
+                </svg>
+                <svg x-show="currentLang === 'es'" class="w-full h-full" viewBox="0 0 640 480">
+                  <path fill="#aa151b" d="M0 0h640v480H0z"/>
+                  <path fill="#f1bf00" d="M0 120h640v240H0z"/>
+                </svg>
+              </div>
+              <span class="text-sm font-medium" x-text="currentLang === 'en' ? 'EN' : 'ES'"></span>
+              <svg class="w-4 h-4 transition-transform duration-200" :class="{ 'rotate-180': open }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </button>
+            
+            <!-- Language Dropdown Menu -->
+            <div 
+              x-show="open" 
+              class="absolute top-full right-0 mt-2 w-40 bg-white rounded-lg shadow-xl border border-gray-100 z-50"
+              x-transition:enter="transition ease-out duration-200"
+              x-transition:enter-start="opacity-0 transform scale-95"
+              x-transition:enter-end="opacity-100 transform scale-100"
+              x-transition:leave="transition ease-in duration-150"
+              x-transition:leave-start="opacity-100 transform scale-100"
+              x-transition:leave-end="opacity-0 transform scale-95"
+            >
+              <div class="py-2">
+                <!-- English Option -->
+                <button 
+                  @click="currentLang = 'en'; open = false"
+                  class="w-full flex items-center gap-3 px-4 py-2 text-left hover:bg-aqua hover:text-white transition-colors cursor-pointer"
+                  :class="{ 'bg-aqua/10 text-aqua': currentLang === 'en' }"
+                >
+                  <div class="w-6 h-4 rounded-sm overflow-hidden flex-shrink-0">
+                    <svg class="w-full h-full" viewBox="0 0 640 480">
+                      <defs>
+                        <clipPath id="us-flag-small">
+                          <path d="M0 0h640v480H0z"/>
+                        </clipPath>
+                      </defs>
+                      <g clip-path="url(#us-flag-small)">
+                        <path fill="#bd3d44" d="M0 0h640v480H0"/>
+                        <path stroke="#fff" stroke-width="37" d="M0 55.3h640M0 129h640M0 203h640M0 277h640M0 351h640M0 425h640"/>
+                        <path fill="#192f5d" d="M0 0h364.8v258.5H0"/>
+                        <g fill="#fff">
+                          <g id="us-star-small">
+                            <path d="m30.4 11 2.3 7.1h7.5l-6.1 4.4 2.3 7.1-6.1-4.4-6.1 4.4 2.3-7.1-6.1-4.4h7.5z"/>
+                          </g>
+                          <use href="#us-star-small" transform="translate(63,0)"/>
+                          <use href="#us-star-small" transform="translate(126,0)"/>
+                          <use href="#us-star-small" transform="translate(189,0)"/>
+                          <use href="#us-star-small" transform="translate(252,0)"/>
+                          <use href="#us-star-small" transform="translate(315,0)"/>
+                        </g>
+                      </g>
+                    </svg>
+                  </div>
+                  <span class="font-medium">English</span>
+                </button>
+                
+                <!-- Spanish Option -->
+                <button 
+                  @click="currentLang = 'es'; open = false"
+                  class="w-full flex items-center gap-3 px-4 py-2 text-left hover:bg-aqua hover:text-white transition-colors cursor-pointer"
+                  :class="{ 'bg-aqua/10 text-aqua': currentLang === 'es' }"
+                >
+                  <div class="w-6 h-4 rounded-sm overflow-hidden flex-shrink-0">
+                    <svg class="w-full h-full" viewBox="0 0 640 480">
+                      <path fill="#aa151b" d="M0 0h640v480H0z"/>
+                      <path fill="#f1bf00" d="M0 120h640v240H0z"/>
+                    </svg>
+                  </div>
+                  <span class="font-medium">Español</span>
+                </button>
+              </div>
+            </div>
+          </div>
         </nav>
 
         <!-- CTA Button - Desktop -->
@@ -260,6 +370,81 @@ const currentPath = Astro.url.pathname;
       <a href="/warranties" class:list={["block py-2.5 px-4 rounded transition duration-200 font-semibold hover:bg-gray-100", currentPath === "/warranties" ? "bg-aqua/10 text-aqua" : "text-navy"]}>Warranties</a>
       <a href="/faqs" class:list={["block py-2.5 px-4 rounded transition duration-200 font-semibold hover:bg-gray-100", currentPath === "/faqs" ? "bg-aqua/10 text-aqua" : "text-navy"]}>FAQs</a>
       <a href="/contact-support" class:list={["block py-2.5 px-4 rounded transition duration-200 font-semibold hover:bg-gray-100", currentPath === "/contact-support" ? "bg-aqua/10 text-aqua" : "text-navy"]}>Contact Support</a>
+
+      <!-- Language Selector - Mobile -->
+      <div x-data="{ isOpen: false, currentLang: 'en' }" class="relative">
+        <button 
+          @click="isOpen = !isOpen"
+          class="flex items-center justify-between w-full py-2.5 px-4 rounded transition duration-200 hover:bg-gray-100 font-semibold text-navy cursor-pointer"
+        >
+          <div class="flex items-center gap-3">
+            <div class="w-5 h-4 rounded-sm overflow-hidden">
+              <svg x-show="currentLang === 'en'" class="w-full h-full" viewBox="0 0 640 480">
+                <defs>
+                  <clipPath id="us-flag-mobile">
+                    <path d="M0 0h640v480H0z"/>
+                  </clipPath>
+                </defs>
+                <g clip-path="url(#us-flag-mobile)">
+                  <path fill="#bd3d44" d="M0 0h640v480H0"/>
+                  <path stroke="#fff" stroke-width="37" d="M0 55.3h640M0 129h640M0 203h640M0 277h640M0 351h640M0 425h640"/>
+                  <path fill="#192f5d" d="M0 0h364.8v258.5H0"/>
+                </g>
+              </svg>
+              <svg x-show="currentLang === 'es'" class="w-full h-full" viewBox="0 0 640 480">
+                <path fill="#aa151b" d="M0 0h640v480H0z"/>
+                <path fill="#f1bf00" d="M0 120h640v240H0z"/>
+              </svg>
+            </div>
+            <span x-text="currentLang === 'en' ? 'Language (English)' : 'Idioma (Español)'"></span>
+          </div>
+          <svg 
+            class="w-4 h-4 transition-transform duration-200" 
+            :class="{ 'rotate-180': isOpen }"
+            fill="none" 
+            stroke="currentColor" 
+            viewBox="0 0 24 24"
+          >
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </button>
+        <div x-show="isOpen" class="pl-4">
+          <button 
+            @click="currentLang = 'en'; isOpen = false" 
+            class="flex items-center gap-3 w-full py-2 px-4 rounded hover:bg-gray-100 text-left cursor-pointer"
+            :class="{ 'bg-aqua/10 text-aqua font-semibold': currentLang === 'en', 'text-gray-700': currentLang !== 'en' }"
+          >
+            <div class="w-5 h-4 rounded-sm overflow-hidden">
+              <svg class="w-full h-full" viewBox="0 0 640 480">
+                <defs>
+                  <clipPath id="us-flag-option">
+                    <path d="M0 0h640v480H0z"/>
+                  </clipPath>
+                </defs>
+                <g clip-path="url(#us-flag-option)">
+                  <path fill="#bd3d44" d="M0 0h640v480H0"/>
+                  <path stroke="#fff" stroke-width="37" d="M0 55.3h640M0 129h640M0 203h640M0 277h640M0 351h640M0 425h640"/>
+                  <path fill="#192f5d" d="M0 0h364.8v258.5H0"/>
+                </g>
+              </svg>
+            </div>
+            English
+          </button>
+          <button 
+            @click="currentLang = 'es'; isOpen = false" 
+            class="flex items-center gap-3 w-full py-2 px-4 rounded hover:bg-gray-100 text-left cursor-pointer"
+            :class="{ 'bg-aqua/10 text-aqua font-semibold': currentLang === 'es', 'text-gray-700': currentLang !== 'es' }"
+          >
+            <div class="w-5 h-4 rounded-sm overflow-hidden">
+              <svg class="w-full h-full" viewBox="0 0 640 480">
+                <path fill="#aa151b" d="M0 0h640v480H0z"/>
+                <path fill="#f1bf00" d="M0 120h640v240H0z"/>
+              </svg>
+            </div>
+            Español
+          </button>
+        </div>
+      </div>
 
       <!-- Mobile Call Button -->
       <div class="mt-6 px-4">
