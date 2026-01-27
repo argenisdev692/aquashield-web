@@ -1,0 +1,449 @@
+---
+// Facebook Lead Modal component for AquaShield Restoration
+// Full-screen modal with Google Maps autocomplete and reCAPTCHA
+
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<!-- Facebook Lead Button Trigger -->
+<button
+  id="fb-lead-trigger"
+  class:list={["btn-primary fixed bottom-6 right-6 z-50 shadow-2xl flex items-center gap-2", className]}
+  aria-label="Request Free Inspection"
+>
+  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+  </svg>
+  <span>Free Inspection</span>
+</button>
+
+<!-- Facebook Lead Modal -->
+<div
+  id="fb-lead-modal"
+  class="fixed inset-0 z-[100] hidden bg-black/80 backdrop-blur-sm"
+  aria-hidden="true"
+>
+  <div class="h-full w-full overflow-y-auto py-8 px-4">
+    <div class="container mx-auto max-w-3xl">
+      <div class="bg-white rounded-3xl shadow-2xl relative">
+        <!-- Close Button -->
+        <button
+          id="fb-lead-close"
+          class="absolute top-4 right-4 w-10 h-10 bg-gray-100 hover:bg-gray-200 rounded-full flex items-center justify-center transition-colors z-10"
+          aria-label="Close modal"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+
+        <!-- Modal Content -->
+        <div class="p-8 md:p-12">
+          <div class="text-center mb-8">
+            <h2 class="text-3xl md:text-4xl font-bold text-navy mb-4">
+              Schedule Your <span class="text-aqua">Free Inspection</span>
+            </h2>
+            <p class="text-gray-600 text-lg">
+              Expert water damage assessment at no cost. Fill out the form below and we'll contact you within 24 hours.
+            </p>
+          </div>
+
+          <!-- Facebook Lead Form -->
+          <form id="facebook-lead-form" class="space-y-6">
+            <!-- Name Fields -->
+            <div class="grid md:grid-cols-2 gap-6">
+              <div>
+                <label for="fb_first_name" class="block text-sm font-medium text-gray-700 mb-2">
+                  First Name <span class="text-red-600">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="fb_first_name"
+                  name="first_name"
+                  required
+                  class="form-input w-full px-4 py-3 border border-gray-300 rounded-xl focus:border-aqua focus:ring-2 focus:ring-aqua transition-all"
+                  placeholder="John"
+                />
+              </div>
+              <div>
+                <label for="fb_last_name" class="block text-sm font-medium text-gray-700 mb-2">
+                  Last Name <span class="text-red-600">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="fb_last_name"
+                  name="last_name"
+                  required
+                  class="form-input w-full px-4 py-3 border border-gray-300 rounded-xl focus:border-aqua focus:ring-2 focus:ring-aqua transition-all"
+                  placeholder="Doe"
+                />
+              </div>
+            </div>
+
+            <!-- Contact Fields -->
+            <div class="grid md:grid-cols-2 gap-6">
+              <div>
+                <label for="fb_phone" class="block text-sm font-medium text-gray-700 mb-2">
+                  Phone Number <span class="text-red-600">*</span>
+                </label>
+                <input
+                  type="tel"
+                  id="fb_phone"
+                  name="phone"
+                  required
+                  class="form-input w-full px-4 py-3 border border-gray-300 rounded-xl focus:border-aqua focus:ring-2 focus:ring-aqua transition-all"
+                  placeholder="(555) 123-4567"
+                />
+              </div>
+              <div>
+                <label for="fb_email" class="block text-sm font-medium text-gray-700 mb-2">
+                  Email Address <span class="text-red-600">*</span>
+                </label>
+                <input
+                  type="email"
+                  id="fb_email"
+                  name="email"
+                  required
+                  class="form-input w-full px-4 py-3 border border-gray-300 rounded-xl focus:border-aqua focus:ring-2 focus:ring-aqua transition-all"
+                  placeholder="john@example.com"
+                />
+              </div>
+            </div>
+
+            <!-- Address Field with Google Maps Autocomplete -->
+            <div>
+              <label for="fb_address" class="block text-sm font-medium text-gray-700 mb-2">
+                Property Address <span class="text-red-600">*</span>
+              </label>
+              <input
+                type="text"
+                id="fb_address"
+                name="address"
+                required
+                class="form-input w-full px-4 py-3 border border-gray-300 rounded-xl focus:border-aqua focus:ring-2 focus:ring-aqua transition-all"
+                placeholder="Start typing your address..."
+              />
+              <input type="hidden" id="fb_latitude" name="latitude" />
+              <input type="hidden" id="fb_longitude" name="longitude" />
+            </div>
+
+            <!-- Address Line 2 -->
+            <div>
+              <label for="fb_address_2" class="block text-sm font-medium text-gray-700 mb-2">
+                Unit/Apt/Suite (Optional)
+              </label>
+              <input
+                type="text"
+                id="fb_address_2"
+                name="address_2"
+                class="form-input w-full px-4 py-3 border border-gray-300 rounded-xl focus:border-aqua focus:ring-2 focus:ring-aqua transition-all"
+                placeholder="Apt 123"
+              />
+            </div>
+
+            <!-- City, State, ZIP -->
+            <div class="grid md:grid-cols-3 gap-6">
+              <div>
+                <label for="fb_city" class="block text-sm font-medium text-gray-700 mb-2">
+                  City <span class="text-red-600">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="fb_city"
+                  name="city"
+                  required
+                  class="form-input w-full px-4 py-3 border border-gray-300 rounded-xl focus:border-aqua focus:ring-2 focus:ring-aqua transition-all"
+                />
+              </div>
+              <div>
+                <label for="fb_state" class="block text-sm font-medium text-gray-700 mb-2">
+                  State <span class="text-red-600">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="fb_state"
+                  name="state"
+                  required
+                  maxlength="2"
+                  class="form-input w-full px-4 py-3 border border-gray-300 rounded-xl focus:border-aqua focus:ring-2 focus:ring-aqua transition-all"
+                  placeholder="TX"
+                />
+              </div>
+              <div>
+                <label for="fb_zipcode" class="block text-sm font-medium text-gray-700 mb-2">
+                  ZIP Code <span class="text-red-600">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="fb_zipcode"
+                  name="zipcode"
+                  required
+                  maxlength="5"
+                  class="form-input w-full px-4 py-3 border border-gray-300 rounded-xl focus:border-aqua focus:ring-2 focus:ring-aqua transition-all"
+                  placeholder="77001"
+                />
+              </div>
+            </div>
+
+            <!-- Country (Hidden - Default USA) -->
+            <input type="hidden" name="country" value="USA" />
+
+            <!-- Insurance Property -->
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2">
+                Do you have property insurance? <span class="text-red-600">*</span>
+              </label>
+              <div class="flex gap-6">
+                <label class="flex items-center cursor-pointer">
+                  <input
+                    type="radio"
+                    name="insurance_property"
+                    value="yes"
+                    required
+                    class="w-4 h-4 text-aqua"
+                    style="accent-color: var(--color-aqua);"
+                  />
+                  <span class="ml-2 text-gray-700">Yes</span>
+                </label>
+                <label class="flex items-center cursor-pointer">
+                  <input
+                    type="radio"
+                    name="insurance_property"
+                    value="no"
+                    required
+                    class="w-4 h-4 text-aqua"
+                    style="accent-color: var(--color-aqua);"
+                  />
+                  <span class="ml-2 text-gray-700">No</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Message -->
+            <div>
+              <label for="fb_message" class="block text-sm font-medium text-gray-700 mb-2">
+                Tell Us About Your Situation (Optional)
+              </label>
+              <textarea
+                id="fb_message"
+                name="message"
+                rows="4"
+                class="form-input w-full px-4 py-3 border border-gray-300 rounded-xl focus:border-aqua focus:ring-2 focus:ring-aqua transition-all resize-none"
+                placeholder="Describe the damage or issue you're experiencing..."
+              ></textarea>
+            </div>
+
+            <!-- SMS Consent -->
+            <div class="flex items-start gap-3">
+              <input
+                type="checkbox"
+                id="fb_sms_consent"
+                name="sms_consent"
+                class="mt-1 h-4 w-4 text-aqua border-gray-300 rounded"
+                style="accent-color: var(--color-aqua);"
+              />
+              <label for="fb_sms_consent" class="text-sm text-gray-600">
+                I consent to receive SMS messages from AquaShield Restoration. 
+                Message and data rates may apply. Reply STOP to opt-out.
+              </label>
+            </div>
+
+            <!-- Submit Button -->
+            <button
+              type="submit"
+              class="btn-primary w-full text-lg py-4 flex items-center justify-center gap-2"
+            >
+              <span>Submit Request</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </button>
+          </form>
+
+          <p class="text-center text-sm text-gray-500 mt-6">
+            By submitting this form, you agree to our 
+            <a href="/privacy" class="text-aqua hover:underline">Privacy Policy</a> and 
+            <a href="/terms" class="text-aqua hover:underline">Terms of Service</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  @reference "tailwindcss";
+
+  .form-input:focus {
+    outline: none;
+  }
+</style>
+
+<script define:vars={{ 
+  recaptchaSiteKey: import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY,
+  googleMapsApiKey: import.meta.env.PUBLIC_GOOGLE_MAPS_API_KEY
+}}>
+  let autocomplete;
+
+  // Load Google Maps and reCAPTCHA
+  function loadScripts() {
+    // Google Maps
+    if (!window.google) {
+      const mapsScript = document.createElement('script');
+      mapsScript.src = `https://maps.googleapis.com/maps/api/js?key=${googleMapsApiKey}&libraries=places`;
+      mapsScript.async = true;
+      mapsScript.defer = true;
+      mapsScript.onload = initAutocomplete;
+      document.head.appendChild(mapsScript);
+    } else {
+      initAutocomplete();
+    }
+
+    // reCAPTCHA
+    if (!window.grecaptcha) {
+      const recaptchaScript = document.createElement('script');
+      recaptchaScript.src = `https://www.google.com/recaptcha/api.js?render=${recaptchaSiteKey}`;
+      document.head.appendChild(recaptchaScript);
+    }
+  }
+
+  // Initialize Google Maps Autocomplete
+  function initAutocomplete() {
+    const addressInput = document.getElementById('fb_address');
+    
+    if (addressInput && window.google) {
+      autocomplete = new google.maps.places.Autocomplete(addressInput, {
+        types: ['address'],
+        componentRestrictions: { country: 'us' }
+      });
+
+      autocomplete.addListener('place_changed', fillInAddress);
+    }
+  }
+
+  // Fill address fields from autocomplete
+  function fillInAddress() {
+    const place = autocomplete.getPlace();
+
+    if (!place.geometry) {
+      return;
+    }
+
+    // Set coordinates
+    document.getElementById('fb_latitude').value = place.geometry.location.lat();
+    document.getElementById('fb_longitude').value = place.geometry.location.lng();
+
+    // Parse address components
+    let street_number = '';
+    let route = '';
+
+    for (const component of place.address_components) {
+      const type = component.types[0];
+
+      switch (type) {
+        case 'street_number':
+          street_number = component.long_name;
+          break;
+        case 'route':
+          route = component.short_name;
+          break;
+        case 'locality':
+          document.getElementById('fb_city').value = component.long_name;
+          break;
+        case 'administrative_area_level_1':
+          document.getElementById('fb_state').value = component.short_name;
+          break;
+        case 'postal_code':
+          document.getElementById('fb_zipcode').value = component.short_name;
+          break;
+      }
+    }
+
+    document.getElementById('fb_address').value = `${street_number} ${route}`.trim();
+  }
+
+  // Modal controls
+  document.addEventListener('DOMContentLoaded', () => {
+    loadScripts();
+
+    const modal = document.getElementById('fb-lead-modal');
+    const trigger = document.getElementById('fb-lead-trigger');
+    const closeBtn = document.getElementById('fb-lead-close');
+    const form = document.getElementById('facebook-lead-form');
+
+    // Open modal
+    trigger?.addEventListener('click', () => {
+      modal?.classList.remove('hidden');
+      modal?.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    });
+
+    // Close modal
+    const closeModal = () => {
+      modal?.classList.add('hidden');
+      modal?.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    };
+
+    closeBtn?.addEventListener('click', closeModal);
+
+    // Close on backdrop click
+    modal?.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        closeModal();
+      }
+    });
+
+    // Form submission
+    form?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const submitButton = form.querySelector('button[type="submit"]');
+      if (!submitButton) return;
+
+      // Disable submit button
+      submitButton.disabled = true;
+      const originalText = submitButton.innerHTML;
+      submitButton.innerHTML = '<span>Submitting...</span><svg class="animate-spin h-5 w-5 inline-block ml-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>';
+
+      try {
+        // Get reCAPTCHA token
+        const token = await grecaptcha.execute(recaptchaSiteKey, { action: 'submit_lead' });
+
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData.entries());
+        data['g-recaptcha-response'] = token;
+
+        // Send to API
+        const response = await fetch('/api/facebook-lead', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+          alert('✅ ' + result.message + '\n\nWe will contact you within 24 hours to schedule your free inspection!');
+          form.reset();
+          closeModal();
+        } else {
+          alert('❌ ' + result.message);
+        }
+      } catch (error) {
+        console.error('Error submitting form:', error);
+        alert('❌ An error occurred. Please try again or call us directly.');
+      } finally {
+        // Re-enable submit button
+        submitButton.disabled = false;
+        submitButton.innerHTML = originalText;
+      }
+    });
+  });
+</script>

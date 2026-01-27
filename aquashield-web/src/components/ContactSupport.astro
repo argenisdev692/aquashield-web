@@ -198,23 +198,62 @@
     </div>
 </main>
 
-<script>
+<script define:vars={{ recaptchaSiteKey: import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY }}>
+    // Load reCAPTCHA v3
+    function loadRecaptcha() {
+        const script = document.createElement('script');
+        script.src = `https://www.google.com/recaptcha/api.js?render=${recaptchaSiteKey}`;
+        document.head.appendChild(script);
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
-        const form = document.getElementById('contact-support-form');
+        loadRecaptcha();
         
-        if (form) {
+        const form = document.getElementById('contact-support-form');
+        const submitButton = form?.querySelector('button[type="submit"]');
+        
+        if (form && submitButton) {
             form.addEventListener('submit', async (e) => {
                 e.preventDefault();
                 
-                const formData = new FormData(form as HTMLFormElement);
-                const data = Object.fromEntries(formData.entries());
+                // Disable submit button
+                submitButton.disabled = true;
+                const originalText = submitButton.innerHTML;
+                submitButton.innerHTML = '<span>Sending...</span><svg class="animate-spin h-5 w-5 inline-block ml-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>';
                 
-                // Here you would typically send the data to your backend
-                console.log('Form submitted:', data);
-                
-                // Show success message
-                alert('Thank you for contacting us! We will get back to you as soon as possible.');
-                (form as HTMLFormElement).reset();
+                try {
+                    // Get reCAPTCHA token
+                    const token = await grecaptcha.execute(recaptchaSiteKey, { action: 'submit_support' });
+                    
+                    const formData = new FormData(form as HTMLFormElement);
+                    const data = Object.fromEntries(formData.entries());
+                    data['g-recaptcha-response'] = token;
+                    
+                    // Send to API
+                    const response = await fetch('/api/contact-support', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(data),
+                    });
+                    
+                    const result = await response.json();
+                    
+                    if (result.success) {
+                        alert('✅ ' + result.message);
+                        (form as HTMLFormElement).reset();
+                    } else {
+                        alert('❌ ' + result.message);
+                    }
+                } catch (error) {
+                    console.error('Error submitting form:', error);
+                    alert('❌ An error occurred. Please try again.');
+                } finally {
+                    // Re-enable submit button
+                    submitButton.disabled = false;
+                    submitButton.innerHTML = originalText;
+                }
             });
         }
     });
