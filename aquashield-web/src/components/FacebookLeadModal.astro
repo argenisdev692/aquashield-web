@@ -232,9 +232,24 @@ const { class: className } = Astro.props;
                 id="fb_message"
                 name="message"
                 rows="4"
+                maxlength="1000"
+                minlength="10"
                 class="form-input w-full px-4 py-3 border border-gray-300 rounded-xl focus:border-aqua focus:ring-2 focus:ring-aqua transition-all resize-none"
                 placeholder="Describe the damage or issue you're experiencing..."
               ></textarea>
+              <div class="text-xs text-gray-500 mt-1">Minimum 10 characters, maximum 1000</div>
+            </div>
+
+            <!-- Honeypot field - Hidden from users but visible to bots -->
+            <div class="hidden" aria-hidden="true">
+              <label for="fb_website">Website (leave blank)</label>
+              <input
+                type="text"
+                id="fb_website"
+                name="website"
+                tabindex="-1"
+                autocomplete="off"
+              />
             </div>
 
             <!-- SMS Consent -->
@@ -374,12 +389,15 @@ const { class: className } = Astro.props;
     const trigger = document.getElementById('fb-lead-trigger');
     const closeBtn = document.getElementById('fb-lead-close');
     const form = document.getElementById('facebook-lead-form');
+    
+    let formStartTime = 0;
 
     // Open modal
     trigger?.addEventListener('click', () => {
       modal?.classList.remove('hidden');
       modal?.setAttribute('aria-hidden', 'false');
       document.body.style.overflow = 'hidden';
+      formStartTime = Date.now();
     });
 
     // Close modal
@@ -404,6 +422,47 @@ const { class: className } = Astro.props;
 
       const submitButton = form.querySelector('button[type="submit"]');
       if (!submitButton) return;
+
+      // Anti-Spam Checks (Client-Side)
+      
+      // Check 1: Honeypot field
+      const honeypot = form.website?.value;
+      if (honeypot) {
+        console.warn('Bot detected via honeypot');
+        alert('❌ Invalid submission detected.');
+        return;
+      }
+
+      // Check 2: Validate message content for spam patterns
+      const message = form.message?.value || '';
+      if (message) {
+        const spamPatterns = [
+          /\b(buy|sale|offer|discount|promo|click here|visit|website|seo|marketing)\b/gi,
+          /(https?:\/\/|www\.)/gi,
+          /\b(viagra|cialis|pharmacy|casino|poker|loan|crypto|bitcoin)\b/gi,
+          /\$\d+/g,
+        ];
+        
+        let isSpam = false;
+        for (const pattern of spamPatterns) {
+          if (pattern.test(message)) {
+            isSpam = true;
+            break;
+          }
+        }
+        
+        if (isSpam) {
+          alert('❌ Your message contains prohibited content.');
+          return;
+        }
+      }
+
+      // Check 3: Submission time (minimum 5 seconds)
+      const timeTaken = (Date.now() - formStartTime) / 1000;
+      if (timeTaken < 5) {
+        alert('❌ Please take your time to fill out the form.');
+        return;
+      }
 
       // Disable submit button
       submitButton.disabled = true;

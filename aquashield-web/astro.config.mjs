@@ -9,10 +9,16 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
   integrations: [react()],
   
+  // Output mode for API endpoints
+  output: 'server',
+  
   // Disable dev toolbar
   devToolbar: {
     enabled: false
   },
+
+  // Security headers via middleware
+  // Configured in src/middleware.ts
 
   vite: {
     plugins: [tailwindcss()]

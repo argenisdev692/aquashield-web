@@ -2,96 +2,131 @@ import type { APIRoute } from 'astro';
 import { getServerSupabase, type ContactSupport } from '../../lib/supabase';
 import { sendEmail, getContactSupportEmailTemplate } from '../../utils/email';
 import { v4 as uuidv4 } from 'uuid';
+import { contactSupportSchema, formatZodErrors } from '../../utils/validation';
+import { performSpamCheck } from '../../utils/spam-detection';
 
-// Verify reCAPTCHA token
-async function verifyRecaptcha(token: string): Promise<boolean> {
+// Verify reCAPTCHA token with enhanced logging
+async function verifyRecaptcha(token: string, ipAddress: string): Promise<{ success: boolean; score?: number; message?: string }> {
   const secretKey = import.meta.env.RECAPTCHA_SECRET_KEY;
   
-  const response = await fetch('https://www.google.com/recaptcha/api/siteverify', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
-    },
-    body: `secret=${secretKey}&response=${token}`,
-  });
+  try {
+    const response = await fetch('https://www.google.com/recaptcha/api/siteverify', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: `secret=${secretKey}&response=${token}&remoteip=${ipAddress}`,
+    });
 
-  const data = await response.json();
-  
-  // Check if score is acceptable (threshold 0.5)
-  return data.success && (!data.score || data.score >= 0.5);
+    const data = await response.json();
+    
+    console.log('reCAPTCHA verification:', {
+      success: data.success,
+      score: data.score,
+      action: data.action,
+      hostname: data.hostname,
+      'error-codes': data['error-codes']
+    });
+    
+    // Check if score is acceptable (threshold 0.5)
+    const isValid = data.success && (!data.score || data.score >= 0.5);
+    
+    return {
+      success: isValid,
+      score: data.score,
+      message: isValid ? 'Verification successful' : 'Low confidence score or failed verification'
+    };
+  } catch (error) {
+    console.error('reCAPTCHA verification error:', error);
+    return {
+      success: false,
+      message: 'reCAPTCHA server error'
+    };
+  }
 }
 
 export const POST: APIRoute = async ({ request }) => {
   try {
     const body = await request.json();
     
-    const {
-      first_name,
-      last_name,
-      email,
-      phone,
-      message,
-      sms_consent,
-      'g-recaptcha-response': recaptchaToken
-    } = body;
-
-    // Validate required fields
-    if (!first_name || !last_name || !email || !phone || !message) {
+    // Step 1: Zod Schema Validation
+    const validationResult = contactSupportSchema.safeParse(body);
+    
+    if (!validationResult.success) {
       return new Response(
         JSON.stringify({
           success: false,
-          message: 'All required fields must be filled',
-          errors: {
-            first_name: !first_name ? ['First name is required'] : [],
-            last_name: !last_name ? ['Last name is required'] : [],
-            email: !email ? ['Email is required'] : [],
-            phone: !phone ? ['Phone is required'] : [],
-            message: !message ? ['Message is required'] : [],
-          }
+          message: 'Validation errors',
+          errors: formatZodErrors(validationResult.error)
         }),
         { status: 422, headers: { 'Content-Type': 'application/json' } }
       );
     }
 
-    // Verify reCAPTCHA
-    if (!recaptchaToken) {
+    const validatedData = validationResult.data;
+    
+    // Step 2: Comprehensive Spam Check (honeypot, content, rate limit, etc.)
+    const spamCheck = await performSpamCheck({
+      request,
+      honeypot: validatedData.website,
+      message: validatedData.message,
+      email: validatedData.email,
+      first_name: validatedData.first_name,
+      last_name: validatedData.last_name,
+      phone: validatedData.phone,
+      formType: 'contact_support'
+    });
+
+    if (spamCheck.isSpam) {
+      console.warn('Spam detected in contact form:', {
+        reasons: spamCheck.reasons,
+        score: spamCheck.totalScore,
+        ip: request.headers.get('x-forwarded-for') || request.headers.get('x-real-ip')
+      });
+
       return new Response(
         JSON.stringify({
           success: false,
-          message: 'reCAPTCHA verification is required',
-          errors: { 'g-recaptcha-response': ['Please verify you are not a robot'] }
+          message: 'Your submission has been flagged. Please contact us directly by phone if this is an error.',
+          errors: { general: spamCheck.reasons }
         }),
         { status: 422, headers: { 'Content-Type': 'application/json' } }
       );
     }
 
-    const isValidRecaptcha = await verifyRecaptcha(recaptchaToken);
-    if (!isValidRecaptcha) {
+    // Step 3: Verify reCAPTCHA
+    const ipAddress = request.headers.get('x-forwarded-for')?.split(',')[0] || 
+                      request.headers.get('x-real-ip') || 
+                      'unknown';
+    
+    const recaptchaResult = await verifyRecaptcha(validatedData['g-recaptcha-response'], ipAddress);
+    
+    if (!recaptchaResult.success) {
       return new Response(
         JSON.stringify({
           success: false,
-          message: 'reCAPTCHA verification failed',
-          errors: { 'g-recaptcha-response': ['CAPTCHA verification failed'] }
+          message: `reCAPTCHA verification failed: ${recaptchaResult.message}`,
+          errors: { 'g-recaptcha-response': [recaptchaResult.message || 'CAPTCHA verification failed'] }
         }),
         { status: 422, headers: { 'Content-Type': 'application/json' } }
       );
     }
 
-    // Format phone number
-    const formattedPhone = phone.replace(/[^0-9]/g, '');
+    // Step 4: Format phone number
+    const formattedPhone = validatedData.phone.replace(/[^0-9]/g, '');
     const finalPhone = formattedPhone.length === 10 ? `+1${formattedPhone}` : `+${formattedPhone}`;
 
-    // Create contact support entry in Supabase
+    // Step 5: Create contact support entry in Supabase
     const supabase = getServerSupabase();
     
     const contactData: Partial<ContactSupport> = {
       uuid: uuidv4(),
-      first_name,
-      last_name,
-      email,
+      first_name: validatedData.first_name,
+      last_name: validatedData.last_name,
+      email: validatedData.email,
       phone: finalPhone,
-      message,
-      sms_consent: sms_consent === true || sms_consent === 'true' || sms_consent === 'on',
+      message: validatedData.message,
+      sms_consent: validatedData.sms_consent || false,
       readed: false,
     };
 
@@ -112,7 +147,7 @@ export const POST: APIRoute = async ({ request }) => {
       );
     }
 
-    // Send email notification to admin
+    // Step 6: Send email notification to admin
     try {
       const emailHtml = getContactSupportEmailTemplate(data as ContactSupport);
       const adminEmail = import.meta.env.ADMIN_EMAIL;
@@ -128,6 +163,7 @@ export const POST: APIRoute = async ({ request }) => {
       // Don't fail the request if email fails
     }
 
+    // Step 7: Success response
     return new Response(
       JSON.stringify({
         success: true,

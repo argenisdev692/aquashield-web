@@ -176,9 +176,24 @@ const serviceAreas = [
                 id="message"
                 name="message"
                 rows="4"
+                maxlength="1000"
+                minlength="10"
                 class="form-input resize-none"
                 placeholder="Please describe the damage or issue you're experiencing..."
               ></textarea>
+              <div class="text-xs text-gray-500 mt-1">Minimum 10 characters, maximum 1000</div>
+            </div>
+
+            <!-- Honeypot field - Hidden from users but visible to bots -->
+            <div class="hidden" aria-hidden="true">
+              <label for="website">Website (leave blank)</label>
+              <input
+                type="text"
+                id="website"
+                name="website"
+                tabindex="-1"
+                autocomplete="off"
+              />
             </div>
 
             <div class="flex items-start gap-3">
@@ -401,9 +416,49 @@ const serviceAreas = [
     const form = document.getElementById('contact-form');
     const submitButton = form?.querySelector('button[type="submit"]');
     
+    // Track form start time for spam detection
+    const formStartTime = Date.now();
+    
     if (form && submitButton) {
       form.addEventListener('submit', async (e) => {
         e.preventDefault();
+        
+        // Honeypot check - if filled, it's a bot
+        const honeypot = (form as HTMLFormElement).website?.value;
+        if (honeypot) {
+          console.warn('Bot detected via honeypot');
+          return false;
+        }
+        
+        // Validate message content for spam patterns
+        const message = (form as HTMLFormElement).message?.value || '';
+        const spamPatterns = [
+          /\b(buy|sale|offer|discount|promo|click here|visit|website|seo|marketing)\b/gi,
+          /(https?:\/\/|www\.)/gi, // URLs
+          /\b(viagra|cialis|pharmacy|casino|poker|loan)\b/gi,
+          /\$\d+/g, // Money amounts
+        ];
+        
+        let isSpam = false;
+        for (const pattern of spamPatterns) {
+          if (pattern.test(message)) {
+            isSpam = true;
+            break;
+          }
+        }
+        
+        if (isSpam) {
+          alert('Your message contains prohibited content. Please remove promotional links or offers.');
+          return false;
+        }
+        
+        // Check submission time
+        const timeTaken = (Date.now() - formStartTime) / 1000;
+        if (timeTaken < 5) {
+          console.warn('Form submitted too quickly');
+          alert('Please take your time to fill out the form properly.');
+          return false;
+        }
         
         // Disable submit button
         submitButton.disabled = true;
