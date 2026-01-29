@@ -1691,7 +1691,7 @@ This project is proprietary software. Unauthorized copying, modification, distri
 **Development Team:**
 - **Lead Developer:** [Your Name]
 - **Email:** info@aquashieldrestorationusa.com
-- **GitHub:** [@aquashield](https://github.com/argenisdev692/aquashield-web)
+- **GitHub:** [@aquashield-web](https://github.com/argenisdev692/aquashield-web)
 
 ---
 
