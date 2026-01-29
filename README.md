@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![AquaShield Logo](public/assets/logo/logo-png.png)
+![AquaShield Logo](public/logo PNG.png)
 
 **Professional Water Damage Restoration & Roofing Services**
 
@@ -13,7 +13,7 @@
 [![License](https://img.shields.io/badge/License-Proprietary-red)](LICENSE)
 [![OWASP](https://img.shields.io/badge/Security-OWASP_2025-4B32C3)](https://owasp.org/)
 
-[Live Demo](#) · [Documentation](#) · [Report Bug](#) · [Request Feature](#)
+[Live Demo](https://aquashieldrestorationusa.com) · [Documentation](#) · [Report Bug](#) · [Request Feature](#)
 
 </div>
 
@@ -546,7 +546,7 @@ SMTP_PASS=your_app_password_16_chars
 
 # Email Settings (both providers)
 EMAIL_FROM_NAME=AquaShield Restoration LLC
-ADMIN_EMAIL=admin@aquashieldrestoration.com
+ADMIN_EMAIL=admin@aquashieldrestorationusa.com
 ```
 
 **Resend Setup:** See [RESEND_SETUP.md](RESEND_SETUP.md)
@@ -562,12 +562,12 @@ ADMIN_EMAIL=admin@aquashieldrestoration.com
 ```env
 COMPANY_NAME=AquaShield Restoration LLC
 COMPANY_PHONE=(555) 123-4567
-COMPANY_EMAIL=info@aquashieldrestoration.com
+COMPANY_EMAIL=info@aquashieldrestorationusa.com
 COMPANY_ADDRESS=123 Restoration Way, Suite 100
 COMPANY_CITY=Houston, TX 77001
-COMPANY_FACEBOOK=https://facebook.com/aquashieldrestoration
-COMPANY_INSTAGRAM=https://instagram.com/aquashieldrestoration
-COMPANY_LINKEDIN=https://linkedin.com/company/aquashieldrestoration
+COMPANY_FACEBOOK=https://facebook.com/aquashieldrestorationusa
+COMPANY_INSTAGRAM=https://instagram.com/aquashieldrestorationusa
+COMPANY_LINKEDIN=https://linkedin.com/company/aquashieldrestorationusa
 COMPANY_TWITTER=https://twitter.com/aquashieldrest
 ```
 
@@ -1683,22 +1683,15 @@ This project is proprietary software. Unauthorized copying, modification, distri
 
 **AquaShield Restoration LLC**
 
-- **Website:** [aquashieldrestoration.com](#)
-- **Email:** info@aquashieldrestoration.com
+- **Website:** [aquashieldrestorationusa.com](#)
+- **Email:** info@aquashieldrestorationusa.com
 - **Phone:** (555) 123-4567
-- **Address:** 123 Restoration Way, Suite 100, Houston, TX 77001
+- **Address:** 1302 Waugh Dr 810 , Houston, TX 77019
 
 **Development Team:**
 - **Lead Developer:** [Your Name]
-- **Email:** dev@aquashieldrestoration.com
-- **GitHub:** [@aquashield](https://github.com/aquashield)
+- **Email:** info@aquashieldrestorationusa.com
+- **GitHub:** [@aquashield](https://github.com/argenisdev692/aquashield-web)
 
 ---
 
-<div align="center">
-
-**Built with ❤️ using Astro, React, and Tailwind CSS**
-
-[⬆ Back to Top](#aquashield-restoration-llc---enterprise-landing-page)
-
-</div>
