@@ -38,20 +38,14 @@ const companyData = {
 const currentPath = Astro.url.pathname;
 ---
 
-<header 
-  x-data="{ 
-    isScrolled: false, 
-    isDrawerOpen: false,
-    serviceMenuOpen: false,
-    languageMenuOpen: false
-  }" 
-  @scroll.window="
-    isScrolled = (window.pageYOffset > 20);
-    serviceMenuOpen = false;
-    languageMenuOpen = false;
-  "
+<header
+  x-data="{
+    isScrolled: false,
+    isDrawerOpen: false
+  }"
+  @scroll.window="isScrolled = (window.pageYOffset > 20)"
   :class="{ 'bg-white shadow-md': isScrolled, 'bg-transparent': !isScrolled }"
-  class:list={["fixed top-0 left-0 right-0 z-50 transition-all duration-300", className]} 
+  class:list={["fixed top-0 left-0 right-0 z-50 transition-all duration-300", className]}
   id="navbar"
 >
   <!-- Top bar with emergency number - Desktop only -->
@@ -117,24 +111,25 @@ const currentPath = Astro.url.pathname;
             
             return (
               'submenu' in link ? (
-                <div class="relative group">
-                  <button 
-                    @click="$root.serviceMenuOpen = !$root.serviceMenuOpen" 
-                    @click.away="$root.serviceMenuOpen = false"
+                <div class="relative group" x-data="{ open: false }">
+                  <button
+                    @click="open = !open"
+                    @click.outside="open = false"
                     class:list={[
                       "text-base font-semibold hover:text-aqua transition-colors py-2 flex items-center gap-1",
                       hasActiveSubmenu ? "text-aqua" : "text-navy"
                     ]}
                   >
                     {link.label}
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-4 h-4 transition-transform duration-200" :class="{ 'rotate-180': open }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                     </svg>
                   </button>
                   
                   <!-- Dropdown menu -->
-                  <div 
-                    x-show="$root.serviceMenuOpen" 
+                  <div
+                    x-show="open"
+                    x-cloak
                     class="absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-xl z-50"
                     x-transition:enter="transition ease-out duration-200"
                     x-transition:enter-start="opacity-0 transform scale-95"
@@ -142,13 +137,15 @@ const currentPath = Astro.url.pathname;
                     x-transition:leave="transition ease-in duration-150"
                     x-transition:leave-start="opacity-100 transform scale-100"
                     x-transition:leave-end="opacity-0 transform scale-95"
+                    @click.outside="open = false"
                   >
                     <div class="py-2">
                       {link.submenu.map((sublink) => {
                         const isSubActive = sublink.href === currentPath;
                         return (
-                          <a 
+                          <a
                             href={sublink.href}
+                            @click="open = false"
                             class:list={[
                               "block px-4 py-2 font-semibold transition-colors",
                               isSubActive ? "bg-aqua/10 text-aqua hover:bg-aqua hover:!text-white" : "text-navy hover:bg-aqua hover:!text-white"
@@ -180,10 +177,10 @@ const currentPath = Astro.url.pathname;
           })}
           
           <!-- Language Dropdown -->
-          <div class="relative" x-data="{ currentLang: 'en' }">
-            <button 
-              @click="$root.languageMenuOpen = !$root.languageMenuOpen" 
-              @click.away="$root.languageMenuOpen = false"
+          <div class="relative" x-data="{ currentLang: 'en', open: false }">
+            <button
+              @click="open = !open"
+              @click.outside="open = false"
               class="flex items-center gap-2 text-navy hover:text-aqua transition-colors py-2 px-3 rounded-lg hover:bg-gray-50 cursor-pointer"
             >
               <!-- Current Language Flag -->
@@ -221,14 +218,15 @@ const currentPath = Astro.url.pathname;
                 </svg>
               </div>
               <span class="text-sm font-medium" x-text="currentLang === 'en' ? 'EN' : 'ES'"></span>
-              <svg class="w-4 h-4 transition-transform duration-200" :class="{ 'rotate-180': $root.languageMenuOpen }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg class="w-4 h-4 transition-transform duration-200" :class="{ 'rotate-180': open }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
               </svg>
             </button>
             
             <!-- Language Dropdown Menu -->
-            <div 
-              x-show="$root.languageMenuOpen" 
+            <div
+              x-show="open"
+              x-cloak
               class="absolute top-full right-0 mt-2 w-40 bg-white rounded-lg shadow-xl border border-gray-100 z-50"
               x-transition:enter="transition ease-out duration-200"
               x-transition:enter-start="opacity-0 transform scale-95"
@@ -239,8 +237,8 @@ const currentPath = Astro.url.pathname;
             >
               <div class="py-2">
                 <!-- English Option -->
-                <button 
-                  @click="currentLang = 'en'; $root.languageMenuOpen = false"
+                <button
+                  @click="currentLang = 'en'; open = false"
                   class="w-full flex items-center gap-3 px-4 py-2 text-left hover:bg-aqua hover:text-white transition-colors cursor-pointer"
                   :class="{ 'bg-aqua/10 text-aqua': currentLang === 'en' }"
                 >
@@ -272,8 +270,8 @@ const currentPath = Astro.url.pathname;
                 </button>
                 
                 <!-- Spanish Option -->
-                <button 
-                  @click="currentLang = 'es'; $root.languageMenuOpen = false"
+                <button
+                  @click="currentLang = 'es'; open = false"
                   class="w-full flex items-center gap-3 px-4 py-2 text-left hover:bg-aqua hover:text-white transition-colors cursor-pointer"
                   :class="{ 'bg-aqua/10 text-aqua': currentLang === 'es' }"
                 >
@@ -497,6 +495,11 @@ const currentPath = Astro.url.pathname;
 </script>
 
 <style>
+  /* Hide elements with x-cloak until Alpine initializes */
+  [x-cloak] {
+    display: none !important;
+  }
+  
   /* Smooth transitions for navbar */
   #navbar {
     transition: transform 0.3s ease-in-out;
