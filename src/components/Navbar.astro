@@ -183,6 +183,7 @@ const currentPath = Astro.url.pathname;
               @click="langOpen = !langOpen"
               @click.outside="langOpen = false"
               class="flex items-center gap-2 text-navy hover:text-aqua transition-colors py-2 px-3 rounded-lg hover:bg-gray-50 cursor-pointer"
+              aria-label="Select language"
             >
               <!-- Current Language Flag -->
               <div class="w-5 h-5 rounded-sm overflow-hidden">
@@ -290,10 +291,11 @@ const currentPath = Astro.url.pathname;
         </nav>
 
         <!-- CTA Button - Desktop -->
-        <button 
+        <button
           onclick="openInspectionModal()"
           class="hidden md:inline-flex btn-primary text-sm whitespace-nowrap cursor-pointer"
           type="button"
+          aria-label="Get Free Inspection"
         >
           Get Free Inspection
         </button>
