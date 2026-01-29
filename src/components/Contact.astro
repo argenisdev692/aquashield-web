@@ -404,9 +404,6 @@ const serviceAreas = [
 </style>
 
 <script define:vars={{ recaptchaSiteKey: import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY }}>
-  import { applyPhoneFormatter, getPhoneBackendValue } from '../utils/phoneFormatter';
-  import { showAlert } from '../utils/alert';
-
   // Load reCAPTCHA v3
   function loadRecaptcha() {
     const script = document.createElement('script');
@@ -420,11 +417,11 @@ const serviceAreas = [
     
     const form = document.getElementById('contact-form');
     const submitButton = form?.querySelector('button[type="submit"]');
-    const phoneInput = document.getElementById('phone') as HTMLInputElement;
+    const phoneInput = document.getElementById('phone');
     
     // Phone number formatting (xxx) xxx-xxxx
-    if (phoneInput) {
-      applyPhoneFormatter(phoneInput);
+    if (phoneInput && window.AquaShieldUtils) {
+      window.AquaShieldUtils.applyPhoneFormatter(phoneInput);
     }
     
     // Track form start time for spam detection
@@ -435,14 +432,14 @@ const serviceAreas = [
         e.preventDefault();
         
         // Honeypot check - if filled, it's a bot
-        const honeypot = (form as HTMLFormElement).website?.value;
+        const honeypot = form.website?.value;
         if (honeypot) {
           console.warn('Bot detected via honeypot');
           return false;
         }
         
         // Validate message content for spam patterns
-        const message = (form as HTMLFormElement).message?.value || '';
+        const message = form.message?.value || '';
         const spamPatterns = [
           /\b(buy|sale|offer|discount|promo|click here|visit|website|seo|marketing)\b/gi,
           /(https?:\/\/|www\.)/gi, // URLs
@@ -459,7 +456,7 @@ const serviceAreas = [
         }
         
         if (isSpam) {
-          showAlert({
+          window.AquaShieldUtils.showAlert({
             message: 'Your message contains prohibited content. Please remove promotional links or offers.',
             type: 'error'
           });
@@ -470,7 +467,7 @@ const serviceAreas = [
         const timeTaken = (Date.now() - formStartTime) / 1000;
         if (timeTaken < 5) {
           console.warn('Form submitted too quickly');
-          showAlert({
+          window.AquaShieldUtils.showAlert({
             message: 'Please take your time to fill out the form properly.',
             type: 'warning'
           });
@@ -486,14 +483,9 @@ const serviceAreas = [
           // Get reCAPTCHA token
           const token = await grecaptcha.execute(recaptchaSiteKey, { action: 'submit_contact' });
           
-          const formData = new FormData(form as HTMLFormElement);
+          const formData = new FormData(form);
           const data = Object.fromEntries(formData.entries());
           data['g-recaptcha-response'] = token;
-          
-          // Convert phone to backend format (+1xxxxxxxxxx)
-          if (phoneInput) {
-            data.phone = getPhoneBackendValue(phoneInput);
-          }
           
           // Send to API
           const response = await fetch('/api/contact-support', {
@@ -507,20 +499,20 @@ const serviceAreas = [
           const result = await response.json();
           
           if (result.success) {
-            showAlert({
+            window.AquaShieldUtils.showAlert({
               message: result.message || 'Your message has been sent successfully! We\'ll contact you soon.',
               type: 'success'
             });
-            (form as HTMLFormElement).reset();
+            form.reset();
           } else {
-            showAlert({
+            window.AquaShieldUtils.showAlert({
               message: result.message || 'Failed to send message. Please try again.',
               type: 'error'
             });
           }
         } catch (error) {
           console.error('Error submitting form:', error);
-          showAlert({
+          window.AquaShieldUtils.showAlert({
             message: 'An error occurred. Please try again or call us directly.',
             type: 'error'
           });
