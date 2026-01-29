@@ -219,10 +219,10 @@
 body {
   background-color: var(--background);
   color: var(--foreground);
-  font-family: 'Roboto', system-ui, -apple-system, sans-serif;
+  font-family: 'Roboto', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
 }
 
-/* Ensure Roboto for all elements */
+/* Ensure Roboto for all elements with fallback */
 body,
 button,
 input,
@@ -238,7 +238,8 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'Roboto', system-ui, -apple-system, sans-serif;
+  font-family: 'Roboto', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  font-display: swap; /* Use system font until Roboto loads */
 }
 
 /* Typography */

@@ -12,15 +12,15 @@
 /img/*.mp4
   Cache-Control: public, max-age=31536000, immutable
 
-# Logo and favicon - cache for 1 month
+# Logo and favicon - cache for 1 year
 /*.png
-  Cache-Control: public, max-age=2592000
+  Cache-Control: public, max-age=31536000, immutable
 
 /*.svg
-  Cache-Control: public, max-age=2592000
+  Cache-Control: public, max-age=31536000, immutable
 
 /*.ico
-  Cache-Control: public, max-age=2592000
+  Cache-Control: public, max-age=31536000, immutable
 
 # Webp images - cache for 1 year
 /*.webp
@@ -39,17 +39,28 @@
 /*.eot
   Cache-Control: public, max-age=31536000, immutable
 
-# CSS and JS - cache for 1 week (assets are hashed by build)
+# CSS and JS from _astro folder - cache for 1 year (files are hashed, safe to cache long)
+/_astro/*.css
+  Cache-Control: public, max-age=31536000, immutable
+
+/_astro/*.js
+  Cache-Control: public, max-age=31536000, immutable
+
 /_astro/*
-  Cache-Control: public, max-age=604800, immutable
+  Cache-Control: public, max-age=31536000, immutable
 
 # HTML pages - cache for 1 hour, revalidate
 /*.html
   Cache-Control: public, max-age=3600, must-revalidate
 
-# Default for other static assets
+# Root HTML files
+/
+  Cache-Control: public, max-age=3600, must-revalidate
+
+# Default security headers
 /*
   X-Content-Type-Options: nosniff
   X-Frame-Options: DENY
   X-XSS-Protection: 1; mode=block
   Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(), microphone=(), camera=()
