@@ -248,7 +248,7 @@
 </div>
 
 <script>
-  import { applyPhoneFormatter } from '../utils/phoneFormatter';
+  import { applyPhoneFormatter, getPhoneBackendValue } from '../utils/phoneFormatter';
   import { showAlert } from '../utils/alert';
 
   // Function to open modal
@@ -303,6 +303,11 @@
         
         const formData = new FormData(form as HTMLFormElement);
         const data = Object.fromEntries(formData.entries());
+        
+        // Convert phone to backend format (+1xxxxxxxxxx)
+        if (phoneInput) {
+          data.phone = getPhoneBackendValue(phoneInput);
+        }
         
         // Here you would typically send the data to your backend
         console.log('Inspection form submitted:', data);

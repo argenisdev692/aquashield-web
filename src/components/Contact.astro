@@ -404,7 +404,7 @@ const serviceAreas = [
 </style>
 
 <script define:vars={{ recaptchaSiteKey: import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY }}>
-  import { applyPhoneFormatter } from '../utils/phoneFormatter';
+  import { applyPhoneFormatter, getPhoneBackendValue } from '../utils/phoneFormatter';
   import { showAlert } from '../utils/alert';
 
   // Load reCAPTCHA v3
@@ -489,6 +489,11 @@ const serviceAreas = [
           const formData = new FormData(form as HTMLFormElement);
           const data = Object.fromEntries(formData.entries());
           data['g-recaptcha-response'] = token;
+          
+          // Convert phone to backend format (+1xxxxxxxxxx)
+          if (phoneInput) {
+            data.phone = getPhoneBackendValue(phoneInput);
+          }
           
           // Send to API
           const response = await fetch('/api/contact-support', {

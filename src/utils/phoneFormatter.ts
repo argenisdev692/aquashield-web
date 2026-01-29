@@ -14,7 +14,27 @@ export function formatPhoneNumber(value: string): string {
 }
 
 /**
+ * Convierte un número de teléfono al formato backend +1xxxxxxxxxx
+ * @param value - Valor del teléfono (formateado o no)
+ * @returns Número en formato E.164 para USA (+1xxxxxxxxxx) o string vacío si incompleto
+ */
+export function formatPhoneForBackend(value: string): string {
+  const numbers = value.replace(/\D/g, '').slice(0, 10);
+  return numbers.length === 10 ? `+1${numbers}` : numbers;
+}
+
+/**
+ * Extrae solo dígitos de un número de teléfono
+ * @param value - Valor del teléfono (formateado o no)
+ * @returns Solo los dígitos (máximo 10)
+ */
+export function extractPhoneDigits(value: string): string {
+  return value.replace(/\D/g, '').slice(0, 10);
+}
+
+/**
  * Aplica formateo automático a un input de teléfono
+ * Almacena el valor para backend en data-phone-backend
  * @param input - Elemento HTMLInputElement
  */
 export function applyPhoneFormatter(input: HTMLInputElement): void {
@@ -22,7 +42,23 @@ export function applyPhoneFormatter(input: HTMLInputElement): void {
     const target = e.target as HTMLInputElement;
     const formatted = formatPhoneNumber(target.value);
     target.value = formatted;
+    // Store backend value in data attribute for form submission
+    target.dataset.phoneBackend = formatPhoneForBackend(target.value);
   });
+  
+  // Initialize data attribute with current value
+  if (input.value) {
+    input.dataset.phoneBackend = formatPhoneForBackend(input.value);
+  }
+}
+
+/**
+ * Obtiene el valor para backend de un input de teléfono
+ * @param input - Elemento HTMLInputElement con phone formatter aplicado
+ * @returns Número en formato +1xxxxxxxxxx
+ */
+export function getPhoneBackendValue(input: HTMLInputElement): string {
+  return input.dataset.phoneBackend || formatPhoneForBackend(input.value);
 }
 
 /**

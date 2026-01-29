@@ -24,7 +24,10 @@ const { class: className } = Astro.props;
     <div class="relative aspect-video rounded-2xl overflow-hidden shadow-2xl group">
       <video 
         controls 
+        preload="none"
         poster="/img/hero/hero-1.webp"
+        width="640"
+        height="360"
         class="w-full h-full object-cover"
       >
         <source src="/img/company-video.mp4" type="video/mp4" />
