@@ -326,20 +326,20 @@ const serviceAreas = [
     </div>
   </div>
 
-  <!-- Full Width Map -->
-  <div class="w-full h-96 mt-20 mb-12 relative fade-in-section">
-    <div class="absolute inset-0 bg-gray-200">
-      <!-- Placeholder for Google Maps embed -->
-      <div class="absolute inset-0 flex items-center justify-center bg-gray-100">
-        <div class="text-center">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-gray-400 mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-          </svg>
-          <p class="text-xl text-gray-500 font-medium">Interactive map coming soon</p>
-          <p class="text-gray-400 mt-2">Will display service area coverage</p>
-        </div>
-      </div>
+  <!-- Full Width Google Map -->
+  <div class="w-full h-[500px] mt-20 mb-12 relative fade-in-section">
+    <div class="absolute inset-0 bg-white rounded-2xl shadow-xl overflow-hidden">
+      <iframe 
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3464.256071898361!2d-95.44223462572727!3d29.74130133287228!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8640c11e9f0f0a63%3A0x61f215669818cfcd!2s3733%20Westheimer%20Rd%2C%20Houston%2C%20TX%2077027%2C%20EE.%20UU.!5e0!3m2!1ses!2spt!4v1769700449786!5m2!1ses!2spt"
+        width="100%" 
+        height="100%" 
+        style="border:0;" 
+        allowfullscreen="" 
+        loading="lazy" 
+        referrerpolicy="no-referrer-when-downgrade"
+        title="AquaShield Restoration LLC Location - 3733 Westheimer Rd, Houston, TX 77027"
+        class="w-full h-full"
+      ></iframe>
     </div>
   </div>
 </section>
