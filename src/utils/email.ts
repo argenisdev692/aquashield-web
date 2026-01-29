@@ -1,5 +1,4 @@
 import { Resend } from 'resend';
-import nodemailer from 'nodemailer';
 import type { ContactSupport, Appointment } from '../lib/supabase';
 
 // Email provider type
@@ -14,18 +13,9 @@ if (EMAIL_PROVIDER === 'resend' && import.meta.env.RESEND_API_KEY) {
   resendClient = new Resend(import.meta.env.RESEND_API_KEY);
 }
 
-// Create SMTP transporter (only if using SMTP)
-function createEmailTransporter() {
-  return nodemailer.createTransport({
-    host: import.meta.env.SMTP_HOST,
-    port: Number(import.meta.env.SMTP_PORT),
-    secure: import.meta.env.SMTP_SECURE === 'true',
-    auth: {
-      user: import.meta.env.SMTP_USER,
-      pass: import.meta.env.SMTP_PASS,
-    },
-  });
-}
+// SMTP transporter is not available in Cloudflare Workers
+// Only Resend API works in Cloudflare Workers runtime
+// If you need SMTP, deploy to a platform that supports Node.js (Vercel, Netlify, etc.)
 
 // Format phone number
 function formatPhone(phone: string): string {
@@ -375,7 +365,7 @@ export async function sendEmail(to: string, subject: string, html: string) {
   const fromEmail = import.meta.env.EMAIL_FROM;
   const fromName = import.meta.env.EMAIL_FROM_NAME || 'AquaShield Restoration LLC';
   
-  // Use Resend if configured
+  // Cloudflare Workers only supports Resend API
   if (EMAIL_PROVIDER === 'resend' && resendClient) {
     try {
       const { data, error } = await resendClient.emails.send({
@@ -397,15 +387,6 @@ export async function sendEmail(to: string, subject: string, html: string) {
     }
   }
   
-  // Fallback to SMTP (Gmail/other)
-  const transporter = createEmailTransporter();
-  
-  const mailOptions = {
-    from: `${fromName} <${fromEmail}>`,
-    to,
-    subject,
-    html,
-  };
-
-  return await transporter.sendMail(mailOptions);
+  // SMTP is not supported in Cloudflare Workers
+  throw new Error('SMTP is not supported in Cloudflare Workers. Please use Resend API by setting EMAIL_PROVIDER=resend');
 }
