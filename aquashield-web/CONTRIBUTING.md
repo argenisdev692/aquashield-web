@@ -731,7 +731,7 @@ When adding new features:
 Feel free to:
 
 - 💬 Open a [GitHub Discussion](https://github.com/aquashield/aquashield-web/discussions)
-- 📧 Email: dev@aquashieldrestoration.com
+- 📧 Email: dev@aquashieldrestorationusa.com
 - 🐛 Report bugs: [GitHub Issues](https://github.com/aquashield/aquashield-web/issues)
 
 ---

@@ -246,7 +246,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
 
 ## Links
 
-- [Homepage](https://aquashieldrestoration.com)
+- [Homepage](https://aquashieldrestorationusa.com)
 - [Documentation](README.md)
 - [Contributing Guide](CONTRIBUTING.md)
 - [License](LICENSE)

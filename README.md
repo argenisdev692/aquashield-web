@@ -546,7 +546,7 @@ SMTP_PASS=your_app_password_16_chars
 
 # Email Settings (both providers)
 EMAIL_FROM_NAME=AquaShield Restoration LLC
-ADMIN_EMAIL=admin@aquashieldrestorationusa.com
+ADMIN_EMAIL=victor@aquashieldrestorationusa.com
 ```
 
 **Resend Setup:** See [RESEND_SETUP.md](RESEND_SETUP.md)
@@ -561,10 +561,10 @@ ADMIN_EMAIL=admin@aquashieldrestorationusa.com
 
 ```env
 COMPANY_NAME=AquaShield Restoration LLC
-COMPANY_PHONE=(555) 123-4567
+COMPANY_PHONE=(713) 587-6423
 COMPANY_EMAIL=info@aquashieldrestorationusa.com
-COMPANY_ADDRESS=123 Restoration Way, Suite 100
-COMPANY_CITY=Houston, TX 77001
+COMPANY_ADDRESS=3733 Westheimer Rd. Ste 1 #4583
+COMPANY_CITY=Houston, TX 77027
 COMPANY_FACEBOOK=https://facebook.com/aquashieldrestorationusa
 COMPANY_INSTAGRAM=https://instagram.com/aquashieldrestorationusa
 COMPANY_LINKEDIN=https://linkedin.com/company/aquashieldrestorationusa
@@ -1683,14 +1683,14 @@ This project is proprietary software. Unauthorized copying, modification, distri
 
 **AquaShield Restoration LLC**
 
-- **Website:** [aquashieldrestorationusa.com](#)
+- **Website:** [aquashieldrestorationusa.com](https://aquashieldrestorationusa.com)
 - **Email:** info@aquashieldrestorationusa.com
-- **Phone:** (555) 123-4567
-- **Address:** 1302 Waugh Dr 810 , Houston, TX 77019
+- **Phone:** (713) 587-6423
+- **Address:** 3733 Westheimer Rd. Ste 1 #4583, Houston, TX 77027
 
 **Development Team:**
-- **Lead Developer:** [Your Name]
-- **Email:** info@aquashieldrestorationusa.com
+- **Lead Developer:** Argenis Gonzalez
+- **Email:** argenis692@gmail.com
 - **GitHub:** [@aquashield-web](https://github.com/argenisdev692/aquashield-web)
 
 ---
