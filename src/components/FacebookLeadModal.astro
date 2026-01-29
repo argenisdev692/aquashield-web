@@ -303,9 +303,6 @@ const { class: className } = Astro.props;
   recaptchaSiteKey: import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY,
   googleMapsApiKey: import.meta.env.PUBLIC_GOOGLE_MAPS_API_KEY
 }}>
-  import { applyPhoneFormatter } from '../utils/phoneFormatter';
-  import { showAlert } from '../utils/alert';
-  
   let autocomplete;
 
   // Load Google Maps and reCAPTCHA
@@ -393,13 +390,13 @@ const { class: className } = Astro.props;
     const trigger = document.getElementById('fb-lead-trigger');
     const closeBtn = document.getElementById('fb-lead-close');
     const form = document.getElementById('facebook-lead-form');
-    const phoneInput = document.getElementById('fb_phone') as HTMLInputElement;
+    const phoneInput = document.getElementById('fb_phone');
     
     let formStartTime = 0;
 
     // Phone number formatting (xxx) xxx-xxxx
-    if (phoneInput) {
-      applyPhoneFormatter(phoneInput);
+    if (phoneInput && window.AquaShieldUtils) {
+      window.AquaShieldUtils.applyPhoneFormatter(phoneInput);
     }
 
     // Open modal
@@ -461,8 +458,8 @@ const { class: className } = Astro.props;
           }
         }
         
-        if (isSpam) {
-          showAlert({
+        if (isSpam && window.AquaShieldUtils) {
+          window.AquaShieldUtils.showAlert({
             message: 'Your message contains prohibited content.',
             type: 'error'
           });
@@ -472,8 +469,8 @@ const { class: className } = Astro.props;
 
       // Check 3: Submission time (minimum 5 seconds)
       const timeTaken = (Date.now() - formStartTime) / 1000;
-      if (timeTaken < 5) {
-        showAlert({
+      if (timeTaken < 5 && window.AquaShieldUtils) {
+        window.AquaShieldUtils.showAlert({
           message: 'Please take your time to fill out the form.',
           type: 'warning'
         });
@@ -504,26 +501,28 @@ const { class: className } = Astro.props;
 
         const result = await response.json();
 
-        if (result.success) {
-          showAlert({
+        if (result.success && window.AquaShieldUtils) {
+          window.AquaShieldUtils.showAlert({
             message: (result.message || 'Success!') + ' We will contact you within 24 hours to schedule your free inspection!',
             type: 'success',
             duration: 7000
           });
           form.reset();
           closeModal();
-        } else {
-          showAlert({
+        } else if (window.AquaShieldUtils) {
+          window.AquaShieldUtils.showAlert({
             message: result.message || 'Failed to submit. Please try again.',
             type: 'error'
           });
         }
       } catch (error) {
         console.error('Error submitting form:', error);
-        showAlert({
-          message: 'An error occurred. Please try again or call us directly.',
-          type: 'error'
-        });
+        if (window.AquaShieldUtils) {
+          window.AquaShieldUtils.showAlert({
+            message: 'An error occurred. Please try again or call us directly.',
+            type: 'error'
+          });
+        }
       } finally {
         // Re-enable submit button
         submitButton.disabled = false;

@@ -25,6 +25,9 @@ const cities = [
           <img 
             src={city.image} 
             alt={`${city.name}, ${city.state}`}
+            loading="lazy"
+            width="400"
+            height="192"
             class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
           />
           <div class="absolute inset-0 bg-gradient-to-t from-navy/80 to-transparent"></div>

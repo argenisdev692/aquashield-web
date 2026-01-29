@@ -199,9 +199,6 @@
 </main>
 
 <script define:vars={{ recaptchaSiteKey: import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY }}>
-    import { applyPhoneFormatter } from '../utils/phoneFormatter';
-    import { showAlert } from '../utils/alert';
-
     // Load reCAPTCHA v3
     function loadRecaptcha() {
         const script = document.createElement('script');
@@ -214,11 +211,11 @@
         
         const form = document.getElementById('contact-support-form');
         const submitButton = form?.querySelector('button[type="submit"]');
-        const phoneInput = document.getElementById('phone') as HTMLInputElement;
+        const phoneInput = document.getElementById('phone');
         
         // Phone number formatting (xxx) xxx-xxxx
-        if (phoneInput) {
-            applyPhoneFormatter(phoneInput);
+        if (phoneInput && window.AquaShieldUtils) {
+            window.AquaShieldUtils.applyPhoneFormatter(phoneInput);
         }
         
         if (form && submitButton) {
@@ -234,7 +231,7 @@
                     // Get reCAPTCHA token
                     const token = await grecaptcha.execute(recaptchaSiteKey, { action: 'submit_support' });
                     
-                    const formData = new FormData(form as HTMLFormElement);
+                    const formData = new FormData(form);
                     const data = Object.fromEntries(formData.entries());
                     data['g-recaptcha-response'] = token;
                     
@@ -250,20 +247,20 @@
                     const result = await response.json();
                     
                     if (result.success) {
-                        showAlert({
+                        window.AquaShieldUtils.showAlert({
                             message: result.message || 'Thank you! We will get back to you soon.',
                             type: 'success'
                         });
-                        (form as HTMLFormElement).reset();
+                        form.reset();
                     } else {
-                        showAlert({
+                        window.AquaShieldUtils.showAlert({
                             message: result.message || 'Failed to send. Please try again.',
                             type: 'error'
                         });
                     }
                 } catch (error) {
                     console.error('Error submitting form:', error);
-                    showAlert({
+                    window.AquaShieldUtils.showAlert({
                         message: 'An error occurred. Please call us directly.',
                         type: 'error'
                     });

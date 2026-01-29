@@ -248,9 +248,6 @@
 </div>
 
 <script>
-  import { applyPhoneFormatter, getPhoneBackendValue } from '../utils/phoneFormatter';
-  import { showAlert } from '../utils/alert';
-
   // Function to open modal
   function openInspectionModal() {
     const modal = document.getElementById('inspection-modal');
@@ -277,8 +274,8 @@
   }
 
   // Make functions globally available
-  (window as any).openInspectionModal = openInspectionModal;
-  (window as any).closeInspectionModal = closeInspectionModal;
+  window.openInspectionModal = openInspectionModal;
+  window.closeInspectionModal = closeInspectionModal;
 
   // Close modal on ESC key
   document.addEventListener('keydown', (e) => {
@@ -290,37 +287,39 @@
   // Handle form submission
   document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('inspection-form');
-    const phoneInput = document.getElementById('modal_phone') as HTMLInputElement;
+    const phoneInput = document.getElementById('modal_phone');
     
     // Phone formatting
-    if (phoneInput) {
-      applyPhoneFormatter(phoneInput);
+    if (phoneInput && window.AquaShieldUtils) {
+      window.AquaShieldUtils.applyPhoneFormatter(phoneInput);
     }
     
     if (form) {
       form.addEventListener('submit', async (e) => {
         e.preventDefault();
         
-        const formData = new FormData(form as HTMLFormElement);
+        const formData = new FormData(form);
         const data = Object.fromEntries(formData.entries());
         
-        // Convert phone to backend format (+1xxxxxxxxxx)
-        if (phoneInput) {
-          data.phone = getPhoneBackendValue(phoneInput);
+        // Convert phone to backend format (remove formatting)
+        if (phoneInput && phoneInput.value) {
+          data.phone = phoneInput.value.replace(/\D/g, '');
         }
         
         // Here you would typically send the data to your backend
         console.log('Inspection form submitted:', data);
         
         // Show success message
-        showAlert({
-          message: 'Thank you! We will contact you shortly to schedule your free inspection.',
-          type: 'success'
-        });
+        if (window.AquaShieldUtils) {
+          window.AquaShieldUtils.showAlert({
+            message: 'Thank you! We will contact you shortly to schedule your free inspection.',
+            type: 'success'
+          });
+        }
         
         // Close modal and reset form
         closeInspectionModal();
-        (form as HTMLFormElement).reset();
+        form.reset();
       });
     }
   });
