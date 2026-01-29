@@ -404,6 +404,9 @@ const serviceAreas = [
 </style>
 
 <script define:vars={{ recaptchaSiteKey: import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY }}>
+  import { applyPhoneFormatter } from '../utils/phoneFormatter';
+  import { showAlert } from '../utils/alert';
+
   // Load reCAPTCHA v3
   function loadRecaptcha() {
     const script = document.createElement('script');
@@ -421,25 +424,7 @@ const serviceAreas = [
     
     // Phone number formatting (xxx) xxx-xxxx
     if (phoneInput) {
-      phoneInput.addEventListener('input', (e) => {
-        const input = e.target as HTMLInputElement;
-        let value = input.value.replace(/\D/g, ''); // Remove all non-digits
-        
-        if (value.length > 10) {
-          value = value.slice(0, 10); // Limit to 10 digits
-        }
-        
-        // Format as (xxx) xxx-xxxx
-        if (value.length >= 6) {
-          input.value = `(${value.slice(0, 3)}) ${value.slice(3, 6)}-${value.slice(6)}`;
-        } else if (value.length >= 3) {
-          input.value = `(${value.slice(0, 3)}) ${value.slice(3)}`;
-        } else if (value.length > 0) {
-          input.value = `(${value}`;
-        } else {
-          input.value = '';
-        }
-      });
+      applyPhoneFormatter(phoneInput);
     }
     
     // Track form start time for spam detection
@@ -474,7 +459,10 @@ const serviceAreas = [
         }
         
         if (isSpam) {
-          alert('Your message contains prohibited content. Please remove promotional links or offers.');
+          showAlert({
+            message: 'Your message contains prohibited content. Please remove promotional links or offers.',
+            type: 'error'
+          });
           return false;
         }
         
@@ -482,7 +470,10 @@ const serviceAreas = [
         const timeTaken = (Date.now() - formStartTime) / 1000;
         if (timeTaken < 5) {
           console.warn('Form submitted too quickly');
-          alert('Please take your time to fill out the form properly.');
+          showAlert({
+            message: 'Please take your time to fill out the form properly.',
+            type: 'warning'
+          });
           return false;
         }
         
@@ -511,14 +502,23 @@ const serviceAreas = [
           const result = await response.json();
           
           if (result.success) {
-            alert('✅ ' + result.message);
+            showAlert({
+              message: result.message || 'Your message has been sent successfully! We\'ll contact you soon.',
+              type: 'success'
+            });
             (form as HTMLFormElement).reset();
           } else {
-            alert('❌ ' + result.message);
+            showAlert({
+              message: result.message || 'Failed to send message. Please try again.',
+              type: 'error'
+            });
           }
         } catch (error) {
           console.error('Error submitting form:', error);
-          alert('❌ An error occurred. Please try again.');
+          showAlert({
+            message: 'An error occurred. Please try again or call us directly.',
+            type: 'error'
+          });
         } finally {
           // Re-enable submit button
           submitButton.disabled = false;

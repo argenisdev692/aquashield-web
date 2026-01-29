@@ -111,10 +111,9 @@ const currentPath = Astro.url.pathname;
             
             return (
               'submenu' in link ? (
-                <div class="relative group" x-data="{ open: false }">
+                <div class="relative group" x-data="{ open: false }" @click.away="open = false">
                   <button
                     @click="open = !open"
-                    @click.outside="open = false"
                     class:list={[
                       "text-base font-semibold hover:text-aqua transition-colors py-2 flex items-center gap-1",
                       hasActiveSubmenu ? "text-aqua" : "text-navy"
@@ -177,10 +176,9 @@ const currentPath = Astro.url.pathname;
           })}
           
           <!-- Language Dropdown -->
-          <div class="relative" x-data="{ currentLang: 'en', open: false }">
+          <div class="relative" x-data="{ currentLang: 'en', open: false }" @click.away="open = false">
             <button
               @click="open = !open"
-              @click.outside="open = false"
               class="flex items-center gap-2 text-navy hover:text-aqua transition-colors py-2 px-3 rounded-lg hover:bg-gray-50 cursor-pointer"
             >
               <!-- Current Language Flag -->
@@ -344,7 +342,7 @@ const currentPath = Astro.url.pathname;
       </a>
 
       <!-- Services Dropdown in Drawer -->
-      <div x-data="{ isOpen: false }" class="relative">
+      <div x-data="{ isOpen: false }" class="relative" @click.away="isOpen = false">
         <button 
           @click="isOpen = !isOpen"
           class:list={[
@@ -379,7 +377,7 @@ const currentPath = Astro.url.pathname;
       <a href="/contact-support" class:list={["block py-2.5 px-4 rounded transition duration-200 font-semibold hover:bg-gray-100", currentPath === "/contact-support" ? "bg-aqua/10 text-aqua" : "text-navy"]}>Contact Support</a>
 
       <!-- Language Selector - Mobile -->
-      <div x-data="{ isOpen: false, currentLang: 'en' }" class="relative">
+      <div x-data="{ isOpen: false, currentLang: 'en' }" class="relative" @click.away="isOpen = false">
         <button 
           @click="isOpen = !isOpen"
           class="flex items-center justify-between w-full py-2.5 px-4 rounded transition duration-200 hover:bg-gray-100 font-semibold text-navy cursor-pointer"

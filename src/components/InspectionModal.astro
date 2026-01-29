@@ -248,6 +248,9 @@
 </div>
 
 <script>
+  import { applyPhoneFormatter } from '../utils/phoneFormatter';
+  import { showAlert } from '../utils/alert';
+
   // Function to open modal
   function openInspectionModal() {
     const modal = document.getElementById('inspection-modal');
@@ -287,6 +290,12 @@
   // Handle form submission
   document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('inspection-form');
+    const phoneInput = document.getElementById('modal_phone') as HTMLInputElement;
+    
+    // Phone formatting
+    if (phoneInput) {
+      applyPhoneFormatter(phoneInput);
+    }
     
     if (form) {
       form.addEventListener('submit', async (e) => {
@@ -299,7 +308,10 @@
         console.log('Inspection form submitted:', data);
         
         // Show success message
-        alert('Thank you! We will contact you shortly to schedule your free inspection.');
+        showAlert({
+          message: 'Thank you! We will contact you shortly to schedule your free inspection.',
+          type: 'success'
+        });
         
         // Close modal and reset form
         closeInspectionModal();
