@@ -9,8 +9,9 @@ const companyData = {
   name: "AQUASHIELD RESTORATION LLC",
   phone: "(713) 587-6423",
   email: "info@aquashieldrestorationusa.com",
+  ein: "36-5164436",
   address: {
-    street: "3733 Westheimer Rd. Ste 1 #4583",
+    street: "3733 Westheimer Rd. Ste 1-4583",
     city: "Houston",
     state: "TX",
     zip: "77027",
@@ -170,7 +171,7 @@ const footerLinks = {
     <div class="border-t border-white/10 py-8 text-center text-sm text-white/60">
       <div class="flex flex-col md:flex-row justify-between items-center gap-4">
         <p>© {new Date().getFullYear()} {companyData.name}. All rights reserved.</p>
-        <p>IICRC Certified | Licensed & Insured</p>
+        <p>IICRC Certified | Licensed & Insured | EIN: {companyData.ein}</p>
       </div>
     </div>
   </footer>

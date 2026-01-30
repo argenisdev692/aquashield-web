@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import InspectionModal from '../components/InspectionModal.astro';
+import CookieBanner from '../components/CookieBanner.astro';
 
 interface Props {
   title?: string;
@@ -248,6 +249,9 @@ const companyData = {
     
     <!-- Inspection Modal -->
     <InspectionModal />
+    
+    <!-- Cookie Consent Banner -->
+    <CookieBanner />
     
     <!-- Intersection Observer for fade-in animations -->
     <script>
