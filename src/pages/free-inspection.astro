@@ -1,0 +1,975 @@
+---
+import { getCompanyData, formatPhone } from "../lib/company";
+
+const company = await getCompanyData();
+const formattedPhone = formatPhone(company.phone);
+
+const googleMapsApiKey = import.meta.env.PUBLIC_GOOGLE_MAPS_API_KEY ?? "";
+const recaptchaSiteKey = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY ?? "";
+
+const canonicalUrl = "https://aquashieldrestorationusa.com/free-inspection";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Get Your Free Inspection | AquaShield Restoration</title>
+    <meta
+      name="description"
+      content="Request your free roof inspection from AquaShield Restoration. Our experts will assess storm, hail, and water damage at no cost to you."
+    />
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: "Inter", sans-serif;
+        background: #f3f4f6;
+        min-height: 100vh;
+        color: #111827;
+      }
+
+      .header {
+        background: #1e293b;
+        padding: 1rem 1.5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .header img {
+        height: 48px;
+        width: auto;
+      }
+
+      .container {
+        max-width: 760px;
+        margin: 2rem auto;
+        padding: 0 1rem 3rem;
+      }
+
+      .card {
+        background: #fff;
+        border-radius: 1rem;
+        box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+      }
+      .card-header {
+        background: linear-gradient(135deg, #0891b2 0%, #0e7490 100%);
+        padding: 1.5rem 2rem;
+        text-align: center;
+      }
+      .card-header h1 {
+        color: #fff;
+        font-size: 1.5rem;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+      }
+      .card-header p {
+        color: #cffafe;
+        font-size: 0.9rem;
+        margin-top: 0.4rem;
+      }
+      .card-body {
+        padding: 2rem;
+      }
+
+      .alert {
+        display: none;
+        padding: 0.9rem 1.1rem;
+        border-radius: 0.6rem;
+        font-size: 0.875rem;
+        margin-bottom: 1.25rem;
+      }
+      .alert-success {
+        background: #d1fae5;
+        color: #065f46;
+        border: 1px solid #6ee7b7;
+      }
+      .alert-error {
+        background: #fee2e2;
+        color: #991b1b;
+        border: 1px solid #fca5a5;
+      }
+      .alert.visible {
+        display: block;
+      }
+
+      .form {
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+      }
+      .grid-2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+      }
+      .grid-3 {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 1rem;
+      }
+      @media (max-width: 560px) {
+        .grid-2,
+        .grid-3 {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      label {
+        display: block;
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: #374151;
+        margin-bottom: 0.35rem;
+      }
+      label .required {
+        color: #ef4444;
+      }
+      label .optional {
+        font-size: 0.75rem;
+        color: #9ca3af;
+        font-weight: 400;
+      }
+
+      .input {
+        width: 100%;
+        padding: 0.6rem 0.9rem;
+        border: 1.5px solid #d1d5db;
+        border-radius: 0.5rem;
+        font-size: 0.9rem;
+        font-family: inherit;
+        color: #111827;
+        background: #fff;
+        transition:
+          border-color 0.2s,
+          box-shadow 0.2s;
+        outline: none;
+      }
+      .input:focus {
+        border-color: #0891b2;
+        box-shadow: 0 0 0 3px rgba(8, 145, 178, 0.15);
+      }
+      .input.readonly-field {
+        background: #f9fafb;
+        color: #6b7280;
+        cursor: not-allowed;
+      }
+      .input.error {
+        border-color: #ef4444;
+      }
+      .error-msg {
+        font-size: 0.75rem;
+        color: #ef4444;
+        min-height: 1rem;
+        margin-top: 0.2rem;
+      }
+      textarea.input {
+        resize: vertical;
+        min-height: 96px;
+      }
+
+      #location-map {
+        width: 100%;
+        height: 180px;
+        border-radius: 0.6rem;
+        background: #e5e7eb;
+        border: 1.5px solid #d1d5db;
+        margin-top: 0.35rem;
+      }
+
+      .insurance-group {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        margin-top: 0.5rem;
+      }
+      .ins-radio {
+        display: none;
+      }
+      .ins-label {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 90px;
+        padding: 0.6rem 1rem;
+        border: 1.5px solid #d1d5db;
+        border-radius: 0.5rem;
+        font-size: 0.9rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.18s;
+        user-select: none;
+      }
+      .ins-radio:checked + .ins-label {
+        background: #0891b2;
+        color: #fff;
+        border-color: #0e7490;
+      }
+      .ins-label:hover {
+        border-color: #0891b2;
+        color: #0891b2;
+      }
+
+      .consent-row {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.6rem;
+      }
+      .consent-row input[type="checkbox"] {
+        margin-top: 3px;
+        width: 1.05rem;
+        height: 1.05rem;
+        accent-color: #0891b2;
+        flex-shrink: 0;
+        cursor: pointer;
+      }
+      .consent-row span {
+        font-size: 0.8rem;
+        color: #6b7280;
+        line-height: 1.5;
+      }
+      .consent-row a {
+        color: #0891b2;
+        text-decoration: underline;
+      }
+
+      .btn-submit {
+        width: 100%;
+        padding: 0.85rem;
+        background: linear-gradient(135deg, #0891b2, #0e7490);
+        color: #fff;
+        font-size: 1rem;
+        font-weight: 600;
+        border: none;
+        border-radius: 0.6rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        transition:
+          opacity 0.2s,
+          transform 0.1s;
+      }
+      .btn-submit:hover:not(:disabled) {
+        opacity: 0.92;
+        transform: translateY(-1px);
+      }
+      .btn-submit:disabled {
+        opacity: 0.65;
+        cursor: not-allowed;
+        transform: none;
+      }
+      .spinner {
+        display: none;
+        width: 18px;
+        height: 18px;
+        border: 2px solid rgba(255, 255, 255, 0.4);
+        border-top-color: #fff;
+        border-radius: 50%;
+        animation: spin 0.7s linear infinite;
+      }
+      .spinner.active {
+        display: block;
+      }
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      .footer-link {
+        text-align: center;
+        margin-top: 1.5rem;
+        font-size: 0.85rem;
+        color: #6b7280;
+      }
+      .footer-link a {
+        color: #0891b2;
+        text-decoration: underline;
+      }
+      .section-label {
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: #9ca3af;
+        border-bottom: 1px solid #e5e7eb;
+        padding-bottom: 0.4rem;
+        margin-bottom: -0.25rem;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header class="header">
+      <a href="/" title="Visit AquaShield Restoration">
+        <img src="/assets/logo/logo3.webp" alt="AquaShield Restoration Logo" />
+      </a>
+    </header>
+
+    <main class="container">
+      <div class="card">
+        <div class="card-header">
+          <h1>Get Your Free Roof Inspection</h1>
+          <p>
+            Fill out the form below — our team will contact you shortly to
+            schedule.
+          </p>
+        </div>
+
+        <div class="card-body">
+          <div id="success-alert" class="alert alert-success" role="alert">
+          </div>
+          <div id="error-alert" class="alert alert-error" role="alert"></div>
+
+          <form id="lead-form" class="form" novalidate>
+            <!-- Hidden -->
+            <input type="hidden" id="latitude" name="latitude" />
+            <input type="hidden" id="longitude" name="longitude" />
+            <input type="hidden" id="hidden_address" name="address" />
+            <input type="hidden" id="hidden_city" name="city" />
+            <input type="hidden" id="hidden_state" name="state" />
+            <input type="hidden" id="hidden_zipcode" name="zipcode" />
+            <input
+              type="hidden"
+              id="hidden_country"
+              name="country"
+              value="US"
+            />
+            <input type="hidden" name="lead_source" value="Facebook Ads" />
+            <input
+              type="hidden"
+              id="recaptcha-token"
+              name="g-recaptcha-response"
+            />
+            <!-- Honeypot -->
+            <input
+              type="text"
+              id="website"
+              name="website"
+              style="display:none;"
+              tabindex="-1"
+              autocomplete="off"
+            />
+
+            <p class="section-label">Personal Information</p>
+            <div class="grid-2">
+              <div>
+                <label for="first_name"
+                  >First Name <span class="required">*</span></label
+                >
+                <input
+                  class="input"
+                  type="text"
+                  id="first_name"
+                  name="first_name"
+                  autocomplete="given-name"
+                  maxlength="50"
+                  required
+                />
+                <div class="error-msg" id="err-first_name"></div>
+              </div>
+              <div>
+                <label for="last_name"
+                  >Last Name <span class="required">*</span></label
+                >
+                <input
+                  class="input"
+                  type="text"
+                  id="last_name"
+                  name="last_name"
+                  autocomplete="family-name"
+                  maxlength="50"
+                  required
+                />
+                <div class="error-msg" id="err-last_name"></div>
+              </div>
+            </div>
+
+            <div class="grid-2">
+              <div>
+                <label for="phone">Phone <span class="required">*</span></label>
+                <input
+                  class="input"
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  placeholder="(XXX) XXX-XXXX"
+                  autocomplete="tel"
+                  maxlength="14"
+                  required
+                />
+                <div class="error-msg" id="err-phone"></div>
+              </div>
+              <div>
+                <label for="email">Email <span class="required">*</span></label>
+                <input
+                  class="input"
+                  type="email"
+                  id="email"
+                  name="email"
+                  autocomplete="email"
+                  required
+                />
+                <div class="error-msg" id="err-email"></div>
+              </div>
+            </div>
+
+            <p class="section-label">Property Address</p>
+            <div>
+              <label for="address_map_input"
+                >Address <span class="required">*</span></label
+              >
+              <input
+                class="input"
+                type="text"
+                id="address_map_input"
+                name="address_map_input"
+                placeholder="Start typing your address..."
+                autocomplete="off"
+                required
+              />
+              <div class="error-msg" id="err-address_map_input"></div>
+            </div>
+
+            <div>
+              <label for="address_2"
+                >Address 2 <span class="optional"
+                  >(Optional — Apt, Suite, Unit)</span
+                ></label
+              >
+              <input
+                class="input"
+                type="text"
+                id="address_2"
+                name="address_2"
+                placeholder="Apt 4B, Suite 100, etc."
+                autocomplete="address-line2"
+              />
+            </div>
+
+            <div class="grid-3">
+              <div>
+                <label for="display_city"
+                  >City <span class="required">*</span></label
+                >
+                <input
+                  class="input readonly-field"
+                  type="text"
+                  id="display_city"
+                  placeholder="Auto-filled"
+                  readonly
+                />
+              </div>
+              <div>
+                <label for="display_state"
+                  >State <span class="required">*</span></label
+                >
+                <input
+                  class="input readonly-field"
+                  type="text"
+                  id="display_state"
+                  placeholder="Auto-filled"
+                  maxlength="2"
+                  readonly
+                />
+              </div>
+              <div>
+                <label for="display_zipcode"
+                  >ZIP Code <span class="required">*</span></label
+                >
+                <input
+                  class="input readonly-field"
+                  type="text"
+                  id="display_zipcode"
+                  placeholder="Auto-filled"
+                  maxlength="5"
+                  readonly
+                />
+              </div>
+            </div>
+
+            <div>
+              <label>Location Preview</label>
+              <div id="location-map"></div>
+            </div>
+
+            <div>
+              <label for="message"
+                >Comment or Message <span class="optional">(Optional)</span
+                ></label
+              >
+              <textarea
+                class="input"
+                id="message"
+                name="message"
+                rows="3"
+                placeholder="Describe the damage or any additional info..."
+              ></textarea>
+            </div>
+
+            <div style="text-align:center;">
+              <label style="justify-content:center;"
+                >Do you have property insurance? <span class="required">*</span
+                ></label
+              >
+              <div class="insurance-group">
+                <input
+                  class="ins-radio"
+                  type="radio"
+                  id="ins_yes"
+                  name="insurance_property"
+                  value="yes"
+                  required
+                />
+                <label class="ins-label" for="ins_yes">Yes</label>
+                <input
+                  class="ins-radio"
+                  type="radio"
+                  id="ins_no"
+                  name="insurance_property"
+                  value="no"
+                  required
+                />
+                <label class="ins-label" for="ins_no">No</label>
+              </div>
+              <div
+                class="error-msg"
+                id="err-insurance_property"
+                style="text-align:center;"
+              >
+              </div>
+            </div>
+
+            <div class="consent-row">
+              <input
+                type="checkbox"
+                id="sms_consent"
+                name="sms_consent"
+                value="true"
+              />
+              <span>
+                By checking this box, I consent to receive SMS messages from
+                <strong>AquaShield Restoration LLC</strong> at the number provided.
+                Message &amp; data rates may apply. I agree to the
+                <a href="/privacy-policy" target="_blank">Privacy Policy</a> and
+                <a href="/terms-and-conditions" target="_blank"
+                  >Terms of Service</a
+                >.
+              </span>
+            </div>
+
+            <div>
+              <button type="submit" id="submit-btn" class="btn-submit" disabled>
+                <span class="spinner" id="spinner"></span>
+                <span id="btn-text">Send Request</span>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="footer-link">
+        <a href="/" target="_blank">Visit Full Website</a>
+      </div>
+    </main>
+
+    <!-- reCAPTCHA v3 -->
+    <script define:vars={{ recaptchaSiteKey }}>
+      window.__rcKey = recaptchaSiteKey;
+      function onRecaptchaLoad() {}
+    </script>
+    <script
+      src={`https://www.google.com/recaptcha/api.js?render=${recaptchaSiteKey}&onload=onRecaptchaLoad`}
+      async
+      defer
+      is:inline></script>
+
+    <!-- Google Maps -->
+    <script define:vars={{ googleMapsApiKey }}>
+      function initMaps() {
+        const defaultPos = { lat: 37.0902, lng: -95.7129 };
+        const map = new google.maps.Map(
+          document.getElementById("location-map"),
+          {
+            center: defaultPos,
+            zoom: 4,
+            mapTypeControl: false,
+            streetViewControl: false,
+            fullscreenControl: false,
+          },
+        );
+        const marker = new google.maps.Marker({ map, visible: false });
+
+        const addressInput = /** @type {HTMLInputElement} */ (
+          document.getElementById("address_map_input")
+        );
+        const autocomplete = new google.maps.places.Autocomplete(addressInput, {
+          types: ["address"],
+          componentRestrictions: { country: "us" },
+          fields: ["address_components", "geometry", "formatted_address"],
+        });
+
+        autocomplete.addListener("place_changed", () => {
+          const place = autocomplete.getPlace();
+          if (!place.geometry) return;
+
+          const lat = place.geometry.location.lat();
+          const lng = place.geometry.location.lng();
+
+          /** @param {string} id @param {string|number} val */
+          const setVal = (id, val) => {
+            const el = document.getElementById(id);
+            if (el) el.value = String(val);
+          };
+
+          setVal("latitude", lat);
+          setVal("longitude", lng);
+          map.setCenter({ lat, lng });
+          map.setZoom(16);
+          marker.setPosition({ lat, lng });
+          marker.setVisible(true);
+
+          let streetNum = "",
+            route = "",
+            city = "",
+            state = "",
+            zip = "";
+          for (const comp of place.address_components) {
+            switch (comp.types[0]) {
+              case "street_number":
+                streetNum = comp.long_name;
+                break;
+              case "route":
+                route = comp.long_name;
+                break;
+              case "locality":
+                city = comp.long_name;
+                break;
+              case "administrative_area_level_1":
+                state = comp.short_name;
+                break;
+              case "postal_code":
+                zip = comp.long_name;
+                break;
+            }
+          }
+          const addr1 = [streetNum, route].filter(Boolean).join(" ");
+          addressInput.value = place.formatted_address || addr1;
+          setVal("hidden_address", addr1);
+          setVal("hidden_city", city);
+          setVal("hidden_state", state);
+          setVal("hidden_zipcode", zip);
+          setVal("display_city", city);
+          setVal("display_state", state);
+          setVal("display_zipcode", zip);
+
+          // Trigger validity check defined in main script
+          document.dispatchEvent(new CustomEvent("maps-filled"));
+        });
+      }
+
+      if (window.google && window.google.maps) {
+        initMaps();
+      } else {
+        const s = document.createElement("script");
+        s.src = `https://maps.googleapis.com/maps/api/js?key=${googleMapsApiKey}&libraries=places&callback=initMaps`;
+        s.async = true;
+        s.defer = true;
+        document.head.appendChild(s);
+        window.initMaps = initMaps;
+      }
+    </script>
+
+    <!-- Form logic (TypeScript) -->
+    <script>
+      // ── Ambient declarations for external globals ──
+      declare const grecaptcha: {
+        ready(cb: () => void): void;
+        execute(siteKey: string, opts: { action: string }): Promise<string>;
+      };
+      declare global {
+        interface Window {
+          __rcKey?: string;
+        }
+      }
+
+      // ── Typed element references ──
+      const form = document.getElementById("lead-form") as HTMLFormElement;
+      const submitBtn = document.getElementById(
+        "submit-btn",
+      ) as HTMLButtonElement;
+      const spinnerEl = document.getElementById("spinner") as HTMLElement;
+      const btnText = document.getElementById("btn-text") as HTMLElement;
+      const successDiv = document.getElementById(
+        "success-alert",
+      ) as HTMLElement;
+      const errorDiv = document.getElementById("error-alert") as HTMLElement;
+
+      function inp(id: string): HTMLInputElement {
+        return document.getElementById(id) as HTMLInputElement;
+      }
+
+      // ── Error helpers ──
+      function showError(fieldId: string, msg: string): void {
+        const el = document.getElementById(`err-${fieldId}`);
+        const input =
+          document.getElementById(fieldId) ??
+          form.querySelector<HTMLElement>(`[name="${fieldId}"]`);
+        if (el) el.textContent = msg;
+        if (input) input.classList.add("error");
+      }
+      function clearAllErrors(): void {
+        document.querySelectorAll(".error-msg").forEach((e) => {
+          e.textContent = "";
+        });
+        document
+          .querySelectorAll(".input.error")
+          .forEach((e) => e.classList.remove("error"));
+      }
+
+      // ── Formatters ──
+      function formatPhone(val: string): string {
+        const d = val.replace(/\D/g, "").substring(0, 10);
+        if (d.length <= 3) return d.length ? `(${d}` : "";
+        if (d.length <= 6) return `(${d.slice(0, 3)}) ${d.slice(3)}`;
+        return `(${d.slice(0, 3)}) ${d.slice(3, 6)}-${d.slice(6)}`;
+      }
+      function formatName(val: string): string {
+        return val
+          .split(/\s+/)
+          .filter(Boolean)
+          .map(
+            (w: string) => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase(),
+          )
+          .join(" ");
+      }
+
+      // ── Enable/disable submit ──
+      function checkValidity(): void {
+        const first = inp("first_name").value.trim();
+        const last = inp("last_name").value.trim();
+        const phone = inp("phone").value.trim();
+        const email = inp("email").value.trim();
+        const address =
+          inp("hidden_address").value.trim() ||
+          inp("address_map_input").value.trim();
+        const city = inp("hidden_city").value.trim();
+        const state = inp("hidden_state").value.trim();
+        const zip = inp("hidden_zipcode").value.trim();
+        const insurance = form.querySelector(
+          'input[name="insurance_property"]:checked',
+        );
+        submitBtn.disabled = !(
+          first &&
+          last &&
+          phone.length >= 14 &&
+          email &&
+          address &&
+          city &&
+          state &&
+          zip &&
+          insurance
+        );
+      }
+
+      // ── Event listeners ──
+      inp("phone").addEventListener("input", function (this: HTMLInputElement) {
+        this.value = formatPhone(this.value);
+        checkValidity();
+      });
+
+      (["first_name", "last_name"] as const).forEach((id) => {
+        inp(id).addEventListener("input", function (this: HTMLInputElement) {
+          const pos = this.selectionStart ?? 0;
+          const trail = this.value.endsWith(" ");
+          this.value = formatName(this.value) + (trail ? " " : "");
+          try {
+            this.setSelectionRange(pos, pos);
+          } catch {
+            /* ignore */
+          }
+          checkValidity();
+        });
+      });
+
+      ["email", "message", "address_2"].forEach((id) => {
+        document.getElementById(id)?.addEventListener("input", checkValidity);
+      });
+
+      form
+        .querySelectorAll<HTMLInputElement>('input[name="insurance_property"]')
+        .forEach((r) => {
+          r.addEventListener("change", checkValidity);
+        });
+
+      // Re-check after Maps autocomplete fills hidden fields
+      document.addEventListener("maps-filled", checkValidity);
+
+      // ── reCAPTCHA ──
+      function getRecaptchaToken(): Promise<string> {
+        return new Promise<string>((resolve, reject) => {
+          const key = window.__rcKey;
+          if (!key) {
+            resolve("");
+            return;
+          }
+          const run = (): void => {
+            if (typeof grecaptcha === "undefined") {
+              setTimeout(run, 300);
+              return;
+            }
+            grecaptcha.ready(() => {
+              grecaptcha
+                .execute(key, { action: "submit_facebook_lead" })
+                .then(resolve)
+                .catch(reject);
+            });
+          };
+          run();
+        });
+      }
+
+      // ── Submit handler ──
+      form.addEventListener("submit", async (e: Event) => {
+        e.preventDefault();
+        clearAllErrors();
+        setLoading(true);
+
+        const city = inp("hidden_city").value.trim();
+        const state = inp("hidden_state").value.trim();
+        const zip = inp("hidden_zipcode").value.trim();
+
+        if (!city || !state || !zip) {
+          showError(
+            "address_map_input",
+            "Please select an address from the dropdown suggestions.",
+          );
+          setLoading(false);
+          return;
+        }
+
+        let token = "";
+        try {
+          token = await getRecaptchaToken();
+        } catch {
+          /* ignore */
+        }
+        inp("recaptcha-token").value = token;
+
+        const lat = parseFloat(inp("latitude").value) || null;
+        const lng = parseFloat(inp("longitude").value) || null;
+
+        const insuranceEl = form.querySelector<HTMLInputElement>(
+          'input[name="insurance_property"]:checked',
+        );
+        const smsEl = document.getElementById(
+          "sms_consent",
+        ) as HTMLInputElement | null;
+        const messageEl = document.getElementById(
+          "message",
+        ) as HTMLTextAreaElement | null;
+
+        const payload = {
+          first_name: inp("first_name").value.trim(),
+          last_name: inp("last_name").value.trim(),
+          phone: inp("phone").value.trim(),
+          email: inp("email").value.trim(),
+          address: inp("hidden_address").value.trim(),
+          address_2: inp("address_2").value.trim() || undefined,
+          city,
+          state,
+          zipcode: zip,
+          country: "US",
+          insurance_property: insuranceEl?.value,
+          message: messageEl?.value.trim() || undefined,
+          sms_consent: smsEl?.checked ?? false,
+          latitude: lat,
+          longitude: lng,
+          lead_source: "Facebook Ads",
+          website: inp("website").value || "",
+          "g-recaptcha-response": token,
+        };
+
+        try {
+          const res = await fetch("/api/facebook-lead", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+            },
+            body: JSON.stringify(payload),
+          });
+          const data = (await res.json()) as Record<string, unknown>;
+
+          if (res.ok && data["success"]) {
+            showAlert(
+              successDiv,
+              (data["message"] as string | undefined) ??
+                "Thank you! We will contact you shortly.",
+            );
+            form.reset();
+            inp("display_city").value = "";
+            inp("display_state").value = "";
+            inp("display_zipcode").value = "";
+          } else if (data["errors"] && typeof data["errors"] === "object") {
+            Object.entries(data["errors"] as Record<string, unknown>).forEach(
+              ([field, msgs]) => {
+                const msg = Array.isArray(msgs)
+                  ? String(msgs[0])
+                  : String(msgs);
+                showError(field, msg);
+              },
+            );
+            showAlert(
+              errorDiv,
+              (data["message"] as string | undefined) ??
+                "Please correct the errors below.",
+            );
+          } else {
+            showAlert(
+              errorDiv,
+              (data["message"] as string | undefined) ??
+                "An error occurred. Please try again.",
+            );
+          }
+        } catch {
+          showAlert(errorDiv, "Network error. Please try again later.");
+        } finally {
+          setLoading(false);
+        }
+      });
+
+      function setLoading(val: boolean): void {
+        submitBtn.disabled = val;
+        spinnerEl.classList.toggle("active", val);
+        btnText.textContent = val ? "Sending..." : "Send Request";
+      }
+
+      function showAlert(el: HTMLElement, msg: string): void {
+        el.textContent = msg;
+        el.classList.add("visible");
+        el.scrollIntoView({ behavior: "smooth", block: "center" });
+        setTimeout(() => el.classList.remove("visible"), 7000);
+      }
+    </script>
+  </body>
+</html>

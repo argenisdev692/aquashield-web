@@ -272,7 +272,11 @@ const serviceAreas = [
               </label>
             </div>
 
-            <button type="submit" class="btn-primary w-full text-lg py-4">
+            <button
+              type="submit"
+              class="btn-primary w-full text-lg py-4"
+              style="cursor:pointer;"
+            >
               Submit Request
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -563,43 +567,58 @@ const serviceAreas = [
     googleMapsApiKey,
   }}
 >
-  let contactAutocomplete;
-
-  // Load Google Maps Places for address autocomplete
-  function loadContactMapsScript() {
-    if (!window.google) {
-      const mapsScript = document.createElement("script");
-      mapsScript.src = `https://maps.googleapis.com/maps/api/js?key=${googleMapsApiKey}&libraries=places`;
-      mapsScript.async = true;
-      mapsScript.defer = true;
-      mapsScript.onload = initContactAutocomplete;
-      document.head.appendChild(mapsScript);
-    } else {
-      initContactAutocomplete();
-    }
-  }
-
+  // Initialise Google Maps Places autocomplete for the contact form address field
   function initContactAutocomplete() {
-    const addressInput = document.getElementById("address");
-    if (!addressInput || !window.google) return;
+    const addressInput = /** @type {HTMLInputElement|null} */ (
+      document.getElementById("address")
+    );
+    if (!addressInput || !window.google?.maps?.places) return;
 
-    contactAutocomplete = new google.maps.places.Autocomplete(addressInput, {
+    const ac = new google.maps.places.Autocomplete(addressInput, {
       types: ["address"],
       componentRestrictions: { country: "us" },
+      fields: ["address_components", "geometry", "formatted_address"],
     });
 
-    contactAutocomplete.addListener("place_changed", () => {
-      const place = contactAutocomplete.getPlace();
+    ac.addListener("place_changed", () => {
+      const place = ac.getPlace();
       if (!place.geometry) return;
 
-      const latEl = document.getElementById("contact_latitude");
-      const lngEl = document.getElementById("contact_longitude");
-      if (latEl) latEl.value = place.geometry.location.lat();
-      if (lngEl) lngEl.value = place.geometry.location.lng();
+      const latEl = /** @type {HTMLInputElement|null} */ (
+        document.getElementById("contact_latitude")
+      );
+      const lngEl = /** @type {HTMLInputElement|null} */ (
+        document.getElementById("contact_longitude")
+      );
+      if (latEl) latEl.value = String(place.geometry.location.lat());
+      if (lngEl) lngEl.value = String(place.geometry.location.lng());
 
-      // Fill address field with full formatted address
       addressInput.value = place.formatted_address || addressInput.value;
     });
+  }
+
+  // Always load via callback so we don't clash with other Maps instances on the page
+  function loadContactMapsScript() {
+    window.__contactMapsReady = initContactAutocomplete;
+    if (window.google?.maps?.places) {
+      // Already loaded with places library — just init
+      initContactAutocomplete();
+      return;
+    }
+    // Check if a Maps script without places is already in the DOM; if so, we need our own
+    const existing = document.querySelector(
+      'script[src*="maps.googleapis.com"]',
+    );
+    if (existing && existing.src.includes("places")) {
+      // Has places — wait for it
+      existing.addEventListener("load", initContactAutocomplete);
+      return;
+    }
+    const s = document.createElement("script");
+    s.src = `https://maps.googleapis.com/maps/api/js?key=${googleMapsApiKey}&libraries=places&callback=__contactMapsReady`;
+    s.async = true;
+    s.defer = true;
+    document.head.appendChild(s);
   }
 
   // Load reCAPTCHA v3
