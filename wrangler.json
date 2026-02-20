@@ -12,5 +12,21 @@
   },
   "observability": {
     "enabled": true
+  },
+  "vars": {
+    "EMAIL_PROVIDER": "resend",
+    "EMAIL_FROM_NAME": "AquaShield Restoration LLC",
+    "ADMIN_EMAIL": "admin@aquashieldrestorationusa.com",
+    "COMPANY_NAME": "AquaShield Restoration LLC",
+    "COMPANY_PHONE": "(713) 587-6423",
+    "COMPANY_EMAIL": "info@aquashieldrestorationusa.com",
+    "COMPANY_ADDRESS": "3733 Westheimer Rd. Ste 1 4583",
+    "COMPANY_CITY": "Houston, TX 77027",
+    "COMPANY_FACEBOOK": "https://facebook.com/aquashieldrestoration",
+    "COMPANY_INSTAGRAM": "https://instagram.com/aquashieldrestoration",
+    "COMPANY_LINKEDIN": "https://linkedin.com/company/aquashieldrestoration",
+    "COMPANY_TWITTER": "https://twitter.com/aquashieldrest",
+    "COMPANY_WEBSITE": "https://aquashieldrestorationusa.com"
   }
 }
+
