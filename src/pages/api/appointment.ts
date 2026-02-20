@@ -1,55 +1,53 @@
 import type { APIRoute } from 'astro';
-import { getServerSupabase, type ContactSupport } from '../../lib/supabase';
-import { sendEmail, getContactSupportEmailTemplate } from '../../utils/email';
-import { contactSupportSchema, formatZodErrors } from '../../utils/validation';
+import { getServerSupabase, type Appointment } from '../../lib/supabase';
+import { v4 as uuidv4 } from 'uuid';
+import { appointmentSchema, formatZodErrors } from '../../utils/validation';
 import { performSpamCheck } from '../../utils/spam-detection';
 import { verifyTurnstile } from '../../utils/turnstile';
-
+import { sendEmail, getNewLeadEmailTemplate, getLeadConfirmationEmailTemplate } from '../../utils/email';
 
 export const POST: APIRoute = async ({ request }) => {
   try {
     const body = await request.json();
-    
+
     // Step 1: Zod Schema Validation
-    const validationResult = contactSupportSchema.safeParse(body);
-    
+    const validationResult = appointmentSchema.safeParse(body);
+
     if (!validationResult.success) {
       return new Response(
         JSON.stringify({
           success: false,
           message: 'Validation errors',
-          errors: formatZodErrors(validationResult.error)
+          errors: formatZodErrors(validationResult.error),
         }),
         { status: 422, headers: { 'Content-Type': 'application/json' } }
       );
     }
 
     const validatedData = validationResult.data;
-    
-    // Step 2: Comprehensive Spam Check (honeypot, content, rate limit, etc.)
+
+    // Step 2: Spam Check
     const spamCheck = await performSpamCheck({
       request,
-      honeypot: validatedData.website,
-      message: validatedData.message,
-      email: validatedData.email,
+      honeypot: '',
+      message: validatedData.message || '',
+      email: validatedData.email || '',
       first_name: validatedData.first_name,
       last_name: validatedData.last_name,
       phone: validatedData.phone,
-      formType: 'contact_support'
+      formType: 'appointment',
     });
 
     if (spamCheck.isSpam) {
-      console.warn('Spam detected in contact form:', {
+      console.warn('Spam detected in appointment form:', {
         reasons: spamCheck.reasons,
         score: spamCheck.totalScore,
-        ip: request.headers.get('x-forwarded-for') || request.headers.get('x-real-ip')
       });
-
       return new Response(
         JSON.stringify({
           success: false,
-          message: 'Your submission has been flagged. Please contact us directly by phone if this is an error.',
-          errors: { general: spamCheck.reasons }
+          message:
+            'Your submission has been flagged. Please contact us directly by phone if this is an error.',
         }),
         { status: 422, headers: { 'Content-Type': 'application/json' } }
       );
@@ -71,76 +69,92 @@ export const POST: APIRoute = async ({ request }) => {
         JSON.stringify({
           success: false,
           message: 'CAPTCHA verification failed. Please try again.',
-          errors: { captcha: [turnstileResult.message || 'CAPTCHA verification failed'] },
         }),
         { status: 422, headers: { 'Content-Type': 'application/json' } }
       );
     }
 
-    // Step 4: Format phone number
+    // Step 3: Format phone number to E.164
     const formattedPhone = validatedData.phone.replace(/[^0-9]/g, '');
-    const finalPhone = formattedPhone.length === 10 ? `+1${formattedPhone}` : `+${formattedPhone}`;
+    const finalPhone =
+      formattedPhone.length === 10 ? `+1${formattedPhone}` : `+${formattedPhone}`;
 
-    // Step 5: Create contact support entry in Supabase
+    // Step 4: Insert into Supabase appointments table (service role bypasses RLS)
     const supabase = getServerSupabase();
 
-    const contactData: Partial<ContactSupport> = {
+    const appointmentData: Partial<Appointment> = {
+      uuid: uuidv4(),
       first_name: validatedData.first_name,
       last_name: validatedData.last_name,
-      email: validatedData.email,
       phone: finalPhone,
-      subject: validatedData.service || 'General Inquiry',
-      message: validatedData.message,
+      email: validatedData.email || null,
+      address: validatedData.address,
+      address_2: validatedData.address_2 || null,
+      city: validatedData.city,
+      state: validatedData.state,
+      zipcode: validatedData.zipcode,
+      country: validatedData.country || 'US',
+      insurance_property: validatedData.insurance_property === 'yes',
+      message: validatedData.message || null,
+      sms_consent: validatedData.sms_consent ?? false,
+      registration_date: new Date().toISOString(),
+      status_lead: 'New',
+      lead_source: 'Website',
     };
 
-    const { data, error } = await supabase
-      .from('contact_support')
-      .insert([contactData])
-      .select()
-      .single();
+    const { error } = await supabase
+      .from('appointments')
+      .insert([appointmentData]);
 
     if (error) {
-      console.error('Supabase error:', error);
+      console.error('Supabase error inserting appointment:', error);
       return new Response(
         JSON.stringify({
           success: false,
-          message: 'Database error occurred',
+          message: 'Database error occurred. Please try again or call us directly.',
         }),
         { status: 500, headers: { 'Content-Type': 'application/json' } }
       );
     }
 
-    // Step 6: Send email notification to admin(s)
+    // Step 5: Send emails
     try {
-      const emailHtml = getContactSupportEmailTemplate(data as ContactSupport);
       const companyName = import.meta.env.COMPANY_NAME || 'AquaShield Restoration LLC';
-
-      // Collect all admin recipients (deduplicated)
       const adminEmail = import.meta.env.ADMIN_EMAIL || 'admin@aquashieldrestorationusa.com';
-      const infoEmail = import.meta.env.COMPANY_EMAIL || 'info@aquashieldrestorationusa.com';
-      const recipients = [...new Set([adminEmail, infoEmail].filter(Boolean))];
 
+      // Email 1: New lead alert → admin
+      const newLeadHtml = getNewLeadEmailTemplate(appointmentData as Appointment);
       await sendEmail(
-        recipients,
-        `New Contact Support Request - ${companyName}`,
-        emailHtml
+        adminEmail,
+        `🎉 New Lead Alert! - ${companyName}`,
+        newLeadHtml
       );
+
+      // Email 2: Confirmation → customer (only if they provided an email)
+      if (appointmentData.email) {
+        const confirmationHtml = getLeadConfirmationEmailTemplate(appointmentData as Appointment);
+        await sendEmail(
+          appointmentData.email,
+          `✅ We Received Your Information! - ${companyName}`,
+          confirmationHtml
+        );
+      }
     } catch (emailError) {
-      console.error('Email error:', emailError);
+      console.error('Email error in appointment API:', emailError);
       // Don't fail the request if email fails
     }
 
-    // Step 7: Success response
+    // Step 6: Success
     return new Response(
       JSON.stringify({
         success: true,
-        message: 'Thank you for contacting us! We will get back to you shortly.',
+        message:
+          'Thank you! We will contact you shortly to schedule your free inspection.',
       }),
       { status: 200, headers: { 'Content-Type': 'application/json' } }
     );
-
   } catch (error) {
-    console.error('Error in contact-support API:', error);
+    console.error('Error in appointment API:', error);
     return new Response(
       JSON.stringify({
         success: false,

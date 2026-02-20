@@ -1,0 +1,654 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+
+const privacyEmail = "privacy@aquashieldrestorationusa.com";
+const responseDeadline = "45 business days";
+---
+
+<Layout
+  title="Privacy Request (DSAR) | AquaShield Restoration LLC"
+  description="Submit a Data Subject Access Request (DSAR) to AquaShield Restoration LLC. Exercise your rights under the Texas Data Privacy and Security Act (TDPSA): access, deletion, correction, or portability of your personal data."
+>
+  <Navbar />
+  <main>
+    <!-- ── Hero ── -->
+    <section class="relative py-20 bg-gradient-navy text-white overflow-hidden">
+      <div
+        class="absolute inset-0 opacity-5"
+        style="background-image: radial-gradient(circle at 30% 50%, #0d9488 0%, transparent 60%), radial-gradient(circle at 80% 20%, #0369a1 0%, transparent 50%);"
+      >
+      </div>
+      <div class="relative container mx-auto px-4 max-w-3xl text-center">
+        <div
+          class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium mb-6"
+        >
+          <svg
+            class="w-4 h-4 text-teal-400"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+            ></path>
+          </svg>
+          Texas Data Privacy and Security Act (TDPSA)
+        </div>
+        <h1 class="text-4xl md:text-5xl font-bold mb-4">Privacy Request</h1>
+        <p class="text-xl text-white/80">
+          Exercise your privacy rights under Texas law. We will respond within <strong
+            class="text-teal-300">{responseDeadline}</strong
+          > of receiving your verified request.
+        </p>
+      </div>
+    </section>
+
+    <!-- ── Rights Info Cards ── -->
+    <section class="bg-gray-50 py-12 border-b border-gray-200">
+      <div class="max-w-5xl mx-auto px-4">
+        <p
+          class="text-center text-sm text-gray-500 mb-8 font-medium uppercase tracking-wider"
+        >
+          Your rights under TDPSA
+        </p>
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+          {
+            [
+              {
+                icon: "👁️",
+                label: "Access",
+                desc: "See what data we hold about you",
+              },
+              {
+                icon: "🗑️",
+                label: "Deletion",
+                desc: "Request we delete your data",
+              },
+              {
+                icon: "✏️",
+                label: "Correction",
+                desc: "Fix inaccurate information",
+              },
+              {
+                icon: "📦",
+                label: "Portability",
+                desc: "Get your data in CSV/JSON",
+              },
+              { icon: "🚫", label: "Opt-Out", desc: "Stop data sharing/sale" },
+              { icon: "⚖️", label: "Appeal", desc: "Appeal a denied request" },
+            ].map((r) => (
+              <div class="flex flex-col items-center text-center p-4 bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-md hover:border-teal-300 transition-all">
+                <span class="text-3xl mb-2">{r.icon}</span>
+                <p class="font-bold text-navy text-sm mb-1">{r.label}</p>
+                <p class="text-gray-500 text-xs">{r.desc}</p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Main Form & Info ── -->
+    <section class="py-16 bg-white">
+      <div
+        class="max-w-5xl mx-auto px-4 grid lg:grid-cols-5 gap-12 items-start"
+      >
+        <!-- Left: Form -->
+        <div class="lg:col-span-3">
+          <h2 class="text-2xl font-bold text-navy mb-2">Submit Your Request</h2>
+          <p class="text-gray-500 text-sm mb-8">
+            Fill out the form below. We will verify your identity before
+            processing your request. All fields marked with <span
+              class="text-red-500">*</span
+            > are required.
+          </p>
+
+          <form id="dsar-form" class="space-y-6" novalidate>
+            <!-- Full Name -->
+            <div class="grid sm:grid-cols-2 gap-4">
+              <div>
+                <label
+                  for="dsar-first-name"
+                  class="block text-sm font-semibold text-gray-700 mb-1.5"
+                >
+                  First Name <span class="text-red-500">*</span>
+                </label>
+                <input
+                  id="dsar-first-name"
+                  name="first_name"
+                  type="text"
+                  required
+                  autocomplete="given-name"
+                  placeholder="Jane"
+                  class="w-full px-4 py-3 rounded-xl border border-gray-300 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition"
+                />
+              </div>
+              <div>
+                <label
+                  for="dsar-last-name"
+                  class="block text-sm font-semibold text-gray-700 mb-1.5"
+                >
+                  Last Name <span class="text-red-500">*</span>
+                </label>
+                <input
+                  id="dsar-last-name"
+                  name="last_name"
+                  type="text"
+                  required
+                  autocomplete="family-name"
+                  placeholder="Doe"
+                  class="w-full px-4 py-3 rounded-xl border border-gray-300 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition"
+                />
+              </div>
+            </div>
+
+            <!-- Email -->
+            <div>
+              <label
+                for="dsar-email"
+                class="block text-sm font-semibold text-gray-700 mb-1.5"
+              >
+                Email Address <span class="text-red-500">*</span>
+              </label>
+              <input
+                id="dsar-email"
+                name="email"
+                type="email"
+                required
+                autocomplete="email"
+                placeholder="jane@example.com"
+                class="w-full px-4 py-3 rounded-xl border border-gray-300 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition"
+              />
+              <p class="text-xs text-gray-400 mt-1">
+                Must match the email used when contacting us previously.
+              </p>
+            </div>
+
+            <!-- Phone (optional for identity verification) -->
+            <div>
+              <label
+                for="dsar-phone"
+                class="block text-sm font-semibold text-gray-700 mb-1.5"
+              >
+                Phone Number <span
+                  class="text-gray-400 font-normal text-xs ml-1"
+                  >(optional — helps verify identity)</span
+                >
+              </label>
+              <input
+                id="dsar-phone"
+                name="phone"
+                type="tel"
+                autocomplete="tel"
+                placeholder="(713) 555-0100"
+                class="w-full px-4 py-3 rounded-xl border border-gray-300 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition"
+              />
+            </div>
+
+            <!-- State / Residency -->
+            <div>
+              <label
+                for="dsar-state"
+                class="block text-sm font-semibold text-gray-700 mb-1.5"
+              >
+                State of Residency <span class="text-red-500">*</span>
+              </label>
+              <select
+                id="dsar-state"
+                name="state"
+                required
+                class="w-full px-4 py-3 rounded-xl border border-gray-300 text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition"
+              >
+                <option value="" disabled selected>Select your state…</option>
+                <option value="TX">Texas (TDPSA)</option>
+                <option value="CA">California (CCPA)</option>
+                <option value="OTHER">Other US State</option>
+                <option value="EU">European Union (GDPR)</option>
+              </select>
+            </div>
+
+            <!-- Request Type -->
+            <div>
+              <label class="block text-sm font-semibold text-gray-700 mb-3">
+                Type of Request <span class="text-red-500">*</span>
+              </label>
+              <div class="space-y-2.5" id="request-type-group">
+                {
+                  [
+                    {
+                      value: "access",
+                      label: "👁️  Right to Access",
+                      desc: "Provide a copy of all personal data you hold about me.",
+                    },
+                    {
+                      value: "deletion",
+                      label: "🗑️  Right to Deletion",
+                      desc: "Delete all personal data you hold about me.",
+                    },
+                    {
+                      value: "correction",
+                      label: "✏️  Right to Correction",
+                      desc: "Correct inaccurate personal data.",
+                    },
+                    {
+                      value: "portability",
+                      label: "📦  Right to Portability",
+                      desc: "Provide my data in a machine-readable format (CSV/JSON).",
+                    },
+                    {
+                      value: "opt-out",
+                      label: "🚫  Opt-Out of Sale",
+                      desc: "Stop sharing/selling my personal data for advertising or other purposes.",
+                    },
+                    {
+                      value: "appeal",
+                      label: "⚖️  Appeal",
+                      desc: "Appeal a previous denial of a privacy request.",
+                    },
+                  ].map((t) => (
+                    <label class="flex items-start gap-3 p-3.5 rounded-xl border border-gray-200 cursor-pointer hover:border-teal-400 hover:bg-teal-50/50 transition-all has-checked:border-teal-500 has-checked:bg-teal-50">
+                      <input
+                        type="radio"
+                        name="request_type"
+                        value={t.value}
+                        required
+                        class="mt-0.5 accent-teal-600 shrink-0"
+                      />
+                      <div>
+                        <p class="font-semibold text-sm text-gray-800">
+                          {t.label}
+                        </p>
+                        <p class="text-xs text-gray-500 mt-0.5">{t.desc}</p>
+                      </div>
+                    </label>
+                  ))
+                }
+              </div>
+            </div>
+
+            <!-- Additional Details -->
+            <div>
+              <label
+                for="dsar-details"
+                class="block text-sm font-semibold text-gray-700 mb-1.5"
+              >
+                Additional Details <span
+                  class="text-gray-400 font-normal text-xs ml-1"
+                  >(optional)</span
+                >
+              </label>
+              <textarea
+                id="dsar-details"
+                name="details"
+                rows="4"
+                placeholder="Describe your request in more detail, or provide any reference numbers from previous interactions with us…"
+                class="w-full px-4 py-3 rounded-xl border border-gray-300 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition resize-none"
+              ></textarea>
+            </div>
+
+            <!-- Attestation checkbox -->
+            <div
+              class="flex items-start gap-3 p-4 bg-gray-50 rounded-xl border border-gray-200"
+            >
+              <input
+                type="checkbox"
+                id="dsar-attest"
+                name="attest"
+                required
+                class="mt-1 w-4 h-4 accent-teal-600 shrink-0 cursor-pointer"
+              />
+              <label
+                for="dsar-attest"
+                class="text-sm text-gray-600 cursor-pointer"
+              >
+                <span class="font-semibold text-gray-800">I confirm that:</span> The
+                information I have provided is accurate and I am the individual (or
+                authorized representative) whose personal data is the subject of this
+                request. I understand my identity may need to be verified before the
+                request is processed.
+              </label>
+            </div>
+
+            <!-- Honeypot -->
+            <div style="display:none;" aria-hidden="true">
+              <input
+                type="text"
+                name="website"
+                tabindex="-1"
+                autocomplete="off"
+              />
+            </div>
+
+            <!-- Submit -->
+            <button
+              id="dsar-submit"
+              type="submit"
+              class="w-full flex items-center justify-center gap-2 bg-teal-600 hover:bg-teal-700 text-white font-bold py-4 px-8 rounded-xl shadow-lg hover:shadow-teal-200 transition-all duration-200 text-base"
+            >
+              <svg
+                class="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                ></path>
+              </svg>
+              Submit Privacy Request
+            </button>
+
+            <p class="text-center text-xs text-gray-400">
+              By submitting, you agree to our
+              <a href="/privacy-policy" class="text-teal-600 hover:underline"
+                >Privacy Policy</a
+              >. This form is protected against abuse and spam.
+            </p>
+          </form>
+
+          <!-- Success Message (hidden) -->
+          <div
+            id="dsar-success"
+            class="hidden mt-6 p-6 bg-teal-50 border border-teal-200 rounded-xl text-center"
+          >
+            <div class="text-4xl mb-3">✅</div>
+            <h3 class="font-bold text-teal-800 text-lg mb-2">
+              Request Submitted!
+            </h3>
+            <p class="text-teal-700 text-sm">
+              We have received your privacy request. Expect a response within <strong
+                >45 days</strong
+              >. A confirmation has been sent to the email you provided.
+            </p>
+          </div>
+        </div>
+
+        <!-- Right: Info sidebar -->
+        <div class="lg:col-span-2 space-y-6 lg:sticky lg:top-8">
+          <!-- Timeline -->
+          <div class="bg-navy text-white rounded-2xl p-6">
+            <h3 class="font-bold text-lg mb-4 flex items-center gap-2">
+              <svg
+                class="w-5 h-5 text-teal-400"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+              What Happens Next
+            </h3>
+            <ol class="space-y-4">
+              {
+                [
+                  {
+                    step: "1",
+                    label: "We receive your request",
+                    detail: "Confirmation email sent within 24 hours.",
+                  },
+                  {
+                    step: "2",
+                    label: "Identity verified",
+                    detail: "We may contact you to verify your identity.",
+                  },
+                  {
+                    step: "3",
+                    label: "Request processed",
+                    detail: "We locate and gather your data.",
+                  },
+                  {
+                    step: "4",
+                    label: "Response delivered",
+                    detail: "Within 45 days via secure email.",
+                  },
+                ].map((s) => (
+                  <li class="flex gap-3 items-start">
+                    <span class="shrink-0 w-7 h-7 rounded-full bg-teal-500 text-white text-xs font-bold flex items-center justify-center">
+                      {s.step}
+                    </span>
+                    <div>
+                      <p class="font-semibold text-sm">{s.label}</p>
+                      <p class="text-white/60 text-xs">{s.detail}</p>
+                    </div>
+                  </li>
+                ))
+              }
+            </ol>
+          </div>
+
+          <!-- Direct contact -->
+          <div class="bg-gray-50 rounded-2xl p-6 border border-gray-200">
+            <h3 class="font-bold text-navy text-base mb-4">
+              Prefer to Contact Us Directly?
+            </h3>
+            <div class="space-y-3 text-sm">
+              <a
+                href={`mailto:${privacyEmail}?subject=Privacy Request (DSAR)`}
+                class="flex items-center gap-3 text-gray-700 hover:text-teal-600 transition-colors"
+              >
+                <div
+                  class="w-9 h-9 bg-teal-100 rounded-lg flex items-center justify-center shrink-0"
+                >
+                  <svg
+                    class="w-4 h-4 text-teal-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                    ></path>
+                  </svg>
+                </div>
+                <div>
+                  <p class="font-semibold">Email</p>
+                  <p class="text-teal-600">{privacyEmail}</p>
+                </div>
+              </a>
+              <a
+                href="tel:7135876423"
+                class="flex items-center gap-3 text-gray-700 hover:text-teal-600 transition-colors"
+              >
+                <div
+                  class="w-9 h-9 bg-teal-100 rounded-lg flex items-center justify-center shrink-0"
+                >
+                  <svg
+                    class="w-4 h-4 text-teal-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.948V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                    ></path>
+                  </svg>
+                </div>
+                <div>
+                  <p class="font-semibold">Phone</p>
+                  <p class="text-teal-600">(713) 587-6423</p>
+                </div>
+              </a>
+              <div class="flex items-start gap-3 text-gray-700">
+                <div
+                  class="w-9 h-9 bg-teal-100 rounded-lg flex items-center justify-center shrink-0 mt-0.5"
+                >
+                  <svg
+                    class="w-4 h-4 text-teal-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                    ></path>
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                  </svg>
+                </div>
+                <div>
+                  <p class="font-semibold">Mail</p>
+                  <p class="text-gray-500 text-xs leading-relaxed">
+                    AquaShield Restoration LLC<br />Attn: Privacy Request<br
+                    />3733 Westheimer Rd. Ste 1-4583<br />Houston, TX 77027
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- TDPSA note -->
+          <div class="bg-amber-50 border border-amber-200 rounded-2xl p-5">
+            <p
+              class="text-xs font-semibold text-amber-800 uppercase tracking-wider mb-2"
+            >
+              ⚠ Important
+            </p>
+            <p class="text-xs text-amber-700 leading-relaxed">
+              We process requests at <strong>no cost</strong>, up to twice per
+              year. We may need to verify your identity for security. If we are
+              unable to verify, we may not be able to fulfill the request.<br
+              /><br />
+              If you disagree with our response, you may <strong>appeal</strong> by
+              selecting "Appeal" above, or file a complaint with the
+              <a
+                href="https://www.texasattorneygeneral.gov"
+                target="_blank"
+                rel="noopener"
+                class="underline hover:text-amber-900">Texas Attorney General</a
+              >.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>
+
+<script define:vars={{ privacyEmail }}>
+  document.addEventListener("DOMContentLoaded", () => {
+    const form = document.getElementById("dsar-form");
+    const submitBtn = document.getElementById("dsar-submit");
+    const successMsg = document.getElementById("dsar-success");
+    const phoneInput = document.getElementById("dsar-phone");
+
+    // Phone formatter
+    if (phoneInput && window.AquaShieldUtils) {
+      window.AquaShieldUtils.applyPhoneFormatter(phoneInput);
+    }
+
+    if (!form || !submitBtn) return;
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      // ── Basic validation ──────────────────────────────────────────
+      const firstName = form.querySelector('[name="first_name"]').value.trim();
+      const lastName = form.querySelector('[name="last_name"]').value.trim();
+      const email = form.querySelector('[name="email"]').value.trim();
+      const state = form.querySelector('[name="state"]').value;
+      const reqType = form.querySelector('[name="request_type"]:checked');
+      const attest = form.querySelector('[name="attest"]').checked;
+      const honeypot = form.querySelector('[name="website"]').value;
+      const details = form.querySelector('[name="details"]').value.trim();
+
+      // Honeypot check
+      if (honeypot) return;
+
+      if (!firstName || !lastName || !email || !state || !reqType || !attest) {
+        window.AquaShieldUtils?.showAlert({
+          message:
+            "Please fill in all required fields and select a request type.",
+          type: "error",
+        });
+        return;
+      }
+
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        window.AquaShieldUtils?.showAlert({
+          message: "Please enter a valid email address.",
+          type: "error",
+        });
+        return;
+      }
+
+      // ── Disable button ────────────────────────────────────────────
+      submitBtn.disabled = true;
+      const originalHTML = submitBtn.innerHTML;
+      submitBtn.innerHTML = `
+        <svg class="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+        </svg>
+        Submitting…`;
+
+      try {
+        // ── Build mailto body (fallback — no server-side API needed) ──
+        const requestTypeLabel =
+          reqType.value.charAt(0).toUpperCase() + reqType.value.slice(1);
+        const subject = encodeURIComponent(
+          `Privacy Request (DSAR) – ${requestTypeLabel} – ${firstName} ${lastName}`,
+        );
+        const body = encodeURIComponent(
+          `DSAR FORM SUBMISSION\n` +
+            `========================\n` +
+            `Name:         ${firstName} ${lastName}\n` +
+            `Email:        ${email}\n` +
+            `Phone:        ${form.querySelector('[name="phone"]').value || "Not provided"}\n` +
+            `State:        ${state}\n` +
+            `Request Type: ${requestTypeLabel}\n` +
+            `Details:      ${details || "None"}\n` +
+            `Submitted:    ${new Date().toISOString()}\n` +
+            `Attested:     Yes\n`,
+        );
+
+        // Open email client with pre-filled data
+        window.location.href = `mailto:${privacyEmail}?subject=${subject}&body=${body}`;
+
+        // Show success after short delay (email client opens)
+        setTimeout(() => {
+          form.style.display = "none";
+          successMsg.classList.remove("hidden");
+          window.AquaShieldUtils?.showAlert({
+            message:
+              "Your privacy request has been prepared. Please send the email that just opened.",
+            type: "success",
+          });
+        }, 800);
+      } catch (err) {
+        console.error("DSAR submission error:", err);
+        window.AquaShieldUtils?.showAlert({
+          message: `An error occurred. Please email us directly at ${privacyEmail}`,
+          type: "error",
+        });
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalHTML;
+      }
+    });
+  });
+</script>

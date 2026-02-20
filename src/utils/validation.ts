@@ -75,9 +75,10 @@ export const contactSupportSchema = z.object({
     .max(0, 'Invalid submission')
     .optional()
     .default(''),
-  
-  'g-recaptcha-response': z.string()
-    .min(1, 'reCAPTCHA verification is required')
+
+  // Cloudflare Turnstile token
+  'cf-turnstile-response': z.string()
+    .min(1, 'CAPTCHA verification is required')
 });
 
 export type ContactSupportInput = z.infer<typeof contactSupportSchema>;
@@ -187,6 +188,74 @@ export const facebookLeadSchema = z.object({
 });
 
 export type FacebookLeadInput = z.infer<typeof facebookLeadSchema>;
+
+/**
+ * Appointment / Free Inspection Form Schema
+ */
+export const appointmentSchema = z.object({
+  first_name: z.string()
+    .min(2, 'First name must be at least 2 characters')
+    .max(50, 'First name must not exceed 50 characters')
+    .regex(/^[A-Za-z\s\'-]+$/, 'First name contains invalid characters'),
+
+  last_name: z.string()
+    .min(2, 'Last name must be at least 2 characters')
+    .max(50, 'Last name must not exceed 50 characters')
+    .regex(/^[A-Za-z\s\'-]+$/, 'Last name contains invalid characters'),
+
+  phone: z.string()
+    .min(10, 'Phone number is too short')
+    .max(20, 'Phone number is too long')
+    .refine(val => val.replace(/\D/g, '').length >= 10, 'Invalid phone number'),
+
+  email: z.string()
+    .email('Invalid email address')
+    .max(100, 'Email is too long')
+    .optional()
+    .or(z.literal('')),
+
+  address: z.string()
+    .min(5, 'Address is too short')
+    .max(200, 'Address is too long'),
+
+  address_2: z.string()
+    .max(100, 'Address line 2 is too long')
+    .optional(),
+
+  city: z.string()
+    .min(2, 'City is required')
+    .max(100, 'City is too long'),
+
+  state: z.string()
+    .min(2, 'State is required')
+    .max(2, 'State must be 2 characters'),
+
+  zipcode: z.string()
+    .regex(/^\d{5}$/, 'Zipcode must be exactly 5 digits'),
+
+  country: z.string()
+    .min(2, 'Country is required')
+    .default('US'),
+
+  insurance_property: z.enum(['yes', 'no'], {
+    errorMap: () => ({ message: 'Please specify if property has insurance' }),
+  }),
+
+  message: z.string()
+    .max(1000, 'Message must not exceed 1000 characters')
+    .optional(),
+
+  sms_consent: z.boolean()
+    .or(z.string().transform(val => val === 'true' || val === 'on'))
+    .optional()
+    .default(false),
+
+  // Cloudflare Turnstile token
+  'cf-turnstile-response': z.string()
+    .min(1, 'CAPTCHA verification is required'),
+});
+
+export type AppointmentInput = z.infer<typeof appointmentSchema>;
 
 /**
  * Helper to format Zod errors for API response

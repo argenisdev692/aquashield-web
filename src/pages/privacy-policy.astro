@@ -1,61 +1,718 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Navbar from '../components/Navbar.astro';
-import Footer from '../components/Footer.astro';
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+
+const lastUpdated = "February 20, 2026";
+const companyName = "AquaShield Restoration LLC";
+const companyAddress = "3733 Westheimer Rd. Ste 1-4583, Houston, TX 77027";
+const companyPhone = "(713) 587-6423";
+const companyEmail = "info@aquashieldrestorationusa.com";
+const privacyEmail = "privacy@aquashieldrestorationusa.com";
 ---
 
-<Layout title="Privacy Policy | AquaShield Restoration LLC">
+<Layout
+  title="Privacy Policy | AquaShield Restoration LLC"
+  description="AquaShield Restoration LLC Privacy Policy — TDPSA (Texas Data Privacy and Security Act) and GDPR compliant. Learn how we collect, use, and protect your personal information."
+>
   <Navbar />
   <main>
-    <section class="relative py-20 bg-gradient-navy text-white">
-      <div class="container mx-auto px-4">
-        <h1 class="text-4xl md:text-5xl font-bold mb-4">Política de Privacidad</h1>
-        <p class="text-xl text-white/80">Última actualización: 29 de enero de 2026</p>
+    <!-- Hero Section -->
+    <section class="relative py-20 bg-gradient-navy text-white overflow-hidden">
+      <div
+        class="absolute inset-0 opacity-10"
+        style="background-image: url('/images/hero-bg.jpg'); background-size: cover;"
+      >
+      </div>
+      <div class="relative container mx-auto px-4 max-w-4xl">
+        <div
+          class="inline-flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full text-sm font-medium mb-6 backdrop-blur-sm"
+        >
+          <svg
+            class="w-4 h-4 text-teal-400"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+            ></path>
+          </svg>
+          OWASP · TDPSA · GDPR Compliant
+        </div>
+        <h1 class="text-4xl md:text-5xl font-bold mb-4">Privacy Policy</h1>
+        <p class="text-xl text-white/80 mb-2">Last Updated: {lastUpdated}</p>
+        <p class="text-white/60 text-sm">
+          This policy applies to <strong>{companyName}</strong> and its website at
+          aquashieldrestorationusa.com. It complies with the <strong
+            >Texas Data Privacy and Security Act (TDPSA)</strong
+          >, effective 2024.
+        </p>
       </div>
     </section>
-    
+
+    <!-- Table of Contents -->
+    <section
+      class="bg-gray-50 border-b border-gray-200 sticky top-0 z-10 hidden md:block"
+    >
+      <div class="max-w-4xl mx-auto px-4 py-3">
+        <nav class="flex flex-wrap gap-x-6 gap-y-1 text-sm text-navy/70">
+          <a
+            href="#data-collected"
+            class="hover:text-teal-600 transition-colors">1. Data Collected</a
+          >
+          <a href="#purpose" class="hover:text-teal-600 transition-colors"
+            >2. Purpose of Processing</a
+          >
+          <a href="#third-parties" class="hover:text-teal-600 transition-colors"
+            >3. Third Parties</a
+          >
+          <a href="#retention" class="hover:text-teal-600 transition-colors"
+            >4. Data Retention</a
+          >
+          <a href="#your-rights" class="hover:text-teal-600 transition-colors"
+            >5. Your Rights</a
+          >
+          <a
+            href="#do-not-sell"
+            class="hover:text-teal-600 transition-colors font-semibold text-teal-600"
+            >6. Do Not Sell</a
+          >
+          <a href="#security" class="hover:text-teal-600 transition-colors"
+            >7. Security</a
+          >
+          <a href="#cookies" class="hover:text-teal-600 transition-colors"
+            >8. Cookies</a
+          >
+          <a href="#contact" class="hover:text-teal-600 transition-colors"
+            >9. Contact</a
+          >
+        </nav>
+      </div>
+    </section>
+
+    <!-- Main Content -->
     <section class="section-container bg-white">
-      <div class="max-w-4xl mx-auto prose prose-navy">
-        <p class="lead">
-          En AquaShield Restoration LLC, valoramos tu privacidad. Esta política describe cómo manejamos la información personal que recopilamos a través de nuestro sitio web y servicios.
+      <div
+        class="max-w-4xl mx-auto prose prose-navy prose-headings:text-navy prose-a:text-teal-600 prose-a:no-underline hover:prose-a:underline"
+      >
+        <!-- Intro -->
+        <p
+          class="lead text-lg text-gray-600 not-prose mb-8 p-6 bg-blue-50 rounded-xl border border-blue-100"
+        >
+          <strong>{companyName}</strong> ("we," "our," or "us") is a licensed restoration
+          contractor based in Houston, Texas. We take your privacy seriously. This
+          Privacy Policy explains what personal information we collect through our
+          website, why we collect it, who we share it with, and the rights you have
+          under applicable law — including the
+          <strong>Texas Data Privacy and Security Act (TDPSA)</strong>.
         </p>
 
-        <h2>Información que Recopilamos</h2>
+        <!-- ─── 1. DATA COLLECTED ─── -->
+        <h2 id="data-collected" class="scroll-mt-20">
+          1. Categories of Personal Data We Collect
+        </h2>
         <p>
-          Recopilamos información personal que incluye: nombre, dirección de la propiedad, número de teléfono, correo electrónico e información relacionada con reclamaciones de seguros para fines de estimación y restauración.
+          We collect the following categories of personal data when you use our
+          Contact Support form, Free Inspection form, or interact with our
+          website:
         </p>
 
-        <h2>Uso de la Información</h2>
-        <p>
-          Utilizamos estos datos exclusivamente para proporcionar servicios de mitigación, techado y reconstrucción, comunicarnos con las compañías de seguros (bajo tu autorización) y mejorar nuestra atención al cliente.
-        </p>
-
-        <h2>Compartir Datos</h2>
-        <p>
-          No vendemos tu información a terceros. Solo compartimos datos con ajustadores de seguros, sub-contratistas autorizados y autoridades legales cuando sea estrictamente necesario para la ejecución del proyecto.
-        </p>
-
-        <h2>Seguridad</h2>
-        <p>
-          Implementamos medidas de seguridad técnica para proteger tus datos contra accesos no autorizados. Tomamos en serio la protección de tu información personal y aplicamos las mejores prácticas de la industria.
-        </p>
-
-        <h2>Tus Derechos</h2>
-        <p>
-          Tienes el derecho de acceder, corregir o eliminar tu información personal. Contáctanos para ejercer estos derechos.
-        </p>
-
-        <h2>Contacto</h2>
-        <p>
-          Si tienes preguntas sobre esta Política de Privacidad, por favor contáctanos:
-        </p>
-        <div class="not-prose bg-gray-50 p-6 rounded-lg border border-gray-200 mt-4">
-          <p class="font-bold text-navy mb-3">AquaShield Restoration LLC</p>
-          <p class="mb-2"><strong>Dirección:</strong> 3733 Westheimer Rd. Ste 1-4583, Houston, TX 77027</p>
-          <p class="mb-2"><strong>Teléfono:</strong> <a href="tel:7135876423" class="text-aqua hover:underline">(713) 587-6423</a></p>
-          <p class="mb-2"><strong>Email:</strong> <a href="mailto:info@aquashieldrestorationusa.com" class="text-aqua hover:underline">info@aquashieldrestorationusa.com</a></p>
-          <p><strong>EIN:</strong> 36-5164436</p>
+        <div
+          class="not-prose overflow-x-auto rounded-xl border border-gray-200 mb-8"
+        >
+          <table class="min-w-full divide-y divide-gray-200 text-sm">
+            <thead class="bg-gray-50">
+              <tr>
+                <th class="px-4 py-3 text-left font-semibold text-gray-700"
+                  >Category</th
+                >
+                <th class="px-4 py-3 text-left font-semibold text-gray-700"
+                  >Data Elements</th
+                >
+                <th class="px-4 py-3 text-left font-semibold text-gray-700"
+                  >Source</th
+                >
+              </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-gray-100">
+              <tr>
+                <td class="px-4 py-3 font-medium text-gray-800">Identifiers</td>
+                <td class="px-4 py-3 text-gray-600"
+                  >First name, last name, email address, phone number</td
+                >
+                <td class="px-4 py-3 text-gray-500">You (form submission)</td>
+              </tr>
+              <tr class="bg-gray-50">
+                <td class="px-4 py-3 font-medium text-gray-800"
+                  >Property Data</td
+                >
+                <td class="px-4 py-3 text-gray-600"
+                  >Property address, city, state, zip code, country</td
+                >
+                <td class="px-4 py-3 text-gray-500">You (inspection form)</td>
+              </tr>
+              <tr>
+                <td class="px-4 py-3 font-medium text-gray-800"
+                  >Insurance Information</td
+                >
+                <td class="px-4 py-3 text-gray-600"
+                  >Whether the property has active insurance (yes/no only — no
+                  policy numbers)</td
+                >
+                <td class="px-4 py-3 text-gray-500">You (inspection form)</td>
+              </tr>
+              <tr class="bg-gray-50">
+                <td class="px-4 py-3 font-medium text-gray-800"
+                  >Communications</td
+                >
+                <td class="px-4 py-3 text-gray-600"
+                  >Message content, subject/service type, SMS consent preference</td
+                >
+                <td class="px-4 py-3 text-gray-500">You (form submission)</td>
+              </tr>
+              <tr>
+                <td class="px-4 py-3 font-medium text-gray-800"
+                  >Technical / Internet Activity</td
+                >
+                <td class="px-4 py-3 text-gray-600"
+                  >IP address, browser User-Agent string, form submission
+                  timestamp, spam score (internal)</td
+                >
+                <td class="px-4 py-3 text-gray-500">Automatically collected</td>
+              </tr>
+              <tr class="bg-gray-50">
+                <td class="px-4 py-3 font-medium text-gray-800"
+                  >Website Interaction</td
+                >
+                <td class="px-4 py-3 text-gray-600"
+                  >Pages visited, session duration, referral source (via Google
+                  Analytics 4 if enabled)</td
+                >
+                <td class="px-4 py-3 text-gray-500">Automatically collected</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
+
+        <div
+          class="not-prose bg-yellow-50 border border-yellow-200 rounded-xl p-5 mb-8"
+        >
+          <p class="text-sm font-semibold text-yellow-800 mb-1">
+            ⚠ We do NOT collect sensitive personal data
+          </p>
+          <p class="text-sm text-yellow-700">
+            We do not collect health data, biometric data, racial or ethnic
+            origin, religious beliefs, sexual orientation, citizenship status,
+            genetic data, or precise geolocation beyond property address. No
+            special category data under TDPSA or GDPR is collected.
+          </p>
+        </div>
+
+        <!-- ─── 2. PURPOSE ─── -->
+        <h2 id="purpose" class="scroll-mt-20">
+          2. Why We Collect This Data (Purpose of Processing)
+        </h2>
+        <p>We process your personal data only for the following purposes:</p>
+        <ul>
+          <li>
+            <strong>Scheduling free inspections</strong> — To contact you and schedule
+            a property assessment at your request.
+          </li>
+          <li>
+            <strong>Responding to support inquiries</strong> — To answer your questions
+            about our services, insurance claims, or restoration projects.
+          </li>
+          <li>
+            <strong>SMS communications</strong> — Only if you explicitly opt in. Used
+            to send appointment reminders and status updates.
+          </li>
+          <li>
+            <strong>Fraud and spam prevention</strong> — IP addresses and User-Agent
+            strings are used to detect bots and prevent abuse (legitimate interest).
+          </li>
+          <li>
+            <strong>Website analytics</strong> — Aggregate, anonymized data via Google
+            Analytics 4 to improve our website performance.
+          </li>
+          <li>
+            <strong>Legal compliance</strong> — To meet our obligations under Texas
+            law, TDPSA, and any applicable regulatory requirements.
+          </li>
+        </ul>
+        <p>
+          <strong>Legal basis (TDPSA/GDPR):</strong> Primarily <em
+            >contract performance</em
+          > (responding to your service request) and <em>legitimate interest</em
+          > (fraud prevention, security). Consent is obtained for SMS notifications
+          and optional analytics.
+        </p>
+
+        <!-- ─── 3. THIRD PARTIES ─── -->
+        <h2 id="third-parties" class="scroll-mt-20">
+          3. Third Parties We Share Data With
+        </h2>
+        <p>
+          We do not sell your personal data. We share data only with the
+          following service providers (processors) who act on our behalf and are
+          contractually required to protect it:
+        </p>
+
+        <div
+          class="not-prose overflow-x-auto rounded-xl border border-gray-200 mb-8"
+        >
+          <table class="min-w-full divide-y divide-gray-200 text-sm">
+            <thead class="bg-gray-50">
+              <tr>
+                <th class="px-4 py-3 text-left font-semibold text-gray-700"
+                  >Provider</th
+                >
+                <th class="px-4 py-3 text-left font-semibold text-gray-700"
+                  >Service</th
+                >
+                <th class="px-4 py-3 text-left font-semibold text-gray-700"
+                  >Data Shared</th
+                >
+                <th class="px-4 py-3 text-left font-semibold text-gray-700"
+                  >Privacy Policy</th
+                >
+              </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-gray-100">
+              <tr>
+                <td class="px-4 py-3 font-medium text-gray-800"
+                  >Supabase, Inc.</td
+                >
+                <td class="px-4 py-3 text-gray-600"
+                  >Database & backend (PostgreSQL, hosted on AWS us-east-1)</td
+                >
+                <td class="px-4 py-3 text-gray-600">All form submission data</td
+                >
+                <td class="px-4 py-3"
+                  ><a
+                    href="https://supabase.com/privacy"
+                    target="_blank"
+                    rel="noopener"
+                    class="text-teal-600 hover:underline"
+                    >supabase.com/privacy</a
+                  ></td
+                >
+              </tr>
+              <tr class="bg-gray-50">
+                <td class="px-4 py-3 font-medium text-gray-800"
+                  >Cloudflare, Inc.</td
+                >
+                <td class="px-4 py-3 text-gray-600"
+                  >CDN, DDoS protection, and Turnstile CAPTCHA verification</td
+                >
+                <td class="px-4 py-3 text-gray-600"
+                  >IP address, CAPTCHA challenge response</td
+                >
+                <td class="px-4 py-3"
+                  ><a
+                    href="https://www.cloudflare.com/privacypolicy/"
+                    target="_blank"
+                    rel="noopener"
+                    class="text-teal-600 hover:underline"
+                    >cloudflare.com/privacypolicy</a
+                  ></td
+                >
+              </tr>
+              <tr>
+                <td class="px-4 py-3 font-medium text-gray-800"
+                  >Resend / SendGrid</td
+                >
+                <td class="px-4 py-3 text-gray-600"
+                  >Transactional email delivery (admin notifications)</td
+                >
+                <td class="px-4 py-3 text-gray-600"
+                  >Name, email, message content (admin copy only)</td
+                >
+                <td class="px-4 py-3 text-gray-500">See provider's policy</td>
+              </tr>
+              <tr class="bg-gray-50">
+                <td class="px-4 py-3 font-medium text-gray-800"
+                  >Google Analytics 4</td
+                >
+                <td class="px-4 py-3 text-gray-600"
+                  >Website analytics (if enabled)</td
+                >
+                <td class="px-4 py-3 text-gray-600"
+                  >Anonymized IP, pages visited, session data</td
+                >
+                <td class="px-4 py-3"
+                  ><a
+                    href="https://policies.google.com/privacy"
+                    target="_blank"
+                    rel="noopener"
+                    class="text-teal-600 hover:underline"
+                    >policies.google.com/privacy</a
+                  ></td
+                >
+              </tr>
+              <tr>
+                <td class="px-4 py-3 font-medium text-gray-800"
+                  >Insurance Adjusters / Sub-contractors</td
+                >
+                <td class="px-4 py-3 text-gray-600"
+                  >Service delivery (only when authorized by you)</td
+                >
+                <td class="px-4 py-3 text-gray-600"
+                  >Name, phone, property address, insurance status</td
+                >
+                <td class="px-4 py-3 text-gray-500"
+                  >Shared only under NDA / authorization</td
+                >
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>
+          We do not share your data with data brokers, advertising networks, or
+          third-party marketers. We do not sell, rent, or trade your personal
+          information.
+        </p>
+
+        <!-- ─── 4. RETENTION ─── -->
+        <h2 id="retention" class="scroll-mt-20">4. Data Retention</h2>
+        <p>
+          We retain your personal data only as long as necessary for the
+          purposes described above:
+        </p>
+        <ul>
+          <li>
+            <strong>Contact & Appointment records:</strong> 3 years from last interaction,
+            then securely deleted.
+          </li>
+          <li>
+            <strong>Spam/rate-limiting logs (IP addresses):</strong> 90 days, then
+            automatically purged.
+          </li>
+          <li>
+            <strong>Email records:</strong> 2 years (in our email system), aligned
+            with transactional record requirements.
+          </li>
+          <li>
+            <strong>Analytics data (Google Analytics 4):</strong> 14 months (Google's
+            default retention).
+          </li>
+          <li>
+            <strong>Legal obligations:</strong> If required by Texas law or a legal
+            proceeding, records may be retained longer.
+          </li>
+        </ul>
+        <p>
+          You may request early deletion of your data at any time. See <a
+            href="#your-rights">Section 5</a
+          > for instructions.
+        </p>
+
+        <!-- ─── 5. YOUR RIGHTS ─── -->
+        <h2 id="your-rights" class="scroll-mt-20">
+          5. Your Privacy Rights (TDPSA)
+        </h2>
+        <p>
+          Under the <strong>Texas Data Privacy and Security Act (TDPSA)</strong
+          >, Texas residents have the following rights. We will respond to all
+          verified requests within <strong>45 days</strong> (extendable by 45 days
+          with notice):
+        </p>
+
+        <div class="not-prose space-y-3 mb-8">
+          {
+            [
+              {
+                icon: "👁️",
+                title: "Right to Access",
+                desc: "Request a copy of the personal data we hold about you, in a portable, machine-readable format (CSV/JSON).",
+              },
+              {
+                icon: "✏️",
+                title: "Right to Correction",
+                desc: "Request correction of inaccurate personal data we maintain about you.",
+              },
+              {
+                icon: "🗑️",
+                title: "Right to Deletion",
+                desc: "Request that we delete your personal data, subject to legal retention obligations.",
+              },
+              {
+                icon: "📦",
+                title: "Right to Portability",
+                desc: "Receive your data in a structured, commonly used format (CSV or JSON).",
+              },
+              {
+                icon: "🚫",
+                title: "Right to Opt-Out",
+                desc: "Opt out of the sale or sharing of personal data for targeted advertising (we do not sell data, but you may still submit this request).",
+              },
+              {
+                icon: "⚖️",
+                title: "Right to Appeal",
+                desc: "If we deny your request, you may appeal. If still denied, you may file a complaint with the Texas Attorney General.",
+              },
+            ].map((right) => (
+              <div class="flex gap-4 p-4 bg-gray-50 rounded-xl border border-gray-200">
+                <div class="text-2xl shrink-0">{right.icon}</div>
+                <div>
+                  <p class="font-semibold text-navy text-sm">{right.title}</p>
+                  <p class="text-gray-600 text-sm mt-0.5">{right.desc}</p>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+
+        <div
+          class="not-prose bg-teal-50 border border-teal-200 rounded-xl p-6 mb-8"
+        >
+          <p class="font-bold text-teal-800 mb-2">📋 How to Submit a Request</p>
+          <p class="text-sm text-teal-700 mb-4">
+            Submit your Data Subject Access Request (DSAR) via any of these
+            methods:
+          </p>
+          <div class="flex flex-col sm:flex-row gap-3">
+            <a
+              href="/privacy-request"
+              class="inline-flex items-center justify-center gap-2 bg-teal-600 text-white px-5 py-2.5 rounded-lg text-sm font-semibold hover:bg-teal-700 transition-colors"
+            >
+              <svg
+                class="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                ><path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
+                ></path></svg
+              >
+              Online Request Form
+            </a>
+            <a
+              href={`mailto:${privacyEmail}?subject=Privacy Request (DSAR)`}
+              class="inline-flex items-center justify-center gap-2 border border-teal-600 text-teal-700 px-5 py-2.5 rounded-lg text-sm font-semibold hover:bg-teal-50 transition-colors"
+            >
+              <svg
+                class="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                ><path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                ></path></svg
+              >
+              Email: {privacyEmail}
+            </a>
+          </div>
+          <p class="text-xs text-teal-600 mt-3">
+            We respond within 45 days · Free of charge · Identity verification
+            required
+          </p>
+        </div>
+
+        <!-- ─── 6. DO NOT SELL ─── -->
+        <h2 id="do-not-sell" class="scroll-mt-20">
+          6. Do Not Sell My Personal Information
+        </h2>
+
+        <div class="not-prose bg-navy text-white rounded-xl p-6 mb-8">
+          <div class="flex items-start gap-4">
+            <div class="text-3xl">🛡️</div>
+            <div>
+              <p class="font-bold text-lg mb-2">
+                NOTICE: We Do Not Sell Your Personal Data
+              </p>
+              <p class="text-white/80 text-sm mb-3">
+                AquaShield Restoration LLC does <strong>not</strong> sell, trade,
+                or share your personal information with third-party advertisers, data
+                brokers, or marketers for monetary or other valuable consideration.
+              </p>
+              <p class="text-white/70 text-sm">
+                As required by the Texas Data Privacy and Security Act (TDPSA),
+                we also recognize and honor the
+                <strong class="text-teal-300"
+                  >Global Privacy Control (GPC)</strong
+                > browser signal. If your browser sends a <code
+                  class="bg-white/10 px-1 rounded">Sec-GPC: 1</code
+                > header, our server automatically acknowledges it.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <p>
+          You still have the right to formally opt out of data sharing for
+          targeted advertising purposes. To exercise this right:
+        </p>
+        <ul>
+          <li>
+            Submit a request via our <a href="/privacy-request"
+              >Privacy Request form</a
+            >
+          </li>
+          <li>
+            Email us at <a href={`mailto:${privacyEmail}`}>{privacyEmail}</a>
+          </li>
+          <li>
+            Enable the <strong>Global Privacy Control (GPC)</strong> in your browser
+            (automatically honored)
+          </li>
+        </ul>
+
+        <!-- ─── 7. SECURITY ─── -->
+        <h2 id="security" class="scroll-mt-20">7. Security Safeguards</h2>
+        <p>
+          We implement the following technical and organizational security
+          measures, aligned with <strong>OWASP Top 10 2025</strong>:
+        </p>
+        <ul>
+          <li>
+            <strong>TLS/HTTPS:</strong> All data in transit is encrypted using TLS
+            1.3.
+          </li>
+          <li>
+            <strong>Database encryption:</strong> All data at rest is encrypted by
+            Supabase (AES-256 on AWS).
+          </li>
+          <li>
+            <strong>CAPTCHA:</strong> Cloudflare Turnstile protects all public forms
+            against bot submissions.
+          </li>
+          <li>
+            <strong>Anti-spam:</strong> Multi-layer spam detection (honeypot, content
+            analysis, rate limiting, User-Agent detection) on every form submission.
+          </li>
+          <li>
+            <strong>HTTP Security Headers:</strong> Content-Security-Policy, X-Frame-Options,
+            X-Content-Type-Options, HSTS, Permissions-Policy deployed on every response.
+          </li>
+          <li>
+            <strong>Input validation:</strong> All form data is validated with strict
+            Zod schemas server-side before any database operation.
+          </li>
+          <li>
+            <strong>Rate limiting:</strong> Maximum 3 form submissions per IP per
+            hour, enforced server-side.
+          </li>
+          <li>
+            <strong>Access control:</strong> Database access uses a service role key
+            stored server-side only, never exposed to the client.
+          </li>
+        </ul>
+        <p>
+          Despite these measures, no system is 100% secure. In the event of a
+          data breach affecting your rights, we will notify you as required by
+          Texas law.
+        </p>
+
+        <!-- ─── 8. COOKIES ─── -->
+        <h2 id="cookies" class="scroll-mt-20">8. Cookies & Tracking</h2>
+        <p>
+          Our website uses cookies and similar tracking technologies. Our <a
+            href="/cookies-policy">Cookie Policy</a
+          > provides full details. Summary:
+        </p>
+        <ul>
+          <li>
+            <strong>Strictly necessary:</strong> Session and security cookies required
+            for the site to function. No consent required.
+          </li>
+          <li>
+            <strong>Analytics:</strong> Google Analytics 4 cookies (if you consent).
+            IP anonymization is enabled. You may opt out via your browser or the <a
+              href="/cookies-policy">Cookie Settings</a
+            > page.
+          </li>
+          <li>
+            <strong>No advertising cookies:</strong> We do not use third-party advertising
+            or tracking cookies.
+          </li>
+        </ul>
+
+        <!-- ─── 9. CONTACT ─── -->
+        <h2 id="contact" class="scroll-mt-20">
+          9. Contact & How to File a Complaint
+        </h2>
+        <p>
+          If you have questions about this Privacy Policy, wish to exercise your
+          rights, or want to report a concern:
+        </p>
+
+        <div
+          class="not-prose bg-gray-50 p-6 rounded-xl border border-gray-200 mt-4 mb-8"
+        >
+          <p class="font-bold text-navy mb-4 text-lg">{companyName}</p>
+          <div class="grid sm:grid-cols-2 gap-4 text-sm text-gray-700">
+            <div>
+              <p
+                class="font-semibold text-gray-500 uppercase tracking-wider text-xs mb-1"
+              >
+                Address
+              </p>
+              <p>{companyAddress}</p>
+            </div>
+            <div>
+              <p
+                class="font-semibold text-gray-500 uppercase tracking-wider text-xs mb-1"
+              >
+                Phone
+              </p>
+              <a
+                href={`tel:${companyPhone.replace(/[^0-9]/g, "")}`}
+                class="text-teal-600 hover:underline">{companyPhone}</a
+              >
+            </div>
+            <div>
+              <p
+                class="font-semibold text-gray-500 uppercase tracking-wider text-xs mb-1"
+              >
+                General Email
+              </p>
+              <a
+                href={`mailto:${companyEmail}`}
+                class="text-teal-600 hover:underline">{companyEmail}</a
+              >
+            </div>
+            <div>
+              <p
+                class="font-semibold text-gray-500 uppercase tracking-wider text-xs mb-1"
+              >
+                Privacy / DSAR Email
+              </p>
+              <a
+                href={`mailto:${privacyEmail}`}
+                class="text-teal-600 hover:underline">{privacyEmail}</a
+              >
+            </div>
+          </div>
+        </div>
+
+        <p>
+          If you are a Texas resident and believe we have not adequately
+          responded to your privacy request, you may file a complaint with the
+          <a
+            href="https://www.texasattorneygeneral.gov/consumer-protection/file-consumer-complaint"
+            target="_blank"
+            rel="noopener">Office of the Texas Attorney General</a
+          >.
+        </p>
+
+        <p class="text-sm text-gray-500 border-t border-gray-200 pt-6 mt-8">
+          This Privacy Policy was last updated on <strong>{lastUpdated}</strong
+          >. We reserve the right to update this policy periodically. Material
+          changes will be posted on this page with an updated "Last Updated"
+          date. Continued use of our website after changes constitutes
+          acceptance of the updated policy.
+        </p>
       </div>
     </section>
   </main>

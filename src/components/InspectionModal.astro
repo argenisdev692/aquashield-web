@@ -1,5 +1,6 @@
 ---
 // Free Inspection Modal Component
+const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
 ---
 
 <!-- Modal Container -->
@@ -280,6 +281,17 @@
               </label>
             </div>
 
+            <!-- Cloudflare Turnstile CAPTCHA -->
+            <div class="mt-6 flex justify-center">
+              <div
+                class="cf-turnstile"
+                data-sitekey={turnstileSiteKey}
+                data-theme="light"
+                data-size="normal"
+              >
+              </div>
+            </div>
+
             <!-- Submit Button -->
             <div class="text-center mt-8">
               <button
@@ -308,6 +320,13 @@
     </div>
   </div>
 </div>
+
+<!-- Cloudflare Turnstile SDK -->
+<script
+  src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+  async
+  defer
+  is:inline></script>
 
 <script is:inline>
   // Function to open modal
@@ -350,39 +369,73 @@
   document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("inspection-form");
     const phoneInput = document.getElementById("modal_phone");
+    const submitBtn = form?.querySelector('button[type="submit"]');
 
     // Phone formatting
     if (phoneInput && window.AquaShieldUtils) {
       window.AquaShieldUtils.applyPhoneFormatter(phoneInput);
     }
 
-    if (form) {
+    if (form && submitBtn) {
       form.addEventListener("submit", async (e) => {
         e.preventDefault();
 
-        const formData = new FormData(form);
-        const data = Object.fromEntries(formData.entries());
+        // Disable button and show loading state
+        submitBtn.disabled = true;
+        const originalHTML = submitBtn.innerHTML;
+        submitBtn.innerHTML =
+          '<span>Sending...</span><svg class="animate-spin h-5 w-5 ml-2 inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>';
 
-        // Convert phone to backend format (remove formatting)
-        if (phoneInput && phoneInput.value) {
-          data.phone = phoneInput.value.replace(/\D/g, "");
-        }
+        try {
+          const formData = new FormData(form);
+          const data = Object.fromEntries(formData.entries());
 
-        // Here you would typically send the data to your backend
-        console.log("Inspection form submitted:", data);
+          // Normalize phone – strip formatting for API
+          if (phoneInput && phoneInput.value) {
+            data.phone = phoneInput.value.replace(/\D/g, "");
+          }
 
-        // Show success message
-        if (window.AquaShieldUtils) {
-          window.AquaShieldUtils.showAlert({
-            message:
-              "Thank you! We will contact you shortly to schedule your free inspection.",
-            type: "success",
+          const response = await fetch("/api/appointment", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data),
           });
-        }
 
-        // Close modal and reset form
-        closeInspectionModal();
-        form.reset();
+          const result = await response.json();
+
+          if (result.success) {
+            if (window.AquaShieldUtils) {
+              window.AquaShieldUtils.showAlert({
+                message:
+                  result.message ||
+                  "Thank you! We will contact you shortly to schedule your free inspection.",
+                type: "success",
+              });
+            }
+            closeInspectionModal();
+            form.reset();
+          } else {
+            if (window.AquaShieldUtils) {
+              window.AquaShieldUtils.showAlert({
+                message:
+                  result.message ||
+                  "Failed to send. Please try again or call us directly.",
+                type: "error",
+              });
+            }
+          }
+        } catch (error) {
+          console.error("Error submitting appointment form:", error);
+          if (window.AquaShieldUtils) {
+            window.AquaShieldUtils.showAlert({
+              message: "An error occurred. Please call us directly.",
+              type: "error",
+            });
+          }
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = originalHTML;
+        }
       });
     }
   });

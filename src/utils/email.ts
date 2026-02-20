@@ -147,8 +147,8 @@ export function getContactSupportEmailTemplate(contact: ContactSupport): string 
             <div class="details">
                 <p><strong>Name:</strong> ${contact.first_name} ${contact.last_name}</p>
                 <p><strong>Email:</strong> <a href="mailto:${contact.email}">${contact.email}</a></p>
-                <p><strong>Phone:</strong> <a href="tel:${contact.phone.replace(/[^0-9]/g, '')}">${formatPhone(contact.phone)}</a></p>
-                <p><strong>SMS Consent:</strong> ${contact.sms_consent ? 'Yes' : 'No'}</p>
+                <p><strong>Phone:</strong> <a href="tel:${contact.phone ? contact.phone.replace(/[^0-9]/g, '') : ''}">${contact.phone ? formatPhone(contact.phone) : 'N/A'}</a></p>
+                <p><strong>Subject:</strong> ${contact.subject}</p>
                 <p><strong>Submitted:</strong> ${submittedDate}</p>
                 <hr>
                 <p><strong>Message:</strong></p>
@@ -360,17 +360,150 @@ export function getNewLeadEmailTemplate(appointment: Appointment): string {
   `;
 }
 
+// Lead Confirmation Email Template (sent to customer after submitting appointment)
+export function getLeadConfirmationEmailTemplate(appointment: Appointment): string {
+  const companyName = import.meta.env.COMPANY_NAME || 'AquaShield Restoration LLC';
+  const companyPhone = import.meta.env.COMPANY_PHONE || '(713) 587-6423';
+  const companyEmail = import.meta.env.COMPANY_EMAIL;
+  const companyAddress = import.meta.env.COMPANY_ADDRESS;
+  const companyWebsite = 'https://aquashieldrestorationusa.com';
+  const facebook = import.meta.env.COMPANY_FACEBOOK;
+  const instagram = import.meta.env.COMPANY_INSTAGRAM;
+  const linkedin = import.meta.env.COMPANY_LINKEDIN;
+  const twitter = import.meta.env.COMPANY_TWITTER;
+
+  const fullName = `${appointment.first_name} ${appointment.last_name}`;
+
+  return `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>✅ We Received Your Information! - ${companyName}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+        }
+        .logo {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        .details {
+            line-height: 1.6;
+            color: #333333;
+        }
+        .footer {
+            margin-top: 25px;
+            text-align: center;
+            color: #666666;
+            font-size: 14px;
+        }
+        .social-icons {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .social-icons a {
+            margin: 0 10px;
+            display: inline-block;
+        }
+        .highlight-blue {
+            color: #00b8d4;
+            font-weight: bold;
+        }
+        .confirmation-banner {
+            background: #e6f7fb;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        a { color: #00b8d4; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <h1 style="color: #001f3f; margin: 0;">${companyName}</h1>
+            <p style="color: #00b8d4; margin: 5px 0 0;"><a href="${companyWebsite}">${companyWebsite}</a></p>
+        </div>
+
+        <div class="details">
+            <h2 style="color: #00b8d4; text-align: center; border-bottom: 2px solid #00b8d4; padding-bottom: 10px;">
+                ✅ We Received Your Information!
+            </h2>
+
+            <div class="confirmation-banner">
+                <p style="margin: 0;"><strong>Your information has been successfully received.</strong></p>
+            </div>
+
+            <p style="margin: 20px 0;">Hello <strong>${fullName}</strong>, thank you for contacting us! 🙌</p>
+
+            <p>By completing this form, you authorize <strong>${companyName}</strong> to contact you
+                to coordinate your free inspection. An agent or virtual assistant will call you within
+                <strong>1 business day</strong> from the number:</p>
+
+            <p style="text-align: center; font-size: 1.2em; margin: 25px 0;">
+                <span class="highlight-blue"><strong>📞 ${companyPhone}</strong></span>
+            </p>
+
+            <p style="margin-bottom: 25px;">Your information is confidential and will be used exclusively
+                for this purpose. Please keep your phone available to receive our call.</p>
+
+            <div style="background: #f8f9fa; padding: 15px; border-radius: 8px;">
+                <p style="margin: 0; font-size: 0.9em;">📌 <strong>Reminder:</strong><br>
+                    If we cannot reach you, we will leave a voicemail with instructions to reschedule.</p>
+            </div>
+        </div>
+
+        <div class="social-icons">
+            ${facebook ? `<a href="${facebook}" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/124/124010.png" width="30" alt="Facebook"></a>` : ''}
+            ${instagram ? `<a href="${instagram}" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" width="30" alt="Instagram"></a>` : ''}
+            ${linkedin ? `<a href="${linkedin}" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" width="30" alt="LinkedIn"></a>` : ''}
+            ${twitter ? `<a href="${twitter}" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/733/733579.png" width="30" alt="Twitter"></a>` : ''}
+        </div>
+
+        <div class="footer">
+            <p>Business Hours:<br>Monday to Friday: 9:00 AM - 5:00 PM</p>
+            <p style="margin-top: 10px; font-size: 12px;">© ${new Date().getFullYear()} ${companyName}. All rights reserved.</p>
+            ${companyAddress ? `<p style="font-size: 10px; color: #999;">${companyAddress}</p>` : ''}
+            <div style="margin-top: 5px; font-size: 12px; color: #777;">
+                <p style="margin: 3px 0;">
+                    ${companyPhone ? `<span>${companyPhone}</span>` : ''}
+                    ${companyPhone && companyEmail ? `<span style="margin: 0 5px;">|</span>` : ''}
+                    ${companyEmail ? `<a href="mailto:${companyEmail}" style="color: #666; text-decoration: none;">${companyEmail}</a>` : ''}
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+  `;
+}
+
 // Send email function with provider support
-export async function sendEmail(to: string, subject: string, html: string) {
+// `to` can be a single email string or an array of email addresses
+export async function sendEmail(to: string | string[], subject: string, html: string) {
   const fromEmail = import.meta.env.EMAIL_FROM;
   const fromName = import.meta.env.EMAIL_FROM_NAME || 'AquaShield Restoration LLC';
+  const toArray = Array.isArray(to) ? to : [to];
   
   // Cloudflare Workers only supports Resend API
   if (EMAIL_PROVIDER === 'resend' && resendClient) {
     try {
       const { data, error } = await resendClient.emails.send({
         from: `${fromName} <${fromEmail}>`,
-        to: [to],
+        to: toArray,
         subject,
         html,
       });
