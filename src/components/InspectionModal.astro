@@ -3,31 +3,43 @@
 ---
 
 <!-- Modal Container -->
-<div 
-  id="inspection-modal" 
+<div
+  id="inspection-modal"
   class="fixed inset-0 z-50 hidden overflow-y-auto"
   style="display: none;"
 >
   <!-- Background Overlay -->
-  <div 
+  <div
     class="fixed inset-0 bg-black/50 transition-opacity"
     onclick="closeInspectionModal()"
-  ></div>
+  >
+  </div>
 
   <!-- Modal Panel -->
-  <div class="flex items-center justify-center min-h-screen px-4 py-8 text-center sm:p-0">
-    <div 
+  <div
+    class="flex items-center justify-center min-h-screen px-4 py-8 text-center sm:p-0"
+  >
+    <div
       class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-4xl sm:w-full relative max-h-[90vh] overflow-y-auto"
       onclick="event.stopPropagation()"
     >
       <!-- Close Button -->
-      <button 
+      <button
         onclick="closeInspectionModal()"
         class="sticky top-4 right-4 float-right bg-red-500 text-white rounded-full p-2 hover:bg-red-600 transition-colors duration-200 shadow-lg z-10 cursor-pointer"
         type="button"
       >
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        <svg
+          class="w-6 h-6"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M6 18L18 6M6 6l12 12"></path>
         </svg>
       </button>
 
@@ -36,11 +48,14 @@
         <div class="max-w-3xl mx-auto">
           <!-- Header -->
           <div class="text-center mb-8">
-            <h2 class="text-3xl font-bold text-white mb-4 bg-aqua py-4 rounded-lg shadow-lg">
+            <h2
+              class="text-3xl font-bold text-white mb-4 bg-aqua py-4 rounded-lg shadow-lg"
+            >
               Get Your Free Inspection
             </h2>
             <p class="text-lg text-gray-600">
-              Fill out the form below and our team will contact you shortly to schedule your free inspection.
+              Fill out the form below and our team will contact you shortly to
+              schedule your free inspection.
             </p>
           </div>
 
@@ -49,7 +64,10 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
               <!-- First Name -->
               <div>
-                <label for="modal_first_name" class="block text-sm font-medium text-gray-700 mb-1">
+                <label
+                  for="modal_first_name"
+                  class="block text-sm font-medium text-gray-700 mb-1"
+                >
                   First Name <span class="text-red-600">*</span>
                 </label>
                 <input
@@ -63,7 +81,10 @@
 
               <!-- Last Name -->
               <div>
-                <label for="modal_last_name" class="block text-sm font-medium text-gray-700 mb-1">
+                <label
+                  for="modal_last_name"
+                  class="block text-sm font-medium text-gray-700 mb-1"
+                >
                   Last Name <span class="text-red-600">*</span>
                 </label>
                 <input
@@ -77,7 +98,10 @@
 
               <!-- Phone -->
               <div>
-                <label for="modal_phone" class="block text-sm font-medium text-gray-700 mb-1">
+                <label
+                  for="modal_phone"
+                  class="block text-sm font-medium text-gray-700 mb-1"
+                >
                   Phone <span class="text-red-600">*</span>
                 </label>
                 <input
@@ -92,7 +116,10 @@
 
               <!-- Email -->
               <div>
-                <label for="modal_email" class="block text-sm font-medium text-gray-700 mb-1">
+                <label
+                  for="modal_email"
+                  class="block text-sm font-medium text-gray-700 mb-1"
+                >
                   Email <span class="text-red-600">*</span>
                 </label>
                 <input
@@ -106,7 +133,10 @@
 
               <!-- Address -->
               <div class="md:col-span-2">
-                <label for="modal_address" class="block text-sm font-medium text-gray-700 mb-1">
+                <label
+                  for="modal_address"
+                  class="block text-sm font-medium text-gray-700 mb-1"
+                >
                   Address <span class="text-red-600">*</span>
                 </label>
                 <input
@@ -121,7 +151,10 @@
 
               <!-- City -->
               <div>
-                <label for="modal_city" class="block text-sm font-medium text-gray-700 mb-1">
+                <label
+                  for="modal_city"
+                  class="block text-sm font-medium text-gray-700 mb-1"
+                >
                   City <span class="text-red-600">*</span>
                 </label>
                 <input
@@ -135,7 +168,10 @@
 
               <!-- State -->
               <div>
-                <label for="modal_state" class="block text-sm font-medium text-gray-700 mb-1">
+                <label
+                  for="modal_state"
+                  class="block text-sm font-medium text-gray-700 mb-1"
+                >
                   State <span class="text-red-600">*</span>
                 </label>
                 <input
@@ -151,7 +187,10 @@
 
               <!-- Zip Code -->
               <div>
-                <label for="modal_zipcode" class="block text-sm font-medium text-gray-700 mb-1">
+                <label
+                  for="modal_zipcode"
+                  class="block text-sm font-medium text-gray-700 mb-1"
+                >
                   Zip Code <span class="text-red-600">*</span>
                 </label>
                 <input
@@ -168,7 +207,9 @@
               <!-- Property Insurance -->
               <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">
-                  Do you have property insurance? <span class="text-red-600">*</span>
+                  Do you have property insurance? <span class="text-red-600"
+                    >*</span
+                  >
                 </label>
                 <div class="flex space-x-4 mt-2">
                   <label class="inline-flex items-center cursor-pointer">
@@ -197,8 +238,13 @@
 
               <!-- Message -->
               <div class="md:col-span-2">
-                <label for="modal_message" class="block text-sm font-medium text-gray-700 mb-1">
-                  Comment or Message <span class="text-xs text-gray-500">(Optional)</span>
+                <label
+                  for="modal_message"
+                  class="block text-sm font-medium text-gray-700 mb-1"
+                >
+                  Comment or Message <span class="text-xs text-gray-500"
+                    >(Optional)</span
+                  >
                 </label>
                 <textarea
                   id="modal_message"
@@ -220,10 +266,16 @@
                   style="accent-color: var(--color-aqua);"
                 />
                 <span class="ml-2 text-sm text-gray-600">
-                  I consent to receive SMS messages from AquaShield Restoration LLC at <strong>(713) 587-6423</strong>. 
-                  Message and data rates may apply. Reply STOP to opt-out. 
-                  View our <a href="/privacy-policy" class="text-aqua hover:underline">Privacy Policy</a> and 
-                  <a href="/terms-and-conditions" class="text-aqua hover:underline">Terms & Conditions</a>.
+                  I consent to receive SMS messages from AquaShield Restoration
+                  LLC at <strong>(713) 587-6423</strong>. Message and data rates
+                  may apply. Reply STOP to opt-out. View our <a
+                    href="/privacy-policy"
+                    class="text-aqua hover:underline">Privacy Policy</a
+                  > and
+                  <a
+                    href="/terms-and-conditions"
+                    class="text-aqua hover:underline">Terms & Conditions</a
+                  >.
                 </span>
               </label>
             </div>
@@ -235,8 +287,18 @@
                 class="w-full md:w-auto inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-bold rounded-lg text-white bg-aqua hover:bg-navy focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-aqua transition-all duration-400 shadow-lg cursor-pointer"
               >
                 <span>Send Request</span>
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5 ml-2"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
                 </svg>
               </button>
             </div>
@@ -247,25 +309,25 @@
   </div>
 </div>
 
-<script>
+<script is:inline>
   // Function to open modal
   function openInspectionModal() {
-    const modal = document.getElementById('inspection-modal');
+    const modal = document.getElementById("inspection-modal");
     if (modal) {
-      modal.style.display = 'block';
-      document.body.style.overflow = 'hidden'; // Prevent scrolling
+      modal.style.display = "block";
+      document.body.style.overflow = "hidden"; // Prevent scrolling
     }
   }
 
   // Function to close modal
   function closeInspectionModal() {
-    const modal = document.getElementById('inspection-modal');
+    const modal = document.getElementById("inspection-modal");
     if (modal) {
-      modal.style.display = 'none';
-      document.body.style.overflow = ''; // Restore scrolling
-      
+      modal.style.display = "none";
+      document.body.style.overflow = ""; // Restore scrolling
+
       // Re-initialize Alpine.js components if needed
-      if (typeof Alpine !== 'undefined') {
+      if (typeof Alpine !== "undefined") {
         setTimeout(() => {
           Alpine.initTree(document.body);
         }, 100);
@@ -278,45 +340,46 @@
   window.closeInspectionModal = closeInspectionModal;
 
   // Close modal on ESC key
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
       closeInspectionModal();
     }
   });
 
   // Handle form submission
-  document.addEventListener('DOMContentLoaded', () => {
-    const form = document.getElementById('inspection-form');
-    const phoneInput = document.getElementById('modal_phone');
-    
+  document.addEventListener("DOMContentLoaded", () => {
+    const form = document.getElementById("inspection-form");
+    const phoneInput = document.getElementById("modal_phone");
+
     // Phone formatting
     if (phoneInput && window.AquaShieldUtils) {
       window.AquaShieldUtils.applyPhoneFormatter(phoneInput);
     }
-    
+
     if (form) {
-      form.addEventListener('submit', async (e) => {
+      form.addEventListener("submit", async (e) => {
         e.preventDefault();
-        
+
         const formData = new FormData(form);
         const data = Object.fromEntries(formData.entries());
-        
+
         // Convert phone to backend format (remove formatting)
         if (phoneInput && phoneInput.value) {
-          data.phone = phoneInput.value.replace(/\D/g, '');
+          data.phone = phoneInput.value.replace(/\D/g, "");
         }
-        
+
         // Here you would typically send the data to your backend
-        console.log('Inspection form submitted:', data);
-        
+        console.log("Inspection form submitted:", data);
+
         // Show success message
         if (window.AquaShieldUtils) {
           window.AquaShieldUtils.showAlert({
-            message: 'Thank you! We will contact you shortly to schedule your free inspection.',
-            type: 'success'
+            message:
+              "Thank you! We will contact you shortly to schedule your free inspection.",
+            type: "success",
           });
         }
-        
+
         // Close modal and reset form
         closeInspectionModal();
         form.reset();
