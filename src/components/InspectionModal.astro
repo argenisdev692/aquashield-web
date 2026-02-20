@@ -1,6 +1,7 @@
 ---
 // Free Inspection Modal Component
 const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
+const googleMapsApiKey = import.meta.env.PUBLIC_GOOGLE_MAPS_API_KEY;
 ---
 
 <!-- Modal Container -->
@@ -132,7 +133,7 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
                 />
               </div>
 
-              <!-- Address -->
+              <!-- Address with Google Maps Autocomplete -->
               <div class="md:col-span-2">
                 <label
                   for="modal_address"
@@ -145,9 +146,12 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
                   id="modal_address"
                   name="address"
                   required
-                  placeholder="123 Main Street"
+                  placeholder="Start typing your address..."
+                  autocomplete="off"
                   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-aqua focus:border-transparent transition text-gray-900"
                 />
+                <input type="hidden" id="modal_latitude" name="latitude" />
+                <input type="hidden" id="modal_longitude" name="longitude" />
               </div>
 
               <!-- City -->
@@ -327,6 +331,82 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
   async
   defer
   is:inline></script>
+
+<script define:vars={{ googleMapsApiKey }}>
+  let modalAutocomplete;
+
+  // Load Google Maps Places script for autocomplete
+  function loadModalMapsScript() {
+    if (!window.google) {
+      const script = document.createElement("script");
+      script.src = `https://maps.googleapis.com/maps/api/js?key=${googleMapsApiKey}&libraries=places`;
+      script.async = true;
+      script.defer = true;
+      script.onload = initModalAutocomplete;
+      document.head.appendChild(script);
+    } else {
+      initModalAutocomplete();
+    }
+  }
+
+  // Initialize Places Autocomplete on the modal address field
+  function initModalAutocomplete() {
+    const addressInput = document.getElementById("modal_address");
+    if (!addressInput || !window.google) return;
+
+    modalAutocomplete = new google.maps.places.Autocomplete(addressInput, {
+      types: ["address"],
+      componentRestrictions: { country: "us" },
+    });
+
+    modalAutocomplete.addListener("place_changed", () => {
+      const place = modalAutocomplete.getPlace();
+      if (!place.geometry) return;
+
+      // Set coordinates in hidden fields
+      const latEl = document.getElementById("modal_latitude");
+      const lngEl = document.getElementById("modal_longitude");
+      if (latEl) latEl.value = place.geometry.location.lat();
+      if (lngEl) lngEl.value = place.geometry.location.lng();
+
+      // Parse and fill address components
+      let streetNumber = "";
+      let route = "";
+      for (const component of place.address_components) {
+        const type = component.types[0];
+        switch (type) {
+          case "street_number":
+            streetNumber = component.long_name;
+            break;
+          case "route":
+            route = component.short_name;
+            break;
+          case "locality":
+            const cityEl = document.getElementById("modal_city");
+            if (cityEl) cityEl.value = component.long_name;
+            break;
+          case "administrative_area_level_1":
+            const stateEl = document.getElementById("modal_state");
+            if (stateEl) stateEl.value = component.short_name;
+            break;
+          case "postal_code":
+            const zipEl = document.getElementById("modal_zipcode");
+            if (zipEl) zipEl.value = component.short_name;
+            break;
+        }
+      }
+      // Set street address
+      addressInput.value = `${streetNumber} ${route}`.trim();
+    });
+  }
+
+  // Load on page ready
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", loadModalMapsScript);
+  } else {
+    loadModalMapsScript();
+  }
+</script>
 
 <script is:inline>
   // Function to open modal

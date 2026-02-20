@@ -8,6 +8,8 @@ interface Props {
 
 const { class: className } = Astro.props;
 
+const googleMapsApiKey = import.meta.env.PUBLIC_GOOGLE_MAPS_API_KEY;
+
 const contactInfo = {
   phone: "(713) 587-6423",
   email: "info@aquashieldrestorationusa.com",
@@ -200,6 +202,7 @@ const serviceAreas = [
               </select>
             </div>
 
+            <!-- Address with Google Maps Autocomplete -->
             <div>
               <label
                 for="address"
@@ -212,9 +215,12 @@ const serviceAreas = [
                 id="address"
                 name="address"
                 required
+                autocomplete="off"
                 class="form-input"
-                placeholder="123 Main St, City, TX 77001"
+                placeholder="Start typing your property address..."
               />
+              <input type="hidden" id="contact_latitude" name="latitude" />
+              <input type="hidden" id="contact_longitude" name="longitude" />
             </div>
 
             <div>
@@ -552,8 +558,50 @@ const serviceAreas = [
 </style>
 
 <script
-  define:vars={{ recaptchaSiteKey: import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY }}
+  define:vars={{
+    recaptchaSiteKey: import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY,
+    googleMapsApiKey,
+  }}
 >
+  let contactAutocomplete;
+
+  // Load Google Maps Places for address autocomplete
+  function loadContactMapsScript() {
+    if (!window.google) {
+      const mapsScript = document.createElement("script");
+      mapsScript.src = `https://maps.googleapis.com/maps/api/js?key=${googleMapsApiKey}&libraries=places`;
+      mapsScript.async = true;
+      mapsScript.defer = true;
+      mapsScript.onload = initContactAutocomplete;
+      document.head.appendChild(mapsScript);
+    } else {
+      initContactAutocomplete();
+    }
+  }
+
+  function initContactAutocomplete() {
+    const addressInput = document.getElementById("address");
+    if (!addressInput || !window.google) return;
+
+    contactAutocomplete = new google.maps.places.Autocomplete(addressInput, {
+      types: ["address"],
+      componentRestrictions: { country: "us" },
+    });
+
+    contactAutocomplete.addListener("place_changed", () => {
+      const place = contactAutocomplete.getPlace();
+      if (!place.geometry) return;
+
+      const latEl = document.getElementById("contact_latitude");
+      const lngEl = document.getElementById("contact_longitude");
+      if (latEl) latEl.value = place.geometry.location.lat();
+      if (lngEl) lngEl.value = place.geometry.location.lng();
+
+      // Fill address field with full formatted address
+      addressInput.value = place.formatted_address || addressInput.value;
+    });
+  }
+
   // Load reCAPTCHA v3
   function loadRecaptcha() {
     const script = document.createElement("script");
@@ -564,6 +612,7 @@ const serviceAreas = [
   // Form validation and submission handling
   document.addEventListener("DOMContentLoaded", () => {
     loadRecaptcha();
+    loadContactMapsScript();
 
     const form = document.getElementById("contact-form");
     const submitButton = form?.querySelector('button[type="submit"]');
