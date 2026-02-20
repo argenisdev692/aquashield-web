@@ -2,6 +2,7 @@
 import { defineConfig } from 'astro/config';
 
 import react from '@astrojs/react';
+import alpinejs from '@astrojs/alpinejs';
 
 import tailwindcss from '@tailwindcss/vite';
 
@@ -9,7 +10,7 @@ import cloudflare from '@astrojs/cloudflare';
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [react()],
+  integrations: [react(), alpinejs()],
   
   // Output mode for API endpoints
   output: 'server',

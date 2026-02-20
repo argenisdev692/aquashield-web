@@ -50,7 +50,7 @@ const posts = [
         <a href={post.slug} class="group relative flex h-48 flex-col overflow-hidden rounded-lg bg-gray-100 shadow-lg md:h-64 xl:h-96">
           <img src={post.image} loading="lazy" alt={post.title} class="absolute inset-0 h-full w-full object-cover object-center transition duration-200 group-hover:scale-110" />
 
-          <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-gray-800 to-transparent md:via-transparent"></div>
+          <div class="pointer-events-none absolute inset-0 bg-linear-to-t from-gray-800 to-transparent md:via-transparent"></div>
 
           <div class="relative mt-auto p-4">
             <span class="block text-sm text-gray-200">{post.date}</span>

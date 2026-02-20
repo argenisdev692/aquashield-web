@@ -8,7 +8,11 @@ interface Props {
 
 const { class: className } = Astro.props;
 
-const navLinks = [
+type NavLinkSimple = { href: string; label: string };
+type NavLinkWithSubmenu = { label: string; submenu: { href: string; label: string }[] };
+type NavLink = NavLinkSimple | NavLinkWithSubmenu;
+
+const navLinks: NavLink[] = [
   { href: "/", label: "Home" },
   { 
     label: "Services",
@@ -109,7 +113,7 @@ const currentPath = Astro.url.pathname;
         <nav class="hidden md:flex items-center gap-8">
           {navLinks.map((link) => {
             const isActive = 'href' in link && link.href === currentPath;
-            const hasActiveSubmenu = 'submenu' in link && link.submenu.some(sub => sub.href === currentPath);
+            const hasActiveSubmenu = 'submenu' in link && (link as NavLinkWithSubmenu).submenu.some(sub => sub.href === currentPath);
             
             return (
               'submenu' in link ? (
@@ -149,7 +153,7 @@ const currentPath = Astro.url.pathname;
                             @click="servicesOpen = false"
                             class:list={[
                               "block px-4 py-2 font-semibold transition-colors",
-                              isSubActive ? "bg-aqua/10 text-aqua hover:bg-aqua hover:!text-white" : "text-navy hover:bg-aqua hover:!text-white"
+                              isSubActive ? "bg-aqua/10 text-aqua hover:bg-aqua hover:text-white!" : "text-navy hover:bg-aqua hover:text-white!"
                             ]}
                           >
                             {sublink.label}
@@ -244,7 +248,7 @@ const currentPath = Astro.url.pathname;
                   class="w-full flex items-center gap-3 px-4 py-2 text-left hover:bg-aqua hover:text-white transition-colors cursor-pointer"
                   :class="{ 'bg-aqua/10 text-aqua': currentLang === 'en' }"
                 >
-                  <div class="w-6 h-4 rounded-sm overflow-hidden flex-shrink-0">
+                  <div class="w-6 h-4 rounded-sm overflow-hidden shrink-0">
                     <svg class="w-full h-full" viewBox="0 0 640 480">
                       <defs>
                         <clipPath id="us-flag-small">
@@ -277,7 +281,7 @@ const currentPath = Astro.url.pathname;
                   class="w-full flex items-center gap-3 px-4 py-2 text-left hover:bg-aqua hover:text-white transition-colors cursor-pointer"
                   :class="{ 'bg-aqua/10 text-aqua': currentLang === 'es' }"
                 >
-                  <div class="w-6 h-4 rounded-sm overflow-hidden flex-shrink-0">
+                  <div class="w-6 h-4 rounded-sm overflow-hidden shrink-0">
                     <svg class="w-full h-full" viewBox="0 0 640 480">
                       <path fill="#aa151b" d="M0 0h640v480H0z"/>
                       <path fill="#f1bf00" d="M0 120h640v240H0z"/>
@@ -305,7 +309,8 @@ const currentPath = Astro.url.pathname;
 
   <!-- Overlay for drawer -->
   <div 
-    x-show="isDrawerOpen" 
+    x-show="isDrawerOpen"
+    x-cloak
     x-transition:enter="transition-opacity ease-out duration-300"
     x-transition:enter-start="opacity-0" 
     x-transition:enter-end="opacity-100"
@@ -319,13 +324,14 @@ const currentPath = Astro.url.pathname;
 
   <!-- Mobile Drawer -->
   <div 
-    x-show="isDrawerOpen" 
+    x-show="isDrawerOpen"
+    x-cloak
     x-transition:enter="transition ease-out duration-300"
-    x-transition:enter-start="-translate-x-full" 
-    x-transition:enter-end="translate-x-0"
+    x-transition:enter-start="opacity-0 -translate-x-full" 
+    x-transition:enter-end="opacity-100 translate-x-0"
     x-transition:leave="transition ease-in duration-300" 
-    x-transition:leave-start="translate-x-0"
-    x-transition:leave-end="-translate-x-full"
+    x-transition:leave-start="opacity-100 translate-x-0"
+    x-transition:leave-end="opacity-0 -translate-x-full"
     class="fixed inset-y-0 left-0 w-64 bg-white shadow-lg transform md:hidden z-50 overflow-y-auto"
     @click.away="isDrawerOpen = false"
   >
@@ -366,7 +372,7 @@ const currentPath = Astro.url.pathname;
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
           </svg>
         </button>
-        <div x-show="isOpen" class="pl-4">
+        <div x-show="isOpen" x-cloak class="pl-4">
           <a href="/new-roof" class:list={["block py-2 px-4 rounded hover:bg-gray-100", currentPath === "/new-roof" ? "bg-aqua/10 text-aqua font-semibold" : "text-gray-700"]}>New Roof</a>
           <a href="/roof-repair" class:list={["block py-2 px-4 rounded hover:bg-gray-100", currentPath === "/roof-repair" ? "bg-aqua/10 text-aqua font-semibold" : "text-gray-700"]}>Roof Repair</a>
           <a href="/storm-damage" class:list={["block py-2 px-4 rounded hover:bg-gray-100", currentPath === "/storm-damage" ? "bg-aqua/10 text-aqua font-semibold" : "text-gray-700"]}>Storm Damage</a>
@@ -418,7 +424,7 @@ const currentPath = Astro.url.pathname;
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
           </svg>
         </button>
-        <div x-show="isOpen" class="pl-4">
+        <div x-show="isOpen" x-cloak class="pl-4">
           <button 
             @click="currentLang = 'en'; isOpen = false" 
             class="flex items-center gap-3 w-full py-2 px-4 rounded hover:bg-gray-100 text-left cursor-pointer"

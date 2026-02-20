@@ -32,11 +32,19 @@ const serviceAreas = [
 ];
 ---
 
-<section id="contact" class:list={["section-padding bg-white pt-12 md:pt-16 shadow-[0_-5px_20px_-5px_rgba(0,0,0,0.1)] relative z-10", className]}>
+<section
+  id="contact"
+  class:list={[
+    "section-padding bg-white pt-12 md:pt-16 shadow-[0_-5px_20px_-5px_rgba(0,0,0,0.1)] relative z-10",
+    className,
+  ]}
+>
   <div class="container mx-auto px-4">
     <!-- Section header -->
     <div class="text-center max-w-3xl mx-auto mb-16 fade-in-section">
-      <span class="inline-block text-aqua font-bold text-xl md:text-2xl uppercase tracking-widest mb-4">
+      <span
+        class="inline-block text-aqua font-bold text-xl md:text-2xl uppercase tracking-widest mb-4"
+      >
         Contact Us
       </span>
       <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-navy mb-6">
@@ -44,23 +52,41 @@ const serviceAreas = [
         <span class="text-aqua">Estimate Today</span>
       </h2>
       <p class="text-gray-600 text-lg">
-        Water damage doesn't wait, and neither do we. Contact us 24/7 for emergency 
-        service or schedule a free inspection at your convenience.
+        Water damage doesn't wait, and neither do we. Contact us 24/7 for
+        emergency service or schedule a free inspection at your convenience.
       </p>
     </div>
 
     <!-- Emergency banner -->
-    <div class="bg-gradient-hero rounded-3xl p-8 md:p-12 mb-16 text-center fade-in-section">
+    <div
+      class="bg-gradient-hero rounded-3xl p-8 md:p-12 mb-16 text-center fade-in-section"
+    >
       <div class="flex flex-col md:flex-row items-center justify-center gap-6">
         <div class="flex items-center gap-4">
-          <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center animate-pulse">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+          <div
+            class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center animate-pulse"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-8 w-8 text-white"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+              ></path>
             </svg>
           </div>
           <div class="text-left">
             <div class="text-white/70 text-sm">24/7 Emergency Hotline</div>
-            <a href={`tel:${contactInfo.phone.replace(/[^0-9]/g, '')}`} class="text-3xl md:text-4xl font-bold text-white hover:text-aqua transition-colors">
+            <a
+              href={`tel:${contactInfo.phone.replace(/[^0-9]/g, "")}`}
+              class="text-3xl md:text-4xl font-bold text-white hover:text-aqua transition-colors"
+            >
               {contactInfo.phone}
             </a>
           </div>
@@ -68,7 +94,9 @@ const serviceAreas = [
         <div class="hidden md:block w-px h-16 bg-white/20"></div>
         <div class="text-white text-center md:text-left">
           <div class="font-semibold mb-1">60-Minute Response Time</div>
-          <div class="text-white/70 text-sm">We're ready when you need us most</div>
+          <div class="text-white/70 text-sm">
+            We're ready when you need us most
+          </div>
         </div>
       </div>
     </div>
@@ -77,12 +105,17 @@ const serviceAreas = [
       <!-- Contact form -->
       <div class="fade-in-section">
         <div class="bg-white rounded-3xl p-8 md:p-10 shadow-lg">
-          <h3 class="text-2xl font-bold text-navy mb-6">Request a Free Estimate</h3>
-          
+          <h3 class="text-2xl font-bold text-navy mb-6">
+            Request a Free Estimate
+          </h3>
+
           <form id="contact-form" class="space-y-6">
             <div class="grid md:grid-cols-2 gap-6">
               <div>
-                <label for="firstName" class="block text-sm font-medium text-gray-700 mb-2">
+                <label
+                  for="firstName"
+                  class="block text-sm font-medium text-gray-700 mb-2"
+                >
                   First Name <span class="text-red-600">*</span>
                 </label>
                 <input
@@ -95,7 +128,10 @@ const serviceAreas = [
                 />
               </div>
               <div>
-                <label for="lastName" class="block text-sm font-medium text-gray-700 mb-2">
+                <label
+                  for="lastName"
+                  class="block text-sm font-medium text-gray-700 mb-2"
+                >
                   Last Name <span class="text-red-600">*</span>
                 </label>
                 <input
@@ -111,7 +147,10 @@ const serviceAreas = [
 
             <div class="grid md:grid-cols-2 gap-6">
               <div>
-                <label for="email" class="block text-sm font-medium text-gray-700 mb-2">
+                <label
+                  for="email"
+                  class="block text-sm font-medium text-gray-700 mb-2"
+                >
                   Email Address <span class="text-red-600">*</span>
                 </label>
                 <input
@@ -124,7 +163,10 @@ const serviceAreas = [
                 />
               </div>
               <div>
-                <label for="phone" class="block text-sm font-medium text-gray-700 mb-2">
+                <label
+                  for="phone"
+                  class="block text-sm font-medium text-gray-700 mb-2"
+                >
                   Phone Number <span class="text-red-600">*</span>
                 </label>
                 <input
@@ -139,7 +181,10 @@ const serviceAreas = [
             </div>
 
             <div>
-              <label for="service" class="block text-sm font-medium text-gray-700 mb-2">
+              <label
+                for="service"
+                class="block text-sm font-medium text-gray-700 mb-2"
+              >
                 Service Needed <span class="text-red-600">*</span>
               </label>
               <select id="service" name="service" required class="form-input">
@@ -156,7 +201,10 @@ const serviceAreas = [
             </div>
 
             <div>
-              <label for="address" class="block text-sm font-medium text-gray-700 mb-2">
+              <label
+                for="address"
+                class="block text-sm font-medium text-gray-700 mb-2"
+              >
                 Property Address <span class="text-red-600">*</span>
               </label>
               <input
@@ -170,7 +218,10 @@ const serviceAreas = [
             </div>
 
             <div>
-              <label for="message" class="block text-sm font-medium text-gray-700 mb-2">
+              <label
+                for="message"
+                class="block text-sm font-medium text-gray-700 mb-2"
+              >
                 Tell Us About Your Situation <span class="text-red-600">*</span>
               </label>
               <textarea
@@ -183,7 +234,9 @@ const serviceAreas = [
                 class="form-input resize-none"
                 placeholder="Please describe the damage or issue you're experiencing..."
               ></textarea>
-              <div class="text-xs text-gray-500 mt-1">Minimum 10 characters, maximum 1000</div>
+              <div class="text-xs text-gray-500 mt-1">
+                Minimum 10 characters, maximum 1000
+              </div>
             </div>
 
             <!-- Honeypot field - Hidden from users but visible to bots -->
@@ -208,23 +261,37 @@ const serviceAreas = [
                 style="accent-color: var(--color-aqua);"
               />
               <label for="consent" class="text-sm text-gray-600">
-                I agree to receive communications from AquaShield Restoration. 
+                I agree to receive communications from AquaShield Restoration.
                 We respect your privacy and will never share your information.
               </label>
             </div>
 
             <button type="submit" class="btn-primary w-full text-lg py-4">
               Submit Request
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5 ml-2"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
               </svg>
             </button>
           </form>
 
           <p class="text-center text-sm text-gray-500 mt-6">
-            By submitting this form, you agree to our 
-            <a href="/privacy" class="text-aqua hover:underline">Privacy Policy</a> and 
-            <a href="/terms" class="text-aqua hover:underline">Terms of Service</a>.
+            By submitting this form, you agree to our
+            <a href="/privacy" class="text-aqua hover:underline"
+              >Privacy Policy</a
+            > and
+            <a href="/terms" class="text-aqua hover:underline"
+              >Terms of Service</a
+            >.
           </p>
         </div>
       </div>
@@ -234,13 +301,30 @@ const serviceAreas = [
         <!-- Contact details -->
         <div class="bg-white rounded-3xl p-8 shadow-lg">
           <h3 class="text-2xl font-bold text-navy mb-6">Contact Information</h3>
-          
+
           <div class="space-y-6">
             <div class="flex items-start gap-4">
-              <div class="w-12 h-12 bg-aqua/10 rounded-xl flex items-center justify-center flex-shrink-0">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-aqua" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+              <div
+                class="w-12 h-12 bg-aqua/10 rounded-xl flex items-center justify-center shrink-0"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6 text-aqua"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                  ></path>
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
                 </svg>
               </div>
               <div>
@@ -251,29 +335,59 @@ const serviceAreas = [
             </div>
 
             <div class="flex items-start gap-4">
-              <div class="w-12 h-12 bg-aqua/10 rounded-xl flex items-center justify-center flex-shrink-0">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-aqua" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              <div
+                class="w-12 h-12 bg-aqua/10 rounded-xl flex items-center justify-center shrink-0"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6 text-aqua"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                  ></path>
                 </svg>
               </div>
               <div>
                 <div class="font-semibold text-navy">Email Us</div>
-                <a href={`mailto:${contactInfo.email}`} class="text-aqua hover:underline">
+                <a
+                  href={`mailto:${contactInfo.email}`}
+                  class="text-aqua hover:underline"
+                >
                   {contactInfo.email}
                 </a>
               </div>
             </div>
 
             <div class="flex items-start gap-4">
-              <div class="w-12 h-12 bg-aqua/10 rounded-xl flex items-center justify-center flex-shrink-0">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-aqua" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              <div
+                class="w-12 h-12 bg-aqua/10 rounded-xl flex items-center justify-center shrink-0"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6 text-aqua"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                 </svg>
               </div>
               <div>
                 <div class="font-semibold text-navy">Business Hours</div>
                 <div class="text-gray-600">{contactInfo.hours}</div>
-                <div class="text-sm text-aqua font-medium">Always available for emergencies</div>
+                <div class="text-sm text-aqua font-medium">
+                  Always available for emergencies
+                </div>
               </div>
             </div>
           </div>
@@ -283,23 +397,51 @@ const serviceAreas = [
             <div class="text-sm font-medium text-gray-700 mb-4">Follow Us</div>
             <div class="flex gap-4">
               <a href="#" class="social-link" aria-label="Facebook">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"
+                  ></path>
                 </svg>
               </a>
               <a href="#" class="social-link" aria-label="Instagram">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"
+                  ></path>
                 </svg>
               </a>
               <a href="#" class="social-link" aria-label="LinkedIn">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z"/>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z"
+                  ></path>
                 </svg>
               </a>
               <a href="#" class="social-link" aria-label="X (Twitter)">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 16 16">
-                  <path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865z"/>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5"
+                  fill="currentColor"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865z"
+                  ></path>
                 </svg>
               </a>
             </div>
@@ -310,18 +452,23 @@ const serviceAreas = [
         <div class="bg-white rounded-3xl p-8 shadow-lg">
           <h3 class="text-2xl font-bold text-navy mb-6">Service Areas</h3>
           <p class="text-gray-600 mb-6">
-            We proudly serve the greater Texas area with fast, reliable water damage 
-            restoration services.
+            We proudly serve the greater Texas area with fast, reliable water
+            damage restoration services.
           </p>
           <div class="flex flex-wrap gap-2">
-            {serviceAreas.map((area) => (
-              <span class="inline-block px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm hover:bg-aqua/10 hover:text-aqua transition-colors">
-                {area}
-              </span>
-            ))}
+            {
+              serviceAreas.map((area) => (
+                <span class="inline-block px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm hover:bg-aqua/10 hover:text-aqua transition-colors">
+                  {area}
+                </span>
+              ))
+            }
           </div>
           <p class="text-sm text-gray-500 mt-4">
-            Don't see your area? <a href={`tel:${contactInfo.phone.replace(/[^0-9]/g, '')}`} class="text-aqua hover:underline">Call us</a> – we may still be able to help!
+            Don't see your area? <a
+              href={`tel:${contactInfo.phone.replace(/[^0-9]/g, "")}`}
+              class="text-aqua hover:underline">Call us</a
+            > – we may still be able to help!
           </p>
         </div>
       </div>
@@ -330,18 +477,19 @@ const serviceAreas = [
 
   <!-- Full Width Google Map -->
   <div class="w-full h-[500px] mt-20 mb-12 relative fade-in-section">
-    <div class="absolute inset-0 bg-white rounded-2xl shadow-xl overflow-hidden">
-      <iframe 
+    <div
+      class="absolute inset-0 bg-white rounded-2xl shadow-xl overflow-hidden"
+    >
+      <iframe
         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3464.256071898361!2d-95.44223462572727!3d29.74130133287228!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8640c11e9f0f0a63%3A0x61f215669818cfcd!2s3733%20Westheimer%20Rd%2C%20Houston%2C%20TX%2077027%2C%20EE.%20UU.!5e0!3m2!1ses!2spt!4v1769700449786!5m2!1ses!2spt"
-        width="100%" 
-        height="100%" 
-        style="border:0;" 
-        allowfullscreen="" 
-        loading="lazy" 
+        width="100%"
+        height="100%"
+        style="border:0;"
+        allowfullscreen=""
+        loading="lazy"
         referrerpolicy="no-referrer-when-downgrade"
         title="AquaShield Restoration LLC Location - 3733 Westheimer Rd, Houston, TX 77027"
-        class="w-full h-full"
-      ></iframe>
+        class="w-full h-full"></iframe>
     </div>
   </div>
 </section>
@@ -395,7 +543,7 @@ const serviceAreas = [
       opacity: 1;
       transform: none;
     }
-    
+
     .form-input,
     .social-link {
       transition: none;
@@ -403,50 +551,52 @@ const serviceAreas = [
   }
 </style>
 
-<script define:vars={{ recaptchaSiteKey: import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY }}>
+<script
+  define:vars={{ recaptchaSiteKey: import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY }}
+>
   // Load reCAPTCHA v3
   function loadRecaptcha() {
-    const script = document.createElement('script');
+    const script = document.createElement("script");
     script.src = `https://www.google.com/recaptcha/api.js?render=${recaptchaSiteKey}`;
     document.head.appendChild(script);
   }
 
   // Form validation and submission handling
-  document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener("DOMContentLoaded", () => {
     loadRecaptcha();
-    
-    const form = document.getElementById('contact-form');
+
+    const form = document.getElementById("contact-form");
     const submitButton = form?.querySelector('button[type="submit"]');
-    const phoneInput = document.getElementById('phone');
-    
+    const phoneInput = document.getElementById("phone");
+
     // Phone number formatting (xxx) xxx-xxxx
     if (phoneInput && window.AquaShieldUtils) {
       window.AquaShieldUtils.applyPhoneFormatter(phoneInput);
     }
-    
+
     // Track form start time for spam detection
     const formStartTime = Date.now();
-    
+
     if (form && submitButton) {
-      form.addEventListener('submit', async (e) => {
+      form.addEventListener("submit", async (e) => {
         e.preventDefault();
-        
+
         // Honeypot check - if filled, it's a bot
         const honeypot = form.website?.value;
         if (honeypot) {
-          console.warn('Bot detected via honeypot');
+          console.warn("Bot detected via honeypot");
           return false;
         }
-        
+
         // Validate message content for spam patterns
-        const message = form.message?.value || '';
+        const message = form.message?.value || "";
         const spamPatterns = [
           /\b(buy|sale|offer|discount|promo|click here|visit|website|seo|marketing)\b/gi,
           /(https?:\/\/|www\.)/gi, // URLs
           /\b(viagra|cialis|pharmacy|casino|poker|loan)\b/gi,
           /\$\d+/g, // Money amounts
         ];
-        
+
         let isSpam = false;
         for (const pattern of spamPatterns) {
           if (pattern.test(message)) {
@@ -454,67 +604,74 @@ const serviceAreas = [
             break;
           }
         }
-        
+
         if (isSpam) {
           window.AquaShieldUtils.showAlert({
-            message: 'Your message contains prohibited content. Please remove promotional links or offers.',
-            type: 'error'
+            message:
+              "Your message contains prohibited content. Please remove promotional links or offers.",
+            type: "error",
           });
           return false;
         }
-        
+
         // Check submission time
         const timeTaken = (Date.now() - formStartTime) / 1000;
         if (timeTaken < 5) {
-          console.warn('Form submitted too quickly');
+          console.warn("Form submitted too quickly");
           window.AquaShieldUtils.showAlert({
-            message: 'Please take your time to fill out the form properly.',
-            type: 'warning'
+            message: "Please take your time to fill out the form properly.",
+            type: "warning",
           });
           return false;
         }
-        
+
         // Disable submit button
         submitButton.disabled = true;
         const originalText = submitButton.innerHTML;
-        submitButton.innerHTML = '<svg class="animate-spin h-5 w-5 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>';
-        
+        submitButton.innerHTML =
+          '<svg class="animate-spin h-5 w-5 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>';
+
         try {
           // Get reCAPTCHA token
-          const token = await grecaptcha.execute(recaptchaSiteKey, { action: 'submit_contact' });
-          
+          const token = await grecaptcha.execute(recaptchaSiteKey, {
+            action: "submit_contact",
+          });
+
           const formData = new FormData(form);
           const data = Object.fromEntries(formData.entries());
-          data['g-recaptcha-response'] = token;
-          
+          data["g-recaptcha-response"] = token;
+
           // Send to API
-          const response = await fetch('/api/contact-support', {
-            method: 'POST',
+          const response = await fetch("/api/contact-support", {
+            method: "POST",
             headers: {
-              'Content-Type': 'application/json',
+              "Content-Type": "application/json",
             },
             body: JSON.stringify(data),
           });
-          
+
           const result = await response.json();
-          
+
           if (result.success) {
             window.AquaShieldUtils.showAlert({
-              message: result.message || 'Your message has been sent successfully! We\'ll contact you soon.',
-              type: 'success'
+              message:
+                result.message ||
+                "Your message has been sent successfully! We'll contact you soon.",
+              type: "success",
             });
             form.reset();
           } else {
             window.AquaShieldUtils.showAlert({
-              message: result.message || 'Failed to send message. Please try again.',
-              type: 'error'
+              message:
+                result.message || "Failed to send message. Please try again.",
+              type: "error",
             });
           }
         } catch (error) {
-          console.error('Error submitting form:', error);
+          console.error("Error submitting form:", error);
           window.AquaShieldUtils.showAlert({
-            message: 'An error occurred. Please try again or call us directly.',
-            type: 'error'
+            message: "An error occurred. Please try again or call us directly.",
+            type: "error",
           });
         } finally {
           // Re-enable submit button
