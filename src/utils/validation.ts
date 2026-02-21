@@ -173,7 +173,7 @@ export const facebookLeadSchema = z.object({
     .optional()
     .nullable(),
   
-  lead_source: z.string()
+  lead_source: z.enum(['Facebook Ads', 'Website', 'Reference', 'Retell AI'])
     .optional()
     .default('Facebook Ads'),
   
@@ -183,8 +183,9 @@ export const facebookLeadSchema = z.object({
     .optional()
     .default(''),
   
-  'g-recaptcha-response': z.string()
-    .min(1, 'reCAPTCHA verification is required')
+  // Cloudflare Turnstile token
+  'cf-turnstile-response': z.string()
+    .min(1, 'CAPTCHA verification is required')
 });
 
 export type FacebookLeadInput = z.infer<typeof facebookLeadSchema>;

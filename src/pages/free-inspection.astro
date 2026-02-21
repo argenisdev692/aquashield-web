@@ -5,7 +5,7 @@ const company = await getCompanyData();
 const formattedPhone = formatPhone(company.phone);
 
 const googleMapsApiKey = import.meta.env.PUBLIC_GOOGLE_MAPS_API_KEY ?? "";
-const recaptchaSiteKey = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY ?? "";
+const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? "";
 
 const canonicalUrl = "https://aquashieldrestorationusa.com/free-inspection";
 ---
@@ -355,11 +355,6 @@ const canonicalUrl = "https://aquashieldrestorationusa.com/free-inspection";
               value="US"
             />
             <input type="hidden" name="lead_source" value="Facebook Ads" />
-            <input
-              type="hidden"
-              id="recaptcha-token"
-              name="g-recaptcha-response"
-            />
             <!-- Honeypot -->
             <input
               type="text"
@@ -577,6 +572,19 @@ const canonicalUrl = "https://aquashieldrestorationusa.com/free-inspection";
               </span>
             </div>
 
+            <!-- Cloudflare Turnstile CAPTCHA -->
+            <div
+              style="display:flex; justify-content:center; margin-top:.5rem;"
+            >
+              <div
+                class="cf-turnstile"
+                data-sitekey={turnstileSiteKey}
+                data-theme="light"
+                data-size="normal"
+              >
+              </div>
+            </div>
+
             <div>
               <button type="submit" id="submit-btn" class="btn-submit" disabled>
                 <span class="spinner" id="spinner"></span>
@@ -592,13 +600,9 @@ const canonicalUrl = "https://aquashieldrestorationusa.com/free-inspection";
       </div>
     </main>
 
-    <!-- reCAPTCHA v3 -->
-    <script define:vars={{ recaptchaSiteKey }}>
-      window.__rcKey = recaptchaSiteKey;
-      function onRecaptchaLoad() {}
-    </script>
+    <!-- Cloudflare Turnstile API -->
     <script
-      src={`https://www.google.com/recaptcha/api.js?render=${recaptchaSiteKey}&onload=onRecaptchaLoad`}
+      src="https://challenges.cloudflare.com/turnstile/v0/api.js"
       async
       defer
       is:inline></script>
@@ -701,16 +705,7 @@ const canonicalUrl = "https://aquashieldrestorationusa.com/free-inspection";
 
     <!-- Form logic (TypeScript) -->
     <script>
-      // ── Ambient declarations for external globals ──
-      declare const grecaptcha: {
-        ready(cb: () => void): void;
-        execute(siteKey: string, opts: { action: string }): Promise<string>;
-      };
-      declare global {
-        interface Window {
-          __rcKey?: string;
-        }
-      }
+      // ── Ambient declarations ──
 
       // ── Typed element references ──
       const form = document.getElementById("lead-form") as HTMLFormElement;
@@ -824,30 +819,6 @@ const canonicalUrl = "https://aquashieldrestorationusa.com/free-inspection";
       // Re-check after Maps autocomplete fills hidden fields
       document.addEventListener("maps-filled", checkValidity);
 
-      // ── reCAPTCHA ──
-      function getRecaptchaToken(): Promise<string> {
-        return new Promise<string>((resolve, reject) => {
-          const key = window.__rcKey;
-          if (!key) {
-            resolve("");
-            return;
-          }
-          const run = (): void => {
-            if (typeof grecaptcha === "undefined") {
-              setTimeout(run, 300);
-              return;
-            }
-            grecaptcha.ready(() => {
-              grecaptcha
-                .execute(key, { action: "submit_facebook_lead" })
-                .then(resolve)
-                .catch(reject);
-            });
-          };
-          run();
-        });
-      }
-
       // ── Submit handler ──
       form.addEventListener("submit", async (e: Event) => {
         e.preventDefault();
@@ -867,13 +838,19 @@ const canonicalUrl = "https://aquashieldrestorationusa.com/free-inspection";
           return;
         }
 
-        let token = "";
-        try {
-          token = await getRecaptchaToken();
-        } catch {
-          /* ignore */
+        // Read Turnstile token from form
+        const turnstileInput = form.querySelector<HTMLInputElement>(
+          'input[name="cf-turnstile-response"]',
+        );
+        const token = turnstileInput?.value ?? "";
+        if (!token) {
+          showError(
+            "address_map_input",
+            "Please complete the CAPTCHA verification.",
+          );
+          setLoading(false);
+          return;
         }
-        inp("recaptcha-token").value = token;
 
         const lat = parseFloat(inp("latitude").value) || null;
         const lng = parseFloat(inp("longitude").value) || null;
@@ -906,7 +883,7 @@ const canonicalUrl = "https://aquashieldrestorationusa.com/free-inspection";
           longitude: lng,
           lead_source: "Facebook Ads",
           website: inp("website").value || "",
-          "g-recaptcha-response": token,
+          "cf-turnstile-response": token,
         };
 
         try {

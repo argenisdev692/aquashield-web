@@ -1,12 +1,13 @@
 ---
 // Facebook Lead Modal component for AquaShield Restoration
-// Full-screen modal with Google Maps autocomplete and reCAPTCHA
+// Full-screen modal with Google Maps autocomplete and Cloudflare Turnstile
 
 interface Props {
   class?: string;
 }
 
 const { class: className } = Astro.props;
+const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
 ---
 
 <!-- Facebook Lead Button Trigger -->
@@ -331,10 +332,22 @@ const { class: className } = Astro.props;
               </label>
             </div>
 
+            <!-- Cloudflare Turnstile CAPTCHA -->
+            <div class="flex justify-center mt-4">
+              <div
+                class="cf-turnstile"
+                data-sitekey={turnstileSiteKey}
+                data-theme="light"
+                data-size="normal"
+              >
+              </div>
+            </div>
+
             <!-- Submit Button -->
             <button
               type="submit"
               class="btn-primary w-full text-lg py-4 flex items-center justify-center gap-2"
+              style="cursor:pointer;"
             >
               <span>Submit Request</span>
               <svg
@@ -376,17 +389,22 @@ const { class: className } = Astro.props;
   }
 </style>
 
+<!-- Cloudflare Turnstile API -->
+<script
+  src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+  async
+  defer
+  is:inline></script>
+
 <script
   define:vars={{
-    recaptchaSiteKey: import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY,
     googleMapsApiKey: import.meta.env.PUBLIC_GOOGLE_MAPS_API_KEY,
   }}
 >
   let autocomplete;
 
-  // Load Google Maps and reCAPTCHA
+  // Load Google Maps
   function loadScripts() {
-    // Google Maps
     if (!window.google) {
       const mapsScript = document.createElement("script");
       mapsScript.src = `https://maps.googleapis.com/maps/api/js?key=${googleMapsApiKey}&libraries=places`;
@@ -396,13 +414,6 @@ const { class: className } = Astro.props;
       document.head.appendChild(mapsScript);
     } else {
       initAutocomplete();
-    }
-
-    // reCAPTCHA
-    if (!window.grecaptcha) {
-      const recaptchaScript = document.createElement("script");
-      recaptchaScript.src = `https://www.google.com/recaptcha/api.js?render=${recaptchaSiteKey}`;
-      document.head.appendChild(recaptchaScript);
     }
   }
 
@@ -566,14 +577,24 @@ const { class: className } = Astro.props;
         '<span>Submitting...</span><svg class="animate-spin h-5 w-5 inline-block ml-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>';
 
       try {
-        // Get reCAPTCHA token
-        const token = await grecaptcha.execute(recaptchaSiteKey, {
-          action: "submit_lead",
-        });
+        // Turnstile token is automatically included in the form as 'cf-turnstile-response'
+        const turnstileInput = form.querySelector(
+          'input[name="cf-turnstile-response"]',
+        );
+        if (!turnstileInput || !turnstileInput.value) {
+          if (window.AquaShieldUtils) {
+            window.AquaShieldUtils.showAlert({
+              message: "Please complete the CAPTCHA verification.",
+              type: "error",
+            });
+          }
+          submitButton.disabled = false;
+          submitButton.innerHTML = originalText;
+          return;
+        }
 
         const formData = new FormData(form);
         const data = Object.fromEntries(formData.entries());
-        data["g-recaptcha-response"] = token;
 
         // Send to API
         const response = await fetch("/api/facebook-lead", {
@@ -595,6 +616,10 @@ const { class: className } = Astro.props;
             duration: 7000,
           });
           form.reset();
+          // Reset Turnstile widget
+          if (window.turnstile) {
+            window.turnstile.reset();
+          }
           closeModal();
         } else if (window.AquaShieldUtils) {
           window.AquaShieldUtils.showAlert({

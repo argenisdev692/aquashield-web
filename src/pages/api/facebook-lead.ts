@@ -4,44 +4,8 @@ import { sendEmail, getNewLeadEmailTemplate } from '../../utils/email';
 import { v4 as uuidv4 } from 'uuid';
 import { facebookLeadSchema, formatZodErrors } from '../../utils/validation';
 import { performSpamCheck } from '../../utils/spam-detection';
+import { verifyTurnstile } from '../../utils/turnstile';
 
-async function verifyRecaptcha(token: string, ipAddress: string): Promise<{ success: boolean; score?: number; message?: string }> {
-  const secretKey = import.meta.env.RECAPTCHA_SECRET_KEY;
-  
-  try {
-    const response = await fetch('https://www.google.com/recaptcha/api/siteverify', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body: `secret=${secretKey}&response=${token}&remoteip=${ipAddress}`,
-    });
-
-    const data = await response.json();
-    
-    console.log('reCAPTCHA verification:', {
-      success: data.success,
-      score: data.score,
-      action: data.action,
-      hostname: data.hostname,
-      'error-codes': data['error-codes']
-    });
-    
-    const isValid = data.success && (!data.score || data.score >= 0.5);
-    
-    return {
-      success: isValid,
-      score: data.score,
-      message: isValid ? 'Verification successful' : 'Low confidence score or failed verification'
-    };
-  } catch (error) {
-    console.error('reCAPTCHA verification error:', error);
-    return {
-      success: false,
-      message: 'reCAPTCHA server error'
-    };
-  }
-}
 
 export const POST: APIRoute = async ({ request }) => {
   try {
@@ -93,19 +57,22 @@ export const POST: APIRoute = async ({ request }) => {
       );
     }
 
-    // Step 3: Verify reCAPTCHA
+    // Step 3: Verify Cloudflare Turnstile
     const ipAddress = request.headers.get('x-forwarded-for')?.split(',')[0] || 
                       request.headers.get('x-real-ip') || 
-                      'unknown';
+                      undefined;
     
-    const recaptchaResult = await verifyRecaptcha(validatedData['g-recaptcha-response'], ipAddress);
+    const turnstileResult = await verifyTurnstile(
+      validatedData['cf-turnstile-response'],
+      ipAddress
+    );
     
-    if (!recaptchaResult.success) {
+    if (!turnstileResult.success) {
       return new Response(
         JSON.stringify({
           success: false,
-          message: `reCAPTCHA verification failed: ${recaptchaResult.message}`,
-          errors: { 'g-recaptcha-response': [recaptchaResult.message || 'CAPTCHA verification failed'] }
+          message: 'CAPTCHA verification failed. Please try again.',
+          errors: { captcha: [turnstileResult.message || 'CAPTCHA verification failed'] }
         }),
         { status: 422, headers: { 'Content-Type': 'application/json' } }
       );

@@ -9,6 +9,7 @@ interface Props {
 const { class: className } = Astro.props;
 
 const googleMapsApiKey = import.meta.env.PUBLIC_GOOGLE_MAPS_API_KEY;
+const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
 
 const contactInfo = {
   phone: "(713) 587-6423",
@@ -270,6 +271,17 @@ const serviceAreas = [
                 I agree to receive communications from AquaShield Restoration.
                 We respect your privacy and will never share your information.
               </label>
+            </div>
+
+            <!-- Cloudflare Turnstile CAPTCHA -->
+            <div class="flex justify-center">
+              <div
+                class="cf-turnstile"
+                data-sitekey={turnstileSiteKey}
+                data-theme="light"
+                data-size="normal"
+              >
+              </div>
             </div>
 
             <button
@@ -561,10 +573,17 @@ const serviceAreas = [
   }
 </style>
 
+<!-- Cloudflare Turnstile API -->
+<script
+  src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+  async
+  defer
+  is:inline></script>
+
 <script
   define:vars={{
-    recaptchaSiteKey: import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY,
     googleMapsApiKey,
+    turnstileSiteKey,
   }}
 >
   // Initialise Google Maps Places autocomplete for the contact form address field
@@ -621,16 +640,8 @@ const serviceAreas = [
     document.head.appendChild(s);
   }
 
-  // Load reCAPTCHA v3
-  function loadRecaptcha() {
-    const script = document.createElement("script");
-    script.src = `https://www.google.com/recaptcha/api.js?render=${recaptchaSiteKey}`;
-    document.head.appendChild(script);
-  }
-
   // Form validation and submission handling
   document.addEventListener("DOMContentLoaded", () => {
-    loadRecaptcha();
     loadContactMapsScript();
 
     const form = document.getElementById("contact-form");
@@ -700,14 +711,22 @@ const serviceAreas = [
           '<svg class="animate-spin h-5 w-5 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>';
 
         try {
-          // Get reCAPTCHA token
-          const token = await grecaptcha.execute(recaptchaSiteKey, {
-            action: "submit_contact",
-          });
+          // Turnstile token is automatically included in the form as 'cf-turnstile-response'
+          const turnstileInput = form.querySelector(
+            'input[name="cf-turnstile-response"]',
+          );
+          if (!turnstileInput || !turnstileInput.value) {
+            window.AquaShieldUtils.showAlert({
+              message: "Please complete the CAPTCHA verification.",
+              type: "error",
+            });
+            submitButton.disabled = false;
+            submitButton.innerHTML = originalText;
+            return;
+          }
 
           const formData = new FormData(form);
           const data = Object.fromEntries(formData.entries());
-          data["g-recaptcha-response"] = token;
 
           // Send to API
           const response = await fetch("/api/contact-support", {
@@ -728,6 +747,10 @@ const serviceAreas = [
               type: "success",
             });
             form.reset();
+            // Reset Turnstile widget after successful submit
+            if (window.turnstile) {
+              window.turnstile.reset();
+            }
           } else {
             window.AquaShieldUtils.showAlert({
               message:
