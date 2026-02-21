@@ -5,6 +5,9 @@ import { getCompanyData, formatPhone } from "../lib/company";
 const company = await getCompanyData();
 const displayPhone = formatPhone(company.phone);
 const displayEmail = company.email ?? "info@aquashieldrestorationusa.com";
+const turnstileSiteKey = (
+  import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? ""
+).trim();
 ---
 
 <style>
@@ -208,7 +211,7 @@ const displayEmail = company.email ?? "info@aquashieldrestorationusa.com";
       <div class="flex justify-center mt-4">
         <div
           class="cf-turnstile"
-          data-sitekey={import.meta.env.PUBLIC_TURNSTILE_SITE_KEY}
+          data-sitekey={turnstileSiteKey}
           data-theme="light"
           data-size="normal"
         >
@@ -313,12 +316,6 @@ const displayEmail = company.email ?? "info@aquashieldrestorationusa.com";
     </div>
   </div>
 </main>
-
-<script
-  src="https://challenges.cloudflare.com/turnstile/v0/api.js"
-  async
-  defer
-  is:inline></script>
 
 <script>
   document.addEventListener("DOMContentLoaded", () => {

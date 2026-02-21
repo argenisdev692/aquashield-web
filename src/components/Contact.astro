@@ -9,7 +9,9 @@ interface Props {
 const { class: className } = Astro.props;
 
 const googleMapsApiKey = import.meta.env.PUBLIC_GOOGLE_MAPS_API_KEY;
-const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
+const turnstileSiteKey = (
+  import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? ""
+).trim();
 
 const contactInfo = {
   phone: "(713) 587-6423",
@@ -263,7 +265,6 @@ const serviceAreas = [
                 type="checkbox"
                 id="consent"
                 name="consent"
-                required
                 class="mt-1 h-4 w-4 text-aqua border-gray-300 rounded"
                 style="accent-color: var(--color-aqua);"
               />
@@ -572,13 +573,6 @@ const serviceAreas = [
     }
   }
 </style>
-
-<!-- Cloudflare Turnstile API -->
-<script
-  src="https://challenges.cloudflare.com/turnstile/v0/api.js"
-  async
-  defer
-  is:inline></script>
 
 <script
   define:vars={{

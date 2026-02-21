@@ -7,7 +7,9 @@ interface Props {
 }
 
 const { class: className } = Astro.props;
-const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
+const turnstileSiteKey = (
+  import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? ""
+).trim();
 ---
 
 <!-- Facebook Lead Button Trigger -->
@@ -388,13 +390,6 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
     outline: none;
   }
 </style>
-
-<!-- Cloudflare Turnstile API -->
-<script
-  src="https://challenges.cloudflare.com/turnstile/v0/api.js"
-  async
-  defer
-  is:inline></script>
 
 <script
   define:vars={{

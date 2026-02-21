@@ -5,7 +5,9 @@ const company = await getCompanyData();
 const formattedPhone = formatPhone(company.phone);
 
 const googleMapsApiKey = import.meta.env.PUBLIC_GOOGLE_MAPS_API_KEY ?? "";
-const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? "";
+const turnstileSiteKey = (
+  import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? ""
+).trim();
 
 const canonicalUrl = "https://aquashieldrestorationusa.com/free-inspection";
 ---
@@ -600,7 +602,7 @@ const canonicalUrl = "https://aquashieldrestorationusa.com/free-inspection";
       </div>
     </main>
 
-    <!-- Cloudflare Turnstile API -->
+    <!-- Cloudflare Turnstile API (standalone page, not in Layout) -->
     <script
       src="https://challenges.cloudflare.com/turnstile/v0/api.js"
       async
