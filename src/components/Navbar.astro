@@ -52,8 +52,9 @@ const companyData = {
   emergencyPhone: "(713) 587-6423",
 };
 
-// Get current path for active state
-const currentPath = Astro.url.pathname;
+// Get current path for active state and remove trailing slash for accurate matching
+const rawPath = Astro.url.pathname;
+const currentPath = rawPath === '/' ? rawPath : rawPath.replace(/\/$/, "");
 ---
 
 <header
@@ -146,19 +147,19 @@ const currentPath = Astro.url.pathname;
                     </svg>
                   </button>
                   
-                  <!-- Dropdown menu -->
+                  <!-- Mega Dropdown menu -->
                   <div
                     x-show="servicesOpen"
                     x-cloak
-                    class="absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-xl z-50"
+                    class="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[520px] bg-white rounded-xl shadow-2xl border border-gray-100 z-50 overflow-hidden"
                     x-transition:enter="transition ease-out duration-200"
-                    x-transition:enter-start="opacity-0 transform scale-95"
-                    x-transition:enter-end="opacity-100 transform scale-100"
+                    x-transition:enter-start="opacity-0 transform -translate-y-2"
+                    x-transition:enter-end="opacity-100 transform translate-y-0"
                     x-transition:leave="transition ease-in duration-150"
-                    x-transition:leave-start="opacity-100 transform scale-100"
-                    x-transition:leave-end="opacity-0 transform scale-95"
+                    x-transition:leave-start="opacity-100 transform translate-y-0"
+                    x-transition:leave-end="opacity-0 transform -translate-y-2"
                   >
-                    <div class="py-2">
+                    <div class="p-5 grid grid-cols-2 gap-x-4 gap-y-1">
                       {link.submenu.map((sublink) => {
                         const isSubActive = sublink.href === currentPath;
                         return (
@@ -166,10 +167,13 @@ const currentPath = Astro.url.pathname;
                             href={sublink.href}
                             @click="servicesOpen = false"
                             class:list={[
-                              "block px-4 py-2 font-semibold transition-colors",
-                              isSubActive ? "bg-aqua/10 text-aqua hover:bg-aqua hover:text-white!" : "text-navy hover:bg-aqua hover:text-white!"
+                              "flex items-center px-4 py-2.5 rounded-lg font-medium text-sm transition-all duration-200 cursor-pointer",
+                              isSubActive 
+                                ? "bg-aqua/10 text-aqua font-bold shadow-sm" 
+                                : "text-navy hover:bg-gray-50 hover:text-aqua hover:translate-x-1"
                             ]}
                           >
+                            <svg class="w-4 h-4 mr-2 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                             {sublink.label}
                           </a>
                         );
