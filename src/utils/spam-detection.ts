@@ -265,19 +265,19 @@ export function getClientIP(request: Request): string {
   // Check common headers for real IP
   const headers = request.headers;
   
-  const forwardedFor = headers.get('x-forwarded-for');
-  if (forwardedFor) {
-    return forwardedFor.split(',')[0].trim();
+  const cfConnectingIP = headers.get('cf-connecting-ip'); // Cloudflare
+  if (cfConnectingIP) {
+    return cfConnectingIP;
   }
 
   const realIP = headers.get('x-real-ip');
   if (realIP) {
     return realIP;
   }
-
-  const cfConnectingIP = headers.get('cf-connecting-ip'); // Cloudflare
-  if (cfConnectingIP) {
-    return cfConnectingIP;
+  
+  const forwardedFor = headers.get('x-forwarded-for');
+  if (forwardedFor) {
+    return forwardedFor.split(',')[0].trim();
   }
 
   return 'unknown';

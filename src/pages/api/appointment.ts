@@ -2,7 +2,7 @@ import type { APIRoute } from 'astro';
 import { getServerSupabase, type Appointment } from '../../lib/supabase';
 import { v4 as uuidv4 } from 'uuid';
 import { appointmentSchema, formatZodErrors } from '../../utils/validation';
-import { performSpamCheck } from '../../utils/spam-detection';
+import { performSpamCheck, getClientIP } from '../../utils/spam-detection';
 import { verifyTurnstile } from '../../utils/turnstile';
 import { sendEmail, getNewLeadEmailTemplate, getLeadConfirmationEmailTemplate } from '../../utils/email';
 
@@ -54,14 +54,11 @@ export const POST: APIRoute = async ({ request }) => {
     }
 
     // Step 3: Verify Cloudflare Turnstile
-    const ipAddress =
-      request.headers.get('x-forwarded-for')?.split(',')[0] ||
-      request.headers.get('x-real-ip') ||
-      undefined;
+    const ipAddress = getClientIP(request);
 
     const turnstileResult = await verifyTurnstile(
       validatedData['cf-turnstile-response'],
-      ipAddress
+      ipAddress === 'unknown' ? undefined : ipAddress
     );
 
     if (!turnstileResult.success) {
