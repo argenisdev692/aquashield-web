@@ -19,10 +19,10 @@
     <div class="relative z-10 h-full flex items-center justify-center">
         <div class="text-center">
             <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 drop-shadow-lg">
-                Water Damage Restoration & Mitigation
+                Water Damage Restoration
             </h1>
             <p class="text-lg sm:text-xl md:text-2xl text-white max-w-2xl mx-auto px-4 mb-12 drop-shadow-md">
-                Fast 24/7 response for mitigation, drying, and dehumidification after floods, water leaks, or burst pipes.
+                Fast 24/7 response for water extraction and damage repair after floods, leaks, or burst pipes.
             </p>
 
             <!-- Breadcrumb Navigation -->
@@ -46,24 +46,27 @@
 <!-- Main Content -->
 <main class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
     <!-- Emergency Contact Banner -->
-    <div class="bg-aqua/10 border-l-4 border-aqua p-4 mb-8">
+    <div class="bg-aqua/10 border-l-4 border-aqua p-4 mb-8 transform transition hover:scale-[1.01] duration-300">
         <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
             <div class="flex items-center">
-                <svg class="h-6 w-6 text-aqua shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                </svg>
-                <p class="ml-3 text-base sm:text-lg font-medium text-navy text-center sm:text-left">
-                    For emergency restoration services, call us immediately at
-                    <a href="tel:7135876423" class="font-bold hover:text-aqua whitespace-nowrap">(713) 587-6423</a>
+                <div class="relative flex h-6 w-6 mr-3 shrink-0">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-aqua opacity-75"></span>
+                  <svg class="relative inline-flex rounded-full h-6 w-6 text-navy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                  </svg>
+                </div>
+                <p class="text-base sm:text-lg font-medium text-navy text-center sm:text-left">
+                    <strong>EMERGENCY:</strong> For immediate water damage restoration assistance, call us 24/7 at
+                    <a href="tel:7135876423" class="font-bold hover:text-aqua whitespace-nowrap text-xl ml-1 text-red-600 underline">(713) 587-6423</a>
                 </p>
             </div>
-            <button onclick="openInspectionModal()" class="btn-primary px-6 py-2 rounded-md whitespace-nowrap shrink-0 cursor-pointer">
-                Get a Free Inspection
+            <button onclick="openInspectionModal()" class="btn-primary px-6 py-3 rounded-md whitespace-nowrap shrink-0 cursor-pointer font-bold text-lg animate-bounce">
+                Claim Free Inspection
             </button>
         </div>
     </div>
 
-    <div class="bg-white rounded-lg shadow-lg p-8">
+    <div class="bg-white rounded-lg shadow-lg p-8 border-t-4 border-navy">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start mb-8">
             <!-- Text Content Column -->
             <div class="space-y-6">
@@ -71,63 +74,100 @@
                     <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-navy mb-4">
                         Professional Water Damage Restoration Services
                     </h2>
-                    <p class="text-base sm:text-lg text-gray-600">
+                    <p class="text-base sm:text-lg text-gray-700 leading-relaxed font-medium">
                         At AquaShield Restoration LLC, we specialize in high-quality water damage restoration services. Our team is fully equipped and trained to handle any scale of disaster, providing you with swift, effective solutions to minimize loss and restore your property quickly.
                     </p>
-                    <p class="text-base sm:text-lg text-gray-600 mt-4">
-                        Customer satisfaction and safety are our highest priorities. We utilize advanced techniques and industry-leading equipment to ensure a thorough restoration process.
-                    </p>
+                    <div class="mt-6 p-5 bg-navy/5 rounded-lg border-l-4 border-aqua">
+                        <p class="text-base sm:text-lg text-gray-800 leading-relaxed">
+                            When disaster strikes, every minute counts. Delaying professional intervention can lead to thousands of dollars in secondary damages, irreversible structural issues, and severe health risks from mold or hazardous contamination. Don't leave your property's safety to chance—or to inexperienced contractors. At AquaShield Restoration LLC, we don't just fix the surface; we address the root cause, mitigate future risks, and handle the grueling insurance paperwork on your behalf to ensure you get fully covered. <strong>Our elite emergency response team is on standby right now</strong>, fully equipped with state-of-the-art industrial gear to arrive at your property immediately. Stop the damage before it gets worse—secure your peace of mind and protect your most valuable investment today.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Trust Badges Simulation -->
+                <div class="flex items-center space-x-4 pt-4 border-t border-gray-100">
+                    <div class="flex items-center text-navy font-bold">
+                        <svg class="h-6 w-6 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        Licensed & Insured
+                    </div>
+                    <div class="flex items-center text-navy font-bold">
+                        <svg class="h-6 w-6 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        IICRC Certified
+                    </div>
                 </div>
             </div>
 
             <!-- Image Column -->
-            <div class="relative rounded-lg overflow-hidden fade-in-section">
+            <div class="relative rounded-lg overflow-hidden fade-in-section shadow-xl border-4 border-white">
                 <!-- PLACEHOLDER FOR IMAGE -->
-                <img src="/img/services/placeholder.webp" alt="Water Damage Restoration process" class="w-full h-auto object-cover image-zoom bg-gray-200" style="min-height:300px;">
+                <img src="/img/services/placeholder.webp" alt="Water Damage Restoration process" class="w-full h-auto object-cover image-zoom bg-gray-200" style="min-height:350px;">
+                <div class="absolute inset-0 bg-linear-to-t from-black/60 to-transparent flex items-end">
+                    <p class="text-white font-bold p-4 text-xl drop-shadow-md">Trusted Experts in Water Damage Restoration</p>
+                </div>
             </div>
         </div>
 
         <div class="space-y-6">
             <!-- Call to Action Box -->
-            <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
-                <h3 class="text-lg sm:text-xl font-semibold text-navy mb-4">Why Choose Us</h3>
-                <ul class="space-y-3 text-base sm:text-lg">
-                    <li class="flex items-start">
-                        <svg class="w-6 h-6 text-aqua mr-2 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                        </svg>
-                        <span>24/7 Emergency Response</span>
-                    </li>
-                    <li class="flex items-start">
-                        <svg class="w-6 h-6 text-aqua mr-2 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                        </svg>
-                        <span>IICRC Certified Technician Specialists</span>
-                    </li>
-                    <li class="flex items-start">
-                        <svg class="w-6 h-6 text-aqua mr-2 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                        </svg>
-                        <span>Direct Insurance Billing & Coordination</span>
-                    </li>
-                    <li class="flex items-start">
-                        <svg class="w-6 h-6 text-aqua mr-2 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                        </svg>
-                        <span>Comprehensive Restoration from Start to Finish</span>
-                    </li>
-                </ul>
+            <div class="bg-gray-50 p-6 rounded-lg border border-gray-200 shadow-inner">
+                <h3 class="text-xl sm:text-2xl font-bold text-navy mb-6 text-center">Here Is Why Communities Trust Us</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="flex items-start bg-white p-4 rounded shadow-sm">
+                        <svg class="w-8 h-8 text-aqua mr-3 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                        <div>
+                            <strong class="text-navy block text-lg">24/7 Rapid Emergency Response</strong>
+                            <span class="text-sm text-gray-600">We dispatch our team immediately upon your call.</span>
+                        </div>
+                    </div>
+                    <div class="flex items-start bg-white p-4 rounded shadow-sm">
+                        <svg class="w-8 h-8 text-aqua mr-3 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                        <div>
+                            <strong class="text-navy block text-lg">Direct Insurance Billing</strong>
+                            <span class="text-sm text-gray-600">No out-of-pocket stress. We coordinate with your adjuster.</span>
+                        </div>
+                    </div>
+                    <div class="flex items-start bg-white p-4 rounded shadow-sm">
+                        <svg class="w-8 h-8 text-aqua mr-3 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                        <div>
+                            <strong class="text-navy block text-lg">IICRC Certified Specialists</strong>
+                            <span class="text-sm text-gray-600">Top-tier industry training and standards on every job.</span>
+                        </div>
+                    </div>
+                    <div class="flex items-start bg-white p-4 rounded shadow-sm">
+                        <svg class="w-8 h-8 text-aqua mr-3 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                        <div>
+                            <strong class="text-navy block text-lg">Turnkey Restoration</strong>
+                            <span class="text-sm text-gray-600">From initial mitigation to final reconstruction and paint.</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
-    <div id="schedule-inspection" class="mt-12">
-        <div class="text-center mb-8">
-            <h2 class="text-3xl font-bold text-navy">Need Help? Contact Us Now!</h2>
-            <p class="text-lg text-gray-600 mt-2">Don't wait. Schedule your free evaluation today or call for emergency support.</p>
-        </div>
-        <div class="text-center">
-            <button onclick="openInspectionModal()" class="btn-primary inline-block px-8 py-3 text-lg font-bold rounded-lg cursor-pointer">Book Free Evaluation</button>
+    <div id="schedule-inspection" class="mt-16 bg-navy text-white rounded-2xl p-8 sm:p-12 text-center shadow-2xl relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-64 h-64 bg-aqua/20 rounded-full blur-3xl -mr-20 -mt-20"></div>
+        <div class="absolute bottom-0 left-0 w-64 h-64 bg-aqua/20 rounded-full blur-3xl -ml-20 -mb-20"></div>
+        
+        <div class="relative z-10">
+            <h2 class="text-3xl sm:text-4xl font-extrabold mb-4">Ready to Restore Your Peace of Mind?</h2>
+            <p class="text-xl text-gray-300 mt-2 max-w-2xl mx-auto mb-8">
+                If your property has suffered damage, do not hesitate. Our experts will assess the situation for free and provide a clear, honest recovery plan. 
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                <button onclick="openInspectionModal()" class="btn-primary px-10 py-4 text-xl font-bold rounded-lg cursor-pointer transform hover:scale-105 transition-transform shadow-lg w-full sm:w-auto">
+                    Book Your Free Online Evaluation
+                </button>
+                <span class="text-gray-400 font-medium">OR</span>
+                <a href="tel:7135876423" class="bg-white text-navy px-10 py-4 text-xl font-bold rounded-lg cursor-pointer transform hover:scale-105 transition-transform shadow-lg w-full sm:w-auto hover:bg-gray-100 flex items-center justify-center gap-2">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.036 11.036 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path></svg>
+                    Call (713) 587-6423
+                </a>
+            </div>
+            <p class="mt-6 text-sm text-gray-400 flex items-center justify-center gap-2">
+                <svg class="w-4 h-4 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                Your information is 100% secure and will never be shared.
+            </p>
         </div>
     </div>
 </main>

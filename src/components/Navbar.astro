@@ -18,6 +18,7 @@ const navLinks: NavLink[] = [
     label: "Services",
     submenu: [
       { href: "/water-damage", label: "Water Damage" },
+      { href: "/water-mitigation", label: "Water Mitigation" },
       { href: "/fire-damage", label: "Fire Damage" },
       { href: "/mold-remediation", label: "Mold Remediation" },
       { href: "/storm-damage", label: "Storm Damage" },
@@ -27,6 +28,7 @@ const navLinks: NavLink[] = [
       { href: "/insurance-restoration", label: "Insurance Restoration" },
       { href: "/large-loss", label: "Large Loss" },
       { href: "/emergency-board-up", label: "Emergency Board-Up" },
+      { href: "/emergency-tarping", label: "Emergency Tarping" },
       { href: "/packout-restoration", label: "Packout & Restoration" },
       { href: "/reconstruction", label: "Reconstruction" },
       { href: "/controlled-demolition", label: "Demolition" },
@@ -370,7 +372,7 @@ const currentPath = Astro.url.pathname;
           @click="isOpen = !isOpen"
           class:list={[
             "flex items-center justify-between w-full py-2.5 px-4 rounded transition duration-200 hover:bg-gray-100 font-semibold",
-            ["/water-damage", "/fire-damage", "/mold-remediation", "/storm-damage", "/hvac-decontamination", "/drying-dehumidification", "/sewage-cleanup", "/insurance-restoration", "/large-loss", "/emergency-board-up", "/packout-restoration", "/reconstruction", "/controlled-demolition", "/new-roof", "/roof-repair", "/hail-damage"].includes(currentPath) ? "text-aqua" : "text-navy"
+            ["/water-damage", "/water-mitigation", "/fire-damage", "/mold-remediation", "/storm-damage", "/hvac-decontamination", "/drying-dehumidification", "/sewage-cleanup", "/insurance-restoration", "/large-loss", "/emergency-board-up", "/emergency-tarping", "/packout-restoration", "/reconstruction", "/controlled-demolition", "/new-roof", "/roof-repair", "/hail-damage"].includes(currentPath) ? "text-aqua" : "text-navy"
           ]}
         >
           <span>Services</span>
@@ -386,6 +388,7 @@ const currentPath = Astro.url.pathname;
         </button>
         <div x-show="isOpen" x-cloak class="pl-4">
           <a href="/water-damage" class:list={["block py-2 px-4 rounded hover:bg-gray-100", currentPath === "/water-damage" ? "bg-aqua/10 text-aqua font-semibold" : "text-gray-700"]}>Water Damage</a>
+          <a href="/water-mitigation" class:list={["block py-2 px-4 rounded hover:bg-gray-100", currentPath === "/water-mitigation" ? "bg-aqua/10 text-aqua font-semibold" : "text-gray-700"]}>Water Mitigation</a>
           <a href="/fire-damage" class:list={["block py-2 px-4 rounded hover:bg-gray-100", currentPath === "/fire-damage" ? "bg-aqua/10 text-aqua font-semibold" : "text-gray-700"]}>Fire Damage</a>
           <a href="/mold-remediation" class:list={["block py-2 px-4 rounded hover:bg-gray-100", currentPath === "/mold-remediation" ? "bg-aqua/10 text-aqua font-semibold" : "text-gray-700"]}>Mold Remediation</a>
           <a href="/storm-damage" class:list={["block py-2 px-4 rounded hover:bg-gray-100", currentPath === "/storm-damage" ? "bg-aqua/10 text-aqua font-semibold" : "text-gray-700"]}>Storm Damage</a>
@@ -395,6 +398,7 @@ const currentPath = Astro.url.pathname;
           <a href="/insurance-restoration" class:list={["block py-2 px-4 rounded hover:bg-gray-100", currentPath === "/insurance-restoration" ? "bg-aqua/10 text-aqua font-semibold" : "text-gray-700"]}>Insurance Restoration</a>
           <a href="/large-loss" class:list={["block py-2 px-4 rounded hover:bg-gray-100", currentPath === "/large-loss" ? "bg-aqua/10 text-aqua font-semibold" : "text-gray-700"]}>Large Loss</a>
           <a href="/emergency-board-up" class:list={["block py-2 px-4 rounded hover:bg-gray-100", currentPath === "/emergency-board-up" ? "bg-aqua/10 text-aqua font-semibold" : "text-gray-700"]}>Emergency Board-Up</a>
+          <a href="/emergency-tarping" class:list={["block py-2 px-4 rounded hover:bg-gray-100", currentPath === "/emergency-tarping" ? "bg-aqua/10 text-aqua font-semibold" : "text-gray-700"]}>Emergency Tarping</a>
           <a href="/packout-restoration" class:list={["block py-2 px-4 rounded hover:bg-gray-100", currentPath === "/packout-restoration" ? "bg-aqua/10 text-aqua font-semibold" : "text-gray-700"]}>Packout & Restoration</a>
           <a href="/reconstruction" class:list={["block py-2 px-4 rounded hover:bg-gray-100", currentPath === "/reconstruction" ? "bg-aqua/10 text-aqua font-semibold" : "text-gray-700"]}>Reconstruction</a>
           <a href="/controlled-demolition" class:list={["block py-2 px-4 rounded hover:bg-gray-100", currentPath === "/controlled-demolition" ? "bg-aqua/10 text-aqua font-semibold" : "text-gray-700"]}>Demolition</a>
