@@ -17,9 +17,21 @@ const navLinks: NavLink[] = [
   { 
     label: "Services",
     submenu: [
+      { href: "/water-damage", label: "Water Damage" },
+      { href: "/fire-damage", label: "Fire Damage" },
+      { href: "/mold-remediation", label: "Mold Remediation" },
+      { href: "/storm-damage", label: "Storm Damage" },
+      { href: "/hvac-decontamination", label: "HVAC Cleaning" },
+      { href: "/drying-dehumidification", label: "Drying & Dehumidification" },
+      { href: "/sewage-cleanup", label: "Sewage Cleanup" },
+      { href: "/insurance-restoration", label: "Insurance Restoration" },
+      { href: "/large-loss", label: "Large Loss" },
+      { href: "/emergency-board-up", label: "Emergency Board-Up" },
+      { href: "/packout-restoration", label: "Packout & Restoration" },
+      { href: "/reconstruction", label: "Reconstruction" },
+      { href: "/controlled-demolition", label: "Demolition" },
       { href: "/new-roof", label: "New Roof" },
       { href: "/roof-repair", label: "Roof Repair" },
-      { href: "/storm-damage", label: "Storm Damage" },
       { href: "/hail-damage", label: "Hail Damage" },
     ]
   },
@@ -358,7 +370,7 @@ const currentPath = Astro.url.pathname;
           @click="isOpen = !isOpen"
           class:list={[
             "flex items-center justify-between w-full py-2.5 px-4 rounded transition duration-200 hover:bg-gray-100 font-semibold",
-            ["/new-roof", "/roof-repair", "/storm-damage", "/hail-damage"].includes(currentPath) ? "text-aqua" : "text-navy"
+            ["/water-damage", "/fire-damage", "/mold-remediation", "/storm-damage", "/hvac-decontamination", "/drying-dehumidification", "/sewage-cleanup", "/insurance-restoration", "/large-loss", "/emergency-board-up", "/packout-restoration", "/reconstruction", "/controlled-demolition", "/new-roof", "/roof-repair", "/hail-damage"].includes(currentPath) ? "text-aqua" : "text-navy"
           ]}
         >
           <span>Services</span>
@@ -373,9 +385,21 @@ const currentPath = Astro.url.pathname;
           </svg>
         </button>
         <div x-show="isOpen" x-cloak class="pl-4">
+          <a href="/water-damage" class:list={["block py-2 px-4 rounded hover:bg-gray-100", currentPath === "/water-damage" ? "bg-aqua/10 text-aqua font-semibold" : "text-gray-700"]}>Water Damage</a>
+          <a href="/fire-damage" class:list={["block py-2 px-4 rounded hover:bg-gray-100", currentPath === "/fire-damage" ? "bg-aqua/10 text-aqua font-semibold" : "text-gray-700"]}>Fire Damage</a>
+          <a href="/mold-remediation" class:list={["block py-2 px-4 rounded hover:bg-gray-100", currentPath === "/mold-remediation" ? "bg-aqua/10 text-aqua font-semibold" : "text-gray-700"]}>Mold Remediation</a>
+          <a href="/storm-damage" class:list={["block py-2 px-4 rounded hover:bg-gray-100", currentPath === "/storm-damage" ? "bg-aqua/10 text-aqua font-semibold" : "text-gray-700"]}>Storm Damage</a>
+          <a href="/hvac-decontamination" class:list={["block py-2 px-4 rounded hover:bg-gray-100", currentPath === "/hvac-decontamination" ? "bg-aqua/10 text-aqua font-semibold" : "text-gray-700"]}>HVAC Cleaning</a>
+          <a href="/drying-dehumidification" class:list={["block py-2 px-4 rounded hover:bg-gray-100", currentPath === "/drying-dehumidification" ? "bg-aqua/10 text-aqua font-semibold" : "text-gray-700"]}>Drying & Dehumidification</a>
+          <a href="/sewage-cleanup" class:list={["block py-2 px-4 rounded hover:bg-gray-100", currentPath === "/sewage-cleanup" ? "bg-aqua/10 text-aqua font-semibold" : "text-gray-700"]}>Sewage Cleanup</a>
+          <a href="/insurance-restoration" class:list={["block py-2 px-4 rounded hover:bg-gray-100", currentPath === "/insurance-restoration" ? "bg-aqua/10 text-aqua font-semibold" : "text-gray-700"]}>Insurance Restoration</a>
+          <a href="/large-loss" class:list={["block py-2 px-4 rounded hover:bg-gray-100", currentPath === "/large-loss" ? "bg-aqua/10 text-aqua font-semibold" : "text-gray-700"]}>Large Loss</a>
+          <a href="/emergency-board-up" class:list={["block py-2 px-4 rounded hover:bg-gray-100", currentPath === "/emergency-board-up" ? "bg-aqua/10 text-aqua font-semibold" : "text-gray-700"]}>Emergency Board-Up</a>
+          <a href="/packout-restoration" class:list={["block py-2 px-4 rounded hover:bg-gray-100", currentPath === "/packout-restoration" ? "bg-aqua/10 text-aqua font-semibold" : "text-gray-700"]}>Packout & Restoration</a>
+          <a href="/reconstruction" class:list={["block py-2 px-4 rounded hover:bg-gray-100", currentPath === "/reconstruction" ? "bg-aqua/10 text-aqua font-semibold" : "text-gray-700"]}>Reconstruction</a>
+          <a href="/controlled-demolition" class:list={["block py-2 px-4 rounded hover:bg-gray-100", currentPath === "/controlled-demolition" ? "bg-aqua/10 text-aqua font-semibold" : "text-gray-700"]}>Demolition</a>
           <a href="/new-roof" class:list={["block py-2 px-4 rounded hover:bg-gray-100", currentPath === "/new-roof" ? "bg-aqua/10 text-aqua font-semibold" : "text-gray-700"]}>New Roof</a>
           <a href="/roof-repair" class:list={["block py-2 px-4 rounded hover:bg-gray-100", currentPath === "/roof-repair" ? "bg-aqua/10 text-aqua font-semibold" : "text-gray-700"]}>Roof Repair</a>
-          <a href="/storm-damage" class:list={["block py-2 px-4 rounded hover:bg-gray-100", currentPath === "/storm-damage" ? "bg-aqua/10 text-aqua font-semibold" : "text-gray-700"]}>Storm Damage</a>
           <a href="/hail-damage" class:list={["block py-2 px-4 rounded hover:bg-gray-100", currentPath === "/hail-damage" ? "bg-aqua/10 text-aqua font-semibold" : "text-gray-700"]}>Hail Damage</a>
         </div>
       </div>
