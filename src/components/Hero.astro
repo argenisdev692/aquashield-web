@@ -23,30 +23,38 @@ const heroStats = [
 ];
 ---
 
-<section id="home" class:list={["relative min-h-[100vh] flex items-center overflow-hidden", className]}>
+<section
+  id="home"
+  class:list={[
+    "relative min-h-screen flex items-center overflow-hidden",
+    className,
+  ]}
+>
   <!-- Background with gradient and pattern -->
   <div class="absolute inset-0 bg-gradient-hero">
     <!-- Wave pattern overlay -->
     <div class="absolute inset-0 opacity-10">
-      <svg class="w-full h-full" preserveAspectRatio="none" viewBox="0 0 1440 800" xmlns="http://www.w3.org/2000/svg">
-        <path 
-          d="M0,400 C150,350 350,450 500,400 C650,350 750,300 900,350 C1050,400 1200,450 1440,400 L1440,800 L0,800 Z" 
+      <svg
+        class="w-full h-full"
+        preserveAspectRatio="none"
+        viewBox="0 0 1440 800"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M0,400 C150,350 350,450 500,400 C650,350 750,300 900,350 C1050,400 1200,450 1440,400 L1440,800 L0,800 Z"
           fill="var(--aqua)"
-          opacity="0.3"
-        />
-        <path 
-          d="M0,500 C200,450 400,550 600,500 C800,450 1000,400 1200,450 C1350,480 1400,500 1440,500 L1440,800 L0,800 Z" 
+          opacity="0.3"></path>
+        <path
+          d="M0,500 C200,450 400,550 600,500 C800,450 1000,400 1200,450 C1350,480 1400,500 1440,500 L1440,800 L0,800 Z"
           fill="var(--aqua)"
-          opacity="0.2"
-        />
-        <path 
-          d="M0,600 C250,550 450,650 700,600 C950,550 1150,500 1440,550 L1440,800 L0,800 Z" 
+          opacity="0.2"></path>
+        <path
+          d="M0,600 C250,550 450,650 700,600 C950,550 1150,500 1440,550 L1440,800 L0,800 Z"
           fill="var(--aqua)"
-          opacity="0.15"
-        />
+          opacity="0.15"></path>
       </svg>
     </div>
-    
+
     <!-- Animated water drops -->
     <div class="absolute inset-0 overflow-hidden pointer-events-none">
       <div class="water-drop drop-1"></div>
@@ -64,41 +72,73 @@ const heroStats = [
       <div class="text-white space-y-6 fade-in-section">
         <!-- Main heading with typing effect -->
         <h1 class="hero-title">
-          <span class="inline-block typing-text" data-text="AQUASHIELD RESTORATION">
+          <span
+            class="inline-block typing-text"
+            data-text="AQUASHIELD RESTORATION"
+          >
             <span class="typed-text"></span>
             <span class="cursor">|</span>
           </span>
           <br />
-          <span class="text-white/90 inline-block animate-fade-in-up" style="animation-delay: 2.5s;">{companyData.tagline}</span>
+          <span
+            class="text-white/90 inline-block animate-fade-in-up"
+            style="animation-delay: 2.5s;">{companyData.tagline}</span
+          >
         </h1>
 
         <!-- Subheading -->
         <p class="text-lg md:text-xl text-white/80 max-w-xl">
-          Expert Water Damage Restoration & Professional Roofing Services. 
-          24/7 emergency response, storm damage repair, and complete restoration 
+          Expert Water Damage Restoration & Professional Roofing Services. 24/7
+          emergency response, storm damage repair, and complete restoration
           solutions for your home or business.
         </p>
 
         <!-- Badge - Repositioned below description for better UX -->
-        <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 text-sm">
+        <div
+          class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 text-sm"
+        >
           <span class="w-2 h-2 bg-aqua rounded-full animate-pulse"></span>
           <span>24/7 Emergency Service Available</span>
         </div>
 
         <!-- CTA Buttons - improved z-index -->
         <div class="flex flex-col sm:flex-row gap-4 pt-4 pb-8 relative z-20">
-          <button onclick="openInspectionModal()" class="btn-primary text-center text-lg px-8 py-4 shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 ease-out cursor-pointer">
+          <button
+            onclick="openInspectionModal()"
+            class="btn-primary text-center text-lg px-8 py-4 shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 ease-out cursor-pointer"
+          >
             Get Free Estimate
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5 inline-block ml-2"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
             </svg>
           </button>
           <a
-            href={`tel:${companyData.emergencyPhone.replace(/[^0-9]/g, '')}`}
+            href={`tel:${companyData.emergencyPhone.replace(/[^0-9]/g, "")}`}
             class="btn-call-emergency text-center text-lg px-8 py-4 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 ease-out"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+              ></path>
             </svg>
             Call Now: {companyData.emergencyPhone}
           </a>
@@ -106,54 +146,98 @@ const heroStats = [
       </div>
 
       <!-- Right column - Stats/Image -->
-      <div class="hidden lg:block fade-in-section" style="animation-delay: 0.3s;">
+      <div
+        class="hidden lg:block fade-in-section"
+        style="animation-delay: 0.3s;"
+      >
         <div class="relative">
           <!-- Stats cards -->
           <div class="grid grid-cols-2 gap-4 mb-6">
-            {heroStats.map((stat, index) => (
-              <div
-                class="bg-white/10 backdrop-blur-md rounded-2xl p-6 text-center border border-white/20 hover:bg-white/20 transition-all duration-300 hover:scale-105"
-                style={`animation-delay: ${0.1 * index}s`}
-              >
-                <div class="text-3xl md:text-4xl font-bold text-aqua mb-2">{stat.value}</div>
-                <div class="text-white/80 text-sm">{stat.label}</div>
-              </div>
-            ))}
+            {
+              heroStats.map((stat, index) => (
+                <div
+                  class="bg-white/10 backdrop-blur-md rounded-2xl p-6 text-center border border-white/20 hover:bg-white/20 transition-all duration-300 hover:scale-105"
+                  style={`animation-delay: ${0.1 * index}s`}
+                >
+                  <div class="text-3xl md:text-4xl font-bold text-aqua mb-2">
+                    {stat.value}
+                  </div>
+                  <div class="text-white/80 text-sm">{stat.label}</div>
+                </div>
+              ))
+            }
           </div>
 
           <!-- Trust indicators below cards -->
           <div class="flex flex-col gap-3 text-white text-sm font-medium">
             <div class="flex items-center gap-3">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-aqua shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5 text-aqua shrink-0"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                ></path>
               </svg>
               <span>Licensed & Insured</span>
             </div>
             <div class="flex items-center gap-3">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-aqua shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5 text-aqua shrink-0"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 13l4 4L19 7"></path>
               </svg>
               <span>Certified Professionals</span>
             </div>
             <div class="flex items-center gap-3">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-aqua shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5 text-aqua shrink-0"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                ></path>
               </svg>
               <span>Insurance Claims Help</span>
             </div>
           </div>
 
           <!-- Decorative shield with animated glow -->
-          <div class="absolute bottom-0 -right-4 w-40 h-40 opacity-30 pointer-events-none z-10">
-            <svg viewBox="0 0 100 100" class="w-full h-full shield-glow" xmlns="http://www.w3.org/2000/svg">
+          <div
+            class="absolute bottom-0 -right-4 w-40 h-40 opacity-30 pointer-events-none z-10"
+          >
+            <svg
+              viewBox="0 0 100 100"
+              class="w-full h-full shield-glow"
+              xmlns="http://www.w3.org/2000/svg"
+            >
               <!-- Shield outline -->
               <path
                 d="M50 5 L90 20 L90 50 C90 75 70 90 50 95 C30 90 10 75 10 50 L10 20 Z"
                 fill="var(--aqua)"
                 stroke="var(--white)"
                 stroke-width="2"
-                class="shield-path"
-              />
+                class="shield-path"></path>
               <!-- Checkmark icon inside -->
               <path
                 d="M35 50 L45 60 L65 35"
@@ -161,8 +245,7 @@ const heroStats = [
                 stroke="var(--white)"
                 stroke-width="6"
                 stroke-linecap="round"
-                stroke-linejoin="round"
-              />
+                stroke-linejoin="round"></path>
             </svg>
           </div>
         </div>
@@ -171,16 +254,28 @@ const heroStats = [
   </div>
 
   <!-- Wave divider at bottom - animated waves -->
-  <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-[0]">
-    <svg class="relative block w-full h-[120px] md:h-[180px] lg:h-[220px]" viewBox="0 24 150 28" preserveAspectRatio="none">
+  <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-0">
+    <svg
+      class="relative block w-full h-[120px] md:h-[180px] lg:h-[220px]"
+      viewBox="0 24 150 28"
+      preserveAspectRatio="none"
+    >
       <style>
         @keyframes waveMove1 {
-          from { transform: translateX(-90px); }
-          to { transform: translateX(85px); }
+          from {
+            transform: translateX(-90px);
+          }
+          to {
+            transform: translateX(85px);
+          }
         }
         @keyframes waveMove2 {
-          from { transform: translateX(-90px); }
-          to { transform: translateX(85px); }
+          from {
+            transform: translateX(-90px);
+          }
+          to {
+            transform: translateX(85px);
+          }
         }
         .wave-layer-1 {
           animation: waveMove1 12s linear infinite 0s;
@@ -201,13 +296,28 @@ const heroStats = [
           <stop offset="100%" stop-color="#38bdf8"></stop>
         </linearGradient>
         <!-- Wave path definition -->
-        <path id="wavePath" d="M -160 40 Q -116 30 -72 40 Q -28 50 16 40 Q 60 30 104 40 Q 148 50 192 40 L 192 80 L -160 80 Z"></path>
+        <path
+          id="wavePath"
+          d="M -160 40 Q -116 30 -72 40 Q -28 50 16 40 Q 60 30 104 40 Q 148 50 192 40 L 192 80 L -160 80 Z"
+        ></path>
       </defs>
       <g>
         <!-- First wave layer -->
-        <use href="#wavePath" x="48" y="0" fill="url(#waveGradient1)" opacity="0.4" class="wave-layer-1"></use>
+        <use
+          href="#wavePath"
+          x="48"
+          y="0"
+          fill="url(#waveGradient1)"
+          opacity="0.4"
+          class="wave-layer-1"></use>
         <!-- Second wave layer -->
-        <use href="#wavePath" x="68" y="3" fill="url(#waveGradient2)" opacity="0.5" class="wave-layer-2"></use>
+        <use
+          href="#wavePath"
+          x="68"
+          y="3"
+          fill="url(#waveGradient2)"
+          opacity="0.5"
+          class="wave-layer-2"></use>
         <!-- Static white wave on top -->
         <use href="#wavePath" x="48" y="5" fill="#ffffff" opacity="1"></use>
       </g>
@@ -294,7 +404,7 @@ const heroStats = [
     );
     background-size: 200% 100%;
     animation: gradientFlow 5s ease infinite;
-    
+
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -323,10 +433,12 @@ const heroStats = [
   }
 
   @keyframes blink {
-    0%, 49% {
+    0%,
+    49% {
       opacity: 1;
     }
-    50%, 100% {
+    50%,
+    100% {
       opacity: 0;
     }
   }
@@ -363,7 +475,7 @@ const heroStats = [
       opacity: 1;
       transform: none;
     }
-    
+
     .animate-bounce {
       animation: none;
     }
@@ -403,19 +515,25 @@ const heroStats = [
 <script>
   // Typing effect for hero title
   function typeWriter() {
-    const typingElement = document.querySelector('.typing-text');
+    const typingElement = document.querySelector(".typing-text");
     if (!typingElement) return;
-    
-    const text = typingElement.getAttribute('data-text') || '';
-    const typedTextElement = typingElement.querySelector('.typed-text');
-    const cursorElement = typingElement.querySelector('.cursor');
-    
+
+    const text = typingElement.getAttribute("data-text") || "";
+    const typedTextElement = typingElement.querySelector(
+      ".typed-text",
+    ) as HTMLElement | null;
+    const cursorElement = typingElement.querySelector(
+      ".cursor",
+    ) as HTMLElement | null;
+
     if (!typedTextElement || !cursorElement) return;
-    
+
     let index = 0;
     const speed = 80; // milliseconds per character
-    
+
     function type() {
+      if (!typedTextElement || !cursorElement) return;
+
       if (index < text.length) {
         typedTextElement.textContent += text.charAt(index);
         index++;
@@ -423,18 +541,18 @@ const heroStats = [
       } else {
         // After typing is complete, keep cursor blinking for 2 seconds then hide it
         setTimeout(() => {
-          cursorElement.style.display = 'none';
+          cursorElement.style.display = "none";
         }, 2000);
       }
     }
-    
+
     // Start typing after a small delay
     setTimeout(type, 300);
   }
-  
+
   // Run on page load
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', typeWriter);
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", typeWriter);
   } else {
     typeWriter();
   }
