@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![AquaShield Logo](public/logo PNG.png)
+![AquaShield Logo](public/Logo%20PNG.png)
 
 **Professional Water Damage Restoration & Roofing Services**
 
@@ -180,7 +180,7 @@ flowchart LR
   },
   "integrations": {
     "maps": "Google Maps API",
-    "captcha": "Google reCAPTCHA v3",
+    "captcha": "reCAPTCHA Cloudflare (Turnstile)",
     "analytics": "Google Analytics 4 (pending)",
     "monitoring": "Sentry (pending)"
   }
@@ -510,7 +510,7 @@ SUPABASE_SERVICE_ROLE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9... # KEEP SECRET!
 # Google Maps API
 PUBLIC_GOOGLE_MAPS_API_KEY=AIzaSyD...
 
-# Google reCAPTCHA v3
+# reCAPTCHA Cloudflare
 PUBLIC_RECAPTCHA_SITE_KEY=6LfXXXXXXXXXXXXXXX
 RECAPTCHA_SECRET_KEY=6LfYYYYYYYYYYYYYYY
 ```
@@ -741,7 +741,7 @@ graph LR
     A[Form Submit] -->|Layer 1| B[Honeypot Check]
     B -->|Layer 2| C[Rate Limiting]
     C -->|Layer 3| D[Content Analysis]
-    D -->|Layer 4| E[reCAPTCHA v3]
+    D -->|Layer 4| E[reCAPTCHA Cloudflare]
     E -->|Layer 5| F[User Agent Check]
     F -->|Pass| G[Database]
     
@@ -760,7 +760,7 @@ graph LR
 1. **Honeypot Fields** - Hidden fields to catch bots
 2. **Rate Limiting** - 3 submissions per IP per hour
 3. **Content Analysis** - Detects spam patterns in text
-4. **reCAPTCHA v3** - Score-based bot detection (>= 0.5 required)
+4. **reCAPTCHA Cloudflare** - Bot detection with GDPR compliance
 5. **User-Agent Checking** - Blocks suspicious bots
 6. **Test Data Detection** - Rejects obvious test submissions
 7. **Email Duplicate Check** - Prevents duplicate leads

@@ -10,42 +10,42 @@ const additionalServices = [
   {
     title: "Water Mitigation",
     description: "Rapid water mitigation to stop damage and prevent mold growth instantly.",
-    image: "/img/services/placeholder.webp",
+    image: "/img/services/water-mitigation.webp",
     link: "/water-mitigation",
     icon: "💧"
   },
   {
     title: "Fire & Smoke Damage",
     description: "Soot removal, deodorization, and complete fire damage reconstruction.",
-    image: "/img/services/placeholder.webp",
+    image: "/img/services/fire-damage.webp",
     link: "/fire-damage",
     icon: "🔥"
   },
   {
     title: "Emergency Tarping",
     description: "Blue Tarp and shrink wrap services to secure your roof after a storm.",
-    image: "/img/services/placeholder.webp",
+    image: "/img/services/tarp.webp",
     link: "/emergency-tarping",
     icon: "🏠"
   },
   {
     title: "Sewage Cleanup",
     description: "Hazardous wastewater bio-extraction and professional protocol disinfection.",
-    image: "/img/services/placeholder.webp",
+    image: "/img/services/sewage-cleanup.webp",
     link: "/sewage-cleanup",
     icon: "☣️"
   },
   {
     title: "Large Loss Restoration",
     description: "Commercial, industrial, and multi-family disaster recovery services.",
-    image: "/img/services/placeholder.webp",
+    image: "/img/services/storm-damage.webp",
     link: "/large-loss",
     icon: "🏢"
   },
   {
     title: "HVAC Decontamination",
     description: "Air duct and HVAC cleaning after smoke, fire, or severe mold contamination.",
-    image: "/img/services/placeholder.webp",
+    image: "/img/services/hvac-decontamination.webp",
     link: "/hvac-decontamination",
     icon: "❄️"
   }
@@ -89,14 +89,14 @@ const additionalServices = [
           </div>
 
           <!-- Content Below Image -->
-          <div class="p-6 relative">
-            <h3 class="text-xl font-bold text-navy mb-3 group-hover:text-aqua transition-colors duration-300 flex items-center justify-between">
+          <div class="p-6 relative text-center md:text-left">
+            <h3 class="text-xl font-bold text-navy mb-3 group-hover:text-aqua transition-colors duration-300 flex items-center justify-center md:justify-between flex-wrap gap-2">
               {service.title}
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 text-aqua" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 opacity-0 group-hover:opacity-100 transition-all duration-300 text-aqua hidden md:block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
               </svg>
             </h3>
-            <p class="text-gray-600 line-clamp-2">
+            <p class="text-gray-600 line-clamp-2 w-full">
               {service.description}
             </p>
           </div>

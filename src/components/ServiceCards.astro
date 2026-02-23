@@ -10,37 +10,47 @@ const services = [
     title: "Emergency Response",
     description: "24/7 rapid response for water emergencies",
     icon: "🚨",
-    link: "#contact"
+    link: "#contact",
   },
   {
     title: "Water Extraction",
     description: "Professional water removal and drying",
     icon: "💧",
-    link: "/storm-damage"
+    link: "/storm-damage",
   },
   {
     title: "Mold Remediation",
     description: "Complete mold inspection and removal",
     icon: "🔬",
-    link: "/services"
+    link: "/services",
   },
   {
     title: "Insurance Claims",
     description: "Expert assistance with insurance claims",
     icon: "📋",
-    link: "/insurance-claims"
+    link: "/insurance-claims",
   },
 ];
 ---
 
-<section class:list={["section-container bg-silver-light mb-12 md:mb-16", className]} id="service-cards">
+<section
+  class:list={["section-container bg-silver-light mb-12 md:mb-16", className]}
+  id="service-cards"
+>
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-    {services.map((service) => (
-      <a href={service.link} class="card-service group">
-        <div class="text-4xl mb-4 group-hover:scale-110 transition-transform">{service.icon}</div>
-        <h3 class="text-xl font-bold text-navy mb-3">{service.title}</h3>
-        <p class="text-muted-foreground">{service.description}</p>
-      </a>
-    ))}
+    {
+      services.map((service) => (
+        <a
+          href={service.link}
+          class="card-service group text-center md:text-left flex flex-col items-center md:items-start"
+        >
+          <div class="text-4xl mb-4 group-hover:scale-110 transition-transform">
+            {service.icon}
+          </div>
+          <h3 class="text-xl font-bold text-navy mb-3">{service.title}</h3>
+          <p class="text-muted-foreground">{service.description}</p>
+        </a>
+      ))
+    }
   </div>
 </section>
