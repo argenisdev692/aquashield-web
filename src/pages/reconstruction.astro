@@ -1,14 +1,17 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Navbar from '../components/Navbar.astro';
-import Footer from '../components/Footer.astro';
-import Reconstruction from '../components/Reconstruction.astro';
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+import ReconstructionComponent from "../components/Reconstruction.astro";
 ---
 
-<Layout title="Reconstruction & Remodeling | <strong>AquaShield Restoration LLC</strong>" description="From mitigation to total reconstruction (residential, commercial, and multi-family) to deliver your property ready to use.">
+<Layout
+  title="Reconstruction & Remodeling | <strong>AquaShield Restoration LLC</strong>"
+  description="From mitigation to total reconstruction (residential, commercial, and multi-family) to deliver your property ready to use."
+>
   <Navbar />
   <main>
-    <Reconstruction />
+    <ReconstructionComponent />
   </main>
   <Footer />
 </Layout>
