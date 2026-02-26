@@ -1,4 +1,4 @@
-# AquaShield Restoration LLC - Enterprise Landing Page
+# AquaShield Restoration USA - Enterprise Landing Page
 
 <div align="center">
 
@@ -46,7 +46,7 @@
 
 ### Project Overview
 
-**AquaShield Restoration LLC** is a next-generation water damage restoration and roofing services platform built with modern web technologies. This enterprise-grade landing page serves as the primary customer acquisition channel, featuring advanced lead generation, multi-channel contact forms, and real-time spam protection.
+**AquaShield Restoration USA** is a next-generation water damage restoration and roofing services platform built with modern web technologies. This enterprise-grade landing page serves as the primary customer acquisition channel, featuring advanced lead generation, multi-channel contact forms, and real-time spam protection.
 
 ### Key Metrics
 
@@ -545,7 +545,7 @@ SMTP_USER=your_email@gmail.com
 SMTP_PASS=your_app_password_16_chars
 
 # Email Settings (both providers)
-EMAIL_FROM_NAME=AquaShield Restoration LLC
+EMAIL_FROM_NAME=AquaShield Restoration USA
 ADMIN_EMAIL=victor@aquashieldrestorationusa.com
 ```
 
@@ -560,7 +560,7 @@ ADMIN_EMAIL=victor@aquashieldrestorationusa.com
 #### Company Information
 
 ```env
-COMPANY_NAME=AquaShield Restoration LLC
+COMPANY_NAME=AquaShield Restoration USA
 COMPANY_PHONE=(713) 587-6423
 COMPANY_EMAIL=info@aquashieldrestorationusa.com
 COMPANY_ADDRESS=3733 Westheimer Rd. Ste 1 #4583
@@ -1673,15 +1673,15 @@ const { title, description, class: className } = Astro.props;
 
 ## 📄 License
 
-**Proprietary License** - © 2026 AquaShield Restoration LLC. All rights reserved.
+**Proprietary License** - © 2026 AquaShield Restoration USA. All rights reserved.
 
-This project is proprietary software. Unauthorized copying, modification, distribution, or use of this software, via any medium, is strictly prohibited without explicit written permission from AquaShield Restoration LLC.
+This project is proprietary software. Unauthorized copying, modification, distribution, or use of this software, via any medium, is strictly prohibited without explicit written permission from AquaShield Restoration USA.
 
 ---
 
 ## 📞 Contact
 
-**AquaShield Restoration LLC**
+**AquaShield Restoration USA**
 
 - **Website:** [aquashieldrestorationusa.com](https://aquashieldrestorationusa.com)
 - **Email:** info@aquashieldrestorationusa.com

@@ -116,7 +116,7 @@ export const POST: APIRoute = async ({ request }) => {
 
     // Step 5: Send emails
     try {
-      const companyName = import.meta.env.COMPANY_NAME || 'AquaShield Restoration LLC';
+      const companyName = import.meta.env.COMPANY_NAME || 'AquaShield Restoration USA';
       const adminEmail = import.meta.env.ADMIN_EMAIL || 'admin@aquashieldrestorationusa.com';
 
       // Email 1: New lead alert → admin

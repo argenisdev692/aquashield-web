@@ -32,7 +32,7 @@ function formatPhone(phone: string): string {
 
 // Contact Support Email Template
 export function getContactSupportEmailTemplate(contact: ContactSupport): string {
-  const companyName = import.meta.env.COMPANY_NAME || 'AquaShield Restoration LLC';
+  const companyName = import.meta.env.COMPANY_NAME || 'AquaShield Restoration USA';
   const companyPhone = import.meta.env.COMPANY_PHONE;
   const companyEmail = import.meta.env.COMPANY_EMAIL;
   const companyAddress = import.meta.env.COMPANY_ADDRESS;
@@ -183,7 +183,7 @@ export function getContactSupportEmailTemplate(contact: ContactSupport): string 
 
 // New Lead Email Template
 export function getNewLeadEmailTemplate(appointment: Appointment): string {
-  const companyName = import.meta.env.COMPANY_NAME || 'AquaShield Restoration LLC';
+  const companyName = import.meta.env.COMPANY_NAME || 'AquaShield Restoration USA';
   const companyPhone = import.meta.env.COMPANY_PHONE;
   const companyEmail = import.meta.env.COMPANY_EMAIL;
   const companyAddress = import.meta.env.COMPANY_ADDRESS;
@@ -362,7 +362,7 @@ export function getNewLeadEmailTemplate(appointment: Appointment): string {
 
 // Lead Confirmation Email Template (sent to customer after submitting appointment)
 export function getLeadConfirmationEmailTemplate(appointment: Appointment): string {
-  const companyName = import.meta.env.COMPANY_NAME || 'AquaShield Restoration LLC';
+  const companyName = import.meta.env.COMPANY_NAME || 'AquaShield Restoration USA';
   const companyPhone = import.meta.env.COMPANY_PHONE || '(713) 587-6423';
   const companyEmail = import.meta.env.COMPANY_EMAIL;
   const companyAddress = import.meta.env.COMPANY_ADDRESS;
@@ -495,7 +495,7 @@ export function getLeadConfirmationEmailTemplate(appointment: Appointment): stri
 // `to` can be a single email string or an array of email addresses
 export async function sendEmail(to: string | string[], subject: string, html: string) {
   const fromEmail = import.meta.env.EMAIL_FROM;
-  const fromName = import.meta.env.EMAIL_FROM_NAME || 'AquaShield Restoration LLC';
+  const fromName = import.meta.env.EMAIL_FROM_NAME || 'AquaShield Restoration USA';
   const toArray = Array.isArray(to) ? to : [to];
   
   // Cloudflare Workers only supports Resend API

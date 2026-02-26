@@ -15,9 +15,9 @@
   },
   "vars": {
     "EMAIL_PROVIDER": "resend",
-    "EMAIL_FROM_NAME": "AquaShield Restoration LLC",
+    "EMAIL_FROM_NAME": "AquaShield Restoration USA",
     "ADMIN_EMAIL": "admin@aquashieldrestorationusa.com",
-    "COMPANY_NAME": "AquaShield Restoration LLC",
+    "COMPANY_NAME": "AquaShield Restoration USA",
     "COMPANY_PHONE": "(713) 587-6423",
     "COMPANY_EMAIL": "info@aquashieldrestorationusa.com",
     "COMPANY_ADDRESS": "3733 Westheimer Rd. Ste 1 4583",

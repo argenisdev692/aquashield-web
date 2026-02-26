@@ -110,7 +110,7 @@ export const POST: APIRoute = async ({ request }) => {
     // Step 6: Send email notification to admin(s)
     try {
       const emailHtml = getContactSupportEmailTemplate(data as ContactSupport);
-      const companyName = import.meta.env.COMPANY_NAME || 'AquaShield Restoration LLC';
+      const companyName = import.meta.env.COMPANY_NAME || 'AquaShield Restoration USA';
 
       // Collect all admin recipients (deduplicated)
       const adminEmail = import.meta.env.ADMIN_EMAIL || 'admin@aquashieldrestorationusa.com';

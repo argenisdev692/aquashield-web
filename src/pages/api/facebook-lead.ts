@@ -148,7 +148,7 @@ export const POST: APIRoute = async ({ request }) => {
     try {
       const emailHtml = getNewLeadEmailTemplate(data as Appointment);
       const adminEmail = import.meta.env.ADMIN_EMAIL;
-      const companyName = import.meta.env.COMPANY_NAME || 'AquaShield Restoration LLC';
+      const companyName = import.meta.env.COMPANY_NAME || 'AquaShield Restoration USA';
       
       await sendEmail(
         adminEmail,

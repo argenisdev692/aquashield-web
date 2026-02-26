@@ -9,7 +9,7 @@ import { getServerSupabase, type CompanyData } from './supabase';
 
 /** Default fallback values so the UI never breaks if the DB is unreachable */
 export const DEFAULT_COMPANY: CompanyData = {
-  company_name: 'AquaShield Restoration LLC',
+  company_name: 'AquaShield Restoration USA',
   name: 'Victor Lara',
   email: 'info@aquashieldrestorationusa.com',
   phone: '+17135876423',

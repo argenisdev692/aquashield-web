@@ -95,7 +95,7 @@ services.forEach(s => {
                         Professional ${s.name} Services
                     </h2>
                     <p class="text-base sm:text-lg text-gray-600">
-                        At AquaShield Restoration LLC, we specialize in high-quality ${s.name.toLowerCase()} services. Our team is fully equipped and trained to handle any scale of disaster, providing you with swift, effective solutions to minimize loss and restore your property quickly.
+                        At AquaShield Restoration USA, we specialize in high-quality ${s.name.toLowerCase()} services. Our team is fully equipped and trained to handle any scale of disaster, providing you with swift, effective solutions to minimize loss and restore your property quickly.
                     </p>
                     <p class="text-base sm:text-lg text-gray-600 mt-4">
                         Customer satisfaction and safety are our highest priorities. We utilize advanced techniques and industry-leading equipment to ensure a thorough restoration process.
@@ -163,7 +163,7 @@ import Footer from '../components/Footer.astro';
 import ${componentName} from '../components/${componentName}.astro';
 ---
 
-<Layout title="${s.name} | AquaShield Restoration LLC" description="${s.desc}">
+<Layout title="${s.name} | AquaShield Restoration USA" description="${s.desc}">
   <Navbar />
   <main>
     <${componentName} />
