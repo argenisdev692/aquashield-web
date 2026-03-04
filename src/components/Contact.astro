@@ -13,11 +13,16 @@ const turnstileSiteKey = (
   import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? ""
 ).trim();
 
+import { getCompanyData, formatPhone } from "../lib/company";
+
+const dbCompany = await getCompanyData();
+
 const contactInfo = {
-  phone: "(713) 587-6423",
-  email: "info@aquashieldrestorationusa.com",
-  address: "3733 Westheimer Rd. Ste 1 #4583",
-  city: "Houston, TX 77027",
+  phone: formatPhone(dbCompany.phone) || "(713) 587-6423",
+  email: dbCompany.email || "info@aquashieldrestorationusa.com",
+  address:
+    dbCompany.address || "3733 Westheimer Rd. Ste 1 #4583, Houston, TX 77027",
+  city: dbCompany.address ? "" : "", // Note: if the address from db contains city, we can just display address. Let's merge them
   hours: "24/7 Emergency Service",
 };
 
@@ -353,7 +358,6 @@ const serviceAreas = [
               <div>
                 <div class="font-semibold text-navy">Office Location</div>
                 <div class="text-gray-600">{contactInfo.address}</div>
-                <div class="text-gray-600">{contactInfo.city}</div>
               </div>
             </div>
 
@@ -504,14 +508,14 @@ const serviceAreas = [
       class="absolute inset-0 bg-white rounded-2xl shadow-xl overflow-hidden"
     >
       <iframe
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3464.256071898361!2d-95.44223462572727!3d29.74130133287228!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8640c11e9f0f0a63%3A0x61f215669818cfcd!2s3733%20Westheimer%20Rd%2C%20Houston%2C%20TX%2077027%2C%20EE.%20UU.!5e0!3m2!1ses!2spt!4v1769700449786!5m2!1ses!2spt"
+        src={`https://www.google.com/maps/embed/v1/place?key=${googleMapsApiKey}&q=${encodeURIComponent(dbCompany.address || contactInfo.address)}`}
         width="100%"
         height="100%"
         style="border:0;"
         allowfullscreen=""
         loading="lazy"
         referrerpolicy="no-referrer-when-downgrade"
-        title="<strong>AquaShield Restoration USA</strong> Location - 3733 Westheimer Rd, Houston, TX 77027"
+        title={`AquaShield Restoration Location - ${dbCompany.address || contactInfo.address}`}
         class="w-full h-full"></iframe>
     </div>
   </div>

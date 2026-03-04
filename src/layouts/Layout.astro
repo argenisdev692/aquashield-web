@@ -17,24 +17,28 @@ const {
   canonicalURL = Astro.url.href,
 } = Astro.props;
 
+import { getCompanyData, formatPhone } from '../lib/company';
+
+const dbCompany = await getCompanyData();
+
 // Company data - centralized for easy updates
 const companyData = {
-  name: "AquaShield Restoration USA",
+  name: dbCompany.company_name || "AquaShield Restoration USA",
   tagline: "Total Restoration & Protection",
-  phone: "(713) 587-6423",
-  emergencyPhone: "(713) 587-6423",
-  email: "info@aquashieldrestorationusa.com",
+  phone: formatPhone(dbCompany.phone) || "(713) 587-6423",
+  emergencyPhone: formatPhone(dbCompany.phone) || "(713) 587-6423",
+  email: dbCompany.email || "info@aquashieldrestorationusa.com",
   address: {
-    street: "3733 Westheimer Rd. Ste 1 #4583",
+    street: dbCompany.address || "3733 Westheimer Rd. Ste 1 #4583",
     city: "Houston",
     state: "TX",
     zip: "77027",
   },
   social: {
-    facebook: "https://facebook.com/aquashieldrestorationusa",
-    instagram: "https://instagram.com/aquashieldrestorationusa",
-    twitter: "https://twitter.com/aquashieldrest",
-    linkedin: "https://linkedin.com/company/aquashieldrestorationusa",
+    facebook: dbCompany.facebook_link || "https://facebook.com/aquashieldrestorationusa",
+    instagram: dbCompany.instagram_link || "https://instagram.com/aquashieldrestorationusa",
+    twitter: dbCompany.twitter_link || "https://twitter.com/aquashieldrest",
+    linkedin: dbCompany.linkedin_link || "https://linkedin.com/company/aquashieldrestorationusa",
   },
 };
 ---

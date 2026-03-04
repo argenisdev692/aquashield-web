@@ -1,70 +1,111 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Navbar from '../components/Navbar.astro';
-import Footer from '../components/Footer.astro';
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+import { getCompanyData, formatPhone } from "../lib/company";
+
+const dbCompany = await getCompanyData();
+const companyName = dbCompany.company_name || "AquaShield Restoration USA";
+const companyAddress =
+  dbCompany.address || "3733 Westheimer Rd. Ste 1-4583, Houston, TX 77027";
+const companyPhone = formatPhone(dbCompany.phone) || "(713) 587-6423";
+const companyEmail = dbCompany.email || "info@aquashieldrestorationusa.com";
 ---
 
-<Layout title="Terms and Conditions | <strong>AquaShield Restoration USA</strong>">
+<Layout title={`Terms and Conditions | ${companyName}`}>
   <Navbar />
   <main>
     <section class="relative py-20 bg-gradient-navy text-white">
       <div class="container mx-auto px-4">
-        <h1 class="text-4xl md:text-5xl font-bold mb-4">Términos y Condiciones</h1>
-        <p class="text-xl text-white/80">Última actualización: 29 de enero de 2026</p>
+        <h1 class="text-4xl md:text-5xl font-bold mb-4">
+          Términos y Condiciones
+        </h1>
+        <p class="text-xl text-white/80">
+          Última actualización: 29 de enero de 2026
+        </p>
       </div>
     </section>
-    
+
     <section class="section-container bg-white">
       <div class="max-w-4xl mx-auto prose prose-navy">
         <h2>Entidad Legal</h2>
         <p>
-          <strong>AquaShield Restoration USA</strong> (EIN: 36-5164436)
+          <strong>{companyName}</strong> (EIN: 36-5164436)
         </p>
         <p>
-          Al utilizar este sitio web o contratar nuestros servicios, aceptas los siguientes términos:
+          Al utilizar este sitio web o contratar nuestros servicios, aceptas los
+          siguientes términos:
         </p>
 
         <h2>Ámbito de Servicio</h2>
         <p>
-          <strong>AquaShield Restoration USA</strong> ofrece servicios de restauración por daños de agua, mitigación de moho, techado y remodelación. Nuestra base de operaciones está en Houston, TX, pero brindamos respuesta a catástrofes y tormentas en Florida y otros estados afectados por huracanes.
+          <strong>{companyName}</strong> ofrece servicios de restauración por daños
+          de agua, mitigación de moho, techado y remodelación. Nuestra base de operaciones
+          está en Houston, TX, pero brindamos respuesta a catástrofes y tormentas
+          en Florida y otros estados afectados por huracanes.
         </p>
 
         <h2>Autorización de Trabajo</h2>
         <p>
-          Todo servicio requiere la firma de nuestro contrato oficial de servicios, el cual incluye la "Dirección de Pago" (Direction to Pay) y el "Poder Limitado" para gestionar pagos con las aseguradoras.
+          Todo servicio requiere la firma de nuestro contrato oficial de
+          servicios, el cual incluye la "Dirección de Pago" (Direction to Pay) y
+          el "Poder Limitado" para gestionar pagos con las aseguradoras.
         </p>
 
         <h2>Deducibles de Seguro</h2>
         <p>
-          De acuerdo con la ley de Texas (TBCC 27.02), es responsabilidad del asegurado pagar cualquier deducible aplicable. <strong>AquaShield Restoration USA</strong> no puede legalmente absorber o "perdonar" el deducible del seguro.
+          De acuerdo con la ley de Texas (TBCC 27.02), es responsabilidad del
+          asegurado pagar cualquier deducible aplicable. <strong
+            >{companyName}</strong
+          > no puede legalmente absorber o "perdonar" el deducible del seguro.
         </p>
 
         <h2>Derecho de Cancelación</h2>
         <p>
-          Conforme a las regulaciones estatales, el cliente tiene derecho a cancelar el acuerdo de servicio dentro de los periodos establecidos (usualmente 3 días hábiles) mediante notificación escrita enviada a nuestra dirección oficial.
+          Conforme a las regulaciones estatales, el cliente tiene derecho a
+          cancelar el acuerdo de servicio dentro de los periodos establecidos
+          (usualmente 3 días hábiles) mediante notificación escrita enviada a
+          nuestra dirección oficial.
         </p>
 
         <h2>Garantías</h2>
         <p>
-          Proveemos una garantía de 5 años de mano de obra en todas las instalaciones y reparaciones. Las garantías de materiales varían según el fabricante y están detalladas en tu contrato de servicio.
+          Proveemos una garantía de 5 años de mano de obra en todas las
+          instalaciones y reparaciones. Las garantías de materiales varían según
+          el fabricante y están detalladas en tu contrato de servicio.
         </p>
 
         <h2>Responsabilidad Legal</h2>
         <p>
-          <strong>AquaShield Restoration USA</strong> cuenta con seguro de responsabilidad completo. No somos responsables por condiciones preexistentes o daños causados por factores fuera de nuestro control.
+          <strong>{companyName}</strong> cuenta con seguro de responsabilidad completo.
+          No somos responsables por condiciones preexistentes o daños causados por
+          factores fuera de nuestro control.
         </p>
 
         <h2>Jurisdicción</h2>
         <p>
-          Cualquier disputa legal se regirá por las leyes del Estado de Texas, a menos que el servicio se preste bajo regulaciones específicas de emergencia en otros estados.
+          Cualquier disputa legal se regirá por las leyes del Estado de Texas, a
+          menos que el servicio se preste bajo regulaciones específicas de
+          emergencia en otros estados.
         </p>
 
         <h2>Información de Contacto</h2>
-        <div class="not-prose bg-gray-50 p-6 rounded-lg border border-gray-200 mt-4">
-          <p class="font-bold text-navy mb-3"><strong>AquaShield Restoration USA</strong></p>
-          <p class="mb-2"><strong>Dirección:</strong> 3733 Westheimer Rd. Ste 1-4583, Houston, TX 77027</p>
-          <p class="mb-2"><strong>Teléfono:</strong> <a href="tel:7135876423" class="text-aqua hover:underline">(713) 587-6423</a></p>
-          <p class="mb-2"><strong>Email:</strong> <a href="mailto:info@aquashieldrestorationusa.com" class="text-aqua hover:underline">info@aquashieldrestorationusa.com</a></p>
+        <div
+          class="not-prose bg-gray-50 p-6 rounded-lg border border-gray-200 mt-4"
+        >
+          <p class="font-bold text-navy mb-3"><strong>{companyName}</strong></p>
+          <p class="mb-2"><strong>Dirección:</strong> {companyAddress}</p>
+          <p class="mb-2">
+            <strong>Teléfono:</strong>
+            <a
+              href={`tel:${companyPhone.replace(/[^0-9]/g, "")}`}
+              class="text-aqua hover:underline">{companyPhone}</a>
+          </p>
+          <p class="mb-2">
+            <strong>Email:</strong>
+            <a href={`mailto:${companyEmail}`} class="text-aqua hover:underline"
+              >{companyEmail}</a>
+          </p>
           <p><strong>EIN:</strong> 36-5164436</p>
         </div>
       </div>

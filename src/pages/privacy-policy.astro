@@ -3,11 +3,16 @@ import Layout from "../layouts/Layout.astro";
 import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
 
+import { getCompanyData, formatPhone } from "../lib/company";
+
+const dbCompany = await getCompanyData();
+
 const lastUpdated = "February 20, 2026";
-const companyName = "<strong>AquaShield Restoration USA</strong>";
-const companyAddress = "3733 Westheimer Rd. Ste 1-4583, Houston, TX 77027";
-const companyPhone = "(713) 587-6423";
-const companyEmail = "info@aquashieldrestorationusa.com";
+const companyName = `<strong>${dbCompany.company_name || "AquaShield Restoration USA"}</strong>`;
+const companyAddress =
+  dbCompany.address || "3733 Westheimer Rd. Ste 1-4583, Houston, TX 77027";
+const companyPhone = formatPhone(dbCompany.phone) || "(713) 587-6423";
+const companyEmail = dbCompany.email || "info@aquashieldrestorationusa.com";
 const privacyEmail = "privacy@aquashieldrestorationusa.com";
 ---
 
@@ -532,9 +537,11 @@ const privacyEmail = "privacy@aquashieldrestorationusa.com";
                 NOTICE: We Do Not Sell Your Personal Data
               </p>
               <p class="text-white/80 text-sm mb-3">
-                <strong>AquaShield Restoration USA</strong> does <strong>not</strong> sell, trade,
-                or share your personal information with third-party advertisers, data
-                brokers, or marketers for monetary or other valuable consideration.
+                <strong>${companyName.replace(/<\/?strong>/g, "")}</strong> does <strong
+                  >not</strong
+                > sell, trade, or share your personal information with third-party
+                advertisers, data brokers, or marketers for monetary or other valuable
+                consideration.
               </p>
               <p class="text-white/70 text-sm">
                 As required by the Texas Data Privacy and Security Act (TDPSA),
@@ -650,7 +657,7 @@ const privacyEmail = "privacy@aquashieldrestorationusa.com";
         <div
           class="not-prose bg-gray-50 p-6 rounded-xl border border-gray-200 mt-4 mb-8"
         >
-          <p class="font-bold text-navy mb-4 text-lg">{companyName}</p>
+          <p class="font-bold text-navy mb-4 text-lg" set:html={companyName} />
           <div class="grid sm:grid-cols-2 gap-4 text-sm text-gray-700">
             <div>
               <p
