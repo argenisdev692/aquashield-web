@@ -2,6 +2,8 @@
 // Contact section component for AquaShield Restoration
 // Contact form, emergency hotline, and service area information
 
+import { getCompanyData, formatPhone } from "../lib/company";
+
 interface Props {
   class?: string;
 }
@@ -12,8 +14,6 @@ const googleMapsApiKey = import.meta.env.PUBLIC_GOOGLE_MAPS_API_KEY;
 const turnstileSiteKey = (
   import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? ""
 ).trim();
-
-import { getCompanyData, formatPhone } from "../lib/company";
 
 const dbCompany = await getCompanyData();
 
