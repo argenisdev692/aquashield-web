@@ -1,10 +1,14 @@
 import type { APIRoute } from 'astro';
-import { getServerSupabase, type Appointment } from '../../lib/supabase';
-import { v4 as uuidv4 } from 'uuid';
+import { type Appointment } from '../../lib/supabase';
 import { appointmentSchema, formatZodErrors } from '../../utils/validation';
 import { performSpamCheck, getClientIP } from '../../utils/spam-detection';
 import { verifyTurnstile } from '../../utils/turnstile';
 import { sendEmail, getNewLeadEmailTemplate, getLeadConfirmationEmailTemplate } from '../../utils/email';
+
+const API_BASE_URL = (
+  import.meta.env.PUBLIC_API_URL ||
+  'https://backend-aquashield-restoration-production.up.railway.app/api/v1'
+).replace(/\/$/, '');
 
 export const POST: APIRoute = async ({ request }) => {
   try {
@@ -76,11 +80,14 @@ export const POST: APIRoute = async ({ request }) => {
     const finalPhone =
       formattedPhone.length === 10 ? `+1${formattedPhone}` : `+${formattedPhone}`;
 
-    // Step 4: Insert into Supabase appointments table (service role bypasses RLS)
-    const supabase = getServerSupabase();
+    // Keep insurance info in the message since the backend has no dedicated field
+    const insuranceNote = `Insurance property: ${validatedData.insurance_property === 'yes' ? 'Yes' : 'No'}`;
+    const finalMessage = validatedData.message
+      ? `${validatedData.message}\n\n${insuranceNote}`
+      : insuranceNote;
 
+    // Local object used only to render the notification emails
     const appointmentData: Partial<Appointment> = {
-      uuid: uuidv4(),
       first_name: validatedData.first_name,
       last_name: validatedData.last_name,
       phone: finalPhone,
@@ -90,7 +97,7 @@ export const POST: APIRoute = async ({ request }) => {
       city: validatedData.city,
       state: validatedData.state,
       zipcode: validatedData.zipcode,
-      country: validatedData.country || 'US',
+      country: validatedData.country || 'USA',
       insurance_property: validatedData.insurance_property === 'yes',
       message: validatedData.message || null,
       sms_consent: validatedData.sms_consent ?? false,
@@ -99,18 +106,50 @@ export const POST: APIRoute = async ({ request }) => {
       lead_source: 'Website',
     };
 
-    const { error } = await supabase
-      .from('appointments')
-      .insert([appointmentData]);
-
-    if (error) {
-      console.error('Supabase error inserting appointment:', error);
+    // Step 4: Send to backend API (POST /public/appointments)
+    let apiResponse: Response;
+    try {
+      apiResponse = await fetch(`${API_BASE_URL}/public/appointments`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          firstName: validatedData.first_name,
+          lastName: validatedData.last_name,
+          phone: finalPhone,
+          email: validatedData.email || undefined,
+          address: validatedData.address,
+          address2: validatedData.address_2 || undefined,
+          city: validatedData.city,
+          state: validatedData.state,
+          zipcode: validatedData.zipcode,
+          country: validatedData.country || 'USA',
+          message: finalMessage,
+          smsConsent: validatedData.sms_consent ?? false,
+        }),
+      });
+    } catch (fetchError) {
+      console.error('Network error contacting backend (appointment):', fetchError);
       return new Response(
         JSON.stringify({
           success: false,
-          message: 'Database error occurred. Please try again or call us directly.',
+          message: 'Service temporarily unavailable. Please try again or call us directly.',
         }),
-        { status: 500, headers: { 'Content-Type': 'application/json' } }
+        { status: 502, headers: { 'Content-Type': 'application/json' } }
+      );
+    }
+
+    if (!apiResponse.ok) {
+      const message =
+        apiResponse.status === 429
+          ? 'Too many attempts. Please wait a minute and try again.'
+          : apiResponse.status === 403
+          ? 'Your submission has been flagged. Please contact us directly by phone if this is an error.'
+          : 'We could not process your request. Please review the form and try again.';
+
+      console.error('Backend error creating appointment:', apiResponse.status);
+      return new Response(
+        JSON.stringify({ success: false, message }),
+        { status: apiResponse.status, headers: { 'Content-Type': 'application/json' } }
       );
     }
 
