@@ -20,6 +20,15 @@ declare global {
       applyPhoneFormatter: (input: HTMLInputElement) => void;
       showAlert: (options: { message: string; type: string }) => void;
     } | undefined;
+    fbq?: (...args: unknown[]) => void;
+    _fbq?: unknown;
+  }
+
+  interface ImportMetaEnv {
+    readonly PUBLIC_FACEBOOK_PIXEL_ID?: string;
+    readonly FACEBOOK_PIXEL_ID?: string;
+    readonly FACEBOOK_CONVERSIONS_API_TOKEN?: string;
+    readonly FACEBOOK_TEST_EVENT_CODE?: string;
   }
 }
 

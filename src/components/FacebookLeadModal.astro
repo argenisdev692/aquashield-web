@@ -591,6 +591,13 @@ const turnstileSiteKey = (
         const formData = new FormData(form);
         const data = Object.fromEntries(formData.entries());
 
+        // Shared event_id so the browser Pixel and the server CAPI dedupe
+        const eventId =
+          typeof crypto !== "undefined" && crypto.randomUUID
+            ? crypto.randomUUID()
+            : `lead-${Date.now()}-${Math.random().toString(36).slice(2)}`;
+        data.event_id = eventId;
+
         // Send to API
         const response = await fetch("/api/facebook-lead", {
           method: "POST",
@@ -601,6 +608,22 @@ const turnstileSiteKey = (
         });
 
         const result = await response.json();
+
+        if (result.success) {
+          // Meta Pixel: track Lead conversion for Meta Ads.
+          // eventID is shared with the server CAPI call for deduplication.
+          if (typeof window.fbq !== "undefined") {
+            window.fbq(
+              "track",
+              "Lead",
+              {
+                content_name: "Free Inspection Request",
+                content_category: "Restoration Lead",
+              },
+              { eventID: eventId },
+            );
+          }
+        }
 
         if (result.success && window.AquaShieldUtils) {
           window.AquaShieldUtils.showAlert({

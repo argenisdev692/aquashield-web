@@ -176,13 +176,18 @@ export const facebookLeadSchema = z.object({
   lead_source: z.enum(['Facebook Ads', 'Website', 'Reference', 'Retell AI'])
     .optional()
     .default('Facebook Ads'),
-  
+
+  // Meta Pixel / Conversions API deduplication ID (shared with browser fbq)
+  event_id: z.string()
+    .max(100, 'Invalid event id')
+    .optional(),
+
   // Honeypot field
   website: z.string()
     .max(0, 'Invalid submission')
     .optional()
     .default(''),
-  
+
   // Cloudflare Turnstile token
   'cf-turnstile-response': z.string()
     .min(1, 'CAPTCHA verification is required')

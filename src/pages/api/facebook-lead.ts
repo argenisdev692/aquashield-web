@@ -4,6 +4,7 @@ import { sendEmail, getNewLeadEmailTemplate } from '../../utils/email';
 import { facebookLeadSchema, formatZodErrors } from '../../utils/validation';
 import { performSpamCheck } from '../../utils/spam-detection';
 import { verifyTurnstile } from '../../utils/turnstile';
+import { sendFacebookConversionEvent, parseFbCookies } from '../../utils/facebook-capi';
 
 const API_BASE_URL = (
   import.meta.env.PUBLIC_API_URL ||
@@ -164,7 +165,39 @@ export const POST: APIRoute = async ({ request }) => {
       );
     }
 
-    // Step 6: Send email notification to admin
+    // Step 6: Send Meta Conversions API event (server-side, deduped via event_id)
+    try {
+      const { fbc, fbp } = parseFbCookies(request.headers.get('cookie'));
+
+      await sendFacebookConversionEvent({
+        eventName: 'Lead',
+        eventId: validatedData.event_id || crypto.randomUUID(),
+        eventSourceUrl: request.headers.get('referer') || undefined,
+        userData: {
+          email: validatedData.email,
+          phone: finalPhone,
+          firstName: validatedData.first_name,
+          lastName: validatedData.last_name,
+          city: validatedData.city,
+          state: validatedData.state,
+          zipcode: validatedData.zipcode,
+          country: validatedData.country,
+          clientIpAddress: ipAddress,
+          clientUserAgent: request.headers.get('user-agent'),
+          fbc,
+          fbp,
+        },
+        customData: {
+          content_name: 'Free Inspection Request',
+          content_category: 'Restoration Lead',
+          lead_source: validatedData.lead_source,
+        },
+      });
+    } catch (capiError) {
+      console.error('Meta CAPI error (non-blocking):', capiError);
+    }
+
+    // Step 7: Send email notification to admin
     try {
       const emailHtml = getNewLeadEmailTemplate(appointmentData as Appointment);
       const adminEmail = import.meta.env.ADMIN_EMAIL;
