@@ -4,6 +4,8 @@
 
 ![AquaShield Logo](public/Logo%20PNG.png)
 
+![screen](public/img/screenshot.png)
+
 **Professional Water Damage Restoration & Roofing Services**
 
 [![Astro](https://img.shields.io/badge/Astro-5.16.9-FF5D01?logo=astro&logoColor=white)](https://astro.build)
